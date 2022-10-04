@@ -5,7 +5,7 @@ interface HeadingProps extends HTMLAttributes<HTMLHeadingElement> {}
 
 const Heading = ({ children, className, ...props }: HeadingProps) => {
   return (
-    <h2 className={classNames("text-xl text-blue29 mb-[10px]", className)} {...props}>
+    <h2 className={classNames("text-xl text-blue33", className)} {...props}>
       {children}
     </h2>
   );

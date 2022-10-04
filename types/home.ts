@@ -1,7 +1,6 @@
 import { IPagination } from "./common";
 
 export interface IDataHomePage {
-  featuredComics: IComic[];
   newestComics: any[];
   pagination: IPagination[];
 }

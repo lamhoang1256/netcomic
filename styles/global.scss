@@ -4,7 +4,7 @@
 @tailwind utilities;
 body {
   font-family: "Tahoma", sans-serif, Helvetica, Arial;
-  @apply text-[#333] text-sm bg-[#ebebeb];
+  @apply text-sm bg-[#ebebeb];
 }
 .layout-container {
   width: 100%;

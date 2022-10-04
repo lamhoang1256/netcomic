@@ -11,9 +11,9 @@ interface HomeNewestComicProps {
 
 const HomeNewestComic = ({ newestComics, pagination }: HomeNewestComicProps) => {
   return (
-    <div className="w-2/3 px-[15px]">
+    <div className="w-2/3">
       <Heading>Truyện mới cập nhật</Heading>
-      <div className="grid grid-cols-4 gap-[14px]">
+      <div className="mt-[10px] grid grid-cols-4 gap-[14px]">
         {newestComics.map((comic) => (
           <ComicItem comic={comic} key={comic.slug} />
         ))}
