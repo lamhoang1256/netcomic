@@ -1,0 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Tahoma:wght@300;400;500;600;700&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+body {
+  font-family: "Tahoma", sans-serif, Helvetica, Arial;
+  @apply text-[#333] text-sm bg-[#ebebeb];
+}
+.layout-container {
+  width: 100%;
+  max-width: 1030px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
