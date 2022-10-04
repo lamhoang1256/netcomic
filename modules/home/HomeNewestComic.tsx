@@ -1,24 +1,20 @@
-import { IconChat, IconEye, IconHeart } from "components/icons";
-import { Pagination } from "components/pagination";
 import { Heading } from "components/text";
 import { ComicItem } from "modules/comic";
-import { IComic, IPagination } from "types";
+import { IComic } from "types";
 
 interface HomeNewestComicProps {
   newestComics: IComic[];
-  pagination: IPagination[];
 }
 
-const HomeNewestComic = ({ newestComics, pagination }: HomeNewestComicProps) => {
+const HomeNewestComic = ({ newestComics }: HomeNewestComicProps) => {
   return (
-    <div className="w-2/3">
+    <div>
       <Heading>Truyện mới cập nhật</Heading>
       <div className="mt-[10px] grid grid-cols-4 gap-[14px]">
         {newestComics.map((comic) => (
           <ComicItem comic={comic} key={comic.slug} />
         ))}
       </div>
-      <Pagination pagination={pagination} />
     </div>
   );
 };

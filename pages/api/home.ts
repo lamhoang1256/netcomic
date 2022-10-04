@@ -6,7 +6,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { IQueryParams } from "types/common";
 import { IComic, IDataHomePage } from "types/home";
 import catchAsync from "utils/catch-async";
-import { crawlComic, getPagination } from "utils/crawl";
+import { crawlComic, getPagination, getTopMonthComic } from "utils/crawl";
 import { ApiError, responseError, responseSuccess } from "utils/response";
 
 const crawlHomePage = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -28,7 +28,7 @@ async function crawlHomeComics(query: Partial<IQueryParams>) {
   const response = await axios.get(PATH.netTruyen as string, { params: query });
   const html = response.data;
   const $ = cheerio.load(html);
-  let dataHomePage: IDataHomePage = { newestComics: [], pagination: [] };
+  let dataHomePage: IDataHomePage = { newestComics: [], pagination: [], chartRankings: [] };
   $("#ctl00_divCenter .ModuleContent .item", html).each(function (index, element) {
     const comic = crawlComic($(element));
     let chapters: any[] = [];
@@ -44,6 +44,10 @@ async function crawlHomeComics(query: Partial<IQueryParams>) {
   $("#ctl00_divCenter .pagination li", html).each(function (index, element) {
     const paginationItem = getPagination($(element));
     dataHomePage.pagination.push(paginationItem);
+  });
+  $("#ctl00_divRight #topMonth li", html).each(function (index, element) {
+    const comic = getTopMonthComic($(element));
+    dataHomePage.chartRankings.push(comic);
   });
   return dataHomePage;
 }

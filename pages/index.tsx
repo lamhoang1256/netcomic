@@ -1,17 +1,20 @@
 import axios from "axios";
+import { Pagination } from "components/pagination";
 import { server } from "configs/server";
 import LayoutHome from "layouts/LayoutHome";
+import { ComicChartRanking } from "modules/comic";
 import { HomeBanner, HomeNewestComic, HomeFollow, HomeHistory } from "modules/home";
 import Head from "next/head";
-import { IComic, IPagination } from "types";
+import { IComic, IComicTopRanking, IPagination } from "types";
 
 interface HomePageProps {
   banners: IComic[];
   newestComics: IComic[];
   pagination: IPagination[];
+  chartRankings: IComicTopRanking[];
 }
 
-const Home = ({ banners, newestComics, pagination }: HomePageProps) => {
+const Home = ({ banners, newestComics, pagination, chartRankings }: HomePageProps) => {
   return (
     <>
       <Head>
@@ -20,13 +23,17 @@ const Home = ({ banners, newestComics, pagination }: HomePageProps) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <LayoutHome>
-        <div className="max-w-[1030px] py-[15px] bg-[#f9f9f9] mx-auto">
+        <div className="max-w-[1030px] py-[15px] bg-white mx-auto">
           <HomeBanner banners={banners} />
           <div className="flex gap-4 mt-6 px-[15px]">
-            <HomeNewestComic newestComics={newestComics} pagination={pagination} />
+            <div className="w-2/3">
+              <HomeNewestComic newestComics={newestComics} />
+              <Pagination pagination={pagination} />
+            </div>
             <div className="flex flex-col w-1/3 gap-y-4">
               <HomeFollow />
               <HomeHistory />
+              <ComicChartRanking chartRankings={chartRankings} />
             </div>
           </div>
         </div>
@@ -41,6 +48,7 @@ export async function getStaticProps() {
     props: {
       banners: data.banners,
       newestComics: data.newestComics,
+      chartRankings: data.chartRankings,
       pagination: data.pagination,
     },
   };

@@ -75,6 +75,16 @@ export function getPagination(node: any, replaceHref = `${URL_NETTRUYEN}/`) {
   return { active, title, display, href };
 }
 
+export function getTopMonthComic(node: any, replaceHref = `${URL_NETTRUYEN}/`) {
+  const rank = node.find(".txt-rank").text();
+  const title = node.find(".title a").text();
+  const chapter = node.find(".chapter a").text();
+  const posterUrl = node.find(".thumb img").attr("data-original")?.replace(replaceHref, "") || "";
+  const href = node.find(".thumb").attr("href")?.replace(replaceHref, "") || "";
+  const view = node.find(".view").text().trim();
+  return { rank, title, posterUrl, href, chapter, view };
+}
+
 export function crawlInfoComic(node: any) {
   const title = node.find(".title-detail").text();
   const updatedAt = node.find("time.small").text().trim();

@@ -1,8 +1,10 @@
+import { IComicTopRanking } from "./comic";
 import { IPagination } from "./common";
 
 export interface IDataHomePage {
   newestComics: any[];
   pagination: IPagination[];
+  chartRankings: IComicTopRanking[];
 }
 
 export interface IBanner {
