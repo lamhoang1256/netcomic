@@ -25,12 +25,12 @@ const Home = ({ banners, newestComics, pagination, chartRankings }: HomePageProp
       <LayoutHome>
         <div className="max-w-[1030px] py-[15px] bg-white mx-auto">
           <HomeBanner banners={banners} />
-          <div className="flex gap-4 mt-6 px-[15px]">
-            <div className="w-2/3">
+          <div className="flex flex-col lg:flex-row gap-4 mt-6 px-[15px]">
+            <div className="lg:w-2/3">
               <HomeNewestComic newestComics={newestComics} />
               <Pagination pagination={pagination} />
             </div>
-            <div className="flex flex-col w-1/3 gap-y-4">
+            <div className="flex flex-col lg:w-1/3 gap-y-4">
               <HomeFollow />
               <HomeHistory />
               <ComicChartRanking chartRankings={chartRankings} />
@@ -48,7 +48,7 @@ export async function getStaticProps() {
     props: {
       banners: data.banners,
       newestComics: data.newestComics,
-      // chartRankings: data.chartRankings,
+      chartRankings: data.chartRankings,
       pagination: data.pagination,
     },
   };

@@ -1,5 +1,7 @@
+import { IconFilter } from "components/icons";
 import { Heading } from "components/text";
-import { ComicItem } from "modules/comic";
+import { ComicGrid, ComicItem } from "modules/comic";
+import Link from "next/link";
 import { IComic } from "types";
 
 interface HomeNewestComicProps {
@@ -9,12 +11,19 @@ interface HomeNewestComicProps {
 const HomeNewestComic = ({ newestComics }: HomeNewestComicProps) => {
   return (
     <div>
-      <Heading>Truyện mới cập nhật</Heading>
-      <div className="mt-[10px] grid grid-cols-4 gap-[14px]">
+      <div className="flex items-center justify-between">
+        <Heading>Truyện mới cập nhật</Heading>
+        <Link href="/">
+          <a className="w-[30px] h-[30px] border border-[#ff9601] rounded-full flex items-center justify-center">
+            <IconFilter fill="#ff9601" />
+          </a>
+        </Link>
+      </div>
+      <ComicGrid className="mt-[10px]">
         {newestComics.map((comic) => (
           <ComicItem comic={comic} key={comic.slug} />
         ))}
-      </div>
+      </ComicGrid>
     </div>
   );
 };
