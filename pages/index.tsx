@@ -33,7 +33,7 @@ const Home = ({ banners, newestComics, pagination, chartRankings }: HomePageProp
             <div className="flex flex-col w-1/3 gap-y-4">
               <HomeFollow />
               <HomeHistory />
-              <ComicChartRanking chartRankings={chartRankings} />
+              {/* <ComicChartRanking chartRankings={chartRankings} /> */}
             </div>
           </div>
         </div>
@@ -48,7 +48,7 @@ export async function getStaticProps() {
     props: {
       banners: data.banners,
       newestComics: data.newestComics,
-      chartRankings: data.chartRankings,
+      // chartRankings: data.chartRankings,
       pagination: data.pagination,
     },
   };
