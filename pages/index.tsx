@@ -1,4 +1,5 @@
 import axios from "axios";
+import { server } from "configs/server";
 import LayoutHome from "layouts/LayoutHome";
 import { HomeBanner, HomeNewestComic, HomeTopComic } from "modules/home";
 import type { NextPage } from "next";
@@ -35,7 +36,7 @@ const Home = ({ banners, featuredComics, newestComics, pagination }: HomePagePro
 };
 
 export async function getStaticProps() {
-  const { data } = (await axios.get("http://localhost:3000/api/home")).data;
+  const { data } = (await axios.get(`${server}/api/home`)).data;
   return {
     props: {
       banners: data.banners,
