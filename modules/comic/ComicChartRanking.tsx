@@ -1,13 +1,24 @@
+import axios from "axios";
 import { IconEye } from "components/icons";
+import { server } from "configs/server";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { IComicTopRanking } from "types";
 
-interface ComicChartRankingProps {
-  chartRankings: IComicTopRanking[];
-}
+const ComicChartRanking = () => {
+  const [chartRankings, setChartRankings] = useState<IComicTopRanking[]>([]);
+  const fetchChartRankings = async () => {
+    try {
+      const { data } = (await axios.get(`${server}/api/chart-rankings`)).data;
+      setChartRankings(data);
+    } catch (error) {
+      console.log("error: ", error);
+    }
+  };
+  useEffect(() => {
+    fetchChartRankings();
+  }, []);
 
-const ComicChartRanking = ({ chartRankings }: ComicChartRankingProps) => {
-  console.log("chartRankings: ", chartRankings);
   return (
     <div className="border border-graydd">
       <div className="flex items-center">

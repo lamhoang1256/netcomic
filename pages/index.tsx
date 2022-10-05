@@ -11,10 +11,9 @@ interface HomePageProps {
   banners: IComic[];
   newestComics: IComic[];
   pagination: IPagination[];
-  chartRankings: IComicTopRanking[];
 }
 
-const Home = ({ banners, newestComics, pagination, chartRankings }: HomePageProps) => {
+const Home = ({ banners, newestComics, pagination }: HomePageProps) => {
   return (
     <>
       <Head>
@@ -33,7 +32,7 @@ const Home = ({ banners, newestComics, pagination, chartRankings }: HomePageProp
             <div className="flex flex-col lg:w-1/3 gap-y-4">
               <HomeFollow />
               <HomeHistory />
-              <ComicChartRanking chartRankings={chartRankings} />
+              <ComicChartRanking />
             </div>
           </div>
         </div>
@@ -48,7 +47,6 @@ export async function getStaticProps() {
     props: {
       banners: data.banners,
       newestComics: data.newestComics,
-      chartRankings: data.chartRankings,
       pagination: data.pagination,
     },
   };
