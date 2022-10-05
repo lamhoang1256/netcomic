@@ -2,8 +2,8 @@ import { IconChat, IconEye, IconHeart } from "components/icons";
 
 const ComicItem = ({ comic }: any) => {
   return (
-    <div className="flex md:flex-col">
-      <div className="relative overflow-hidden rounded aspect-[2.2/3] md:w-[unset] md:h-[unset] h-[125px] mr-[3%] md:mr-0 w-[42%] flex-shrink-0">
+    <div>
+      <div className="relative overflow-hidden rounded aspect-[2.2/3]">
         <picture>
           <source srcSet={comic.posterUrl} type="image/webp" />
           <img alt={comic.slug} src={comic.posterUrl} className="object-cover w-full h-full " />
