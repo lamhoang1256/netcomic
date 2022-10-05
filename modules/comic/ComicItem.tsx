@@ -1,6 +1,13 @@
 import { IconChat, IconEye, IconHeart } from "components/icons";
+import { PATH } from "constants/path";
+import Link from "next/link";
+import { IComic } from "types";
 
-const ComicItem = ({ comic }: any) => {
+interface ComicItemProps {
+  comic: IComic | any;
+}
+
+const ComicItem = ({ comic }: ComicItemProps) => {
   return (
     <div>
       <div className="relative overflow-hidden rounded aspect-[2.2/3]">
@@ -24,9 +31,13 @@ const ComicItem = ({ comic }: any) => {
         </div>
       </div>
       <div className="flex-1">
-        <h3 className="mt-1 text-base transition-all duration-200 line-clamp-2 hover:text-blue29">
-          {comic.title}
-        </h3>
+        <Link href={`${PATH.comic}/${comic.slug}`}>
+          <a>
+            <h3 className="mt-1 text-base transition-all duration-200 line-clamp-2 hover:text-blue29">
+              {comic.title}
+            </h3>
+          </a>
+        </Link>
         <div>
           {comic.chapters?.map((chapter: any) => (
             <div className="flex items-center justify-between mt-1" key={chapter.name}>

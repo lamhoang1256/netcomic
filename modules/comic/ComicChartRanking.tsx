@@ -7,17 +7,17 @@ import { IComicTopRanking } from "types";
 
 const ComicChartRanking = () => {
   const [chartRankings, setChartRankings] = useState<IComicTopRanking[]>([]);
-  // const fetchChartRankings = async () => {
-  //   try {
-  //     const { data } = (await axios.get(`${server}/api/chart-rankings`)).data;
-  //     setChartRankings(data);
-  //   } catch (error) {
-  //     console.log("error: ", error);
-  //   }
-  // };
-  // useEffect(() => {
-  //   fetchChartRankings();
-  // }, []);
+  const fetchChartRankings = async () => {
+    try {
+      const { data } = (await axios.get(`${server}/api/chart-rankings`)).data;
+      setChartRankings(data);
+    } catch (error) {
+      console.log("error: ", error);
+    }
+  };
+  useEffect(() => {
+    fetchChartRankings();
+  }, []);
 
   return (
     <div className="border border-graydd">

@@ -1,6 +1,7 @@
 export const PATH = {
   home: "/",
   topComic: "/top-comic",
+  comic: "/comic",
   netTruyen: process.env.URL_NETTRUYEN,
   netTruyenComic: `${process.env.URL_NETTRUYEN}/truyen-tranh`,
   netTruyenSearch: `${process.env.URL_NETTRUYEN}/tim-truyen`,
