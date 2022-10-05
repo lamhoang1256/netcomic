@@ -12,7 +12,7 @@ const HomeNewestComic = ({ newestComics }: HomeNewestComicProps) => {
   return (
     <div>
       <div className="flex items-center justify-between">
-        <Heading>Truyện mới cập nhật</Heading>
+        <Heading className="text-xl">Truyện đề cử</Heading>
         <Link href="/">
           <a className="w-[30px] h-[30px] border border-[#ff9601] rounded-full flex items-center justify-center">
             <IconFilter fill="#ff9601" />

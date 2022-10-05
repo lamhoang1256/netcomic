@@ -85,13 +85,14 @@ export function getTopMonthComic(node: any, replaceHref = `${URL_NETTRUYEN}/`) {
   return { rank, title, posterUrl, href, chapter, view };
 }
 
-export function crawlInfoComic(node: any) {
+export function crawlInfoComic(node: any, replaceHref = `${URL_NETTRUYEN}/`) {
   const title = node.find(".title-detail").text();
   const updatedAt = node.find("time.small").text().trim();
   const posterUrl = node
     .find(".col-image img")
     .attr("src")
     ?.replace(urlNetTruyenWithoutHttp, URL_NETTRUYEN);
+  const slug = node.find(".col-info .mrb10 a").attr("href")?.replace(replaceHref, "") || "";
   const author = node.find(".author .col-xs-8").text();
   const status = node.find(".status .col-xs-8").text();
   const categories = node.find(".kind .col-xs-8").text();
@@ -101,6 +102,7 @@ export function crawlInfoComic(node: any) {
   const followCount = node.find(".follow span b").text();
   const description = node.find(".detail-content p").text().trim();
   return {
+    slug,
     title,
     updatedAt,
     posterUrl,

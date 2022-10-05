@@ -34,7 +34,7 @@ async function crawlDetailsComic(url: string) {
     comments: [],
   };
   $("#ctl00_divCenter").each(function (index, element) {
-    dataDetails.info = crawlInfoComic($(element));
+    dataDetails.info = crawlInfoComic($(element), PATH.netTruyenComic);
   });
   $("#ctl00_divCenter .list-chapter li.row").each(function (index, option) {
     const chapter = getEpisodeList($(option));

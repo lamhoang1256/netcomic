@@ -1,14 +1,14 @@
-@import url("https://fonts.googleapis.com/css2?family=Tahoma:wght@300;400;500;600;700&display=swap");
+@import url("http://fonts.cdnfonts.com/css/averta-blackitalic");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 body {
-  font-family: "Tahoma", sans-serif, Helvetica, Arial;
+  font-family: "Averta-Regular", sans-serif, Helvetica, Arial;
   @apply text-sm bg-[#ebebeb] text-[#333];
 }
 .layout-container {
   width: 100%;
-  max-width: 1030px;
+  max-width: 1140px;
   margin: 0 auto;
   padding: 0 15px;
 }

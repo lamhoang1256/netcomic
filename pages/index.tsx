@@ -3,9 +3,9 @@ import { Pagination } from "components/pagination";
 import { server } from "configs/server";
 import LayoutHome from "layouts/LayoutHome";
 import { ComicChartRanking } from "modules/comic";
-import { HomeBanner, HomeNewestComic, HomeFollow, HomeHistory } from "modules/home";
+import { HomeBanner, HomeFollow, HomeHistory, HomeNewestComic } from "modules/home";
 import Head from "next/head";
-import { IComic, IComicTopRanking, IPagination } from "types";
+import { IComic, IPagination } from "types";
 
 interface HomePageProps {
   banners: IComic[];
@@ -22,9 +22,9 @@ const Home = ({ banners, newestComics, pagination }: HomePageProps) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <LayoutHome>
-        <div className="max-w-[1030px] py-[15px] bg-white mx-auto">
+        <div className="bg-white layout-container">
           <HomeBanner banners={banners} />
-          <div className="flex flex-col lg:flex-row gap-4 mt-6 px-[15px]">
+          <div className="flex flex-col gap-4 mt-6 lg:flex-row">
             <div className="lg:w-2/3">
               <HomeNewestComic newestComics={newestComics} />
               <Pagination pagination={pagination} />

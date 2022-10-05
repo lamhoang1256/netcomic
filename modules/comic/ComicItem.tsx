@@ -15,7 +15,7 @@ const ComicItem = ({ comic }: ComicItemProps) => {
           <source srcSet={comic.posterUrl} type="image/webp" />
           <img alt={comic.slug} src={comic.posterUrl} className="object-cover w-full h-full " />
         </picture>
-        <div className="absolute bottom-0 left-0 text-xs right-0 py-[5px] text-white bg-overlay flex items-center justify-between gap-x-[2px]">
+        <div className="absolute bottom-0 left-0 text-xs right-0 py-[5px] text-white bg-overlay flex items-center justify-between md:px-1 gap-x-[2px]">
           <div className="flex items-center gap-x-[2px]">
             <IconEye />
             <span>3.889K</span>
