@@ -24,7 +24,8 @@ const ComicDetailsPage = ({ info, chapters }: ComicDetailsPageProps) => {
     <>
       <Head>
         <title>
-          {info.title} [Tới Chap {chapters[0].title}] Tiếng Việt
+          ComicDetailsPage
+          {/* {info.title} [Tới Chap {chapters[0].title}] Tiếng Việt */}
         </title>
         <meta name="description" content="Trang chi tiết truyện" />
         <link rel="icon" href="/favicon.ico" />
