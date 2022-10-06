@@ -8,7 +8,7 @@ import { ApiError, responseError, responseSuccess } from "utils/response";
 import { STATUS } from "constants/status";
 import { PATH } from "constants/path";
 
-const searchComics = async (req: NextApiRequest, res: NextApiResponse) => {
+const SearchComicsApi = async (req: NextApiRequest, res: NextApiResponse) => {
   const { method, query } = req;
   if (method !== "GET") {
     const error = new ApiError(STATUS.METHOD_NOT_ALLOWED, "Method not allowed");
@@ -27,11 +27,11 @@ async function crawlSearchComics(query: Partial<IQueryParams>) {
   const html = response.data;
   const $ = cheerio.load(html);
   let searchResults: IComic[] = [];
-  $("#ctl00_divCenter .Module .items .item").each(function (index, item) {
-    const result = crawlComic($(item));
+  $("#ctl00_divCenter .Module .items .item").each(function (index, element) {
+    const result = crawlComic($(element), $);
     searchResults.push(result);
   });
   return searchResults;
 }
 
-export default catchAsync(searchComics);
+export default catchAsync(SearchComicsApi);
