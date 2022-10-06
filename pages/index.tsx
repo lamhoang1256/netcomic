@@ -22,8 +22,7 @@ const HomePage = ({ banners, newestComics, paginations }: HomePageProps) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <LayoutHome>
-        HomePage
-        {/* <div className="bg-white layout-container">
+        <div className="bg-white layout-container">
           <HomeBanner banners={banners} />
           <div className="flex flex-col gap-4 mt-6 lg:flex-row">
             <div className="lg:w-2/3">
@@ -36,21 +35,21 @@ const HomePage = ({ banners, newestComics, paginations }: HomePageProps) => {
               <ComicChartRanking />
             </div>
           </div>
-        </div> */}
+        </div>
       </LayoutHome>
     </>
   );
 };
 
-// export async function getStaticProps() {
-//   const { data } = (await axios.get(`${server}/api/home`)).data;
-//   return {
-//     props: {
-//       banners: data.banners,
-//       newestComics: data.newestComics,
-//       paginations: data.paginations,
-//     },
-//   };
-// }
+export async function getStaticProps() {
+  const { data } = (await axios.get(`${server}/api/home`)).data;
+  return {
+    props: {
+      banners: data.banners,
+      newestComics: data.newestComics,
+      paginations: data.paginations,
+    },
+  };
+}
 
 export default HomePage;

@@ -24,15 +24,13 @@ const ComicDetailsPage = ({ info, chapters }: ComicDetailsPageProps) => {
     <>
       <Head>
         <title>
-          ComicDetailsPage
-          {/* {info.title} [Tới Chap {chapters[0].title}] Tiếng Việt */}
+          {info.title} [Tới Chap {chapters[0].title}] Tiếng Việt
         </title>
         <meta name="description" content="Trang chi tiết truyện" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <LayoutHome>
-        ComicDetailsPage
-        {/* <section className="bg-[#f9f9f9] layout-container">
+        <section className="bg-[#f9f9f9] layout-container">
           <div className="flex flex-col gap-6 pt-5 lg:flex-row">
             <div className="lg:w-2/3">
               <div className="text-center">
@@ -150,21 +148,21 @@ const ComicDetailsPage = ({ info, chapters }: ComicDetailsPageProps) => {
               <ComicChartRanking />
             </div>
           </div>
-        </section> */}
+        </section>
       </LayoutHome>
     </>
   );
 };
 
-// export async function getServerSideProps({ query }: GetServerSidePropsContext) {
-//   const { slug } = query;
-//   const { data } = (await axios.get(`${server}/api/comic/${slug}`)).data;
-//   return {
-//     props: {
-//       info: data.info,
-//       chapters: data.chapters,
-//     },
-//   };
-// }
+export async function getServerSideProps({ query }: GetServerSidePropsContext) {
+  const { slug } = query;
+  const { data } = (await axios.get(`${server}/api/comic/${slug}`)).data;
+  return {
+    props: {
+      info: data.info,
+      chapters: data.chapters,
+    },
+  };
+}
 
 export default ComicDetailsPage;
