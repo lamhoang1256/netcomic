@@ -1,13 +1,13 @@
+import { IQueryParams } from "@types";
 import axios from "axios";
 import { PATH } from "constants/path";
 import { STATUS } from "constants/status";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { IQueryParams } from "@types";
 import catchAsync from "utils/catch-async";
 import { crawlGenderComics } from "utils/crawl";
 import { ApiError, responseError, responseSuccess } from "utils/response";
 
-const getGrilComics = async (req: NextApiRequest, res: NextApiResponse) => {
+const GrilComicsApi = async (req: NextApiRequest, res: NextApiResponse) => {
   const { method, query } = req;
   if (method !== "GET") {
     const error = new ApiError(STATUS.METHOD_NOT_ALLOWED, "Method not allowed");
@@ -28,4 +28,4 @@ async function crawlGrilComics(query: Partial<IQueryParams>) {
   return girlComics;
 }
 
-export default catchAsync(getGrilComics);
+export default catchAsync(GrilComicsApi);

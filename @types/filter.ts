@@ -1,17 +1,15 @@
-export interface IFilterItem {
+export interface IFilter {
   value: string;
   content: string;
 }
-
-export interface IFilterOptions {
-  genres: IFilterItem[];
-  minchapter: IFilterItem[];
-  status: IFilterItem[];
-  gender: IFilterItem[];
-  sort: IFilterItem[];
+export interface IFilters {
+  genres: IFilter[];
+  minchapter: IFilter[];
+  status: IFilter[];
+  gender: IFilter[];
+  sort: IFilter[];
 }
-
-export interface IParamsFilter {
+export interface IFilterParams {
   genres: string;
   notgenres: string;
   gender: string;

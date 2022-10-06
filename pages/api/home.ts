@@ -1,4 +1,4 @@
-import { IBanner, IComic, IComicRanking, IPagination, IQueryParams } from "@types";
+import { IBanner, IComic, IComicChartRanking, IPagination, IQueryParams } from "@types";
 import axios from "axios";
 import * as cheerio from "cheerio";
 import { PATH } from "constants/path";
@@ -29,7 +29,7 @@ async function crawlHomePage(query: Partial<IQueryParams>) {
   let banners: IBanner[] = [];
   let newestComics: IComic[] = [];
   let paginations: IPagination[] = [];
-  let chartRankings: IComicRanking[] = [];
+  let chartRankings: IComicChartRanking[] = [];
   $("#ctl00_divAlt1 .items-slide .item", html).each(function (index, element) {
     const banner = crawlBanner($(element));
     banners.push(banner);

@@ -1,13 +1,10 @@
-import { IComment } from "./read";
-
-export interface IChapter {
+export interface ILinkChapter {
   id: string;
   href: string;
   title: string;
   updatedAt: string;
   viewCount: string;
 }
-
 export interface IComic {
   slug: string;
   title: string;
@@ -23,7 +20,6 @@ export interface IComic {
     updatedAgo: string;
   }[];
 }
-
 export interface IComicInfo {
   title: string;
   slug: string;
@@ -39,17 +35,11 @@ export interface IComicInfo {
   description: string;
 }
 
-export interface IComicRanking {
+export interface IComicChartRanking {
   rank: string;
   title: string;
   posterUrl: string;
   href: string;
   view: string;
   chapter: string;
-}
-
-export interface IComicDetails {
-  info: IComicInfo;
-  chapters: IChapter[];
-  comments: IComment[];
 }

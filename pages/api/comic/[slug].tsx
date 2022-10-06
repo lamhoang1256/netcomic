@@ -1,4 +1,4 @@
-import { IChapter, IComicInfo, IComment } from "@types";
+import { ILinkChapter, IComicInfo, IComment } from "@types";
 import axios from "axios";
 import * as cheerio from "cheerio";
 import { PATH } from "constants/path";
@@ -28,7 +28,7 @@ async function crawlComicDetails(url: string) {
   const html = response.data;
   const $ = cheerio.load(html);
   let info: IComicInfo = {} as IComicInfo;
-  let chapters: IChapter[] = [];
+  let chapters: ILinkChapter[] = [];
   let comments: IComment[] = [];
   $("#ctl00_divCenter").each(function (index, element) {
     info = crawlInfoComic($(element), PATH.netTruyenComic);

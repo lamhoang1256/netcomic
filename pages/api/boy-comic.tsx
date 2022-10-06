@@ -1,14 +1,13 @@
-import axios from "axios";
+import { IQueryParams } from "@types";
 import axiosClient from "configs/axiosClient";
 import { PATH } from "constants/path";
 import { STATUS } from "constants/status";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { IQueryParams } from "@types";
 import catchAsync from "utils/catch-async";
 import { crawlGenderComics } from "utils/crawl";
 import { ApiError, responseError, responseSuccess } from "utils/response";
 
-const getBoyComics = async (req: NextApiRequest, res: NextApiResponse) => {
+const BoyComicsApi = async (req: NextApiRequest, res: NextApiResponse) => {
   const { method, query } = req;
   if (method !== "GET") {
     const error = new ApiError(STATUS.METHOD_NOT_ALLOWED, "Method not allowed");
@@ -25,8 +24,8 @@ const getBoyComics = async (req: NextApiRequest, res: NextApiResponse) => {
 async function crawlBoyComics(query: Partial<IQueryParams>) {
   const response = await axiosClient.get(PATH.netTruyenBoy, { params: query });
   const html = response.data;
-  const girlComics = crawlGenderComics(html);
-  return girlComics;
+  const boyComics = crawlGenderComics(html);
+  return boyComics;
 }
 
-export default catchAsync(getBoyComics);
+export default catchAsync(BoyComicsApi);
