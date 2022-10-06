@@ -1,10 +1,10 @@
 import axios from "axios";
 import * as cheerio from "cheerio";
-import { IComic } from "types/home";
+import { IComic } from "@types/home";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { crawlComic } from "utils/crawl";
 import catchAsync from "utils/catch-async";
-import { IQueryParams } from "types/common";
+import { IQueryParams } from "@types/common";
 import { ApiError, responseError, responseSuccess } from "utils/response";
 import { STATUS } from "constants/status";
 import { PATH } from "constants/path";

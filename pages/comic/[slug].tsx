@@ -8,7 +8,7 @@ import { GetServerSidePropsContext } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { useState } from "react";
-import { IComicInfo, IOptionChapter } from "types";
+import { IComicInfo, IOptionChapter } from "@types";
 
 interface ComicDetailsPageProps {
   info: IComicInfo;

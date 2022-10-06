@@ -1,4 +1,4 @@
-import { IComic } from "./home";
+import { IComic } from "./comic";
 
 export interface ITopComicItem {
   active: string;

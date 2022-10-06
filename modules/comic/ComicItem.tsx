@@ -1,10 +1,10 @@
 import { IconChat, IconEye, IconHeart } from "components/icons";
 import { PATH } from "constants/path";
 import Link from "next/link";
-import { IComic } from "types";
+import { IComic } from "@types";
 
 interface ComicItemProps {
-  comic: IComic | any;
+  comic: IComic;
 }
 
 const ComicItem = ({ comic }: ComicItemProps) => {
@@ -15,18 +15,18 @@ const ComicItem = ({ comic }: ComicItemProps) => {
           <source srcSet={comic.posterUrl} type="image/webp" />
           <img alt={comic.slug} src={comic.posterUrl} className="object-cover w-full h-full " />
         </picture>
-        <div className="absolute bottom-0 left-0 text-xs right-0 py-[5px] text-white bg-overlay flex items-center justify-between md:px-1 gap-x-[2px]">
+        <div className="absolute bottom-0 left-0 text-xs right-0 py-[5px] text-white bg-overlay flex items-center justify-between md:px-2 gap-x-[2px]">
           <div className="flex items-center gap-x-[2px]">
             <IconEye />
-            <span>3.889K</span>
+            <span>{comic.viewCount}</span>
           </div>
           <div className="flex items-center gap-x-[2px]">
             <IconChat />
-            <span>3.889</span>
+            <span>{comic.commentCount}</span>
           </div>
           <div className="flex items-center gap-x-[2px]">
             <IconHeart />
-            <span>3.889</span>
+            <span>{comic.followCount}</span>
           </div>
         </div>
       </div>

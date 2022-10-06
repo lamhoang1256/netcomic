@@ -3,9 +3,9 @@ import * as cheerio from "cheerio";
 import { PATH } from "constants/path";
 import { STATUS } from "constants/status";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { ICommentReply, IDetailsChapter, IDataChapter } from "types/read";
+import { IReplyComment, IDetailsChapter, IDataChapter } from "@types/read";
 import catchAsync from "utils/catch-async";
-import { getCommentItem, getCommentReplyItem, getImagesReading } from "utils/crawl";
+import { getComment, getCommentReplyItem, getImagesReading } from "utils/crawl";
 import { ApiError, responseError, responseSuccess } from "utils/response";
 
 const crawlChapterComic = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -48,8 +48,8 @@ const getDetailsChapter = async (url: string) => {
     dataChapter.imageUrls.push(imageUrl);
   });
   $(".comment-list .item.clearfix").each(function (index, element) {
-    let replyComments: ICommentReply[] = [];
-    const comment = getCommentItem($(element).first());
+    let replyComments: IReplyComment[] = [];
+    const comment = getComment($(element).first());
     $(element)
       .find(".item.child")
       .each(function (index, element) {

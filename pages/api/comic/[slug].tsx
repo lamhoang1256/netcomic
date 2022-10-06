@@ -1,22 +1,21 @@
+import { IChapter, IComicInfo, IComment } from "@types";
 import axios from "axios";
 import * as cheerio from "cheerio";
-import type { NextApiRequest, NextApiResponse } from "next";
-import { ICommentReply } from "types/read";
-import { IComicInfo, IComicDetails } from "types/detail";
-import { crawlInfoComic, getCommentItem, getCommentReplyItem, getEpisodeList } from "utils/crawl";
-import catchAsync from "utils/catch-async";
-import { ApiError, responseError, responseSuccess } from "utils/response";
-import { STATUS } from "constants/status";
 import { PATH } from "constants/path";
+import { STATUS } from "constants/status";
+import type { NextApiRequest, NextApiResponse } from "next";
+import catchAsync from "utils/catch-async";
+import { crawlChapters, crawlComments, crawlInfoComic } from "utils/crawl";
+import { ApiError, responseError, responseSuccess } from "utils/response";
 
-const getDetailsComic = async (req: NextApiRequest, res: NextApiResponse) => {
+const ComicDetailsApi = async (req: NextApiRequest, res: NextApiResponse) => {
   const { method, query } = req;
   const { slug } = query;
   if (method !== "GET") {
     const error = new ApiError(STATUS.METHOD_NOT_ALLOWED, "Method not allowed");
     return responseError(error, res);
   }
-  const data = await crawlDetailsComic(`${PATH.netTruyenComic}/${slug}`);
+  const data = await crawlComicDetails(`${PATH.netTruyenComic}/${slug}`);
   const response = {
     message: "Lấy chi tiết truyện thành công!",
     data,
@@ -24,34 +23,25 @@ const getDetailsComic = async (req: NextApiRequest, res: NextApiResponse) => {
   responseSuccess(res, response);
 };
 
-async function crawlDetailsComic(url: string) {
+async function crawlComicDetails(url: string) {
   const response = await axios.get(url);
   const html = response.data;
   const $ = cheerio.load(html);
-  let dataDetails: IComicDetails = {
-    info: {} as IComicInfo,
-    chapters: [],
-    comments: [],
-  };
+  let info: IComicInfo = {} as IComicInfo;
+  let chapters: IChapter[] = [];
+  let comments: IComment[] = [];
   $("#ctl00_divCenter").each(function (index, element) {
-    dataDetails.info = crawlInfoComic($(element), PATH.netTruyenComic);
+    info = crawlInfoComic($(element), PATH.netTruyenComic);
   });
-  $("#ctl00_divCenter .list-chapter li.row").each(function (index, option) {
-    const chapter = getEpisodeList($(option));
-    dataDetails.chapters.push(chapter);
+  $("#ctl00_divCenter .list-chapter li.row").each(function (index, element) {
+    const chapter = crawlChapters($(element));
+    chapters.push(chapter);
   });
   $("#ctl00_divCenter .comment-list .item.clearfix").each(function (index, element) {
-    let replyComments: ICommentReply[] = [];
-    const comment = getCommentItem($(element).first());
-    $(element)
-      .find(".item.child")
-      .each(function (index, element) {
-        const replyComment = getCommentReplyItem($(element));
-        replyComments.push(replyComment);
-      });
-    dataDetails.comments.push({ ...comment, replyComments });
+    const comment = crawlComments($(element), $);
+    comments.push(comment);
   });
-  return dataDetails;
+  return { info, chapters, comments };
 }
 
-export default catchAsync(getDetailsComic);
+export default catchAsync(ComicDetailsApi);

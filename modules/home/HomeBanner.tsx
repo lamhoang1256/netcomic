@@ -6,7 +6,7 @@ import { Navigation } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { IComic } from "types";
+import { IComic } from "@types";
 
 interface HomeBannerProps {
   banners: IComic[];
@@ -14,7 +14,7 @@ interface HomeBannerProps {
 
 const HomeBanner = ({ banners }: HomeBannerProps) => {
   return (
-    <section>
+    <section className="pt-4">
       <Heading className="text-xl mb-[10px]">Truyện đề cử</Heading>
       <Swiper
         loop

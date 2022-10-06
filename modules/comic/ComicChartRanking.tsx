@@ -3,10 +3,10 @@ import { IconEye } from "components/icons";
 import { server } from "configs/server";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { IComicTopRanking } from "types";
+import { IComicRanking } from "@types";
 
 const ComicChartRanking = () => {
-  const [chartRankings, setChartRankings] = useState<IComicTopRanking[]>([]);
+  const [chartRankings, setChartRankings] = useState<IComicRanking[]>([]);
   const fetchChartRankings = async () => {
     try {
       const { data } = (await axios.get(`${server}/api/chart-rankings`)).data;

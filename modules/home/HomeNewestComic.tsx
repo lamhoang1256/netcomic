@@ -2,7 +2,7 @@ import { IconFilter } from "components/icons";
 import { Heading } from "components/text";
 import { ComicGrid, ComicItem } from "modules/comic";
 import Link from "next/link";
-import { IComic } from "types";
+import { IComic } from "@types";
 
 interface HomeNewestComicProps {
   newestComics: IComic[];

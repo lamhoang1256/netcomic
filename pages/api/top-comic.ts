@@ -3,8 +3,7 @@ import * as cheerio from "cheerio";
 import { PATH } from "constants/path";
 import { STATUS } from "constants/status";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { IQueryParams } from "types/common";
-import { IDataTopComics } from "types/top-comic";
+import { IDataTopComics, IQueryParams } from "@types";
 import catchAsync from "utils/catch-async";
 import { crawlComic } from "utils/crawl";
 import { ApiError, responseError, responseSuccess } from "utils/response";
@@ -40,7 +39,7 @@ const crawlTopComics = async (url: string, query: Partial<IQueryParams>) => {
     topComicResults.sort.push({ active, ...option });
   });
   $(".ModuleContent .item").each(function (index, element) {
-    const comic = crawlComic($(element));
+    const comic = crawlComic($(element), $);
     topComicResults.results.push(comic);
   });
   return topComicResults;

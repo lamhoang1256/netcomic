@@ -5,15 +5,15 @@ import LayoutHome from "layouts/LayoutHome";
 import { ComicChartRanking } from "modules/comic";
 import { HomeBanner, HomeFollow, HomeHistory, HomeNewestComic } from "modules/home";
 import Head from "next/head";
-import { IComic, IPagination } from "types";
+import { IComic, IPagination } from "@types";
 
 interface HomePageProps {
   banners: IComic[];
   newestComics: IComic[];
-  pagination: IPagination[];
+  paginations: IPagination[];
 }
 
-const Home = ({ banners, newestComics, pagination }: HomePageProps) => {
+const Home = ({ banners, newestComics, paginations }: HomePageProps) => {
   return (
     <>
       <Head>
@@ -27,7 +27,7 @@ const Home = ({ banners, newestComics, pagination }: HomePageProps) => {
           <div className="flex flex-col gap-4 mt-6 lg:flex-row">
             <div className="lg:w-2/3">
               <HomeNewestComic newestComics={newestComics} />
-              <Pagination pagination={pagination} />
+              <Pagination paginations={paginations} />
             </div>
             <div className="flex flex-col lg:w-1/3 gap-y-4">
               <HomeFollow />
@@ -47,7 +47,7 @@ export async function getStaticProps() {
     props: {
       banners: data.banners,
       newestComics: data.newestComics,
-      pagination: data.pagination,
+      paginations: data.paginations,
     },
   };
 }

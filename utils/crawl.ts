@@ -1,98 +1,154 @@
+import {
+  IBanner,
+  IChapter,
+  IComic,
+  IComicInfo,
+  IComicRanking,
+  IComment,
+  IDataGenderComic,
+  IPagination,
+  IReplyComment,
+} from "@types";
 import * as cheerio from "cheerio";
-import { IDataGenderComic } from "types/common";
+import { PATH } from "constants/path";
 
-const URL_NETTRUYEN = process.env.URL_NETTRUYEN || "";
-const urlNetTruyenWithoutHttp = URL_NETTRUYEN?.split("http:")[1] || "";
+const urlWithoutHttp = PATH.netTruyen?.split("http:")[1] as string;
 
-export function getFeaturedComic(node: any) {
-  const slug = node.find("a").attr("href")?.split("/truyen-tranh/")?.[1] || "";
-  const title = node.find(".slide-caption h3 a").text();
-  const posterUrl = node.find(".lazyOwl").attr("data-src") || "";
-  const newestChapter = node.find(".slide-caption > a").text();
-  const updatedAgo = node.find(".slide-caption > .time").text().trim();
-  const newestHref =
-    node.find(".slide-caption > a").attr("href")?.split("/truyen-tranh/")?.[1] || "";
+export function crawlBanner(node: cheerio.Cheerio<cheerio.Element>): IBanner {
+  const slug = node
+    .find(".slide-caption > h3 > a")
+    .attr("href")
+    ?.split("/truyen-tranh/")?.[1] as string;
+  const title = node.find(".slide-caption > h3").text();
+  const posterUrl = node.find(".lazyOwl").attr("data-src") as string;
+  const updatedAgo = node.find(".slide-caption .time").first().text();
+  const newestEle = node.find(".slide-caption > a").first();
+  const newestChapter = newestEle.text();
+  const newestHref = newestEle.attr("href")?.split("/truyen-tranh/")?.[1] as string;
   return { slug, title, posterUrl, newestChapter, updatedAgo, newestHref };
 }
 
-export function crawlComic(node: any) {
-  const slug = node.find(".image > a").attr("href")?.split("/truyen-tranh/")?.[1] || "";
+export function crawlComic(node: cheerio.Cheerio<cheerio.Element>, $: cheerio.CheerioAPI): IComic {
+  const slug = node.find(".image > a").attr("href")?.split("/truyen-tranh/")?.[1] as string;
   const title = node.find(".jtip").text();
-  const posterUrl = node.find(".image > a > img").attr("data-original") || "";
+  const posterUrl = node.find(".image > a > img").attr("data-original") as string;
   const updatedAgo = node.find(".comic-item .chapter .time").first().text();
   const newestEle = node.find(".comic-item .chapter a").first();
   const newestChapter = newestEle.text();
-  const newestHref = newestEle.attr("href")?.split("/truyen-tranh/")?.[1] || "";
-  return { slug, title, posterUrl, newestChapter, updatedAgo, newestHref };
+  const count = node.find(".pull-left").text().trim();
+  const viewCount = count.split("  ")[0];
+  const commentCount = count.split("  ")[1];
+  const followCount = count.split("  ")[2];
+  const newestHref = newestEle.attr("href")?.split("/truyen-tranh/")?.[1] as string;
+  let chapters: {
+    name: string;
+    updatedAgo: string;
+  }[] = [];
+  node.find(".chapter").each(function (index, element) {
+    const name = $(element).find("a").text();
+    const updatedAgo = $(element).find(".time").text();
+    chapters.push({ name, updatedAgo });
+  });
+  return {
+    slug,
+    title,
+    posterUrl,
+    newestChapter,
+    updatedAgo,
+    newestHref,
+    viewCount,
+    commentCount,
+    followCount,
+    chapters,
+  };
 }
 
-export function getCommentItem(node: any) {
-  const id = node.attr("id")?.replace("comment_", "");
+export function crawlReplyComment(
+  node: cheerio.Cheerio<cheerio.Element>,
+  $: cheerio.CheerioAPI
+): IReplyComment[] {
+  let replyComments: IReplyComment[] = [];
+  $(node)
+    .find(".item.child")
+    .each(function (index, element) {
+      const id = $(element).attr("id")?.replace("comment_", "") as string;
+      const username = $(element).find(".authorname").text();
+      const avatar = $(element)
+        .find("img")
+        .attr("data-original")
+        ?.replace(urlWithoutHttp, PATH.netTruyen as string) as string;
+      const mentionUser = $(element).find(".comment-content .mention-user").text().trim();
+      const content = $(element).find(".comment-content").text().trim().replace(mentionUser, "");
+      const createdAt = $(element).find("abbr").text().trim();
+      replyComments.push({ id, username, avatar, content, createdAt, mentionUser });
+    });
+  return replyComments;
+}
+
+export function crawlComments(
+  node: cheerio.Cheerio<cheerio.Element>,
+  $: cheerio.CheerioAPI
+): IComment {
+  const id = node.attr("id")?.replace("comment_", "") as string;
   const username = node.find(".authorname").first().text();
   const avatar = node
     .find("img")
     .first()
     .attr("data-original")
-    ?.replace(urlNetTruyenWithoutHttp, URL_NETTRUYEN);
+    ?.replace(urlWithoutHttp, PATH.netTruyen as string) as string;
   const content = node.find(".comment-content").first().text();
   const createdAt = node.find("abbr").first().text().trim();
-  return { id, username, avatar, content, createdAt };
+  const replyComments: IReplyComment[] = crawlReplyComment($(node), $);
+  return { id, username, avatar, content, createdAt, replyComments };
 }
 
-export function getCommentReplyItem(node: any) {
-  const id = node.attr("id")?.replace("comment_", "");
-  const username = node.find(".authorname").text();
-  const avatar = node
-    .find("img")
-    .attr("data-original")
-    ?.replace(urlNetTruyenWithoutHttp, URL_NETTRUYEN);
-  const mentionUser = node.find(".comment-content .mention-user").text().trim();
-  const content = node.find(".comment-content").text().trim().replace(mentionUser, "");
-  const createdAt = node.find("abbr").text().trim();
-  return { id, username, avatar, content, createdAt, mentionUser };
-}
-
-export function getEpisodeList(node: any) {
-  const id = node.find(".chapter a").attr("data-id");
-  const href = node.find(".chapter a").attr("href").split("/truyen-tranh/")[1] || "";
+export function crawlChapters(node: cheerio.Cheerio<cheerio.Element>): IChapter {
+  const id = node.find(".chapter a").attr("data-id") as string;
+  const href = node.find(".chapter a").attr("href")?.split("/truyen-tranh/")[1] as string;
   const title = node.find(".chapter a").text();
   const updatedAt = node.find(".col-xs-4").text();
   const viewCount = node.find(".col-xs-3").text();
   return { id, href, title, updatedAt, viewCount };
 }
 
-export function getImagesReading(node: any) {
-  const imageUrl = node.find("img").attr("data-original");
-  const alt = node.find("img").attr("alt");
-  return { alt, imageUrl };
-}
-
-export function getPagination(node: any, replaceHref = `${URL_NETTRUYEN}/`) {
+export function crawlPagination(
+  node: cheerio.Cheerio<cheerio.Element>,
+  replaceHref = PATH.netTruyen as string
+): IPagination {
   const display = node.text();
   const active = node.hasClass("active");
-  const title = node.find("a").attr("title") || "";
-  const href = node.find("a").attr("href")?.replace(replaceHref, "") || "";
+  const title = node.find("a").attr("title") as string;
+  const href = node.find("a").attr("href")?.replace(replaceHref, "") as string;
   return { active, title, display, href };
 }
 
-export function getTopMonthComic(node: any, replaceHref = `${URL_NETTRUYEN}/`) {
+export function crawlComicTopMonth(
+  node: cheerio.Cheerio<cheerio.Element>,
+  replaceHref = PATH.netTruyen as string
+): IComicRanking {
   const rank = node.find(".txt-rank").text();
   const title = node.find(".title a").text();
   const chapter = node.find(".chapter a").text();
-  const posterUrl = node.find(".thumb img").attr("data-original")?.replace(replaceHref, "") || "";
-  const href = node.find(".thumb").attr("href")?.replace(replaceHref, "") || "";
+  const posterUrl = node
+    .find(".thumb img")
+    .attr("data-original")
+    ?.replace(replaceHref, "") as string;
+  const href = node.find(".thumb").attr("href")?.replace(replaceHref, "") as string;
   const view = node.find(".view").text().trim();
   return { rank, title, posterUrl, href, chapter, view };
 }
 
-export function crawlInfoComic(node: any, replaceHref = `${URL_NETTRUYEN}/`) {
+export function crawlInfoComic(
+  node: cheerio.Cheerio<cheerio.Element>,
+  replaceHref = `${PATH.netTruyen as string}/`
+): IComicInfo {
   const title = node.find(".title-detail").text();
   const updatedAt = node.find("time.small").text().trim();
   const posterUrl = node
     .find(".col-image img")
     .attr("src")
-    ?.replace(urlNetTruyenWithoutHttp, URL_NETTRUYEN);
-  const slug = node.find(".col-info .mrb10 a").attr("href")?.replace(replaceHref, "") || "";
+    ?.replace(urlWithoutHttp, PATH.netTruyen as string) as string;
+  const slug = node.find(".col-info .mrb10 a").attr("href")?.replace(replaceHref, "") as string;
   const author = node.find(".author .col-xs-8").text();
   const status = node.find(".status .col-xs-8").text();
   const categories = node.find(".kind .col-xs-8").text();
@@ -117,15 +173,22 @@ export function crawlInfoComic(node: any, replaceHref = `${URL_NETTRUYEN}/`) {
   };
 }
 
+/// not optimized
+export function getImagesReading(node: cheerio.Cheerio<cheerio.Element>) {
+  const imageUrl = node.find("img").attr("data-original");
+  const alt = node.find("img").attr("alt");
+  return { alt, imageUrl };
+}
+
 export const crawlGenderComics = (html: any) => {
   const $ = cheerio.load(html);
   let data: IDataGenderComic = { comics: [], pagination: [] };
   $("#ctl00_divCenter .ModuleContent .item", html).each(function (index, element) {
-    const comic = crawlComic($(element));
+    const comic = crawlComic($(element), $);
     data.comics.push(comic);
   });
   $("#ctl00_divCenter .pagination li", html).each(function (index, element) {
-    const paginationItem = getPagination($(element), `${URL}`);
+    const paginationItem = crawlPagination($(element), `${URL}`);
     data.pagination.push(paginationItem);
   });
   return data;
