@@ -1,9 +1,9 @@
+import { IDataChapter, IDetailsChapter, IReplyComment } from "@types";
 import axios from "axios";
 import * as cheerio from "cheerio";
 import { PATH } from "constants/path";
 import { STATUS } from "constants/status";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { IReplyComment, IDetailsChapter, IDataChapter } from "@types/read";
 import catchAsync from "utils/catch-async";
 import { getComment, getCommentReplyItem, getImagesReading } from "utils/crawl";
 import { ApiError, responseError, responseSuccess } from "utils/response";

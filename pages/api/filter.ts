@@ -3,8 +3,7 @@ import * as cheerio from "cheerio";
 import { PATH } from "constants/path";
 import { STATUS } from "constants/status";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { IFilterOptions } from "@types/filter";
-import { IComic } from "@types/home";
+import { IFilterOptions, IComic } from "@types";
 import catchAsync from "utils/catch-async";
 import { crawlComic } from "utils/crawl";
 import { ApiError, responseError, responseSuccess } from "utils/response";
@@ -36,7 +35,7 @@ async function crawlFilterComics(params: any) {
     sort: [],
   };
   $(".ModuleContent .item", html).each(function (index, element) {
-    const comic = crawlComic($(element));
+    const comic = crawlComic($(element), $);
     results.push(comic);
   });
   $(".genre-item", html).each(function (index, element) {
