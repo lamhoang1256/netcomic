@@ -8,11 +8,11 @@ import { GetServerSidePropsContext } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { useState } from "react";
-import { IComicInfo, IOptionChapter } from "@types";
+import { IComicInfo, ILinkChapter } from "@types";
 
 interface ComicDetailsPageProps {
   info: IComicInfo;
-  chapters: IOptionChapter[];
+  chapters: ILinkChapter[];
 }
 
 const ComicDetailsPage = ({ info, chapters }: ComicDetailsPageProps) => {
