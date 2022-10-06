@@ -1,11 +1,7 @@
-import { IDataChapter, IDetailsChapter, IReplyComment } from "@types";
-import axios from "axios";
-import * as cheerio from "cheerio";
 import { PATH } from "constants/path";
 import { STATUS } from "constants/status";
 import type { NextApiRequest, NextApiResponse } from "next";
 import catchAsync from "utils/catch-async";
-import { getComment, getCommentReplyItem, getImagesReading } from "utils/crawl";
 import { ApiError, responseError, responseSuccess } from "utils/response";
 
 const crawlChapterComic = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -24,41 +20,42 @@ const crawlChapterComic = async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 const getDetailsChapter = async (url: string) => {
-  const response = await axios.get(url);
-  const html = response.data;
-  const $ = cheerio.load(html);
-  let dataChapter: IDataChapter = {
-    imageUrls: [],
-    detailsChapter: {} as IDetailsChapter,
-    comments: [],
-  };
-  $(".reading .container .top")
-    .first()
-    .each(function (index, item) {
-      const urlOriginal = PATH.netTruyen + "/";
-      const blockH1 = $(item).find("h1.txt-primary");
-      const urlComic = blockH1.find("a").attr("href")?.replace(urlOriginal, "") || "";
-      const title = blockH1.find("a").text();
-      const chapter = blockH1.find("span").text();
-      const updatedAt = $(item).find("i").text();
-      dataChapter.detailsChapter = { title, updatedAt, chapter, urlComic };
-    });
-  $(".reading-detail .page-chapter").each(function (index, element) {
-    const imageUrl = getImagesReading($(element));
-    dataChapter.imageUrls.push(imageUrl);
-  });
-  $(".comment-list .item.clearfix").each(function (index, element) {
-    let replyComments: IReplyComment[] = [];
-    const comment = getComment($(element).first());
-    $(element)
-      .find(".item.child")
-      .each(function (index, element) {
-        const replyComment = getCommentReplyItem($(element));
-        replyComments.push(replyComment);
-      });
-    dataChapter.comments.push({ ...comment, replyComments });
-  });
-  return dataChapter;
+  // const response = await axios.get(url);
+  // const html = response.data;
+  // const $ = cheerio.load(html);
+  // let dataChapter: any = {
+  //   imageUrls: [],
+  //   detailsChapter: {} as IDetailsChapter,
+  //   comments: [],
+  // };
+  // $(".reading .container .top")
+  //   .first()
+  //   .each(function (index, item) {
+  //     const urlOriginal = PATH.netTruyen + "/";
+  //     const blockH1 = $(item).find("h1.txt-primary");
+  //     const urlComic = blockH1.find("a").attr("href")?.replace(urlOriginal, "") || "";
+  //     const title = blockH1.find("a").text();
+  //     const chapter = blockH1.find("span").text();
+  //     const updatedAt = $(item).find("i").text();
+  //     dataChapter.detailsChapter = { title, updatedAt, chapter, urlComic };
+  //   });
+  // $(".reading-detail .page-chapter").each(function (index, element) {
+  //   const imageUrl = getImagesReading($(element));
+  //   dataChapter.imageUrls.push(imageUrl);
+  // });
+  // $(".comment-list .item.clearfix").each(function (index, element) {
+  //   let replyComments: IReplyComment[] = [];
+  //   const comment = crawlComments($(element).first());
+  //   $(element)
+  //     .find(".item.child")
+  //     .each(function (index, element) {
+  //       const replyComment = getCommentReplyItem($(element));
+  //       replyComments.push(replyComment);
+  //     });
+  //   dataChapter.comments.push({ ...comment, replyComments });
+  // });
+  // return dataChapter;
+  return { data: "Chapter" };
 };
 
 export default catchAsync(crawlChapterComic);
