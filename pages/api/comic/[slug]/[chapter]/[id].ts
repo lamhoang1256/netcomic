@@ -8,7 +8,7 @@ import catchAsync from "utils/catch-async";
 import { crawlChapters, crawlComments, getImagesReading } from "utils/crawl";
 import { ApiError, responseError, responseSuccess } from "utils/response";
 
-const crawlChapterComic = async (req: NextApiRequest, res: NextApiResponse) => {
+const ChapterComicApi = async (req: NextApiRequest, res: NextApiResponse) => {
   const { method, query } = req;
   const { slug, chapter, id } = query;
   if (method !== "GET") {
@@ -24,34 +24,37 @@ const crawlChapterComic = async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 const getDetailsChapter = async (url: string) => {
-  const response = await axios.get(url);
-  const html = response.data;
-  const $ = cheerio.load(html);
-  let imageUrls: IImageReading[] = [];
-  let info = {} as IDetailsChapter;
-  let comments: IComment[] = [];
+  // const response = await axios.get(url);
+  // const html = response.data;
+  // const $ = cheerio.load(html);
+  // let imageUrls: IImageReading[] = [];
+  // let info = {} as IDetailsChapter;
+  // let comments: IComment[] = [];
   let chapters: ILinkChapter[] = [];
-  $(".reading .container .top")
-    .first()
-    .each(function (index, element) {
-      const originalUrl = PATH.netTruyen + "/";
-      const heading = $(element).find("h1.txt-primary");
-      const href = heading.find("a").attr("href")?.replace(originalUrl, "") as string;
-      const title = heading.find("a").text();
-      const chapter = heading.find("span").text()?.replace("- ", "") as string;
-      const updatedAt = $(element).find("i").text();
-      info = { title, updatedAt, chapter, href };
-    });
-  $(".reading-detail .page-chapter").each(function (index, element) {
-    const imageUrl = getImagesReading($(element));
-    imageUrls.push(imageUrl);
-  });
-  $(".comment-list .item.clearfix").each(function (index, element) {
-    const comment = crawlComments($(element), $);
-    comments.push(comment);
-  });
+  // $(".reading .container .top")
+  //   .first()
+  //   .each(function (index, element) {
+  //     const originalUrl = PATH.netTruyen + "/";
+  //     const heading = $(element).find("h1.txt-primary");
+  //     const href = heading.find("a").attr("href")?.replace(originalUrl, "") as string;
+  //     const title = heading.find("a").text();
+  //     const chapter = heading.find("span").text()?.replace("- ", "") as string;
+  //     const updatedAt = $(element).find("i").text();
+  //     info = { title, updatedAt, chapter, href };
+  //   });
+  // $(".reading-detail .page-chapter").each(function (index, element) {
+  //   const imageUrl = getImagesReading($(element));
+  //   imageUrls.push(imageUrl);
+  // });
+  // $(".comment-list .item.clearfix").each(function (index, element) {
+  //   const comment = crawlComments($(element), $);
+  //   comments.push(comment);
+  // });
+  // const response2 = await axios.get(
+  //   `${PATH.netTruyenComic}/${info.href?.replace("truyen-tranh/", "")}`
+  // );
   const response2 = await axios.get(
-    `${PATH.netTruyenComic}/${info.href?.replace("truyen-tranh/", "")}`
+    `http://nhattruyenone.com/truyen-tranh/vuong-gia-cuong-ghen-tuong-69754`
   );
   const html2 = response2.data;
   const $2 = cheerio.load(html2);
@@ -59,7 +62,7 @@ const getDetailsChapter = async (url: string) => {
     const chapter = crawlChapters($2(element));
     chapters.push(chapter);
   });
-  return { imageUrls, info, comments, chapters };
+  return { chapters };
 };
 
-export default catchAsync(crawlChapterComic);
+export default catchAsync(ChapterComicApi);
