@@ -79,16 +79,20 @@ const ReadComicPage = ({ imageUrls, chapters, info, comments }: ReadComicPagePro
           <ModalChapterList isShow={isShow} toggleModal={toggleModal} chapters={chapters} />
         </section>
         <div className="pt-3">
-          {imageUrls.map((image) => (
-            <picture key={image.imageUrl}>
-              <source srcSet={getImage(image.imageUrl)} type="image/webp" />
-              <img
-                alt={image.alt}
-                src={getImage(image.imageUrl)}
-                className="object-cover mx-auto"
-              />
-            </picture>
-          ))}
+          {imageUrls.map((image) => {
+            console.log(image.imageUrl);
+            console.log(getImage(image.imageUrl));
+            return (
+              <picture key={image.imageUrl}>
+                <source srcSet={getImage(image.imageUrl)} type="image/webp" />
+                <img
+                  alt={image.alt}
+                  src={getImage(image.imageUrl)}
+                  className="object-cover mx-auto"
+                />
+              </picture>
+            );
+          })}
         </div>
       </LayoutHome>
     </>
