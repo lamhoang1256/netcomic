@@ -1,8 +1,17 @@
 import axios from "axios";
-import { IconChevronLeft, IconChevronRight, IconHeart, IconHome, IconList } from "components/icons";
+import {
+  IconChevronLeft,
+  IconChevronRight,
+  IconDown,
+  IconHeart,
+  IconHome,
+  IconList,
+} from "components/icons";
+import { ModalChapterList } from "components/modal";
 import { Heading } from "components/text";
 import { server } from "configs/server";
 import { PATH } from "constants/path";
+import useModal from "hooks/useModal";
 import LayoutHome from "layouts/LayoutHome";
 import { GetServerSidePropsContext } from "next";
 import Head from "next/head";
@@ -11,6 +20,7 @@ import Link from "next/link";
 interface ReadComicPageProps {}
 
 const ReadComicPage = ({}: ReadComicPageProps) => {
+  const { isShow, toggleModal } = useModal();
   return (
     <>
       <Head>
@@ -38,17 +48,17 @@ const ReadComicPage = ({}: ReadComicPageProps) => {
                 <IconList fill="#d9534f" />
               </a>
             </Link>
-            <div className="flex items-center w-1/4 gap-x-1">
+            <div className="flex items-center w-1/3 gap-x-1">
               <button className="w-[34px] h-[34px] flex items-center justify-center bg-black opacity-30 rounded-l">
                 <IconChevronLeft fill="#fff" />
               </button>
-              <select
-                name="nav-chapter"
-                id="nav-chapter"
-                className="h-[35px] border border-[#ccc] flex-1"
+              <div
+                onClick={toggleModal}
+                className="h-9 cursor-pointer px-2 rounded-sm flex items-center justify-between border border-[#ccc] flex-1"
               >
-                <option value="chap12">Chapter 123</option>
-              </select>
+                <span>Chapter 123</span>
+                <IconDown />
+              </div>
               <button className="w-[34px] h-[34px] flex items-center justify-center bg-black opacity-30 rounded-r">
                 <IconChevronRight fill="#fff" />
               </button>
@@ -58,6 +68,7 @@ const ReadComicPage = ({}: ReadComicPageProps) => {
               Theo dõi
             </button>
           </div>
+          <ModalChapterList isShow={isShow} toggleModal={toggleModal} />
         </section>
       </LayoutHome>
     </>

@@ -7,6 +7,8 @@ import IconHome from "./IconHome";
 import IconList from "./IconList";
 import IconChevronLeft from "./IconChevronLeft";
 import IconChevronRight from "./IconChevronRight";
+import IconClose from "./IconClose";
+import IconDown from "./IconDown";
 
 export {
   IconTime,
@@ -18,4 +20,6 @@ export {
   IconList,
   IconChevronLeft,
   IconChevronRight,
+  IconClose,
+  IconDown,
 };
