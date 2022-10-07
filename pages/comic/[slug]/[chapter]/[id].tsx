@@ -38,7 +38,7 @@ const ReadComicPage = ({ imageUrls, chapters, info, comments }: ReadComicPagePro
       </Head>
       <LayoutHome className="bg-black">
         <section className="bg-[#f9f9f9] layout-container">
-          <div className="flex items-center pt-4 pb-2 gap-x-2">
+          <div className="flex flex-wrap py-4 lg:items-center gap-x-2">
             <h1 className="text-xl transition-all duration-200 text-[#0073f4]  hover:text-purpleae">
               {info.title}
             </h1>

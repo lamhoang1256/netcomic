@@ -20,7 +20,7 @@ const ModalChapterList = ({ isShow, toggleModal, chapters }: ModalChapterListPro
       isOpen={isShow}
       onRequestClose={toggleModal}
       contentLabel="Example Modal"
-      className="max-w-[600px] w-full min-w-[300px] bg-[#f9f9f9] top-1/2 absolute left-1/2 -translate-y-1/2 -translate-x-1/2 rounded-md shadow-modal"
+      className="max-w-[600px] w-full outline-none min-w-[300px] bg-[#f9f9f9] top-1/2 absolute left-1/2 -translate-y-1/2 -translate-x-1/2 rounded-md shadow-modal"
       overlayClassName="bg-black bg-opacity-40 fixed inset-0 z-[99] flex items-center justify-center cursor-pointer"
     >
       <form className="flex items-center justify-between px-5 py-[14px]">
@@ -53,6 +53,7 @@ const ModalChapterList = ({ isShow, toggleModal, chapters }: ModalChapterListPro
                   `px-[5px] py-1 w-[105px] border font-light block text-center h-8`,
                   active
                 )}
+                onClick={toggleModal}
               >
                 {chapter.title}
               </a>
