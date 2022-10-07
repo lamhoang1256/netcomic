@@ -64,6 +64,7 @@ const getDetailsChapter = async (url: string) => {
     info,
     chapters,
     comments,
+    path: `${PATH.netTruyenComic}/${info.href?.replace("truyen-tranh/", "")}`,
   };
 };
 
