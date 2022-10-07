@@ -14,7 +14,7 @@ import { getImage } from "constants/image";
 import { PATH } from "constants/path";
 import useModal from "hooks/useModal";
 import LayoutHome from "layouts/LayoutHome";
-import { GetServerSidePropsContext } from "next";
+import { GetStaticPaths, GetStaticPropsContext } from "next";
 import Head from "next/head";
 import Link from "next/link";
 
@@ -95,8 +95,10 @@ const ReadComicPage = ({ imageUrls, chapters, info, comments }: ReadComicPagePro
   );
 };
 
-export async function getServerSideProps({ query }: GetServerSidePropsContext) {
-  const { slug, chapter, id } = query;
+export async function getStaticProps({ params }: GetStaticPropsContext) {
+  const slug = params?.slug as string;
+  const chapter = params?.chapter as string;
+  const id = params?.id as string;
   const { imageUrls, info, chapters, comments } = (
     await axios.get(`${server}/api/comic/${slug}/${chapter}/${id}`)
   ).data.data;
@@ -107,7 +109,15 @@ export async function getServerSideProps({ query }: GetServerSidePropsContext) {
       chapters,
       comments,
     },
+    revalidate: 300,
   };
 }
+
+export const getStaticPaths: GetStaticPaths = () => {
+  return {
+    paths: [],
+    fallback: "blocking",
+  };
+};
 
 export default ReadComicPage;

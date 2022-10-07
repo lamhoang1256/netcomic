@@ -16,6 +16,7 @@ export interface IComic {
   commentCount: string;
   followCount: string;
   chapters: {
+    href: string;
     name: string;
     updatedAgo: string;
   }[];
@@ -41,5 +42,6 @@ export interface IComicChartRanking {
   posterUrl: string;
   href: string;
   view: string;
-  chapter: string;
+  newestChapter: string;
+  newestHref: string;
 }

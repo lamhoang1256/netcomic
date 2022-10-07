@@ -1,11 +1,12 @@
+import { IComic, IPagination } from "@types";
 import axios from "axios";
 import { Pagination } from "components/pagination";
 import { server } from "configs/server";
 import LayoutHome from "layouts/LayoutHome";
 import { ComicChartRanking } from "modules/comic";
 import { HomeBanner, HomeFollow, HomeHistory, HomeNewestComic } from "modules/home";
+import { GetServerSidePropsContext } from "next";
 import Head from "next/head";
-import { IComic, IPagination } from "@types";
 
 interface HomePageProps {
   banners: IComic[];
@@ -41,8 +42,8 @@ const HomePage = ({ banners, newestComics, paginations }: HomePageProps) => {
   );
 };
 
-export async function getStaticProps() {
-  const { data } = (await axios.get(`${server}/api/home`)).data;
+export const getServerSideProps = async ({ query }: GetServerSidePropsContext) => {
+  const { data } = (await axios.get(`${server}/api/home`, { params: query })).data;
   return {
     props: {
       banners: data.banners,
@@ -50,6 +51,6 @@ export async function getStaticProps() {
       paginations: data.paginations,
     },
   };
-}
+};
 
 export default HomePage;

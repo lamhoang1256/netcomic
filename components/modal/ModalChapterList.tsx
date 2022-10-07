@@ -13,8 +13,8 @@ interface ModalChapterListProps {
 }
 
 const ModalChapterList = ({ isShow, toggleModal, chapters }: ModalChapterListProps) => {
-  const router = useRouter();
-  const { id } = router.query;
+  const { query } = useRouter();
+  const { id } = query;
   return (
     <Modal
       isOpen={isShow}

@@ -4,6 +4,7 @@ import { server } from "configs/server";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { IComicChartRanking } from "@types";
+import { PATH } from "constants/path";
 
 const ComicChartRanking = () => {
   const [chartRankings, setChartRankings] = useState<IComicChartRanking[]>([]);
@@ -50,11 +51,15 @@ const ComicChartRanking = () => {
               />
             </picture>
             <div className="flex-1">
-              <h3 className="transition-all duration-200 line-clamp-1 hover:text-blue29">
-                {comic.title}
-              </h3>
+              <Link href={`${PATH.comic}/${comic.href}`}>
+                <a className="transition-all duration-200 line-clamp-1 hover:text-blue29">
+                  {comic.title}
+                </a>
+              </Link>
               <div className="flex items-center justify-between mt-2">
-                <span className="text-[13px]">{comic.chapter}</span>
+                <Link href={`${PATH.comic}/${comic.newestHref}`}>
+                  <a className="text-[13px]">{comic.newestChapter}</a>
+                </Link>
                 <div className="flex items-center text-[#666] text-xs gap-x-1 italic">
                   <IconEye />
                   <span>{comic.view}</span>

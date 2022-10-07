@@ -44,11 +44,13 @@ export function crawlComic(node: cheerio.Cheerio<cheerio.Element>, $: cheerio.Ch
   let chapters: {
     name: string;
     updatedAgo: string;
+    href: string;
   }[] = [];
   node.find(".chapter").each(function (index, element) {
     const name = $(element).find("a").text();
+    const href = $(element).find("a").attr("href")?.replace(PATH.netTruyenComic, "") as string;
     const updatedAgo = $(element).find(".time").text();
-    chapters.push({ name, updatedAgo });
+    chapters.push({ name, href, updatedAgo });
   });
   return {
     slug,
@@ -125,18 +127,19 @@ export function crawlPagination(
 
 export function crawlComicTopMonth(
   node: cheerio.Cheerio<cheerio.Element>,
-  replaceHref = PATH.netTruyen as string
+  replaceHref = PATH.netTruyenComic as string
 ): IComicChartRanking {
   const rank = node.find(".txt-rank").text();
   const title = node.find(".title a").text();
-  const chapter = node.find(".chapter a").text();
   const posterUrl = node
     .find(".thumb img")
     .attr("data-original")
     ?.replace(replaceHref, "") as string;
   const href = node.find(".thumb").attr("href")?.replace(replaceHref, "") as string;
+  const newestChapter = node.find(".chapter a").text();
+  const newestHref = node.find(".chapter a").attr("href")?.replace(replaceHref, "") as string;
   const view = node.find(".view").text().trim();
-  return { rank, title, posterUrl, href, chapter, view };
+  return { rank, title, posterUrl, href, newestChapter, view, newestHref };
 }
 
 export function crawlInfoComic(

@@ -37,12 +37,12 @@ const HomeBanner = ({ banners }: HomeBannerProps) => {
               </picture>
               <div className="absolute bottom-0 left-0 right-0 p-[5px] text-white bg-overlay">
                 <Link href={`${PATH.comic}/${banner.slug}`}>
-                  <a>
-                    <h3 className="line-clamp-1 text-[15px] text-center">{banner.title}</h3>
-                  </a>
+                  <a className="line-clamp-1 text-[15px] text-center">{banner.title}</a>
                 </Link>
                 <div className="flex items-center justify-center gap-[10px] mt-1">
-                  <span className="text-xs">{banner.newestChapter}</span>
+                  <Link href={`${PATH.comic}/${banner.newestHref}`}>
+                    <a className="text-xs">{banner.newestChapter}</a>
+                  </Link>
                   <span className="flex items-center gap-[2px] text-[11px] italic">
                     <IconTime className="text-white" /> {banner.updatedAgo}
                   </span>
