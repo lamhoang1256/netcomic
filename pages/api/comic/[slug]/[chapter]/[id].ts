@@ -33,13 +33,13 @@ const getDetailsChapter = async (url: string) => {
   let chapters: ILinkChapter[] = [];
   $(".reading .container .top")
     .first()
-    .each(function (index, item) {
+    .each(function (index, element) {
       const originalUrl = PATH.netTruyen + "/";
-      const heading = $(item).find("h1.txt-primary");
+      const heading = $(element).find("h1.txt-primary");
       const href = heading.find("a").attr("href")?.replace(originalUrl, "") as string;
       const title = heading.find("a").text();
       const chapter = heading.find("span").text()?.replace("- ", "") as string;
-      const updatedAt = $(item).find("i").text();
+      const updatedAt = $(element).find("i").text();
       info = { title, updatedAt, chapter, href };
     });
   $(".reading-detail .page-chapter").each(function (index, element) {
