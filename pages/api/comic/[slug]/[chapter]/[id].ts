@@ -50,7 +50,9 @@ const getDetailsChapter = async (url: string) => {
     const comment = crawlComments($(element), $);
     comments.push(comment);
   });
-  const response2 = await axios.get(`${info.href?.replace("truyen-tranh/", "")}`);
+  const response2 = await axios.get(
+    `${PATH.netTruyenComic}/${info.href?.replace("truyen-tranh/", "")}`
+  );
   const html2 = response2.data;
   const $2 = cheerio.load(html2);
   $2("#ctl00_divCenter .list-chapter li.row").each(function (index, element) {
@@ -60,9 +62,8 @@ const getDetailsChapter = async (url: string) => {
   return {
     imageUrls,
     info,
+    chapters,
     comments,
-    // chapters,
-    path: `${info.href?.replace("truyen-tranh/", "")}`,
   };
 };
 
