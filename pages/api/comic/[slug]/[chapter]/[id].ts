@@ -1,11 +1,11 @@
-import { IComment, IDetailsChapter, IImageReading } from "@types";
+import { IComment, IDetailsChapter, IImageReading, ILinkChapter } from "@types";
 import axios from "axios";
 import * as cheerio from "cheerio";
 import { PATH } from "constants/path";
 import { STATUS } from "constants/status";
 import type { NextApiRequest, NextApiResponse } from "next";
 import catchAsync from "utils/catch-async";
-import { crawlComments, getImagesReading } from "utils/crawl";
+import { crawlChapters, crawlComments, getImagesReading } from "utils/crawl";
 import { ApiError, responseError, responseSuccess } from "utils/response";
 
 const crawlChapterComic = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -28,8 +28,9 @@ const getDetailsChapter = async (url: string) => {
   const html = response.data;
   const $ = cheerio.load(html);
   let imageUrls: IImageReading[] = [];
-  let detailsChapter = {} as IDetailsChapter;
+  let info = {} as IDetailsChapter;
   let comments: IComment[] = [];
+  let chapters: ILinkChapter[] = [];
   $(".reading .container .top")
     .first()
     .each(function (index, item) {
@@ -37,9 +38,9 @@ const getDetailsChapter = async (url: string) => {
       const heading = $(item).find("h1.txt-primary");
       const href = heading.find("a").attr("href")?.replace(originalUrl, "") as string;
       const title = heading.find("a").text();
-      const chapter = heading.find("span").text();
+      const chapter = heading.find("span").text()?.replace("- ", "") as string;
       const updatedAt = $(item).find("i").text();
-      detailsChapter = { title, updatedAt, chapter, href };
+      info = { title, updatedAt, chapter, href };
     });
   $(".reading-detail .page-chapter").each(function (index, element) {
     const imageUrl = getImagesReading($(element));
@@ -49,7 +50,16 @@ const getDetailsChapter = async (url: string) => {
     const comment = crawlComments($(element), $);
     comments.push(comment);
   });
-  return { imageUrls, detailsChapter, comments };
+  const response2 = await axios.get(
+    `${PATH.netTruyenComic}/${info.href?.replace("truyen-tranh/", "")}`
+  );
+  const html2 = response2.data;
+  const $2 = cheerio.load(html2);
+  $2("#ctl00_divCenter .list-chapter li.row").each(function (index, element) {
+    const chapter = crawlChapters($2(element));
+    chapters.push(chapter);
+  });
+  return { imageUrls, info, comments, chapters };
 };
 
 export default catchAsync(crawlChapterComic);

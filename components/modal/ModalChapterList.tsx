@@ -1,13 +1,20 @@
+import { ILinkChapter } from "@types";
 import { IconClose } from "components/icons";
+import { PATH } from "constants/path";
 import Link from "next/link";
 import Modal from "react-modal";
+import classNames from "utils/classNames";
+import { useRouter } from "next/router";
 
 interface ModalChapterListProps {
   isShow: boolean;
   toggleModal: () => void;
+  chapters: ILinkChapter[];
 }
 
-const ModalChapterList = ({ isShow, toggleModal }: ModalChapterListProps) => {
+const ModalChapterList = ({ isShow, toggleModal, chapters }: ModalChapterListProps) => {
+  const router = useRouter();
+  const { id } = router.query;
   return (
     <Modal
       isOpen={isShow}
@@ -26,22 +33,32 @@ const ModalChapterList = ({ isShow, toggleModal }: ModalChapterListProps) => {
           <IconClose />
         </button>
       </form>
-      <div className="border-b border-t border-[#e5e5e5] px-5 pt-3 pb-4 flex gap-2">
-        <Link href="/">
-          <a className="text-[#fd0405] border-[#fd0405] px-[5px] py-1 w-[105px] border font-light block text-center">
+      <div className="border-b flex-wrap border-t border-[#e5e5e5] px-5 pt-3 pb-4 flex gap-2 max-h-[calc(100vh-200px)] overflow-y-auto">
+        {/* <Link href="/">
+          <a className="text-[#fd0405] border-[#fd0405] px-[5px] py-1 w-[105px] border font-light block text-center h-8">
             Chapter 120
           </a>
-        </Link>
-        <Link href="/">
-          <a className="text-[#c0c0c0] border-graydd px-[5px] py-1 w-[105px] border font-light block text-center">
+        </Link> */}
+        {/* <Link href="/">
+          <a className="text-[#c0c0c0] border-graydd px-[5px] py-1 w-[105px] border font-light block text-center h-8">
             Chapter 120
           </a>
-        </Link>
-        <Link href="/">
-          <a className="border-graydd px-[5px] py-1 w-[105px] border font-light block text-center">
-            Chapter 120
-          </a>
-        </Link>
+        </Link> */}
+        {chapters.map((chapter) => {
+          const active = chapter.id === id ? "text-[#fd0405] border-[#fd0405]" : "border-graydd";
+          return (
+            <Link href={`${PATH.comic}/${chapter.href}`} key={chapter.id}>
+              <a
+                className={classNames(
+                  `px-[5px] py-1 w-[105px] border font-light block text-center h-8`,
+                  active
+                )}
+              >
+                {chapter.title}
+              </a>
+            </Link>
+          );
+        })}
       </div>
       <div className="flex justify-end px-5 py-[10px]">
         <button
