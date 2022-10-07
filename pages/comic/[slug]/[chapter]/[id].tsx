@@ -10,6 +10,7 @@ import {
 } from "components/icons";
 import { ModalChapterList } from "components/modal";
 import { server } from "configs/server";
+import { getImage } from "constants/image";
 import { PATH } from "constants/path";
 import useModal from "hooks/useModal";
 import LayoutHome from "layouts/LayoutHome";
@@ -80,8 +81,12 @@ const ReadComicPage = ({ imageUrls, chapters, info, comments }: ReadComicPagePro
         <div className="pt-3">
           {imageUrls.map((image) => (
             <picture key={image.imageUrl}>
-              <source srcSet={image.imageUrl} type="image/webp" />
-              <img alt={image.alt} src={image.imageUrl} className="object-cover mx-auto" />
+              <source srcSet={getImage(image.imageUrl)} type="image/webp" />
+              <img
+                alt={image.alt}
+                src={getImage(image.imageUrl)}
+                className="object-cover mx-auto"
+              />
             </picture>
           ))}
         </div>

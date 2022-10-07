@@ -1,9 +1,9 @@
 import axios from "axios";
+import { PATH } from "constants/path";
 import { STATUS } from "constants/status";
 import { NextApiHandler } from "next";
-const URL_NETTRUYEN = process.env.URL_NETTRUYEN || "";
 
-const handler: NextApiHandler = (req, res) => {
+const GetImageApi: NextApiHandler = (req, res) => {
   if (!req.query.url) return res.status(STATUS.BAD_REQUEST).send("URL must not be empty");
   const url = (req.query.url as string).startsWith("//")
     ? (req.query.url as string).replace("//", "http://")
@@ -12,7 +12,7 @@ const handler: NextApiHandler = (req, res) => {
     .get(url, {
       responseType: "arraybuffer",
       headers: {
-        referer: URL_NETTRUYEN,
+        referer: PATH.netTruyen as string,
       },
     })
     .then(({ data, headers: { "content-type": contentType } }) => {
@@ -23,4 +23,4 @@ const handler: NextApiHandler = (req, res) => {
     });
 };
 
-export default handler;
+export default GetImageApi;
