@@ -36,8 +36,7 @@ const ReadComicPage = ({ imageUrls, chapters, info, comments }: ReadComicPagePro
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <LayoutHome className="bg-black">
-        Test
-        {/* <section className="bg-[#f9f9f9] layout-container">
+        <section className="bg-[#f9f9f9] layout-container">
           <div className="flex items-center pt-4 pb-2 gap-x-2">
             <h1 className="text-xl transition-all duration-200 text-[#0073f4]  hover:text-purpleae">
               {info.title}
@@ -85,25 +84,25 @@ const ReadComicPage = ({ imageUrls, chapters, info, comments }: ReadComicPagePro
               <img alt={image.alt} src={image.imageUrl} className="object-cover mx-auto" />
             </picture>
           ))}
-        </div> */}
+        </div>
       </LayoutHome>
     </>
   );
 };
 
-// export async function getServerSideProps({ query }: GetServerSidePropsContext) {
-//   const { slug, chapter, id } = query;
-//   const { imageUrls, info, chapters, comments } = (
-//     await axios.get(`${server}/api/comic/${slug}/${chapter}/${id}`)
-//   ).data.data;
-//   return {
-//     props: {
-//       imageUrls,
-//       info,
-//       chapters,
-//       comments,
-//     },
-//   };
-// }
+export async function getServerSideProps({ query }: GetServerSidePropsContext) {
+  const { slug, chapter, id } = query;
+  const { imageUrls, info, chapters, comments } = (
+    await axios.get(`${server}/api/comic/${slug}/${chapter}/${id}`)
+  ).data.data;
+  return {
+    props: {
+      imageUrls,
+      info,
+      chapters,
+      comments,
+    },
+  };
+}
 
 export default ReadComicPage;
