@@ -50,20 +50,18 @@ const getDetailsChapter = async (url: string) => {
     const comment = crawlComments($(element), $);
     comments.push(comment);
   });
-  // const response2 = await axios.get(
-  //   `${PATH.netTruyenComic}/${info.href?.replace("truyen-tranh/", "")}`
-  // );
-  // const html2 = response2.data;
-  // const $2 = cheerio.load(html2);
-  // $2("#ctl00_divCenter .list-chapter li.row").each(function (index, element) {
-  //   const chapter = crawlChapters($2(element));
-  //   chapters.push(chapter);
-  // });
+  const response2 = await axios.get(`${info.href?.replace("truyen-tranh/", "")}`);
+  const html2 = response2.data;
+  const $2 = cheerio.load(html2);
+  $2("#ctl00_divCenter .list-chapter li.row").each(function (index, element) {
+    const chapter = crawlChapters($2(element));
+    chapters.push(chapter);
+  });
   return {
     imageUrls,
     info,
     comments,
-    path: `${PATH.netTruyenComic}/${info.href?.replace("truyen-tranh/", "")}`,
+    chapters,
   };
 };
 
