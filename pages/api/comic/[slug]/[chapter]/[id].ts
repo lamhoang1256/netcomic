@@ -8,20 +8,17 @@ import catchAsync from "utils/catch-async";
 import { crawlChapters, crawlComments, getImagesReading } from "utils/crawl";
 import { ApiError, responseError, responseSuccess } from "utils/response";
 
-const ChapterComicApi = async (req: NextApiRequest, res: NextApiResponse) => {
+const crawlChapterComic = async (req: NextApiRequest, res: NextApiResponse) => {
   const { method, query } = req;
   const { slug, chapter, id } = query;
   if (method !== "GET") {
     const error = new ApiError(STATUS.METHOD_NOT_ALLOWED, "Method not allowed");
     return responseError(error, res);
   }
-  const data: any = await getDetailsChapter(`${PATH.netTruyenComic}/${slug}/${chapter}/${id}`);
-  const chapters = await getLinkChapters(
-    `${PATH.netTruyenComic}/${data?.info.href?.replace("truyen-tranh/", "")}`
-  );
+  const data = await getDetailsChapter(`${PATH.netTruyenComic}/${slug}/${chapter}/${id}`);
   const response = {
     message: "Lấy chi tiết chapter thành công!",
-    data: { ...data, ...chapters },
+    data,
   };
   responseSuccess(res, response);
 };
@@ -33,6 +30,7 @@ const getDetailsChapter = async (url: string) => {
   let imageUrls: IImageReading[] = [];
   let info = {} as IDetailsChapter;
   let comments: IComment[] = [];
+  let chapters: ILinkChapter[] = [];
   $(".reading .container .top")
     .first()
     .each(function (index, element) {
@@ -52,19 +50,21 @@ const getDetailsChapter = async (url: string) => {
     const comment = crawlComments($(element), $);
     comments.push(comment);
   });
-  return { imageUrls, info, comments };
+  // const response2 = await axios.get(
+  //   `${PATH.netTruyenComic}/${info.href?.replace("truyen-tranh/", "")}`
+  // );
+  // const html2 = response2.data;
+  // const $2 = cheerio.load(html2);
+  // $2("#ctl00_divCenter .list-chapter li.row").each(function (index, element) {
+  //   const chapter = crawlChapters($2(element));
+  //   chapters.push(chapter);
+  // });
+  return {
+    imageUrls,
+    info,
+    comments,
+    path: `${PATH.netTruyenComic}/${info.href?.replace("truyen-tranh/", "")}`,
+  };
 };
 
-const getLinkChapters = async (url: string) => {
-  let chapters: ILinkChapter[] = [];
-  const response = await axios.get(url);
-  const html = response.data;
-  const $ = cheerio.load(html);
-  $("#ctl00_divCenter .list-chapter li.row").each(function (index, element) {
-    const chapter = crawlChapters($(element));
-    chapters.push(chapter);
-  });
-  return { chapters };
-};
-
-export default catchAsync(ChapterComicApi);
+export default catchAsync(crawlChapterComic);
