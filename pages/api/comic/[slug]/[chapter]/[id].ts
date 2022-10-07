@@ -61,7 +61,8 @@ const getDetailsChapter = async (url: string) => {
     imageUrls,
     info,
     comments,
-    chapters,
+    // chapters,
+    path: `${info.href?.replace("truyen-tranh/", "")}`,
   };
 };
 
