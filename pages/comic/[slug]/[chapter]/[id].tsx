@@ -11,6 +11,7 @@ import {
 } from "components/icons";
 import { ModalChapterList } from "components/modal";
 import { server } from "configs/server";
+import { getImage } from "constants/image";
 import { PATH } from "constants/path";
 import useModal from "hooks/useModal";
 import LayoutHome from "layouts/LayoutHome";
@@ -103,25 +104,33 @@ const ReadComicPage = ({ imageUrls, chapters, info, comments }: ReadComicPagePro
           {imageUrls.map((image) => (
             <ComicImage
               key={image.imageUrl}
-              src={image.imageUrl}
+              src={getImage(image.imageUrl)}
               alt={image.alt}
               className="mx-auto w-[unset]"
             />
           ))}
         </div>
         <div className="flex items-center justify-center py-4 bg-[#f9f9f9] gap-x-2">
-          <Link href={`${PATH.comic}/${chapters[currentChapter + 1]?.href}`}>
-            <Button className="bg-[#d9534f] flex items-center gap-x-1 text-white">
-              <IconChevronLeft className="!w-3 !h-3" fill="#fff" />
-              <span className="hidden md:block">Chap trước</span>
-            </Button>
-          </Link>
-          <Link href={`${PATH.comic}/${chapters[currentChapter - 1]?.href}`}>
-            <Button className="bg-[#d9534f] flex items-center gap-x-1 text-white">
-              <span className="hidden md:block">Chap sau</span>
-              <IconChevronRight className="!w-3 !h-3" fill="#fff" />
-            </Button>
-          </Link>
+          <Button
+            to={`${PATH.comic}/${chapters[currentChapter + 1]?.href}`}
+            className={classNames(
+              "bg-[#d9534f] flex items-center gap-x-1 text-white hover:bg-[#AB2925]",
+              !chapters[currentChapter + 1] && "pointer-events-none opacity-70 cursor-not-allowed"
+            )}
+          >
+            <IconChevronLeft className="!w-3 !h-3" fill="#fff" />
+            <span className="hidden md:block">Chap trước</span>
+          </Button>
+          <Button
+            to={`${PATH.comic}/${chapters[currentChapter - 1]?.href}`}
+            className={classNames(
+              "bg-[#d9534f] flex items-center gap-x-1 text-white hover:bg-[#AB2925]",
+              !chapters[currentChapter - 1] && "pointer-events-none opacity-70 cursor-not-allowed"
+            )}
+          >
+            <span className="hidden md:block">Chap sau</span>
+            <IconChevronRight className="!w-3 !h-3" fill="#fff" />
+          </Button>
         </div>
       </LayoutHome>
     </>
