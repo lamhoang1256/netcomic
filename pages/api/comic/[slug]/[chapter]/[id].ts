@@ -36,12 +36,23 @@ const getDetailsChapter = async (url: string) => {
     .each(function (index, element) {
       const originalUrl = PATH.netTruyen + "/";
       const heading = $(element).find("h1.txt-primary");
-      const href = heading.find("a").attr("href")?.replace(originalUrl, "") as string;
-      const title = heading.find("a").text();
-      const chapter = heading.find("span").text()?.replace("- ", "") as string;
-      const updatedAt = $(element).find("i").text();
-      info = { title, updatedAt, chapter, href };
+      info.href = heading.find("a").attr("href")?.replace(originalUrl, "") as string;
+      info.title = heading.find("a").text();
+      info.chapter = heading.find("span").text()?.replace("- ", "") as string;
+      info.updatedAt = $(element).find("i").text();
     });
+  // $(".reading-control").each(function (index, element) {
+  //   const prevChapter = $(element)
+  //     .find(".a_prev")
+  //     .attr("href")
+  //     ?.replace(PATH.netTruyenComic, "") as string;
+  //   const nextChapter = $(element)
+  //     .find(".a_next")
+  //     .attr("href")
+  //     ?.replace(PATH.netTruyenComic, "") as string;
+  //   info.prevChapter = prevChapter;
+  //   info.nextChapter = nextChapter;
+  // });
   $(".reading-detail .page-chapter").each(function (index, element) {
     const imageUrl = getImagesReading($(element));
     imageUrls.push(imageUrl);
@@ -59,6 +70,7 @@ const getDetailsChapter = async (url: string) => {
     const chapter = crawlChapters($2(element));
     chapters.push(chapter);
   });
+  imageUrls.shift();
   return {
     imageUrls,
     info,

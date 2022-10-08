@@ -2,6 +2,7 @@ import { IconChat, IconEye, IconHeart } from "components/icons";
 import { PATH } from "constants/path";
 import Link from "next/link";
 import { IComic } from "@types";
+import ComicImage from "./parts/ComicImage";
 
 interface ComicItemProps {
   comic: IComic;
@@ -11,10 +12,7 @@ const ComicItem = ({ comic }: ComicItemProps) => {
   return (
     <div>
       <div className="relative overflow-hidden rounded aspect-[2.2/3]">
-        <picture>
-          <source srcSet={comic.posterUrl} type="image/webp" />
-          <img alt={comic.slug} src={comic.posterUrl} className="object-cover w-full h-full " />
-        </picture>
+        <ComicImage src={comic.posterUrl} alt={comic.slug} />
         <div className="absolute bottom-0 left-0 text-xs right-0 py-[5px] text-white bg-overlay flex items-center justify-between md:px-2 gap-x-[2px]">
           <div className="flex items-center gap-x-[2px]">
             <IconEye />

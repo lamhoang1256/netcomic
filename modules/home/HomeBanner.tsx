@@ -7,6 +7,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { IComic } from "@types";
+import { ComicImage } from "modules/comic";
 
 interface HomeBannerProps {
   banners: IComic[];
@@ -24,17 +25,10 @@ const HomeBanner = ({ banners }: HomeBannerProps) => {
         navigation={true}
         modules={[Navigation]}
       >
-        {banners.map((banner, index) => (
-          <SwiperSlide key={index} className="!w-[187px]">
+        {banners.map((banner) => (
+          <SwiperSlide key={banner.slug} className="!w-[187px]">
             <div className="relative overflow-hidden rounded">
-              <picture>
-                <source srcSet={banner.posterUrl} type="image/webp" />
-                <img
-                  alt={banner.slug}
-                  src={banner.posterUrl}
-                  className="object-cover aspect-[190/250]"
-                />
-              </picture>
+              <ComicImage src={banner.posterUrl} alt={banner.slug} className="aspect-[190/250]" />
               <div className="absolute bottom-0 left-0 right-0 p-[5px] text-white bg-overlay">
                 <Link href={`${PATH.comic}/${banner.slug}`}>
                   <a className="line-clamp-1 text-[15px] text-center">{banner.title}</a>

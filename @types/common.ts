@@ -22,6 +22,8 @@ export interface IDetailsChapter {
   chapter: string;
   updatedAt: string;
   href: string;
+  nextChapter: string;
+  prevChapter: string;
 }
 export interface IReplyComment {
   id: string;
