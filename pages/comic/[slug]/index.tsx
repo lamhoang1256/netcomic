@@ -9,6 +9,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { useState } from "react";
 import { IComicInfo, ILinkChapter } from "@types";
+import { Button } from "components/button";
 
 interface ComicDetailsPageProps {
   info: IComicInfo;
@@ -88,18 +89,20 @@ const ComicDetailsPage = ({ info, chapters }: ComicDetailsPageProps) => {
                     </span>
                   </li>
                   <li className="flex flex-wrap items-center mt-[10px] gap-1">
-                    <button className="px-[14px] py-[6px] bg-[#ff6a3c] hover:opacity-80 transition-all duration-200 text-white rounded">
+                    <Button
+                      to={`${PATH.comic}/${chapters[chapters.length - 1].href}`}
+                      className="bg-[#ff6a3c] !py-[6px] text-white"
+                    >
                       Đọc từ đầu
-                    </button>
-                    <button className="px-[14px] py-[6px] bg-[#f0ad4e] hover:opacity-80 transition-all duration-200 text-white rounded">
+                    </Button>
+                    <Button
+                      to={`${PATH.comic}/${chapters[0].href}`}
+                      className="bg-[#f0ad4e] !py-[6px] text-white"
+                    >
                       Đọc mới nhất
-                    </button>
-                    <button className="px-[14px] py-[6px] bg-[#0079f7] hover:opacity-80 transition-all duration-200 text-white rounded">
-                      Thích
-                    </button>
-                    <button className="px-[14px] py-[6px] bg-[#dc3545] hover:opacity-80 transition-all duration-200 text-white rounded">
-                      Đọc tiếp
-                    </button>
+                    </Button>
+                    <Button className="bg-[#0079f7] !py-[6px] text-white">Thích</Button>
+                    <Button className="bg-[#dc3545] !py-[6px] text-white">Đọc tiếp</Button>
                   </li>
                 </ul>
               </div>

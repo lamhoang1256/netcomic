@@ -11,16 +11,18 @@ const Button = ({ children, type, className, to, ...props }: ButtonProps) => {
   if (to) {
     return (
       <Link href={to}>
-        <button
-          type={type}
-          {...props}
-          className={classNames(
-            "px-3 py-2 hover:opacity-80 transition-all duration-200 rounded",
-            className
-          )}
-        >
-          {children}
-        </button>
+        <a>
+          <button
+            type={type}
+            {...props}
+            className={classNames(
+              "px-3 py-2 hover:opacity-80 transition-all duration-200 rounded",
+              className
+            )}
+          >
+            {children}
+          </button>
+        </a>
       </Link>
     );
   }

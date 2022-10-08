@@ -9,6 +9,14 @@ export interface IPagination {
   display: string;
   href: string;
 }
+export interface ICategory {
+  href: string;
+  display: string;
+}
+export interface ICategoryInfo {
+  name: string;
+  description: string;
+}
 export interface IComicGender {
   comics: IComic[];
   pagination: IPagination[];

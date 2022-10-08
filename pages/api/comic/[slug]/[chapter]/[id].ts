@@ -5,7 +5,7 @@ import { PATH } from "constants/path";
 import { STATUS } from "constants/status";
 import type { NextApiRequest, NextApiResponse } from "next";
 import catchAsync from "utils/catch-async";
-import { crawlChapters, crawlComments, getImagesReading } from "utils/crawl";
+import { crawlChapters, crawlComments, crawlImagesReading } from "utils/crawl";
 import { ApiError, responseError, responseSuccess } from "utils/response";
 
 const crawlChapterComic = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -54,7 +54,7 @@ const getDetailsChapter = async (url: string) => {
   //   info.nextChapter = nextChapter;
   // });
   $(".reading-detail .page-chapter").each(function (index, element) {
-    const imageUrl = getImagesReading($(element));
+    const imageUrl = crawlImagesReading($(element));
     imageUrls.push(imageUrl);
   });
   $(".comment-list .item.clearfix").each(function (index, element) {

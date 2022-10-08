@@ -1,8 +1,8 @@
 import axios from "axios";
 import * as cheerio from "cheerio";
-import { IComic, IQueryParams } from "@types";
+import { ICategory, IComic, IPagination, IQueryParams } from "@types";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { crawlComic } from "utils/crawl";
+import { crawlCategory, crawlComic, crawlPagination } from "utils/crawl";
 import catchAsync from "utils/catch-async";
 import { ApiError, responseError, responseSuccess } from "utils/response";
 import { STATUS } from "constants/status";
@@ -26,12 +26,22 @@ async function crawlSearchComics(query: Partial<IQueryParams>) {
   const response = await axios.get(PATH.netTruyenSearch as string, { params: query });
   const html = response.data;
   const $ = cheerio.load(html);
-  let searchResults: IComic[] = [];
+  let results: IComic[] = [];
+  let paginations: IPagination[] = [];
+  let categories: ICategory[] = [];
   $("#ctl00_divCenter .Module .items .item").each(function (index, element) {
     const result = crawlComic($(element), $);
-    searchResults.push(result);
+    results.push(result);
   });
-  return searchResults;
+  $("#ctl00_divCenter .pagination li", html).each(function (index, element) {
+    const pagination = crawlPagination($(element), PATH.netTruyenCategory);
+    paginations.push(pagination);
+  });
+  $("#ctl00_divRight .nav li a", html).each(function (index, element) {
+    const category = crawlCategory($(element));
+    categories.push(category);
+  });
+  return { results, paginations, categories };
 }
 
 export default catchAsync(SearchComicsApi);

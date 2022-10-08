@@ -3,9 +3,9 @@ import * as cheerio from "cheerio";
 import { PATH } from "constants/path";
 import { STATUS } from "constants/status";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { IFilters, IComic, IQueryParams } from "@types";
+import { IFilters, IComic, IQueryParams, IPagination } from "@types";
 import catchAsync from "utils/catch-async";
-import { crawlComic } from "utils/crawl";
+import { crawlComic, crawlPagination } from "utils/crawl";
 import { ApiError, responseError, responseSuccess } from "utils/response";
 
 const filterComicsApi = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -27,6 +27,7 @@ async function crawlFilterComics(query: Partial<IQueryParams>) {
   const html = response.data;
   const $ = cheerio.load(html);
   let results: IComic[] = [];
+  let paginations: IPagination[] = [];
   let options: IFilters = {
     minchapter: [],
     genres: [],
@@ -61,7 +62,11 @@ async function crawlFilterComics(query: Partial<IQueryParams>) {
     const sort = crawlFilterOption($(element));
     options.sort.push(sort);
   });
-  return { options, results };
+  $("#ctl00_divCenter .pagination li", html).each(function (index, element) {
+    const pagination = crawlPagination($(element), PATH.netTruyenFilter);
+    paginations.push(pagination);
+  });
+  return { options, results, paginations };
 }
 
 function crawlFilterOption(node: cheerio.Cheerio<cheerio.Element>) {

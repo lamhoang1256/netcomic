@@ -43,13 +43,13 @@ const ReadComicPage = ({ imageUrls, chapters, info, comments }: ReadComicPagePro
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <LayoutHome className="bg-black">
-        <section className="bg-[#f9f9f9] layout-container">
-          <div className="flex flex-wrap py-4 lg:items-center gap-x-2">
-            <h1 className="text-xl transition-all duration-200 text-[#0073f4]  hover:text-purpleae">
+        <section className="bg-[#f9f9f9] layout-container rounded">
+          <div className="py-4 text-center">
+            <h1 className="text-[22px] transition-all duration-200 text-[#0073f4]  hover:text-purpleae">
               {info.title}
+              <span className="font-medium text-black"> - {info.chapter}</span>
             </h1>
-            <span className="text-xl font-medium">- {info.chapter}</span>
-            <span className="italic text-gray8a">{info.updatedAt}</span>
+            <span className="block mt-[6px] italic text-gray8a">{info.updatedAt}</span>
           </div>
           <div className="flex items-center justify-center pb-4 gap-x-3">
             <Link href={PATH.home}>

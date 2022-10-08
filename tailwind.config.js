@@ -15,6 +15,7 @@ module.exports = {
         gray8a: "#8a8a8f",
         graydd: "#dddddd",
         redf6: "#f64b15",
+        rede5: "#e52d27",
       },
       fontFamily: {
         montserrat: ["Montserrat", "sans-serif"],
