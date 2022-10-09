@@ -1,5 +1,6 @@
 import { ICategory, ICategoryInfo, IComic, IPagination } from "@types";
 import axios from "axios";
+import { CategorySidebar } from "components/category";
 import { Pagination } from "components/pagination";
 import { server } from "configs/server";
 import { PATH } from "constants/path";
@@ -42,17 +43,7 @@ const CategoryPage = ({ info, results, paginations, categories }: CategoryPagePr
               <Pagination paginations={paginations} />
             </div>
             <div className="flex flex-col lg:w-1/3 gap-y-4">
-              <ul className="grid grid-cols-2 p-3 border rounded gap-y-2 border-graydd">
-                {categories.map((category) => (
-                  <li key={category.display} className="border-b border-graydd">
-                    <Link href={`${PATH.search}/${category.href}`}>
-                      <a className="block py-1 transition-all duration-150 hover:text-rede5">
-                        {category.display}
-                      </a>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+              <CategorySidebar />
             </div>
           </div>
         </div>

@@ -128,7 +128,7 @@ const ComicDetailsPage = ({ info, chapters }: ComicDetailsPageProps) => {
                         className="py-[6px] flex border-b border-dotted border-[#bdbcbc5c]"
                         key={chapter.id}
                       >
-                        <Link href={chapter.href}>
+                        <Link href={`${PATH.comic}/${chapter.href}`}>
                           <a className="w-5/12 md:w-1/2">{chapter.title}</a>
                         </Link>
                         <span className="w-4/12 md:w-1/4 text-center italic text-[#c0c0c0]">

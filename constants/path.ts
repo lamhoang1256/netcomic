@@ -4,7 +4,7 @@ export const PATH = {
   comic: "/comic",
   search: "/search",
   category: "/category",
-  netTruyen: process.env.NEXT_PUBLIC_NHATTRUYEN,
+  netTruyen: process.env.NEXT_PUBLIC_NHATTRUYEN as string,
   netTruyenComic: `${process.env.NEXT_PUBLIC_NHATTRUYEN}/truyen-tranh`,
   netTruyenSearch: `${process.env.NEXT_PUBLIC_NHATTRUYEN}/tim-truyen`,
   netTruyenFull: `${process.env.NEXT_PUBLIC_NHATTRUYEN}/truyen-full`,

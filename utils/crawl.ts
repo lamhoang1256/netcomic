@@ -13,13 +13,13 @@ import {
 import * as cheerio from "cheerio";
 import { PATH } from "constants/path";
 
-const urlWithoutHttp = PATH.netTruyen?.split("http:")[1] as string;
+const urlWithoutHttp = PATH.netTruyen.split("http:")[1] as string;
 export function crawlBanner(node: cheerio.Cheerio<cheerio.Element>): IBanner {
   const slug = node
     .find(".slide-caption > h3 > a")
     .attr("href")
     ?.replace(PATH.netTruyenComic, "") as string;
-  const title = node.find(".slide-caption > h3").text();
+  const title = node.find(".slide-caption > h3").text().trim();
   const posterUrl = node.find(".lazyOwl").attr("data-src") as string;
   const updatedAgo = node.find(".slide-caption .time").first().text();
   const newestEle = node.find(".slide-caption > a").first();
@@ -31,7 +31,7 @@ export function crawlBanner(node: cheerio.Cheerio<cheerio.Element>): IBanner {
 export function crawlComic(
   node: cheerio.Cheerio<cheerio.Element>,
   $: cheerio.CheerioAPI,
-  replaceHref = `${PATH.netTruyenComic as string}/`
+  replaceHref = `${PATH.netTruyenComic}/`
 ): IComic {
   const slug = node.find(".image > a").attr("href")?.replace(replaceHref, "") as string;
   const title = node.find(".jtip").text();
@@ -82,7 +82,7 @@ export function crawlReplyComment(
       const avatar = $(element)
         .find("img")
         .attr("data-original")
-        ?.replace(urlWithoutHttp, PATH.netTruyen as string) as string;
+        ?.replace(urlWithoutHttp, PATH.netTruyen) as string;
       const mentionUser = $(element).find(".comment-content .mention-user").text().trim();
       const content = $(element).find(".comment-content").text().trim().replace(mentionUser, "");
       const createdAt = $(element).find("abbr").text().trim();
@@ -101,16 +101,19 @@ export function crawlComments(
     .find("img")
     .first()
     .attr("data-original")
-    ?.replace(urlWithoutHttp, PATH.netTruyen as string) as string;
+    ?.replace(urlWithoutHttp, PATH.netTruyen) as string;
   const content = node.find(".comment-content").first().text();
   const createdAt = node.find("abbr").first().text().trim();
   const replyComments: IReplyComment[] = crawlReplyComment($(node), $);
   return { id, username, avatar, content, createdAt, replyComments };
 }
 
-export function crawlChapters(node: cheerio.Cheerio<cheerio.Element>): ILinkChapter {
+export function crawlLinkChapter(node: cheerio.Cheerio<cheerio.Element>): ILinkChapter {
   const id = node.find(".chapter a").attr("data-id") as string;
-  const href = node.find(".chapter a").attr("href")?.replace(PATH.netTruyenComic, "") as string;
+  const href = node
+    .find(".chapter a")
+    .attr("href")
+    ?.replace(`${PATH.netTruyenComic}/`, "") as string;
   const title = node.find(".chapter a").text();
   const updatedAt = node.find(".col-xs-4").text();
   const viewCount = node.find(".col-xs-3").text();
@@ -119,7 +122,7 @@ export function crawlChapters(node: cheerio.Cheerio<cheerio.Element>): ILinkChap
 
 export function crawlPagination(
   node: cheerio.Cheerio<cheerio.Element>,
-  replaceHref = PATH.netTruyen as string
+  replaceHref = `${PATH.netTruyen}/`
 ): IPagination {
   const display = node.text();
   const active = node.hasClass("active");
@@ -130,7 +133,7 @@ export function crawlPagination(
 
 export function crawlCategory(
   node: cheerio.Cheerio<cheerio.Element>,
-  replaceHref = `${PATH.netTruyenCategory as string}`
+  replaceHref = PATH.netTruyenCategory
 ): ICategory {
   const display = node.text();
   const href = node.attr("href")?.replace(replaceHref, "")?.replace("/", "") as string;
@@ -139,7 +142,7 @@ export function crawlCategory(
 
 export function crawlComicTopMonth(
   node: cheerio.Cheerio<cheerio.Element>,
-  replaceHref = PATH.netTruyenComic as string
+  replaceHref = `${PATH.netTruyenComic}/`
 ): IComicChartRanking {
   const rank = node.find(".txt-rank").text();
   const title = node.find(".title a").text();
@@ -156,14 +159,14 @@ export function crawlComicTopMonth(
 
 export function crawlInfoComic(
   node: cheerio.Cheerio<cheerio.Element>,
-  replaceHref = `${PATH.netTruyen as string}/`
+  replaceHref = `${PATH.netTruyen}/`
 ): IComicInfo {
   const title = node.find(".title-detail").text();
   const updatedAt = node.find("time.small").text().trim();
   const posterUrl = node
     .find(".col-image img")
     .attr("src")
-    ?.replace(urlWithoutHttp, PATH.netTruyen as string) as string;
+    ?.replace(urlWithoutHttp, PATH.netTruyen) as string;
   const slug = node.find(".col-info .mrb10 a").attr("href")?.replace(replaceHref, "") as string;
   const author = node.find(".author .col-xs-8").text();
   const status = node.find(".status .col-xs-8").text();

@@ -5,7 +5,7 @@ import { PATH } from "constants/path";
 import { STATUS } from "constants/status";
 import type { NextApiRequest, NextApiResponse } from "next";
 import catchAsync from "utils/catch-async";
-import { crawlChapters, crawlComments, crawlImagesReading } from "utils/crawl";
+import { crawlLinkChapter, crawlComments, crawlImagesReading } from "utils/crawl";
 import { ApiError, responseError, responseSuccess } from "utils/response";
 
 const crawlChapterComic = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -41,18 +41,6 @@ const getDetailsChapter = async (url: string) => {
       info.chapter = heading.find("span").text()?.replace("- ", "") as string;
       info.updatedAt = $(element).find("i").text();
     });
-  // $(".reading-control").each(function (index, element) {
-  //   const prevChapter = $(element)
-  //     .find(".a_prev")
-  //     .attr("href")
-  //     ?.replace(PATH.netTruyenComic, "") as string;
-  //   const nextChapter = $(element)
-  //     .find(".a_next")
-  //     .attr("href")
-  //     ?.replace(PATH.netTruyenComic, "") as string;
-  //   info.prevChapter = prevChapter;
-  //   info.nextChapter = nextChapter;
-  // });
   $(".reading-detail .page-chapter").each(function (index, element) {
     const imageUrl = crawlImagesReading($(element));
     imageUrls.push(imageUrl);
@@ -67,7 +55,7 @@ const getDetailsChapter = async (url: string) => {
   const html2 = response2.data;
   const $2 = cheerio.load(html2);
   $2("#ctl00_divCenter .list-chapter li.row").each(function (index, element) {
-    const chapter = crawlChapters($2(element));
+    const chapter = crawlLinkChapter($2(element));
     chapters.push(chapter);
   });
   imageUrls.shift();

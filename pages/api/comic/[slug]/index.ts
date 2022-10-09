@@ -5,7 +5,7 @@ import { PATH } from "constants/path";
 import { STATUS } from "constants/status";
 import type { NextApiRequest, NextApiResponse } from "next";
 import catchAsync from "utils/catch-async";
-import { crawlChapters, crawlComments, crawlInfoComic } from "utils/crawl";
+import { crawlLinkChapter, crawlComments, crawlInfoComic } from "utils/crawl";
 import { ApiError, responseError, responseSuccess } from "utils/response";
 
 const ComicDetailsApi = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -34,7 +34,7 @@ async function crawlComicDetails(url: string) {
     info = crawlInfoComic($(element), PATH.netTruyenComic);
   });
   $("#ctl00_divCenter .list-chapter li.row").each(function (index, element) {
-    const chapter = crawlChapters($(element));
+    const chapter = crawlLinkChapter($(element));
     chapters.push(chapter);
   });
   $("#ctl00_divCenter .comment-list .item.clearfix").each(function (index, element) {

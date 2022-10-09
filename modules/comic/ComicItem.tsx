@@ -35,8 +35,8 @@ const ComicItem = ({ comic }: ComicItemProps) => {
           </a>
         </Link>
         <div>
-          {comic.chapters?.map((chapter) => (
-            <div className="flex items-center justify-between mt-1" key={chapter.name}>
+          {comic.chapters?.map((chapter, index) => (
+            <div className="flex items-center justify-between mt-1" key={index}>
               <Link href={`${PATH.comic}/${chapter.href}`}>
                 <a className="text-[13px] transition-all duration-200 hover:text-blue29">
                   {chapter.name}
