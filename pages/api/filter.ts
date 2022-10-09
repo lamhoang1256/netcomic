@@ -28,7 +28,7 @@ async function crawlFilterComics(query: Partial<IQueryParams>) {
   const $ = cheerio.load(html);
   let results: IComic[] = [];
   let paginations: IPagination[] = [];
-  let options: IFilters = {
+  let filters: IFilters = {
     minchapter: [],
     genres: [],
     status: [],
@@ -41,39 +41,39 @@ async function crawlFilterComics(query: Partial<IQueryParams>) {
   });
   $(".genre-item", html).each(function (index, element) {
     const value = $(element).find("span").attr("data-id") || "";
-    const content = $(element).text().trim();
+    const label = $(element).text().trim();
     const isSelected = false;
-    const genre = { value, content, isSelected };
-    options.genres.push(genre);
+    const genre = { value, label, isSelected };
+    filters.genres.push(genre);
   });
   $(".select-minchapter option", html).each(function (index, element) {
     const minchapter = crawlFilterOption($(element));
-    options.minchapter.push(minchapter);
+    filters.minchapter.push(minchapter);
   });
   $(".select-status option", html).each(function (index, element) {
     const status = crawlFilterOption($(element));
-    options.status.push(status);
+    filters.status.push(status);
   });
   $(".select-gender option", html).each(function (index, element) {
     const gender = crawlFilterOption($(element));
-    options.gender.push(gender);
+    filters.gender.push(gender);
   });
   $(".select-sort option", html).each(function (index, element) {
     const sort = crawlFilterOption($(element));
-    options.sort.push(sort);
+    filters.sort.push(sort);
   });
   $("#ctl00_divCenter .pagination li", html).each(function (index, element) {
     const pagination = crawlPagination($(element), PATH.netTruyenFilter);
     paginations.push(pagination);
   });
-  return { options, results, paginations };
+  return { filters, results, paginations };
 }
 
 function crawlFilterOption(node: cheerio.Cheerio<cheerio.Element>) {
   const value = node.attr("value") || "";
-  const content = node.text();
+  const label = node.text();
   const isSelected = node.attr("selected") === "selected" ? true : false;
-  return { value, content, isSelected };
+  return { value, label, isSelected };
 }
 
 export default catchAsync(filterComicsApi);

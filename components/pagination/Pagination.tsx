@@ -1,14 +1,18 @@
 import { IPagination } from "@types";
 import Link from "next/link";
+import { HTMLAttributes } from "react";
 import classNames from "utils/classNames";
 
-interface PaginationProps {
+interface PaginationProps extends HTMLAttributes<HTMLDivElement> {
   paginations: IPagination[];
 }
 
-const Pagination = ({ paginations }: PaginationProps) => {
+const Pagination = ({ paginations, className, ...props }: PaginationProps) => {
   return (
-    <div className="my-[30px] flex gap-x-[3px] flex-wrap lg:justify-center">
+    <div
+      className={classNames("my-[30px] flex gap-x-[3px] flex-wrap lg:justify-center", className)}
+      {...props}
+    >
       {paginations.map((pagination) => {
         if (!pagination.title && !pagination.href) return null;
         return (

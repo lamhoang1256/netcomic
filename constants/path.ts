@@ -3,6 +3,7 @@ export const PATH = {
   topComic: "/top-comic",
   comic: "/comic",
   search: "/search",
+  filter: "/filter",
   category: "/category",
   netTruyen: process.env.NEXT_PUBLIC_NHATTRUYEN as string,
   netTruyenComic: `${process.env.NEXT_PUBLIC_NHATTRUYEN}/truyen-tranh`,

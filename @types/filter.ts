@@ -1,6 +1,6 @@
 export interface IFilter {
   value: string;
-  content: string;
+  label: string;
 }
 export interface IFilters {
   genres: IFilter[];
