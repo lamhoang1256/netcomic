@@ -30,7 +30,7 @@ const ComicItem = ({ comic }: ComicItemProps) => {
       </div>
       <div className="flex-1">
         <Link href={`${PATH.comic}/${comic.slug}`}>
-          <a className="mt-1 text-base transition-all duration-200 line-clamp-2 hover:text-blue29">
+          <a className="mt-1 transition-all duration-200 md:text-base line-clamp-2 hover:text-blue29">
             {comic.title}
           </a>
         </Link>

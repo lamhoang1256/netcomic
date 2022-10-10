@@ -21,6 +21,16 @@ body {
     grid-gap: 14px 10px;
   }
 }
+.filter-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(215px, 1fr));
+  @media screen and (max-width: 767.98px) {
+    & div:first-child {
+      grid-column: 1 / span 2;
+    }
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 .shadow-modal {
   box-shadow: 0 5px 15px rgb(0 0 0 / 50%);
 }

@@ -1,3 +1,4 @@
+import SelectOne from "./SelectOne";
 import SelectGenres from "./SelectGenres";
 
-export { SelectGenres };
+export { SelectOne, SelectGenres };
