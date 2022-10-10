@@ -28,8 +28,8 @@ const FilterPage = ({ results, paginations, filters }: FilterPageProps) => {
       <LayoutHome>
         <div className="bg-white rounded layout-container">
           <h2 className="pt-4 pb-1 text-2xl text-center">Tìm truyện nâng cao</h2>
-          <div className="items-center gap-2 md:flex">
-            <div className="grid flex-1 grid-cols-5 gap-2 my-3 filter-grid filter">
+          <div className="items-center gap-2 mt-3 mb-2 md:flex">
+            <div className="grid flex-1 grid-cols-5 gap-2 filter-grid filter">
               <FilterGenres genres={filters.genres} />
               <FilterOne
                 keyFilter="minchapter"

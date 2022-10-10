@@ -11,6 +11,8 @@ import IconClose from "./IconClose";
 import IconDown from "./IconDown";
 import IconSearch from "./IconSearch";
 import IconRefresh from "./IconRefresh";
+import IconHiddenPassword from "./IconHiddenPassword";
+import IconShowPassword from "./IconShowPassword";
 
 export {
   IconTime,
@@ -26,4 +28,6 @@ export {
   IconDown,
   IconSearch,
   IconRefresh,
+  IconHiddenPassword,
+  IconShowPassword,
 };

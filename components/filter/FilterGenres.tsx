@@ -21,6 +21,10 @@ const FilterGenres = ({ genres }: FilterGenresProps) => {
   const handleChange = (value: any) => {
     setValue(value);
     const genres: string[] = value ? value?.map((v: IOption) => v.value) : "";
+    if (!genres) {
+      router.push(PATH.filter);
+      return;
+    }
     router.push({
       href: PATH.filter,
       query: { ...router.query, genres: genres.toString() as string },
