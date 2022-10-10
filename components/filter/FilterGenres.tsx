@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import Select from "react-tailwindcss-select";
 
-interface SelectGenresProps {
+interface FilterGenresProps {
   genres: IFilter[];
 }
 
@@ -15,7 +15,7 @@ interface IOption {
   value: string;
 }
 
-const SelectGenres = ({ genres }: SelectGenresProps) => {
+const FilterGenres = ({ genres }: FilterGenresProps) => {
   const router = useRouter();
   const [value, setValue] = useState<IOption[] | null>(null);
   const handleChange = (value: any) => {
@@ -37,4 +37,4 @@ const SelectGenres = ({ genres }: SelectGenresProps) => {
   );
 };
 
-export default SelectGenres;
+export default FilterGenres;

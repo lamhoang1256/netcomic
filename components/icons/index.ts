@@ -10,6 +10,7 @@ import IconChevronRight from "./IconChevronRight";
 import IconClose from "./IconClose";
 import IconDown from "./IconDown";
 import IconSearch from "./IconSearch";
+import IconRefresh from "./IconRefresh";
 
 export {
   IconTime,
@@ -24,4 +25,5 @@ export {
   IconClose,
   IconDown,
   IconSearch,
+  IconRefresh,
 };

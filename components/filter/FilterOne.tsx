@@ -16,7 +16,7 @@ interface SelectProps {
   noOptionsMessage?: string;
 }
 
-interface SelectOneProps extends SelectProps {
+interface FilterOneProps extends SelectProps {
   keyFilter: string;
   options: IFilter[];
 }
@@ -28,7 +28,7 @@ interface IOption {
   value: string;
 }
 
-const SelectOne = ({ keyFilter, options, ...props }: SelectOneProps) => {
+const FilterOne = ({ keyFilter, options, ...props }: FilterOneProps) => {
   const router = useRouter();
   const [value, setValue] = useState<IOption | null>(null);
   const filter: { [key: string]: string } = {};
@@ -43,4 +43,4 @@ const SelectOne = ({ keyFilter, options, ...props }: SelectOneProps) => {
   return <Select options={options} value={value} onChange={handleChange} {...props} />;
 };
 
-export default SelectOne;
+export default FilterOne;

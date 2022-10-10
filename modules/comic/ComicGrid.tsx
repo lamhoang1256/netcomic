@@ -5,7 +5,7 @@ interface ComicGridProps extends HTMLAttributes<HTMLDivElement> {}
 
 const ComicGrid = ({ children, className, ...props }: ComicGridProps) => {
   return (
-    <div className={classNames("comic-list", className)} {...props}>
+    <div className={classNames("comic-grid", className)} {...props}>
       {children}
     </div>
   );
