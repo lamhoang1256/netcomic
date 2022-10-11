@@ -31,13 +31,15 @@ const FilterGenres = ({ genres }: FilterGenresProps) => {
     });
   };
   return (
-    <Select
-      placeholder="Chọn thể loại truyện"
-      options={genres}
-      value={value}
-      isMultiple={true}
-      onChange={handleChange}
-    />
+    <div className="select">
+      <Select
+        placeholder="Chọn thể loại truyện"
+        options={genres}
+        value={value}
+        isMultiple={true}
+        onChange={handleChange}
+      />
+    </div>
   );
 };
 

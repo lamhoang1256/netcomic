@@ -25,10 +25,6 @@ const ProfilePage = ({}: ProfilePageProps) => {
         <Template title="Thông tin tài khoản" desc="Cập nhật thông tin tài khoản">
           <form className="w-full mt-3 max-w-[500px]" autoComplete="off">
             <FormGroup>
-              <Label htmlFor="text">Tài khoản</Label>
-              <span>lamhoang1256</span>
-            </FormGroup>
-            <FormGroup>
               <Label htmlFor="email">Địa chỉ email</Label>
               <span>lamhoang1256@gmail.com</span>
             </FormGroup>

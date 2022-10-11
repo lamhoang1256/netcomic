@@ -40,7 +40,11 @@ const FilterOne = ({ keyFilter, options, ...props }: FilterOneProps) => {
       query: { ...router.query, ...filter },
     });
   };
-  return <Select options={options} value={value} onChange={handleChange} {...props} />;
+  return (
+    <div className="select">
+      <Select options={options} value={value} onChange={handleChange} {...props} />
+    </div>
+  );
 };
 
 export default FilterOne;
