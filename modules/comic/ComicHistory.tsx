@@ -1,3 +1,4 @@
+import { Image } from "components/image";
 import Link from "next/link";
 
 const ComicHistory = () => {
@@ -5,17 +6,11 @@ const ComicHistory = () => {
     <div className=" flex gap-x-[10px] items-center py-[10px] border-t border-[#dedede]">
       <Link href="/">
         <a>
-          <picture>
-            <source
-              srcSet="https://st.ntcdntempv3.com/data/comics/234/dai-tieu-thu-co-y-do-gi-xau-dau.jpg"
-              type="image/webp"
-            />
-            <img
-              alt=""
-              src="https://st.ntcdntempv3.com/data/comics/234/dai-tieu-thu-co-y-do-gi-xau-dau.jpg"
-              className="w-[70px] h-[60px] object-cover object-top"
-            />
-          </picture>
+          <Image
+            alt=""
+            src="https://st.ntcdntempv3.com/data/comics/234/dai-tieu-thu-co-y-do-gi-xau-dau.jpg"
+            className="w-[70px] h-[60px] object-cover object-top"
+          />
         </a>
       </Link>
       <div>

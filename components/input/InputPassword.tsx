@@ -21,7 +21,7 @@ const InputPassword = ({ name, className, ...props }: InputPasswordProps) => {
         id={name}
         name={name}
         type={visiblePassword ? "text" : "password"}
-        className={classNames("px-4 rounded-sm outline-none h-10 flex-1", className)}
+        className={classNames("px-4 rounded-sm outline-none h-9 flex-1", className)}
         onFocus={() => setFocus(true)}
         onBlur={() => setFocus(false)}
         {...props}

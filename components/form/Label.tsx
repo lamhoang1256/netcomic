@@ -7,7 +7,7 @@ const Label = ({ htmlFor, className, children, ...props }: LabelProps) => {
   return (
     <label
       htmlFor={htmlFor}
-      className={classNames("text-[#555555cc] font-medium cursor-pointer", className)}
+      className={classNames("font-medium cursor-pointer", className)}
       {...props}
     >
       {children}
