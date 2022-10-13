@@ -20,7 +20,7 @@ const SignUpPage = () => {
   const { onChange } = useInputChange(values, setValues);
   const handleSignUp = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const isAllInputFilled = Object.values(values).every((item) => item !== "");
+    const isAllInputFilled = Object.values(values).every((value) => value !== "");
     if (!isAllInputFilled) {
       toast.error("Vui lòng nhập đầy đủ thông tin!");
       return;

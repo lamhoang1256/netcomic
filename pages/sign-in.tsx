@@ -1,15 +1,36 @@
 import { Button } from "components/button";
 import { FormGroup, Label } from "components/form";
-import { IconFacebook, IconGoogle, IconMail } from "components/icons";
+import { IconFacebook, IconGoogle } from "components/icons";
 import { Input, InputPassword } from "components/input";
-import { Select } from "components/select";
-import { Template } from "layouts";
-import LayoutUser from "layouts/LayoutUser";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import useInputChange from "hooks/useInputChange";
+import { auth } from "lib/firebase/firebase-config";
 import Head from "next/head";
+import { FormEvent, useState } from "react";
+import { toast } from "react-toastify";
+import { useAuthContext } from "store/auth-context";
 
-interface SignInPageProps {}
-
-const SignInPage = ({}: SignInPageProps) => {
+const SignInPage = () => {
+  const { currentUser } = useAuthContext();
+  const [values, setValues] = useState({
+    email: "",
+    password: "",
+  });
+  const { onChange } = useInputChange(values, setValues);
+  const handleSignIn = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const isAllInputFilled = Object.values(values).every((value) => value !== "");
+    if (!isAllInputFilled) {
+      toast.error("Vui lòng nhập đầy đủ thông tin!");
+      return;
+    }
+    try {
+      await signInWithEmailAndPassword(auth, values.email, values.password);
+      toast.success("Đăng nhập thành công!");
+    } catch (error: any) {
+      toast.error(error.message);
+    }
+  };
   return (
     <>
       <Head>
@@ -20,16 +41,28 @@ const SignInPage = ({}: SignInPageProps) => {
       <div>
         <form
           className="w-full mt-20 mx-auto bg-white rounded-xl p-10 max-w-[580px]"
+          onSubmit={(e) => handleSignIn(e)}
           autoComplete="off"
         >
           <h1 className="text-xl font-bold text-center">Đăng nhập</h1>
           <FormGroup>
             <Label htmlFor="email">Địa chỉ email</Label>
-            <Input name="email" type="email" placeholder="Tài khoản/email của bạn" />
+            <Input
+              name="email"
+              type="email"
+              placeholder="Tài khoản/email của bạn"
+              onChange={onChange}
+              required
+            />
           </FormGroup>
           <FormGroup>
             <Label htmlFor="password">Mật khẩu</Label>
-            <InputPassword name="password" placeholder="Mật khẩu của bạn" />
+            <InputPassword
+              name="password"
+              placeholder="Mật khẩu của bạn"
+              onChange={onChange}
+              required
+            />
           </FormGroup>
           <Button type="submit" className="w-full h-10 mt-1 text-base text-white bg-blue29">
             Đăng nhập
