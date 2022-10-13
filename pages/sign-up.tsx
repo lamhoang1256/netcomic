@@ -2,11 +2,49 @@ import { Button } from "components/button";
 import { FormGroup, Label } from "components/form";
 import { IconFacebook, IconGoogle } from "components/icons";
 import { Input, InputPassword } from "components/input";
+import { userRole, userStatus } from "constants/global";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, serverTimestamp, setDoc } from "firebase/firestore";
+import useInputChange from "hooks/useInputChange";
+import { auth, db } from "lib/firebase/firebase-config";
 import Head from "next/head";
+import { FormEvent, useState } from "react";
+import { toast } from "react-toastify";
 
-interface SignUpPageProps {}
-
-const SignUpPage = ({}: SignUpPageProps) => {
+const SignUpPage = () => {
+  const [values, setValues] = useState({
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+  const { onChange } = useInputChange(values, setValues);
+  const handleSignUp = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const isAllInputFilled = Object.values(values).every((item) => item !== "");
+    if (!isAllInputFilled) {
+      toast.error("Vui lòng nhập đầy đủ thông tin!");
+      return;
+    }
+    if (values.password !== values.confirmPassword) {
+      toast.error("Xác nhận mật khẩu không trùng khớp!");
+      return;
+    }
+    try {
+      await createUserWithEmailAndPassword(auth, values.email, values.password);
+      if (!auth.currentUser) return;
+      await setDoc(doc(db, "users", auth?.currentUser?.uid as string), {
+        userId: auth?.currentUser?.uid,
+        email: values.email,
+        password: values.password,
+        status: userStatus.ACTIVE,
+        role: userRole.USER,
+        createdAt: serverTimestamp(),
+      });
+      toast.success("Đăng ký tài khoản thành công!");
+    } catch (error: any) {
+      toast.error(error?.message);
+    }
+  };
   return (
     <>
       <Head>
@@ -17,20 +55,37 @@ const SignUpPage = ({}: SignUpPageProps) => {
       <div>
         <form
           className="w-full mt-20 mx-auto bg-white rounded-xl p-10 max-w-[580px]"
+          onSubmit={(e) => handleSignUp(e)}
           autoComplete="off"
         >
           <h1 className="text-xl font-bold text-center">Đăng ký</h1>
           <FormGroup>
             <Label htmlFor="email">Địa chỉ email</Label>
-            <Input name="email" type="email" placeholder="Tài khoản/email của bạn" />
+            <Input
+              name="email"
+              type="email"
+              placeholder="Tài khoản/email của bạn"
+              onChange={onChange}
+              required
+            />
           </FormGroup>
           <FormGroup>
             <Label htmlFor="password">Mật khẩu</Label>
-            <InputPassword name="password" placeholder="Mật khẩu của bạn" />
+            <InputPassword
+              name="password"
+              placeholder="Mật khẩu của bạn"
+              onChange={onChange}
+              required
+            />
           </FormGroup>
           <FormGroup>
             <Label htmlFor="confirmPassword">Xác nhận Mật khẩu</Label>
-            <InputPassword name="confirmPassword" placeholder="Xác nhận mật khẩu" />
+            <InputPassword
+              name="confirmPassword"
+              placeholder="Xác nhận mật khẩu"
+              onChange={onChange}
+              required
+            />
           </FormGroup>
           <Button type="submit" className="w-full h-10 mt-1 text-base text-white bg-blue29">
             Đăng ký
