@@ -13,9 +13,14 @@ import IconSearch from "./IconSearch";
 import IconRefresh from "./IconRefresh";
 import IconHiddenPassword from "./IconHiddenPassword";
 import IconShowPassword from "./IconShowPassword";
+import IconMail from "./IconMail";
+import IconFacebook from "./IconFacebook";
+import IconGoogle from "./IconGoogle";
 
 export {
+  IconFacebook,
   IconTime,
+  IconGoogle,
   IconEye,
   IconChat,
   IconHeart,
@@ -30,4 +35,5 @@ export {
   IconRefresh,
   IconHiddenPassword,
   IconShowPassword,
+  IconMail,
 };

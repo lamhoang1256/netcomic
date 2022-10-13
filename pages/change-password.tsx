@@ -30,7 +30,7 @@ const ChangePasswordPage = ({}: ChangePasswordPageProps) => {
               <Label htmlFor="confirmPassword">Xác nhận mật khẩu mới</Label>
               <InputPassword name="confirmPassword" />
             </FormGroup>
-            <Button type="submit" className="w-full h-10 text-white bg-blue33">
+            <Button type="submit" className="w-full h-10 text-white bg-blue00">
               Cập nhật
             </Button>
           </form>

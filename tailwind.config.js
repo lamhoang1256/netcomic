@@ -12,9 +12,11 @@ module.exports = {
       colors: {
         purpleae: "#ae4ad9",
         blue33: "#337ab7",
-        blue29: "#2980b9",
+        blue00: "#0062cc",
+        blue29: "#2979ff",
         gray8a: "#8a8a8f",
         graydd: "#dddddd",
+        grayf2: "#f2f2f2",
         redf6: "#f64b15",
         rede5: "#e52d27",
       },

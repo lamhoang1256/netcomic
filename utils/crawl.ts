@@ -18,13 +18,13 @@ export function crawlBanner(node: cheerio.Cheerio<cheerio.Element>): IBanner {
   const slug = node
     .find(".slide-caption > h3 > a")
     .attr("href")
-    ?.replace(PATH.netTruyenComic, "") as string;
+    ?.replace(`${PATH.netTruyenComic}/`, "") as string;
   const title = node.find(".slide-caption > h3").text().trim();
   const posterUrl = node.find(".lazyOwl").attr("data-src") as string;
   const updatedAgo = node.find(".slide-caption .time").first().text();
   const newestEle = node.find(".slide-caption > a").first();
   const newestChapter = newestEle.text();
-  const newestHref = newestEle.attr("href")?.replace(PATH.netTruyenComic, "") as string;
+  const newestHref = newestEle.attr("href")?.replace(`${PATH.netTruyenComic}/`, "") as string;
   return { slug, title, posterUrl, newestChapter, updatedAgo, newestHref };
 }
 

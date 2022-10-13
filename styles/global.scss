@@ -1,10 +1,21 @@
-@import url("https://fonts.cdnfonts.com/css/averta-blackitalic");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@font-face {
+  font-family: "Averta-Regular";
+  src: url("../assets/fonts/Averta-Regular.otf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Averta-SemiBold";
+  src: url("../assets/fonts/Averta-SemiBold.otf");
+  font-weight: bold;
+  font-style: normal;
+}
 body {
   font-family: "Averta-Regular", sans-serif, Helvetica, Arial;
-  @apply text-sm bg-[#ebebeb] text-[#333];
+  @apply text-sm text-[#333] bg-[#f5f5fa];
 }
 .layout-container {
   width: 100%;
@@ -43,6 +54,8 @@ body {
 .select > div > div {
   border-radius: 2px;
   border: 1px solid #00000024;
+  padding-top: 2px;
+  padding-bottom: 2px;
   &:focus {
     box-shadow: none;
     outline: none;
