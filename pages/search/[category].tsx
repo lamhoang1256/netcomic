@@ -3,12 +3,10 @@ import axios from "axios";
 import { CategorySidebar } from "components/category";
 import { Pagination } from "components/pagination";
 import { server } from "configs/server";
-import { PATH } from "constants/path";
 import LayoutHome from "layouts/LayoutHome";
 import { ComicGrid, ComicItem } from "modules/comic";
 import { GetServerSidePropsContext } from "next";
 import Head from "next/head";
-import Link from "next/link";
 
 interface CategoryPageProps {
   info: ICategoryInfo;

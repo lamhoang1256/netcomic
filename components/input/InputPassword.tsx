@@ -13,7 +13,7 @@ const InputPassword = ({ name, className, ...props }: InputPasswordProps) => {
   return (
     <div
       className={classNames(
-        "flex items-center border shadow-input pr-4 bg-white",
+        "flex items-center border shadow-input pr-4 bg-white rounded overflow-hidden",
         focus ? "border-[#0000008a]" : "border-[#00000023]"
       )}
     >
@@ -21,7 +21,7 @@ const InputPassword = ({ name, className, ...props }: InputPasswordProps) => {
         id={name}
         name={name}
         type={visiblePassword ? "text" : "password"}
-        className={classNames("px-4 rounded-sm outline-none h-10 flex-1", className)}
+        className={classNames("px-4 outline-none h-10 flex-1", className)}
         onFocus={() => setFocus(true)}
         onBlur={() => setFocus(false)}
         {...props}

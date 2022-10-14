@@ -23,7 +23,7 @@ const HomePage = ({ banners, newestComics, paginations }: HomePageProps) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <LayoutHome>
-        <div className="bg-white layout-container">
+        <div className="bg-white rounded-lg layout-container">
           <HomeBanner banners={banners} />
           <div className="flex flex-col gap-4 mt-6 lg:flex-row">
             <div className="lg:w-2/3">

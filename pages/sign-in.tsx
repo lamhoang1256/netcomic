@@ -8,10 +8,8 @@ import { auth } from "lib/firebase/firebase-config";
 import Head from "next/head";
 import { FormEvent, useState } from "react";
 import { toast } from "react-toastify";
-import { useAuthContext } from "store/auth-context";
 
 const SignInPage = () => {
-  const { currentUser } = useAuthContext();
   const [values, setValues] = useState({
     email: "",
     password: "",

@@ -4,8 +4,8 @@ import { auth, db } from "lib/firebase/firebase-config";
 import { createContext, Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
 
 interface IAuthContext {
-  currentUser: User | null;
-  setCurrentUser: Dispatch<SetStateAction<User | null>>;
+  currentUser: User;
+  setCurrentUser: Dispatch<SetStateAction<User>>;
   loading: boolean;
 }
 const AuthContext = createContext<IAuthContext>({} as IAuthContext);
@@ -15,12 +15,12 @@ interface AuthProviderProps {
 }
 function AuthProvider({ children, ...props }: AuthProviderProps) {
   const [loading, setLoading] = useState(true);
-  const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [currentUser, setCurrentUser] = useState<User>({} as User);
   const value = { currentUser, setCurrentUser, loading };
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (!user) {
-        setCurrentUser(null);
+        setCurrentUser({} as User);
         setLoading(false);
         return;
       }
