@@ -1,6 +1,6 @@
 import { onAuthStateChanged, User } from "firebase/auth";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
-import { auth, db } from "lib/firebase/firebase-config";
+import { auth, db } from "libs/firebase/firebase-config";
 import { createContext, Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
 
 interface IAuthContext {

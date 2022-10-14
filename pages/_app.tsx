@@ -1,10 +1,10 @@
-import "../styles/global.scss";
-import type { AppProps } from "next/app";
-import Modal from "react-modal";
-import { ToastContainer } from "react-toastify";
 import Head from "next/head";
-import "react-toastify/dist/ReactToastify.css";
+import Modal from "react-modal";
+import type { AppProps } from "next/app";
 import { AuthProvider } from "store/auth-context";
+import { ToastContainer } from "react-toastify";
+import "assets/styles/global.scss";
+import "react-toastify/dist/ReactToastify.css";
 
 Modal.setAppElement("#__next");
 Modal.defaultStyles = {

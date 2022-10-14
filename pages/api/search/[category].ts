@@ -3,7 +3,7 @@ import * as cheerio from "cheerio";
 import { ICategory, ICategoryInfo, IComic, IPagination, IQueryParams } from "@types";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { crawlCategory, crawlComic, crawlPagination } from "utils/crawl";
-import catchAsync from "utils/catch-async";
+import catchAsync from "utils/catchAsync";
 import { ApiError, responseError, responseSuccess } from "utils/response";
 import { STATUS } from "constants/status";
 import { PATH } from "constants/path";

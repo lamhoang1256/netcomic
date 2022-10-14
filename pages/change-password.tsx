@@ -5,7 +5,7 @@ import { EmailAuthProvider, reauthenticateWithCredential, updatePassword } from 
 import useInputChange from "hooks/useInputChange";
 import { Template } from "layouts";
 import LayoutUser from "layouts/LayoutUser";
-import { auth } from "lib/firebase/firebase-config";
+import { auth } from "libs/firebase/firebase-config";
 import Head from "next/head";
 import { FormEvent, useState } from "react";
 import { toast } from "react-toastify";

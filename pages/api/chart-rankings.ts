@@ -4,7 +4,7 @@ import { PATH } from "constants/path";
 import { STATUS } from "constants/status";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { IComicChartRanking, IQueryParams } from "@types";
-import catchAsync from "utils/catch-async";
+import catchAsync from "utils/catchAsync";
 import { crawlComicTopMonth } from "utils/crawl";
 import { ApiError, responseError, responseSuccess } from "utils/response";
 

@@ -3,7 +3,7 @@ import axiosClient from "configs/axiosClient";
 import { PATH } from "constants/path";
 import { STATUS } from "constants/status";
 import type { NextApiRequest, NextApiResponse } from "next";
-import catchAsync from "utils/catch-async";
+import catchAsync from "utils/catchAsync";
 import { crawlGenderComics } from "utils/crawl";
 import { ApiError, responseError, responseSuccess } from "utils/response";
 
