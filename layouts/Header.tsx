@@ -10,6 +10,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
 import { useAuthContext } from "store/auth-context";
+import { createUsernameFromEmail } from "utils";
 import classNames from "utils/classNames";
 
 const stylesPopoverLink =
@@ -23,7 +24,6 @@ const Header = () => {
     e.preventDefault();
     router.push(`${PATH.search}?keyword=${keyword}`);
   };
-  const email = "lamhoang";
   return (
     <header style={{ backgroundImage: `url("/bg-header.jpg")` }}>
       <div className="layout-container">
@@ -35,7 +35,7 @@ const Header = () => {
           </Link>
           <form
             onSubmit={handleSearchWithKeyword}
-            className="flex items-center justify-between flex-1 max-w-[400px] pl-3 h-8 bg-white rounded-sm"
+            className="md:flex hidden items-center justify-between flex-1 max-w-[400px] pl-3 h-8 bg-white rounded-sm"
           >
             <input
               type="text"
@@ -47,8 +47,7 @@ const Header = () => {
               <IconSearch />
             </button>
           </form>
-
-          {email ? (
+          {currentUser?.email ? (
             <div
               className="relative h-full text-white w-max"
               onMouseEnter={showPopover}
@@ -56,21 +55,21 @@ const Header = () => {
             >
               <div className="flex items-center justify-end h-full gap-x-2 transition-all duration-100 hover:text-[#ffffffb3] cursor-pointer">
                 <Image
-                  alt=""
+                  alt="avatar"
                   src={currentUser?.photoURL || defaultAvatar}
                   className="object-cover w-5 h-5 rounded-full"
                 />
                 <span className="font-medium max5se:line-clamp-1 ">
-                  {currentUser?.email || "User"}
+                  {createUsernameFromEmail(currentUser?.email as string)}
                 </span>
               </div>
               <Popover active={activePopover} className="w-max">
                 <Link href={PATH.profile}>
-                  <a className={stylesPopoverLink}>Tài khoản của tôi</a>
+                  <a className="popover-link">Tài khoản của tôi</a>
                 </Link>
                 <button
                   type="button"
-                  className={classNames(stylesPopoverLink, "w-full text-left")}
+                  className={"popover-link w-full text-left"}
                   onClick={() => signOut(auth)}
                 >
                   Đăng xuất
@@ -79,12 +78,12 @@ const Header = () => {
             </div>
           ) : (
             <div className="flex gap-x-4">
-              <Link href={PATH.home}>
+              <Link href={PATH.signUp}>
                 <a className="text-[#ffffffb3] transition-all duration-100 hover:opacity-70">
                   Đăng kí
                 </a>
               </Link>
-              <Link href={PATH.home}>
+              <Link href={PATH.signIn}>
                 <a className="text-[#ffffffb3] transition-all duration-100 hover:opacity-70">
                   Đăng nhập
                 </a>

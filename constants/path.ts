@@ -5,6 +5,8 @@ export const PATH = {
   search: "/search",
   filter: "/filter",
   category: "/category",
+  signUp: "/sign-up",
+  signIn: "/sign-in",
   profile: "/profile",
   comment: "comment",
   follow: "follow",

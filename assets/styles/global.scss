@@ -13,9 +13,16 @@
   font-weight: bold;
   font-style: normal;
 }
-body {
-  font-family: "Averta-Regular", sans-serif, Helvetica, Arial;
-  @apply text-sm text-[#333] bg-[#f8fafc];
+@layer base {
+  body {
+    font-family: "Averta-Regular", sans-serif, Helvetica, Arial;
+    @apply text-sm text-[#333] bg-[#f8fafc];
+  }
+}
+@layer utilities {
+  .layout-sidebar {
+    @apply -translate-x-full z-[300] w-full max-w-[300px] fixed top-0 left-0 bottom-0 lg:translate-x-0 p-4 lg:p-0 transition-all duration-300 lg:static overflow-auto;
+  }
 }
 .layout-container {
   width: 100%;
@@ -83,6 +90,9 @@ body {
     right: 6px;
     width: 0;
     height: 0;
+  }
+  &-link {
+    @apply text-[#000000cc] block px-5 py-2 hover:bg-[#fafafa] transition-all duration-300 hover:text-[#00bfa5];
   }
   &-content {
     box-shadow: 0 1px 3.125rem 0 rgb(0 0 0 /20%);

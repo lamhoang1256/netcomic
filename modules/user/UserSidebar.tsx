@@ -1,7 +1,10 @@
 import { Image } from "components/image";
+import { defaultAvatar } from "constants/image";
 import { PATH } from "constants/path";
 import { Sidebar } from "layouts";
 import Link from "next/link";
+import { useAuthContext } from "store/auth-context";
+import { createUsernameFromEmail } from "utils";
 
 const sidebarLinks = [
   {
@@ -27,17 +30,20 @@ const sidebarLinks = [
 ];
 
 const UserSidebar = () => {
+  const { currentUser } = useAuthContext();
   return (
     <Sidebar labelOpenSidebar="Tài khoản của tôi">
       <div className="flex items-center gap-x-2">
         <Image
           alt="avatar"
-          src="https://res.cloudinary.com/lamhoang1256/image/upload/v1659780525/shopbee/1a2d07a2d37fffb914b22345dbfebfd3.jpg"
+          src={currentUser?.photoURL || defaultAvatar}
           className="w-10 h-10 rounded-full"
         />
         <div>
-          <h3 className="font-semibold line-clamp-1">User</h3>
-          <Link href="/">Sửa hồ sơ</Link>
+          <h3 className="font-semibold line-clamp-1">
+            {createUsernameFromEmail(currentUser?.email as string)}
+          </h3>
+          <Link href={PATH.profile}>Sửa hồ sơ</Link>
         </div>
       </div>
       <ul className="mt-7">
