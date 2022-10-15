@@ -54,15 +54,30 @@ const ChangePasswordPage = () => {
           >
             <FormGroup>
               <Label htmlFor="password">Mật khẩu cũ</Label>
-              <InputPassword name="password" onChange={onChange} required />
+              <InputPassword
+                name="password"
+                placeholder="Nhập mật khẩu cũ"
+                onChange={onChange}
+                required
+              />
             </FormGroup>
             <FormGroup>
               <Label htmlFor="newPassword">Mật khẩu mới</Label>
-              <InputPassword name="newPassword" onChange={onChange} required />
+              <InputPassword
+                name="newPassword"
+                placeholder="Nhập mật khẩu mới"
+                onChange={onChange}
+                required
+              />
             </FormGroup>
             <FormGroup>
               <Label htmlFor="confirmPassword">Xác nhận mật khẩu mới</Label>
-              <InputPassword name="confirmPassword" onChange={onChange} required />
+              <InputPassword
+                name="confirmPassword"
+                placeholder="Nhập lại mật khẩu mới"
+                onChange={onChange}
+                required
+              />
             </FormGroup>
             <Button type="submit" className="w-full h-10 mt-1 text-white bg-blue00">
               Đổi mật khẩu

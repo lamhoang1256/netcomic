@@ -1,11 +1,12 @@
-import { onAuthStateChanged, User } from "firebase/auth";
+import { ICurrentUser } from "@types";
+import { onAuthStateChanged } from "firebase/auth";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { auth, db } from "libs/firebase/firebase-config";
 import { createContext, Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
 
 interface IAuthContext {
-  currentUser: User;
-  setCurrentUser: Dispatch<SetStateAction<User>>;
+  currentUser: ICurrentUser;
+  setCurrentUser: Dispatch<SetStateAction<ICurrentUser>>;
   loading: boolean;
 }
 const AuthContext = createContext<IAuthContext>({} as IAuthContext);
@@ -15,12 +16,12 @@ interface AuthProviderProps {
 }
 function AuthProvider({ children, ...props }: AuthProviderProps) {
   const [loading, setLoading] = useState(true);
-  const [currentUser, setCurrentUser] = useState<User>({} as User);
+  const [currentUser, setCurrentUser] = useState<ICurrentUser>({} as ICurrentUser);
   const value = { currentUser, setCurrentUser, loading };
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (!user) {
-        setCurrentUser({} as User);
+        setCurrentUser({} as ICurrentUser);
         setLoading(false);
         return;
       }

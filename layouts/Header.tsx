@@ -1,9 +1,11 @@
 import { IconSearch } from "components/icons";
 import { Image } from "components/image";
 import { Popover } from "components/popover";
-import { avatar } from "constants/image";
+import { defaultAvatar } from "constants/image";
 import { PATH } from "constants/path";
+import { signOut } from "firebase/auth";
 import usePopover from "hooks/usePopover";
+import { auth } from "libs/firebase/firebase-config";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
@@ -55,7 +57,7 @@ const Header = () => {
               <div className="flex items-center justify-end h-full gap-x-2 transition-all duration-100 hover:text-[#ffffffb3] cursor-pointer">
                 <Image
                   alt=""
-                  src={currentUser?.photoURL || avatar}
+                  src={currentUser?.photoURL || defaultAvatar}
                   className="object-cover w-5 h-5 rounded-full"
                 />
                 <span className="font-medium max5se:line-clamp-1 ">
@@ -66,7 +68,11 @@ const Header = () => {
                 <Link href={PATH.profile}>
                   <a className={stylesPopoverLink}>Tài khoản của tôi</a>
                 </Link>
-                <button type="button" className={classNames(stylesPopoverLink, "w-full text-left")}>
+                <button
+                  type="button"
+                  className={classNames(stylesPopoverLink, "w-full text-left")}
+                  onClick={() => signOut(auth)}
+                >
                   Đăng xuất
                 </button>
               </Popover>

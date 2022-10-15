@@ -1,8 +1,8 @@
-export interface ICurrentUser {
-  userId: string;
-  email: string;
-  password: string;
-  role: string;
-  status: string;
-  createdAt: string;
+import { User } from "firebase/auth";
+
+export interface ICurrentUser extends User {
+  password?: string;
+  role?: string;
+  status?: string;
+  createdAt?: string;
 }
