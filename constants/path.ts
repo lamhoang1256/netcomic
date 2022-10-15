@@ -8,8 +8,8 @@ export const PATH = {
   signUp: "/sign-up",
   signIn: "/sign-in",
   profile: "/profile",
-  comment: "comment",
-  follow: "follow",
+  comment: "/comment",
+  follow: "/follow",
   changePassword: "/change-password",
   netTruyen: process.env.NEXT_PUBLIC_NHATTRUYEN as string,
   netTruyenComic: `${process.env.NEXT_PUBLIC_NHATTRUYEN}/truyen-tranh`,
@@ -19,4 +19,5 @@ export const PATH = {
   netTruyenCategory: `${process.env.NEXT_PUBLIC_NHATTRUYEN}/the-loai`,
   netTruyenBoy: `${process.env.NEXT_PUBLIC_NHATTRUYEN}/truyen-con-trai`,
   netTruyenFilter: `${process.env.NEXT_PUBLIC_NHATTRUYEN}/tim-truyen-nang-cao`,
+  projectGithub: "https://github.com/lamhoang1256/netcomic",
 };

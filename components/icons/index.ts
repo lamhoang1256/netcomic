@@ -16,11 +16,13 @@ import IconShowPassword from "./IconShowPassword";
 import IconMail from "./IconMail";
 import IconFacebook from "./IconFacebook";
 import IconGoogle from "./IconGoogle";
+import IconGithub from "./IconGithub";
 
 export {
   IconFacebook,
   IconTime,
   IconGoogle,
+  IconGithub,
   IconEye,
   IconChat,
   IconHeart,

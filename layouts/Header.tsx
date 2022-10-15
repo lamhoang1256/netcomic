@@ -11,7 +11,6 @@ import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
 import { useAuthContext } from "store/auth-context";
 import { createUsernameFromEmail } from "utils";
-import classNames from "utils/classNames";
 
 const stylesPopoverLink =
   "text-[#000000cc] block px-5 py-2 hover:bg-[#fafafa] transition-all duration-300 hover:text-[#00bfa5]";
