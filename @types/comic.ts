@@ -28,7 +28,7 @@ export interface IComicInfo {
   posterUrl: string;
   author: string;
   status: string;
-  categories: string;
+  categories: { display: string; href: string }[];
   viewCount: string;
   ratingCount: string;
   ratingValue: string;

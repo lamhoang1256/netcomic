@@ -31,7 +31,7 @@ async function crawlComicDetails(url: string) {
   let chapters: ILinkChapter[] = [];
   let comments: IComment[] = [];
   $("#ctl00_divCenter").each(function (index, element) {
-    info = crawlInfoComic($(element), PATH.netTruyenComic);
+    info = crawlInfoComic($(element), PATH.netTruyenComic, $);
   });
   $("#ctl00_divCenter .list-chapter li.row").each(function (index, element) {
     const chapter = crawlLinkChapter($(element));

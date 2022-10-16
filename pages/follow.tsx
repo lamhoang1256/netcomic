@@ -54,11 +54,15 @@ const FollowPage = ({}: FollowPageProps) => {
                 {comics.map((comic) => (
                   <div className="py-2 border-t border-graydd follow-grid" key={comic.slug}>
                     <div className="min-w-[180px] flex md:items-center gap-x-2">
-                      <Image
-                        alt={comic.slug}
-                        src={comic.posterUrl}
-                        className="w-[50px] h-[50px] flex-shrink-0 rounded-sm object-cover object-top"
-                      />
+                      <Link href={`${PATH.comic}/${comic.slug}`}>
+                        <a className="text-sm font-semibold transition-all duration-200 text-blue29 hover:text-purpleae">
+                          <Image
+                            alt={comic.slug}
+                            src={comic.posterUrl}
+                            className="w-[50px] h-[50px] flex-shrink-0 rounded-sm object-cover object-top"
+                          />
+                        </a>
+                      </Link>
                       <div>
                         <Link href={`${PATH.comic}/${comic.slug}`}>
                           <a className="text-sm font-semibold transition-all duration-200 text-blue29 hover:text-purpleae">
@@ -78,7 +82,9 @@ const FollowPage = ({}: FollowPageProps) => {
                       </span>
                     </div>
                     <div className="min-w-[100px] text-xs text-left">
-                      <span className="block whitespace-nowrap">{comic.newChapter}</span>
+                      <Link href={`${PATH.comic}/${comic.hrefNewChapter}`}>
+                        <a className="block whitespace-nowrap">{comic.newChapter}</a>
+                      </Link>
                       <span className="block whitespace-nowrap text-[#999] italic">
                         {comic.updatedAt}
                       </span>

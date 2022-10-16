@@ -57,10 +57,10 @@ const ComicDetailsPage = ({ info, chapters }: ComicDetailsPageProps) => {
                   <li className="flex mb-2 text-base">
                     <div className="w-1/3">Thể loại</div>
                     <div className="flex flex-wrap flex-1 gap-x-2 gap-y-1">
-                      {info.categories.split(" - ").map((category) => (
-                        <Link href="/" key={category}>
+                      {info.categories.map((category) => (
+                        <Link href={`${PATH.search}/${category.href}`} key={category.href}>
                           <a className="transition-all duration-200 px-[6px] py-[2px] text-blue29 hover:text-redf6 border-blue29 hover:border-redf6 border rounded-[3px] text-sm">
-                            {category}
+                            {category.display}
                           </a>
                         </Link>
                       ))}

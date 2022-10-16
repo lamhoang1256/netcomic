@@ -159,7 +159,8 @@ export function crawlComicTopMonth(
 
 export function crawlInfoComic(
   node: cheerio.Cheerio<cheerio.Element>,
-  replaceHref = `${PATH.netTruyen}/`
+  replaceHref = `${PATH.netTruyen}/`,
+  $: cheerio.CheerioAPI
 ): IComicInfo {
   const title = node.find(".title-detail").text();
   const updatedAt = node.find("time.small").text().trim();
@@ -170,7 +171,12 @@ export function crawlInfoComic(
   const slug = node.find(".col-info .mrb10 a").attr("href")?.replace(replaceHref, "") as string;
   const author = node.find(".author .col-xs-8").text();
   const status = node.find(".status .col-xs-8").text();
-  const categories = node.find(".kind .col-xs-8").text();
+  let categories: { display: string; href: string }[] = [];
+  node.find(".kind .col-xs-8 a").each(function (index, element) {
+    const href = $(element).attr("href")?.replace(`${PATH.netTruyenCategory}/`, "") as string;
+    const display = $(element).text();
+    categories.push({ display, href });
+  });
   const viewCount = node.find(".list-info .col-xs-8").last().text();
   const ratingValue = node.find(".mrt5.mrb10 > span > span").first().text();
   const ratingCount = node.find(".mrt5.mrb10 > span > span").last().text();
