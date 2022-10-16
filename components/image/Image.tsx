@@ -2,11 +2,11 @@ import { ImgHTMLAttributes } from "react";
 
 interface ImageProps extends ImgHTMLAttributes<HTMLImageElement> {}
 
-const Image = ({ src, alt = "", ...props }: ImageProps) => {
+const Image = ({ src, alt = "", className, ...props }: ImageProps) => {
   return (
-    <picture>
+    <picture className={className}>
       <source srcSet={src} type="image/webp" />
-      <img src={src} alt={alt} {...props} />
+      <img src={src} alt={alt} className={className} {...props} />
     </picture>
   );
 };

@@ -35,7 +35,15 @@ export interface IComicInfo {
   followCount: string;
   description: string;
 }
-
+export interface IComicFollow {
+  title: string;
+  posterUrl: string;
+  slug: string;
+  idNewChapter: string;
+  hrefNewChapter: string;
+  newChapter: string;
+  updatedAt: string;
+}
 export interface IComicChartRanking {
   rank: string;
   title: string;
