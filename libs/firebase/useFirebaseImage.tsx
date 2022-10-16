@@ -7,11 +7,11 @@ import {
 } from "firebase/storage";
 import { useState } from "react";
 import { userRole } from "constants/global";
-import { useAuthContext } from "store/auth-context";
 import { toast } from "react-toastify";
+import useStore from "store/store";
 
 export default function useFirebaseImage(imageName?: string, callback?: () => void) {
-  const { currentUser } = useAuthContext();
+  const { currentUser } = useStore();
   const [progress, setProgress] = useState(0);
   const [image, setImage] = useState("");
   const handleUploadImage = async (file: any) => {

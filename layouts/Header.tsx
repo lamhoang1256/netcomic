@@ -9,13 +9,13 @@ import { auth } from "libs/firebase/firebase-config";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
-import { useAuthContext } from "store/auth-context";
+import useStore from "store/store";
 import { createUsernameFromEmail } from "utils";
 
 const stylesPopoverLink =
   "text-[#000000cc] block px-5 py-2 hover:bg-[#fafafa] transition-all duration-300 hover:text-[#00bfa5]";
 const Header = () => {
-  const { currentUser } = useAuthContext();
+  const { currentUser } = useStore();
   const { activePopover, hidePopover, showPopover } = usePopover();
   const router = useRouter();
   const [keyword, setKeyword] = useState("");

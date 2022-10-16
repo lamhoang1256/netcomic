@@ -3,7 +3,7 @@ import { defaultAvatar } from "constants/image";
 import { PATH } from "constants/path";
 import { Sidebar } from "layouts";
 import Link from "next/link";
-import { useAuthContext } from "store/auth-context";
+import useStore from "store/store";
 import { createUsernameFromEmail } from "utils";
 
 const sidebarLinks = [
@@ -30,7 +30,7 @@ const sidebarLinks = [
 ];
 
 const UserSidebar = () => {
-  const { currentUser } = useAuthContext();
+  const { currentUser } = useStore();
   return (
     <Sidebar labelOpenSidebar="Tài khoản của tôi">
       <div className="flex items-center gap-x-2">

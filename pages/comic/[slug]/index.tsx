@@ -1,15 +1,19 @@
+import { IComicInfo, ILinkChapter } from "@types";
 import axios from "axios";
+import { Button } from "components/button";
 import { Heading } from "components/text";
 import { server } from "configs/server";
 import { PATH } from "constants/path";
+import { doc, updateDoc } from "firebase/firestore";
 import LayoutHome from "layouts/LayoutHome";
+import { db } from "libs/firebase/firebase-config";
 import { ComicChartRanking } from "modules/comic";
 import { GetServerSidePropsContext } from "next";
 import Head from "next/head";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useState } from "react";
-import { IComicInfo, ILinkChapter } from "@types";
-import { Button } from "components/button";
+import useStore from "store/store";
 
 interface ComicDetailsPageProps {
   info: IComicInfo;
@@ -17,9 +21,28 @@ interface ComicDetailsPageProps {
 }
 
 const ComicDetailsPage = ({ info, chapters }: ComicDetailsPageProps) => {
+  const router = useRouter();
+  const { slug } = router.query;
+  const { follows, setFollow, currentUser } = useStore();
+  const hasFollowed = follows.some((comic) => comic === slug);
   const [countChapters, setCountChapters] = useState(20);
   const handleShowAllChapter = () => {
     setCountChapters(chapters.length);
+  };
+  const handleToggleFollow = async () => {
+    const colRef = doc(db, "users", currentUser?.uid);
+    if (hasFollowed) {
+      const newFollows = follows.filter((comic) => comic !== slug);
+      setFollow(newFollows);
+      await updateDoc(colRef, { follows: newFollows });
+      return;
+    }
+    if (!hasFollowed) {
+      const newFollows = [slug as string, ...follows];
+      setFollow(newFollows);
+      await updateDoc(colRef, { follows: newFollows });
+      return;
+    }
   };
   return (
     <>
@@ -71,7 +94,7 @@ const ComicDetailsPage = ({ info, chapters }: ComicDetailsPageProps) => {
                     <div className="flex-1">{info.viewCount}</div>
                   </li>
                   <li>
-                    <Link href={`${PATH.comic}/${info.posterUrl}`}>
+                    <Link href={`${PATH.comic}/${info.slug}`}>
                       <a className="mr-2 transition-all duration-200 text-[#0073f4] hover:text-[#044aa4]">
                         {info.title}
                       </a>
@@ -81,8 +104,11 @@ const ComicDetailsPage = ({ info, chapters }: ComicDetailsPageProps) => {
                     </span>
                   </li>
                   <li className="flex items-center mt-[10px] gap-x-2">
-                    <button className="px-[14px] py-[6px] bg-[#5cb85c] hover:opacity-80 transition-all duration-200 text-white rounded">
-                      Theo dõi
+                    <button
+                      className="px-[14px] py-[6px] bg-[#5cb85c] hover:opacity-80 transition-all duration-200 text-white rounded"
+                      onClick={handleToggleFollow}
+                    >
+                      {hasFollowed ? "Đã theo dõi" : "Theo dõi"}
                     </button>
                     <span className="text-[15px]">
                       <b className="text-black">{info.followCount}</b> Lượt theo dõi
