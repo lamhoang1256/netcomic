@@ -1,11 +1,14 @@
 import { IComicFollow } from "@types";
 import axios from "axios";
 import { Image } from "components/image";
+import { LoadingSpinner } from "components/loading";
 import { server } from "configs/server";
+import { PATH } from "constants/path";
 import { Template } from "layouts";
 import LayoutUser from "layouts/LayoutUser";
 import { getFollowComics } from "libs/firebase/firebase-helper";
 import Head from "next/head";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 interface FollowPageProps {}
@@ -39,7 +42,7 @@ const FollowPage = ({}: FollowPageProps) => {
           title="Truyện đang theo dõi"
           desc='Truyện chưa đọc sẽ hiển thị ở đầu danh sách, nhấn vào "Đã đọc" nếu truyện đọc rồi.'
         >
-          {loading && "Loading"}
+          {loading && <LoadingSpinner />}
           {!loading && (
             <div className="overflow-x-auto">
               <div>
@@ -57,10 +60,12 @@ const FollowPage = ({}: FollowPageProps) => {
                         className="w-[50px] h-[50px] flex-shrink-0 rounded-sm object-cover object-top"
                       />
                       <div>
-                        <span className="text-[13px] font-semibold transition-all duration-200 md:text-sm text-blue29 hover:text-purpleae">
-                          {comic.title}
-                        </span>
-                        <div className="flex flex-col items-start md:flex-row gap-x-3">
+                        <Link href={`${PATH.comic}/${comic.slug}`}>
+                          <a className="text-sm font-semibold transition-all duration-200 text-blue29 hover:text-purpleae">
+                            {comic.title}
+                          </a>
+                        </Link>
+                        <div className="flex flex-col items-start mt-1 md:flex-row gap-y-1 gap-x-3">
                           <button className="text-xs font-semibold text-[#23a903]">Đã đọc</button>
                           <button className="text-xs font-semibold text-rede5">Bỏ theo dõi</button>
                         </div>
