@@ -4,32 +4,39 @@ import { Image } from "components/image";
 import { LoadingSpinner } from "components/loading";
 import { server } from "configs/server";
 import { PATH } from "constants/path";
+import { doc, updateDoc } from "firebase/firestore";
 import { Template } from "layouts";
 import LayoutUser from "layouts/LayoutUser";
-import { getFollowComics } from "libs/firebase/firebase-helper";
+import { db } from "libs/firebase/firebase-config";
 import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import useStore from "store/store";
 
-interface FollowPageProps {}
-
-const FollowPage = ({}: FollowPageProps) => {
+const FollowPage = () => {
+  const { follows, currentUser, setFollow } = useStore();
   const [loading, setLoading] = useState(true);
   const [comics, setComics] = useState<IComicFollow[]>([]);
+  const handleRemoveFollow = async (slug: string) => {
+    console.log("slug: ", slug);
+    const colRef = doc(db, "users", currentUser?.uid);
+    const newFollows = follows.filter((comic) => comic !== slug);
+    setFollow(newFollows);
+    await updateDoc(colRef, { follows: newFollows });
+  };
   useEffect(() => {
     const fetchFollow = async () => {
       setLoading(true);
-      const followedComicsId = await getFollowComics("R88yfg3aKzbfgTJ9lxptUCWjyEW2");
-      const followedComics = await Promise.all(
-        followedComicsId.map(
+      const comics = await Promise.all(
+        follows.map(
           async (follow: string) => (await axios.get(`${server}/api/follow/${follow}`)).data.data
         )
       );
-      setComics(followedComics);
+      setComics(comics);
       setLoading(false);
     };
     fetchFollow();
-  }, []);
+  }, [follows]);
   return (
     <>
       <Head>
@@ -71,7 +78,12 @@ const FollowPage = ({}: FollowPageProps) => {
                         </Link>
                         <div className="flex flex-col items-start mt-1 md:flex-row gap-y-1 gap-x-3">
                           <button className="text-xs font-semibold text-[#23a903]">Đã đọc</button>
-                          <button className="text-xs font-semibold text-rede5">Bỏ theo dõi</button>
+                          <button
+                            className="text-xs font-semibold text-rede5"
+                            onClick={() => handleRemoveFollow(comic.slug)}
+                          >
+                            Bỏ theo dõi
+                          </button>
                         </div>
                       </div>
                     </div>
