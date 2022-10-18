@@ -9,9 +9,10 @@ import {
   IconHome,
   IconList,
 } from "components/icons";
-import { ModalChapterList } from "components/modal";
+import { ModalChapters } from "components/modal";
 import { server } from "configs/server";
 import { getImage } from "constants/image";
+import { LocalStorage, parseJson } from "constants/localStorage";
 import { PATH } from "constants/path";
 import useModal from "hooks/useModal";
 import LayoutHome from "layouts/LayoutHome";
@@ -35,11 +36,11 @@ const ReadComicPage = ({ imageUrls, chapters, info, comments }: ReadComicPagePro
   const { slug, chapter, id } = query;
   const { isShow, toggleModal } = useModal();
   const handleSaveHistory = async () => {
-    const history: IComicHistory[] = JSON.parse(localStorage.getItem("history") || "[]");
+    const history: IComicHistory[] = parseJson(localStorage.getItem(LocalStorage.history) || "[]");
     const hasSeen = history.some((item) => item.slug === slug);
     if (!hasSeen) {
       const { data } = (await axios.get(`${server}/api/comic/${slug}`)).data;
-      const historyComic = {
+      const comic = {
         id: id as string,
         slug: slug as string,
         title: info.title,
@@ -48,13 +49,13 @@ const ReadComicPage = ({ imageUrls, chapters, info, comments }: ReadComicPagePro
         chapterUrl: `${slug}/${chapter}/${id}`,
         chapters: [id as string],
       };
-      localStorage.setItem("history", JSON.stringify([historyComic, ...history]));
+      localStorage.setItem(LocalStorage.history, JSON.stringify([comic, ...history]));
       return;
     }
     let existComic = history.find((item: IComicHistory) => item.slug === slug);
     if (!existComic) return;
     const hasRead = existComic.chapters.includes(id as string);
-    const historyComic = {
+    const comic = {
       ...existComic,
       chapterName: info.chapter,
       chapters: hasRead ? existComic.chapters : [...existComic.chapters, id as string],
@@ -62,7 +63,7 @@ const ReadComicPage = ({ imageUrls, chapters, info, comments }: ReadComicPagePro
       chapterUrl: `${slug}/${chapter}/${id}`,
     };
     const newHistory = history.filter((item: IComicHistory) => item.slug !== slug);
-    localStorage.setItem("history", JSON.stringify([historyComic, ...newHistory]));
+    localStorage.setItem("history", JSON.stringify([comic, ...newHistory]));
   };
   useEffect(() => {
     handleSaveHistory();
@@ -134,7 +135,7 @@ const ReadComicPage = ({ imageUrls, chapters, info, comments }: ReadComicPagePro
               <span className="hidden md:block">Theo dõi</span>
             </Button>
           </div>
-          <ModalChapterList isShow={isShow} toggleModal={toggleModal} chapters={chapters} />
+          <ModalChapters isShow={isShow} toggleModal={toggleModal} chapters={chapters} />
         </section>
         <div className="pt-3">
           {imageUrls.map((image) => (

@@ -1,3 +1,3 @@
-import ModalChapterList from "./ModalChapterList";
+import ModalChapters from "./ModalChapters";
 
-export { ModalChapterList };
+export { ModalChapters };

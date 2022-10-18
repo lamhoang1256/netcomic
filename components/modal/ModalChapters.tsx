@@ -1,20 +1,28 @@
-import { ILinkChapter } from "@types";
+import { IComicHistory, ILinkChapter } from "@types";
 import { IconClose } from "components/icons";
 import { PATH } from "constants/path";
 import Link from "next/link";
 import Modal from "react-modal";
 import classNames from "utils/classNames";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { parseJson } from "hooks/useLocalStorage";
+import { LocalStorage } from "constants/localStorage";
 
-interface ModalChapterListProps {
+interface ModalChaptersProps {
   isShow: boolean;
   toggleModal: () => void;
   chapters: ILinkChapter[];
 }
 
-const ModalChapterList = ({ isShow, toggleModal, chapters }: ModalChapterListProps) => {
+const ModalChapters = ({ isShow, toggleModal, chapters }: ModalChaptersProps) => {
   const { query } = useRouter();
-  const { id } = query;
+  const { id, slug } = query;
+  const [history, setHistory] = useState<IComicHistory[]>([]);
+  const currentChapterInHistory = history.find((comic) => comic.slug == slug);
+  useEffect(() => {
+    setHistory(parseJson(localStorage.getItem(LocalStorage.history) || "[]"));
+  }, [id]);
   return (
     <Modal
       isOpen={isShow}
@@ -34,24 +42,17 @@ const ModalChapterList = ({ isShow, toggleModal, chapters }: ModalChapterListPro
         </button>
       </form>
       <div className="border-b flex-wrap border-t border-[#e5e5e5] px-5 pt-3 pb-4 flex gap-2 max-h-[calc(100vh-200px)] overflow-y-auto">
-        {/* <Link href="/">
-          <a className="text-[#fd0405] border-[#fd0405] px-[5px] py-1 w-[105px] border font-light block text-center h-8">
-            Chapter 120
-          </a>
-        </Link> */}
-        {/* <Link href="/">
-          <a className="text-[#c0c0c0] border-graydd px-[5px] py-1 w-[105px] border font-light block text-center h-8">
-            Chapter 120
-          </a>
-        </Link> */}
         {chapters.map((chapter) => {
-          const active = chapter.id === id ? "text-[#fd0405] border-[#fd0405]" : "border-graydd";
+          const current = chapter.id === id ? "text-[#fd0405] border-[#fd0405]" : "border-graydd";
+          const hasSeen =
+            currentChapterInHistory?.chapters?.includes(chapter.id) && "text-[#c0c0c0]";
           return (
             <Link href={`${PATH.comic}/${chapter.href}`} key={chapter.id}>
               <a
                 className={classNames(
                   `px-[5px] py-1 w-[105px] border font-light block text-center h-8`,
-                  active
+                  current,
+                  hasSeen
                 )}
                 onClick={toggleModal}
               >
@@ -73,4 +74,4 @@ const ModalChapterList = ({ isShow, toggleModal, chapters }: ModalChapterListPro
   );
 };
 
-export default ModalChapterList;
+export default ModalChapters;
