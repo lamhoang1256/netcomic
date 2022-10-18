@@ -1,4 +1,4 @@
-import { IComment, IDetailsChapter, IImageReading, ILinkChapter } from "@types";
+import { IComicHistory, IComment, IDetailsChapter, IImageReading, ILinkChapter } from "@types";
 import axios from "axios";
 import { Button } from "components/button";
 import {
@@ -20,6 +20,7 @@ import { GetStaticPaths, GetStaticPropsContext } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 import classNames from "utils/classNames";
 
 interface ReadComicPageProps {
@@ -31,7 +32,42 @@ interface ReadComicPageProps {
 
 const ReadComicPage = ({ imageUrls, chapters, info, comments }: ReadComicPageProps) => {
   const { query } = useRouter();
+  const { slug, chapter, id } = query;
   const { isShow, toggleModal } = useModal();
+  const handleSaveHistory = async () => {
+    const history: IComicHistory[] = JSON.parse(localStorage.getItem("history") || "[]");
+    const hasSeen = history.some((item) => item.slug === slug);
+    if (!hasSeen) {
+      const { data } = (await axios.get(`${server}/api/comic/${slug}`)).data;
+      const historyComic = {
+        id: id as string,
+        slug: slug as string,
+        title: info.title,
+        chapterName: info.chapter,
+        posterUrl: data.info.posterUrl,
+        chapterUrl: `${slug}/${chapter}/${id}`,
+        chapters: [id as string],
+      };
+      localStorage.setItem("history", JSON.stringify([historyComic, ...history]));
+      return;
+    }
+    let existComic = history.find((item: IComicHistory) => item.slug === slug);
+    if (!existComic) return;
+    const hasRead = existComic.chapters.includes(id as string);
+    const historyComic = {
+      ...existComic,
+      chapterName: info.chapter,
+      chapters: hasRead ? existComic.chapters : [...existComic.chapters, id as string],
+      id: id as string,
+      chapterUrl: `${slug}/${chapter}/${id}`,
+    };
+    const newHistory = history.filter((item: IComicHistory) => item.slug !== slug);
+    localStorage.setItem("history", JSON.stringify([historyComic, ...newHistory]));
+  };
+  useEffect(() => {
+    handleSaveHistory();
+  }, [slug, chapter, id]);
+
   const currentChapter = chapters.findIndex((chapter) => chapter.id === query.id);
   return (
     <>

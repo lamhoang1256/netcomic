@@ -13,6 +13,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { toast } from "react-toastify";
 import useStore from "store/store";
 
 interface ComicDetailsPageProps {
@@ -35,12 +36,14 @@ const ComicDetailsPage = ({ info, chapters }: ComicDetailsPageProps) => {
       const newFollows = follows.filter((comic) => comic !== slug);
       setFollow(newFollows);
       await updateDoc(colRef, { follows: newFollows });
+      toast.success("Đã hủy theo dõi truyện này!");
       return;
     }
     if (!hasFollowed) {
       const newFollows = [slug as string, ...follows];
       setFollow(newFollows);
       await updateDoc(colRef, { follows: newFollows });
+      toast.success("Đã theo dõi truyện này!");
       return;
     }
   };

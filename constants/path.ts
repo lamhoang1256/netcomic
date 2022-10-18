@@ -10,6 +10,7 @@ export const PATH = {
   profile: "/profile",
   comment: "/comment",
   follow: "/follow",
+  history: "/history",
   changePassword: "/change-password",
   netTruyen: process.env.NEXT_PUBLIC_NHATTRUYEN as string,
   netTruyenComic: `${process.env.NEXT_PUBLIC_NHATTRUYEN}/truyen-tranh`,

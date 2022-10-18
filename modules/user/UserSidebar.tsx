@@ -27,6 +27,11 @@ const sidebarLinks = [
     path: PATH.follow,
     display: "Truyện theo dõi",
   },
+  {
+    icon: "/icon-password.png",
+    path: PATH.history,
+    display: "Lịch sử xem",
+  },
 ];
 
 const UserSidebar = () => {

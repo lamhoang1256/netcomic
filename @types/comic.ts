@@ -53,3 +53,12 @@ export interface IComicChartRanking {
   newestChapter: string;
   newestHref: string;
 }
+export interface IComicHistory {
+  id: string;
+  slug: string;
+  title: string;
+  chapterName: string;
+  posterUrl: string;
+  chapterUrl: string;
+  chapters: string[];
+}

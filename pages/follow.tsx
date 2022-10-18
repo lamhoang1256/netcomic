@@ -11,6 +11,7 @@ import { db } from "libs/firebase/firebase-config";
 import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import useStore from "store/store";
 
 const FollowPage = () => {
@@ -18,11 +19,11 @@ const FollowPage = () => {
   const [loading, setLoading] = useState(true);
   const [comics, setComics] = useState<IComicFollow[]>([]);
   const handleRemoveFollow = async (slug: string) => {
-    console.log("slug: ", slug);
     const colRef = doc(db, "users", currentUser?.uid);
     const newFollows = follows.filter((comic) => comic !== slug);
     setFollow(newFollows);
     await updateDoc(colRef, { follows: newFollows });
+    toast.success("Đã hủy theo dõi truyện này!");
   };
   useEffect(() => {
     const fetchFollow = async () => {
