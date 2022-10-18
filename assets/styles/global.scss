@@ -21,7 +21,7 @@
 }
 @layer utilities {
   .layout-sidebar {
-    @apply -translate-x-full z-[300] w-full max-w-[300px] fixed top-0 left-0 bottom-0 lg:translate-x-0 p-4 lg:p-0 transition-all duration-300 lg:static overflow-auto;
+    @apply -translate-x-full z-[300] bg-[#f8fafc] lg:bg-transparent w-full max-w-[300px] fixed top-0 left-0 bottom-0 lg:translate-x-0 p-4 lg:p-0 transition-all duration-300 lg:static overflow-auto;
   }
 }
 .layout-container {

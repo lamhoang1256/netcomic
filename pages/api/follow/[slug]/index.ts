@@ -1,13 +1,14 @@
-import { IComicFollow } from "@types";
+import { IComic } from "@types";
 import axios from "axios";
 import * as cheerio from "cheerio";
 import { PATH } from "constants/path";
 import { STATUS } from "constants/status";
 import type { NextApiRequest, NextApiResponse } from "next";
+import { formatView } from "utils";
 import catchAsync from "utils/catchAsync";
 import { ApiError, responseError, responseSuccess } from "utils/response";
 
-const ComicFollowDetailsApi = async (req: NextApiRequest, res: NextApiResponse) => {
+const ComicFollowApi = async (req: NextApiRequest, res: NextApiResponse) => {
   const { method, query } = req;
   const { slug } = query;
   if (method !== "GET") {
@@ -27,7 +28,8 @@ async function crawlComicDetails(url: string) {
   const response = await axios.get(url);
   const html = response.data;
   const $ = cheerio.load(html);
-  let comic: IComicFollow = {} as IComicFollow;
+  let comic: IComic = {} as IComic;
+  comic.chapters = [];
   $("#ctl00_divCenter").each(function (index, element) {
     comic.title = $(element).find(".title-detail").text();
     comic.posterUrl = $(element)
@@ -38,19 +40,26 @@ async function crawlComicDetails(url: string) {
       .find(".col-info .mrb10 a")
       .attr("href")
       ?.replace(`${PATH.netTruyenComic}/`, "") as string;
+    comic.viewCount = formatView(
+      Number($(element).find(".list-info .col-xs-8").last().text().replace(/\./g, ""))
+    );
+    comic.commentCount = formatView(
+      Number($(element).find(".comment-count").last().text().replace(/\./g, ""))
+    );
+    comic.followCount = formatView(
+      Number($(element).find(".follow span b").text().replace(/\./g, ""))
+    );
   });
-  $("#ctl00_divCenter .list-chapter li.row")
-    .first()
-    .each(function (index, element) {
-      comic.idNewChapter = $(element).find(".chapter a").attr("data-id") as string;
-      comic.hrefNewChapter = $(element)
-        .find(".chapter a")
-        .attr("href")
-        ?.replace(`${PATH.netTruyenComic}/`, "") as string;
-      comic.newChapter = $(element).find(".chapter a").text();
-      comic.updatedAt = $(element).find(".col-xs-4").text();
-    });
+  $("#ctl00_divCenter .list-chapter li.row").each(function (index, element) {
+    const href = $(element)
+      .find(".chapter a")
+      .attr("href")
+      ?.replace(`${PATH.netTruyenComic}/`, "") as string;
+    const name = $(element).find(".chapter a").text();
+    const updatedAgo = $(element).find(".col-xs-4").text();
+    comic.chapters.length >= 3 ? comic.chapters : comic.chapters.push({ href, name, updatedAgo });
+  });
   return comic;
 }
 
-export default catchAsync(ComicFollowDetailsApi);
+export default catchAsync(ComicFollowApi);

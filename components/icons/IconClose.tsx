@@ -5,16 +5,12 @@ interface IconCloseProps extends React.SVGProps<SVGSVGElement> {}
 const IconClose = ({ className, ...props }: IconCloseProps) => {
   return (
     <svg
+      viewBox="0 0 1792 1792"
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
       className={classNames("w-6 h-6", className)}
       {...props}
     >
-      <path
-        fillRule="evenodd"
-        d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z"
-        clipRule="evenodd"
-      />
+      <path d="M1490 1322q0 40-28 68l-136 136q-28 28-68 28t-68-28l-294-294-294 294q-28 28-68 28t-68-28l-136-136q-28-28-28-68t28-68l294-294-294-294q-28-28-28-68t28-68l136-136q28-28 68-28t68 28l294 294 294-294q28-28 68-28t68 28l136 136q28 28 28 68t-28 68l-294 294 294 294q28 28 28 68z" />
     </svg>
   );
 };

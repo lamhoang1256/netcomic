@@ -1,6 +1,7 @@
-import { IComicFollow } from "@types";
+import { IComic, IComicHistory } from "@types";
 import axios from "axios";
-import { Image } from "components/image";
+import { IconChat, IconCheck, IconClose, IconEye, IconHeart } from "components/icons";
+import { CustomLink } from "components/link";
 import { LoadingSpinner } from "components/loading";
 import { server } from "configs/server";
 import { PATH } from "constants/path";
@@ -8,8 +9,8 @@ import { doc, updateDoc } from "firebase/firestore";
 import { Template } from "layouts";
 import LayoutUser from "layouts/LayoutUser";
 import { db } from "libs/firebase/firebase-config";
+import { ComicChapters, ComicGrid, ComicImage, ComicTitle } from "modules/comic";
 import Head from "next/head";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import useStore from "store/store";
@@ -17,7 +18,8 @@ import useStore from "store/store";
 const FollowPage = () => {
   const { follows, currentUser, setFollow } = useStore();
   const [loading, setLoading] = useState(true);
-  const [comics, setComics] = useState<IComicFollow[]>([]);
+  const [comics, setComics] = useState<IComic[]>([]);
+  const [history, setHistory] = useState<IComicHistory[]>([]);
   const handleRemoveFollow = async (slug: string) => {
     const colRef = doc(db, "users", currentUser?.uid);
     const newFollows = follows.filter((comic) => comic !== slug);
@@ -25,6 +27,9 @@ const FollowPage = () => {
     await updateDoc(colRef, { follows: newFollows });
     toast.success("Đã hủy theo dõi truyện này!");
   };
+  useEffect(() => {
+    setHistory(JSON.parse(localStorage.getItem("history") || "[]"));
+  }, []);
   useEffect(() => {
     const fetchFollow = async () => {
       setLoading(true);
@@ -52,60 +57,54 @@ const FollowPage = () => {
         >
           {loading && <LoadingSpinner />}
           {!loading && (
-            <div className="overflow-x-auto">
-              <div>
-                <div className="py-3 follow-grid">
-                  <div className="min-w-[180px]">Tên truyện</div>
-                  <div className="min-w-[100px]">Xem gần nhất</div>
-                  <div className="min-w-[100px]">Chap mới nhất</div>
-                </div>
-                {comics.map((comic) => (
-                  <div className="py-2 border-t border-graydd follow-grid" key={comic.slug}>
-                    <div className="min-w-[180px] flex md:items-center gap-x-2">
-                      <Link href={`${PATH.comic}/${comic.slug}`}>
-                        <a className="text-sm font-semibold transition-all duration-200 text-blue29 hover:text-purpleae">
-                          <Image
-                            alt={comic.slug}
-                            src={comic.posterUrl}
-                            className="w-[50px] h-[50px] flex-shrink-0 rounded-sm object-cover object-top"
-                          />
-                        </a>
-                      </Link>
-                      <div>
-                        <Link href={`${PATH.comic}/${comic.slug}`}>
-                          <a className="text-sm font-semibold transition-all duration-200 text-blue29 hover:text-purpleae">
-                            {comic.title}
-                          </a>
-                        </Link>
-                        <div className="flex flex-col items-start mt-1 md:flex-row gap-y-1 gap-x-3">
-                          <button className="text-xs font-semibold text-[#23a903]">Đã đọc</button>
-                          <button
-                            className="text-xs font-semibold text-rede5"
-                            onClick={() => handleRemoveFollow(comic.slug)}
-                          >
-                            Bỏ theo dõi
-                          </button>
+            <ComicGrid className="mt-[10px]">
+              {comics.map((comic) => {
+                const comicInHistory = history.find((h) => h.title === comic.title);
+                return (
+                  <div key={comic.slug}>
+                    <div className="relative overflow-hidden rounded aspect-[2.2/3]">
+                      <div className="absolute top-0 left-0 text-xs right-0 py-[5px] text-white bg-overlay text-center px-1">
+                        {comicInHistory ? `Đọc tiếp ${comicInHistory?.chapterName}` : "Đọc ngay"}
+                      </div>
+                      <CustomLink href={`${PATH.comic}/${comic.slug}`}>
+                        <ComicImage src={comic.posterUrl} alt={comic.slug} />
+                      </CustomLink>
+                      <div className="absolute bottom-0 left-0 text-xs right-0 py-[5px] text-white bg-overlay flex items-center justify-between px-1 gap-x-[2px]">
+                        <div className="flex items-center gap-x-[2px]">
+                          <IconEye />
+                          <span>{comic.viewCount}</span>
+                        </div>
+                        <div className="flex items-center gap-x-[2px]">
+                          <IconChat />
+                          <span>{comic.commentCount}</span>
+                        </div>
+                        <div className="flex items-center gap-x-[2px]">
+                          <IconHeart />
+                          <span>{comic.followCount}</span>
                         </div>
                       </div>
                     </div>
-                    <div className="min-w-[100px] text-xs text-left">
-                      <span className="block whitespace-nowrap">Chapter 1</span>
-                      <span className="block whitespace-nowrap text-[#999] italic">
-                        1 phút trước
-                      </span>
+                    <div className="flex justify-between mt-2 text-[13px]">
+                      <button className="flex items-center text-[#23a903] gap-x-[2px]">
+                        <IconCheck className="!w-3 !h-3" fill="#23a903" />
+                        <span>Đã đọc</span>
+                      </button>
+                      <button
+                        className="flex items-center text-rede5 gap-x-[1px]"
+                        onClick={() => handleRemoveFollow(comic.slug)}
+                      >
+                        <IconClose className="!w-3 !h-3" fill="#e52d27" />
+                        <span>Bỏ theo dõi</span>
+                      </button>
                     </div>
-                    <div className="min-w-[100px] text-xs text-left">
-                      <Link href={`${PATH.comic}/${comic.hrefNewChapter}`}>
-                        <a className="block whitespace-nowrap">{comic.newChapter}</a>
-                      </Link>
-                      <span className="block whitespace-nowrap text-[#999] italic">
-                        {comic.updatedAt}
-                      </span>
-                    </div>
+                    <ComicTitle href={`${PATH.comic}/${comic.slug}`} className="mt-1">
+                      {comic.title}
+                    </ComicTitle>
+                    <ComicChapters chapters={comic.chapters} />
                   </div>
-                ))}
-              </div>
-            </div>
+                );
+              })}
+            </ComicGrid>
           )}
         </Template>
       </LayoutUser>

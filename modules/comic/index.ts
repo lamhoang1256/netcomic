@@ -4,5 +4,16 @@ import ComicHistory from "./ComicHistory";
 import ComicChartRanking from "./ComicChartRanking";
 import ComicGrid from "./ComicGrid";
 import ComicImage from "./parts/ComicImage";
+import ComicTitle from "./parts/ComicTitle";
+import ComicChapters from "./parts/ComicChapters";
 
-export { ComicItem, ComicFollow, ComicHistory, ComicGrid, ComicImage, ComicChartRanking };
+export {
+  ComicItem,
+  ComicFollow,
+  ComicHistory,
+  ComicGrid,
+  ComicImage,
+  ComicChartRanking,
+  ComicTitle,
+  ComicChapters,
+};

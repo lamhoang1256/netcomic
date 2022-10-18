@@ -5,6 +5,11 @@ export interface ILinkChapter {
   updatedAt: string;
   viewCount: string;
 }
+export interface IComicChapters {
+  href: string;
+  name: string;
+  updatedAgo: string;
+}
 export interface IComic {
   slug: string;
   title: string;
@@ -15,11 +20,7 @@ export interface IComic {
   viewCount: string;
   commentCount: string;
   followCount: string;
-  chapters: {
-    href: string;
-    name: string;
-    updatedAgo: string;
-  }[];
+  chapters: IComicChapters[];
 }
 export interface IComicInfo {
   title: string;

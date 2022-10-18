@@ -4,7 +4,7 @@ import { LocalStorage } from "constants/localStorage";
 import { PATH } from "constants/path";
 import { Template } from "layouts";
 import LayoutUser from "layouts/LayoutUser";
-import { ComicGrid, ComicImage } from "modules/comic";
+import { ComicGrid, ComicImage, ComicTitle } from "modules/comic";
 import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -19,7 +19,6 @@ const HistoryPage = () => {
   useEffect(() => {
     setHistory(JSON.parse(localStorage.getItem("history") || "[]"));
   }, []);
-
   return (
     <>
       <Head>
@@ -32,11 +31,15 @@ const HistoryPage = () => {
           title="Lịch sử xem"
           desc='Truyện chưa đọc sẽ hiển thị ở đầu danh sách, nhấn vào "Đã đọc" nếu truyện đọc rồi.'
         >
-          <ComicGrid>
+          <ComicGrid className="mt-4">
             {history?.map((comic: IComicHistory) => (
               <div key={comic.slug}>
                 <div className="relative overflow-hidden rounded aspect-[2.2/3]">
-                  <ComicImage src={comic.posterUrl} alt={comic.slug} />
+                  <Link href={`${PATH.comic}/${comic.slug}`}>
+                    <a>
+                      <ComicImage src={comic.posterUrl} alt={comic.slug} />
+                    </a>
+                  </Link>
                   <div className="absolute bottom-0 left-0 text-xs right-0 py-[5px] text-white bg-overlay flex items-center justify-between md:px-2 gap-x-[2px]">
                     <button
                       onClick={() => handleRemoveHistory(comic.slug)}
@@ -47,11 +50,9 @@ const HistoryPage = () => {
                     </button>
                   </div>
                 </div>
-                <div className="flex-1">
+                <div className="flex-1 mt-1">
                   <Link href={`${PATH.comic}/${comic.slug}`}>
-                    <a className="mt-1 transition-all duration-200 md:text-base line-clamp-2 hover:text-blue29">
-                      {comic.title}
-                    </a>
+                    <ComicTitle>{comic.title}</ComicTitle>
                   </Link>
                   <Link href={`${PATH.comic}/${comic.chapterUrl}`}>
                     <a className="text-[13px] text-[#c0c0c0] mt-[2px] transition-all duration-200 hover:text-blue29 block">

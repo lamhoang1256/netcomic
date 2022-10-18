@@ -1,8 +1,9 @@
-import { IComicInfo, ILinkChapter } from "@types";
+import { IComicHistory, IComicInfo, ILinkChapter } from "@types";
 import axios from "axios";
 import { Button } from "components/button";
 import { Heading } from "components/text";
 import { server } from "configs/server";
+import { LocalStorage, parseJson } from "constants/localStorage";
 import { PATH } from "constants/path";
 import { doc, updateDoc } from "firebase/firestore";
 import LayoutHome from "layouts/LayoutHome";
@@ -12,9 +13,10 @@ import { GetServerSidePropsContext } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import useStore from "store/store";
+import classNames from "utils/classNames";
 
 interface ComicDetailsPageProps {
   info: IComicInfo;
@@ -27,6 +29,9 @@ const ComicDetailsPage = ({ info, chapters }: ComicDetailsPageProps) => {
   const { follows, setFollow, currentUser } = useStore();
   const hasFollowed = follows.some((comic) => comic === slug);
   const [countChapters, setCountChapters] = useState(20);
+  const [history, setHistory] = useState<IComicHistory[]>([]);
+  const currentChapterInHistory = history.find((comic) => comic.slug == slug);
+
   const handleShowAllChapter = () => {
     setCountChapters(chapters.length);
   };
@@ -47,6 +52,9 @@ const ComicDetailsPage = ({ info, chapters }: ComicDetailsPageProps) => {
       return;
     }
   };
+  useEffect(() => {
+    setHistory(parseJson(localStorage.getItem(LocalStorage.history) || "[]"));
+  }, []);
   return (
     <>
       <Head>
@@ -154,7 +162,11 @@ const ComicDetailsPage = ({ info, chapters }: ComicDetailsPageProps) => {
                   <ul className="border border-[#080808] pt-[6px] pr-[6px] pl-[10px] rounded mt-[10px] pb-4">
                     {chapters.slice(0, countChapters).map((chapter) => (
                       <li
-                        className="py-[6px] flex border-b border-dotted border-[#bdbcbc5c]"
+                        className={classNames(
+                          "py-[6px] flex border-b border-dotted border-[#bdbcbc5c]",
+                          currentChapterInHistory?.chapters?.includes(chapter.id) &&
+                            "text-[#c0c0c0]"
+                        )}
                         key={chapter.id}
                       >
                         <Link href={`${PATH.comic}/${chapter.href}`}>

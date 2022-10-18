@@ -22,7 +22,7 @@ const ModalChapters = ({ isShow, toggleModal, chapters }: ModalChaptersProps) =>
   const currentChapterInHistory = history.find((comic) => comic.slug == slug);
   useEffect(() => {
     setHistory(parseJson(localStorage.getItem(LocalStorage.history) || "[]"));
-  }, [id]);
+  }, []);
   return (
     <Modal
       isOpen={isShow}
