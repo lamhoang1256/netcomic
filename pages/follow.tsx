@@ -100,7 +100,7 @@ const FollowPage = () => {
                     <ComicTitle href={`${PATH.comic}/${comic.slug}`} className="mt-1">
                       {comic.title}
                     </ComicTitle>
-                    <ComicChapters chapters={comic.chapters} />
+                    <ComicChapters chapters={comic.chapters} comicInHistory={comicInHistory} />
                   </div>
                 );
               })}

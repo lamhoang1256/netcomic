@@ -6,6 +6,7 @@ export interface ILinkChapter {
   viewCount: string;
 }
 export interface IComicChapters {
+  id: string;
   href: string;
   name: string;
   updatedAgo: string;

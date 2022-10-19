@@ -55,9 +55,12 @@ async function crawlComicDetails(url: string) {
       .find(".chapter a")
       .attr("href")
       ?.replace(`${PATH.netTruyenComic}/`, "") as string;
+    const id = href?.split("/")?.slice(-1)[0];
     const name = $(element).find(".chapter a").text();
     const updatedAgo = $(element).find(".col-xs-4").text();
-    comic.chapters.length >= 3 ? comic.chapters : comic.chapters.push({ href, name, updatedAgo });
+    comic.chapters.length >= 3
+      ? comic.chapters
+      : comic.chapters.push({ id, href, name, updatedAgo });
   });
   return comic;
 }

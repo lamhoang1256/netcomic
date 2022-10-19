@@ -1,7 +1,9 @@
-import { IComic } from "@types";
+import { IComic, IComicHistory } from "@types";
 import { IconChat, IconEye, IconHeart } from "components/icons";
 import { CustomLink } from "components/link";
+import { LocalStorage } from "constants/localStorage";
 import { PATH } from "constants/path";
+import { useEffect, useState } from "react";
 import ComicChapters from "./parts/ComicChapters";
 import ComicImage from "./parts/ComicImage";
 import ComicTitle from "./parts/ComicTitle";
@@ -11,6 +13,12 @@ interface ComicItemProps {
 }
 
 const ComicItem = ({ comic }: ComicItemProps) => {
+  console.log("comic: ", comic);
+  const [history, setHistory] = useState<IComicHistory[]>([]);
+  const comicInHistory = history.find((h) => h.title === comic.title);
+  useEffect(() => {
+    setHistory(JSON.parse(localStorage.getItem("history") || "[]"));
+  }, []);
   return (
     <div>
       <div className="relative overflow-hidden rounded aspect-[2.2/3]">
@@ -32,12 +40,18 @@ const ComicItem = ({ comic }: ComicItemProps) => {
           </div>
         </div>
       </div>
-      <div>
-        <ComicTitle className="my-1" href={`${PATH.comic}/${comic.slug}`}>
-          {comic.title}
-        </ComicTitle>
-        <ComicChapters chapters={comic.chapters} />
-      </div>
+      <ComicTitle className="my-1" href={`${PATH.comic}/${comic.slug}`}>
+        {comic.title}
+      </ComicTitle>
+      <ComicChapters chapters={comic.chapters} comicInHistory={comicInHistory} />
+      {/* {comic.chapters?.map((chapter, index) => (
+        <div className="flex items-center justify-between mt-[2px]" key={index}>
+          <ComicTitle className="!text-[13px]" href={`${PATH.comic}/${chapter.href}`}>
+            {chapter.name}
+          </ComicTitle>
+          <span className="text-[11px] text-[#c0c0c0] italic">{chapter.updatedAgo}</span>
+        </div>
+      ))} */}
     </div>
   );
 };

@@ -45,6 +45,7 @@ export function crawlComic(
   const followCount = count.split("  ")[2];
   const newestHref = newestEle.attr("href")?.replace(replaceHref, "") as string;
   let chapters: {
+    id: string;
     name: string;
     updatedAgo: string;
     href: string;
@@ -52,8 +53,9 @@ export function crawlComic(
   node.find(".chapter").each(function (index, element) {
     const name = $(element).find("a").text();
     const href = $(element).find("a").attr("href")?.replace(replaceHref, "") as string;
+    const id = href?.split("/")?.slice(-1)[0];
     const updatedAgo = $(element).find(".time").text();
-    chapters.push({ name, href, updatedAgo });
+    chapters.push({ id, name, href, updatedAgo });
   });
   return {
     slug,
