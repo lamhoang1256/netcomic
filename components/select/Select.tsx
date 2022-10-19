@@ -1,7 +1,7 @@
-import { useState } from "react";
-import SelectLib from "react-tailwindcss-select";
+import { useEffect, useState } from "react";
+import SelectTailwindcss from "react-tailwindcss-select";
 
-interface IOption {
+export interface IOption {
   value: string;
   label: string;
   disabled?: boolean;
@@ -18,16 +18,22 @@ interface SelectProps {
   searchInputPlaceholder?: string;
   noOptionsMessage?: string;
   options: IOption[];
+  defaultValue?: IOption | null;
+  callback?: (value: IOption) => void;
 }
 
-const Select = ({ options, ...props }: SelectProps) => {
-  const [value, setValue] = useState<IOption | null>(null);
+const Select = ({ options, defaultValue = null, callback, ...props }: SelectProps) => {
+  const [value, setValue] = useState<IOption | null>(defaultValue);
   const handleChange = (value: any) => {
     setValue(value);
+    callback && callback(value);
   };
+  useEffect(() => {
+    setValue(defaultValue);
+  }, [defaultValue]);
   return (
     <div className="select">
-      <SelectLib options={options} value={value} onChange={handleChange} {...props} />
+      <SelectTailwindcss options={options} value={value} onChange={handleChange} {...props} />
     </div>
   );
 };

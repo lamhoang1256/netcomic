@@ -18,7 +18,7 @@ const sidebarLinks = [
     display: "Đổi mật khẩu",
   },
   {
-    icon: "/icon-password.png",
+    icon: "/icon-comment.png",
     path: PATH.comment,
     display: "Bình luận của tôi",
   },

@@ -36,9 +36,9 @@ const SignInPage = () => {
         <meta name="description" content="Đăng nhập" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div>
+      <div className="auth">
         <form
-          className="w-full mt-20 mx-auto bg-white rounded-xl p-10 max-w-[580px]"
+          className="w-full z-10 mt-20 mx-auto bg-white rounded-xl p-10 max-w-[580px]"
           onSubmit={(e) => handleSignIn(e)}
           autoComplete="off"
         >

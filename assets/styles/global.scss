@@ -24,6 +24,24 @@
     @apply -translate-x-full z-[300] bg-[#f8fafc] lg:bg-transparent w-full max-w-[300px] fixed top-0 left-0 bottom-0 lg:translate-x-0 p-4 lg:p-0 transition-all duration-300 lg:static overflow-auto;
   }
 }
+.auth {
+  min-height: 100vh;
+  margin: 0px auto;
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+  position: relative;
+  background-image: url("https://youme.vercel.app/images/auth-bg.png");
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0px;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+  }
+}
 .layout-container {
   width: 100%;
   max-width: 1140px;
@@ -81,6 +99,7 @@
   border: 1px solid #00000024;
   padding-top: 2px;
   padding-bottom: 2px;
+  color: #000;
   &:focus {
     box-shadow: none;
     outline: none;

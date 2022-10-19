@@ -3,6 +3,7 @@ import { FormGroup, Label } from "components/form";
 import { Image } from "components/image";
 import { Input } from "components/input";
 import { Select } from "components/select";
+import { IOption } from "components/select/Select";
 import { defaultAvatar } from "constants/image";
 import { updateProfile } from "firebase/auth";
 import { doc, updateDoc } from "firebase/firestore";
@@ -12,7 +13,7 @@ import LayoutUser from "layouts/LayoutUser";
 import { auth, db } from "libs/firebase/firebase-config";
 import useFirebaseImage from "libs/firebase/useFirebaseImage";
 import Head from "next/head";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import useStore from "store/store";
 
@@ -25,11 +26,14 @@ const ProfilePage = () => {
   const { currentUser } = useStore();
   const [values, setValues] = useState({
     fullname: "",
-    gender: "boy",
-    avatar: currentUser?.photoURL || defaultAvatar,
+    gender: { value: "", label: "" },
+    avatar: defaultAvatar,
   });
   const { onChange } = useInputChange(values, setValues);
   const { handleUploadImage } = useFirebaseImage();
+  const handleChangeGender = (option: IOption) => {
+    setValues({ ...values, gender: option });
+  };
   const handleUpdateProfile = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
@@ -55,6 +59,15 @@ const ProfilePage = () => {
       toast.error("Cập nhật ảnh đại diện thất bại!");
     }
   };
+  useEffect(() => {
+    if (!currentUser) return;
+    setValues({
+      fullname: currentUser?.fullname || "",
+      gender: currentUser?.gender || { value: "", label: "" },
+      avatar: currentUser?.photoURL || defaultAvatar,
+    });
+  }, [currentUser]);
+
   return (
     <>
       <Head>
@@ -87,13 +100,18 @@ const ProfilePage = () => {
                 <Input
                   name="fullname"
                   placeholder="Nhập họ và tên"
-                  defaultValue={currentUser?.displayName as string}
+                  defaultValue={currentUser?.fullname as string}
                   onChange={onChange}
                 />
               </FormGroup>
               <FormGroup>
                 <Label htmlFor="gender">Giới tính</Label>
-                <Select options={options} placeholder="Chọn giới tính" />
+                <Select
+                  options={options}
+                  defaultValue={currentUser?.gender}
+                  callback={handleChangeGender}
+                  placeholder="Chọn giới tính"
+                />
               </FormGroup>
               <Button type="submit" className="w-full h-10 mt-1 text-white bg-blue33">
                 Cập nhật

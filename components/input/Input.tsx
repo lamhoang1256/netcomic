@@ -8,7 +8,7 @@ const Input = ({ name, className, ...props }: InputProps) => {
       id={name}
       name={name}
       className={classNames(
-        "px-4 rounded outline-none h-[42px] border border-[#00000024] focus:border focus:border-[#0000008a] shadow-input",
+        "px-4 rounded outline-none h-[42px] border border-[#00000024] focus:border focus:border-[#0000008a] shadow-input disabled:cursor-not-allowed",
         className
       )}
       {...props}

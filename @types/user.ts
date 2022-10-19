@@ -5,4 +5,6 @@ export interface ICurrentUser extends User {
   role?: string;
   status?: string;
   createdAt?: string;
+  fullname?: string;
+  gender?: { value: string; label: string };
 }
