@@ -15,10 +15,13 @@ import { PATH } from "constants/path";
 
 const urlWithoutHttp = PATH.netTruyen.split("http:")[1] as string;
 export function crawlBanner(node: cheerio.Cheerio<cheerio.Element>): IBanner {
-  const slug = node
+  const slugHasId = node
     .find(".slide-caption > h3 > a")
     .attr("href")
     ?.replace(`${PATH.netTruyenComic}/`, "") as string;
+  const slugArray = slugHasId?.split("-");
+  slugArray.pop();
+  const slug = slugArray.join("-");
   const title = node.find(".slide-caption > h3").text().trim();
   const posterUrl = node.find(".lazyOwl").attr("data-src") as string;
   const updatedAgo = node.find(".slide-caption .time").first().text();
@@ -33,7 +36,10 @@ export function crawlComic(
   $: cheerio.CheerioAPI,
   replaceHref = `${PATH.netTruyenComic}/`
 ): IComic {
-  const slug = node.find(".image > a").attr("href")?.replace(replaceHref, "") as string;
+  const slugHasId = node.find(".image > a").attr("href")?.replace(replaceHref, "") as string;
+  const slugArray = slugHasId?.split("-");
+  slugArray.pop();
+  const slug = slugArray.join("-");
   const title = node.find(".jtip").text();
   const posterUrl = node.find(".image > a > img").attr("data-original") as string;
   const updatedAgo = node.find(".comic-item .chapter .time").first().text();
@@ -183,7 +189,10 @@ export function crawlInfoComic(
   const ratingValue = node.find(".mrt5.mrb10 > span > span").first().text();
   const ratingCount = node.find(".mrt5.mrb10 > span > span").last().text();
   const followCount = node.find(".follow span b").text();
-  const description = node.find(".detail-content p").text().trim();
+  const description = node
+    .find(".detail-content p")
+    .text()
+    .replace(/NhatTruyen/g, "NetComic");
   return {
     slug,
     title,

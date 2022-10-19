@@ -31,7 +31,6 @@ const ComicDetailsPage = ({ info, chapters }: ComicDetailsPageProps) => {
   const [countChapters, setCountChapters] = useState(20);
   const [history, setHistory] = useState<IComicHistory[]>([]);
   const currentChapterInHistory = history.find((comic) => comic.slug == slug);
-
   const handleShowAllChapter = () => {
     setCountChapters(chapters.length);
   };

@@ -1,6 +1,6 @@
 import { IComic, IComicHistory } from "@types";
 import axios from "axios";
-import { IconChat, IconCheck, IconClose, IconEye, IconHeart } from "components/icons";
+import { IconCheck, IconClose } from "components/icons";
 import { CustomLink } from "components/link";
 import { LoadingSpinner } from "components/loading";
 import { server } from "configs/server";
@@ -9,7 +9,7 @@ import { doc, updateDoc } from "firebase/firestore";
 import { Template } from "layouts";
 import LayoutUser from "layouts/LayoutUser";
 import { db } from "libs/firebase/firebase-config";
-import { ComicChapters, ComicGrid, ComicImage, ComicTitle } from "modules/comic";
+import { ComicAmount, ComicChapters, ComicGrid, ComicImage, ComicTitle } from "modules/comic";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
@@ -59,30 +59,19 @@ const FollowPage = () => {
           {!loading && (
             <ComicGrid className="mt-[10px]">
               {comics.map((comic) => {
-                const comicInHistory = history.find((h) => h.title === comic.title);
+                const { slug, posterUrl, viewCount, title, followCount, commentCount, chapters } =
+                  comic;
+                const comicInHistory = history.find((h) => h.slug === slug);
                 return (
-                  <div key={comic.slug}>
+                  <div key={slug}>
                     <div className="relative overflow-hidden rounded aspect-[2.2/3]">
                       <div className="absolute top-0 left-0 text-xs right-0 py-[5px] text-white bg-overlay text-center px-1">
                         {comicInHistory ? `Đọc tiếp ${comicInHistory?.chapterName}` : "Đọc ngay"}
                       </div>
-                      <CustomLink href={`${PATH.comic}/${comic.slug}`}>
-                        <ComicImage src={comic.posterUrl} alt={comic.slug} />
+                      <CustomLink href={`${PATH.comic}/${slug}`}>
+                        <ComicImage src={posterUrl} alt={slug} />
                       </CustomLink>
-                      <div className="absolute bottom-0 left-0 text-xs right-0 py-[5px] text-white bg-overlay flex items-center justify-between px-1 gap-x-[2px]">
-                        <div className="flex items-center gap-x-[2px]">
-                          <IconEye />
-                          <span>{comic.viewCount}</span>
-                        </div>
-                        <div className="flex items-center gap-x-[2px]">
-                          <IconChat />
-                          <span>{comic.commentCount}</span>
-                        </div>
-                        <div className="flex items-center gap-x-[2px]">
-                          <IconHeart />
-                          <span>{comic.followCount}</span>
-                        </div>
-                      </div>
+                      <ComicAmount view={viewCount} comment={commentCount} follow={followCount} />
                     </div>
                     <div className="flex justify-between mt-2 text-[13px]">
                       <button className="flex items-center text-[#23a903] gap-x-[2px]">
@@ -91,16 +80,16 @@ const FollowPage = () => {
                       </button>
                       <button
                         className="flex items-center text-rede5 gap-x-[1px]"
-                        onClick={() => handleRemoveFollow(comic.slug)}
+                        onClick={() => handleRemoveFollow(slug)}
                       >
                         <IconClose className="!w-3 !h-3" fill="#e52d27" />
                         <span>Bỏ theo dõi</span>
                       </button>
                     </div>
-                    <ComicTitle href={`${PATH.comic}/${comic.slug}`} className="mt-1">
-                      {comic.title}
+                    <ComicTitle href={`${PATH.comic}/${slug}`} className="mt-1">
+                      {title}
                     </ComicTitle>
-                    <ComicChapters chapters={comic.chapters} comicInHistory={comicInHistory} />
+                    <ComicChapters chapters={chapters} comicInHistory={comicInHistory} />
                   </div>
                 );
               })}

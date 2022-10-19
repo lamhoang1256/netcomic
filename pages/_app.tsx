@@ -28,6 +28,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           const colRef = doc(db, "users", user.uid);
           const data = await getDoc(colRef);
           setFollow(data?.data()?.follows);
+          // setHistory(data?.data()?.history);
         });
       });
     });

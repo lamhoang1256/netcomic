@@ -6,6 +6,7 @@ import ComicGrid from "./ComicGrid";
 import ComicImage from "./parts/ComicImage";
 import ComicTitle from "./parts/ComicTitle";
 import ComicChapters from "./parts/ComicChapters";
+import ComicAmount from "./parts/ComicAmount";
 
 export {
   ComicItem,
@@ -16,4 +17,5 @@ export {
   ComicChartRanking,
   ComicTitle,
   ComicChapters,
+  ComicAmount,
 };
