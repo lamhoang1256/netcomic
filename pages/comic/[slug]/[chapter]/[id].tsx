@@ -13,6 +13,7 @@ import { CustomLink } from "components/link";
 import { ModalChapters } from "components/modal";
 import { server } from "configs/server";
 import { getImage } from "constants/image";
+import { LocalStorage } from "constants/localStorage";
 import { PATH } from "constants/path";
 import useModal from "hooks/useModal";
 import LayoutHome from "layouts/LayoutHome";
@@ -35,12 +36,13 @@ const ReadComicPage = ({ imageUrls, chapters, info, comments }: ReadComicPagePro
   const { query } = useRouter();
   const { slug, chapter, id } = query;
   const { isShow, toggleModal } = useModal();
-  let { history, follows, removeFollow, addFollow, setHistory } = useGlobalStore();
+  let { follows, removeFollow, addFollow, setHistory } = useGlobalStore();
   const hasFollowed = follows.some((comic) => comic === slug);
   const handleToggleFollow = () => {
     hasFollowed ? removeFollow(slug as string) : addFollow(slug as string);
   };
   const handleSaveHistory = () => {
+    let history: IComicHistory[] = JSON.parse(localStorage.getItem(LocalStorage.history) || "[]");
     let comic: IComicHistory = {} as IComicHistory;
     let existComic = history.find((comic) => comic.slug === slug);
     comic.id = id as string;
@@ -86,7 +88,7 @@ const ReadComicPage = ({ imageUrls, chapters, info, comments }: ReadComicPagePro
             <CustomLink href={PATH.home}>
               <IconHome fill="#d9534f" />
             </CustomLink>
-            <CustomLink href={PATH.home}>
+            <CustomLink href={`${PATH.comic}/${slug}`}>
               <IconList fill="#d9534f" />
             </CustomLink>
             <div className="flex items-center flex-grow w-1/3 md:flex-grow-0 gap-x-1">

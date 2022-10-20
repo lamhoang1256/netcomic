@@ -53,7 +53,13 @@ const FollowPage = () => {
                   <div key={slug}>
                     <div className="relative overflow-hidden rounded aspect-[2.2/3]">
                       <div className="absolute top-0 left-0 text-xs right-0 py-[5px] text-white bg-overlay text-center px-1">
-                        {comicInHistory ? `Đọc tiếp ${comicInHistory?.chapterName}` : "Đọc ngay"}
+                        {comicInHistory ? (
+                          <CustomLink href={`${PATH.comic}/${comicInHistory.chapterUrl}`}>
+                            Đọc tiếp {comicInHistory?.chapterName}
+                          </CustomLink>
+                        ) : (
+                          <CustomLink href={`${PATH.comic}/${slug}`}>Đọc ngay</CustomLink>
+                        )}
                       </div>
                       <CustomLink href={`${PATH.comic}/${slug}`}>
                         <ComicImage src={posterUrl} alt={slug} />
