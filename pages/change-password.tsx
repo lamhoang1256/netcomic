@@ -1,3 +1,4 @@
+import { ProtectedRoute } from "components/auth";
 import { Button } from "components/button";
 import { FormGroup, Label } from "components/form";
 import { InputPassword } from "components/input";
@@ -39,7 +40,7 @@ const ChangePasswordPage = () => {
   };
 
   return (
-    <>
+    <ProtectedRoute>
       <Head>
         <title>Đổi mật khẩu - NetComic</title>
         <meta name="description" content="Đổi mật khẩu - NetComic" />
@@ -85,7 +86,7 @@ const ChangePasswordPage = () => {
           </form>
         </Template>
       </LayoutUser>
-    </>
+    </ProtectedRoute>
   );
 };
 

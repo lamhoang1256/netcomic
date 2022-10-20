@@ -12,6 +12,7 @@ export const PATH = {
   follow: "/follow",
   history: "/history",
   changePassword: "/change-password",
+  pageNotFound: "/404",
   netTruyen: process.env.NEXT_PUBLIC_NHATTRUYEN as string,
   netTruyenComic: `${process.env.NEXT_PUBLIC_NHATTRUYEN}/truyen-tranh`,
   netTruyenSearch: `${process.env.NEXT_PUBLIC_NHATTRUYEN}/tim-truyen`,

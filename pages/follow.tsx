@@ -1,5 +1,6 @@
 import { IComic } from "@types";
 import axios from "axios";
+import { ProtectedRoute } from "components/auth";
 import { IconCheck, IconClose } from "components/icons";
 import { CustomLink } from "components/link";
 import { LoadingSpinner } from "components/loading";
@@ -30,7 +31,7 @@ const FollowPage = () => {
     fetchFollow();
   }, [follows]);
   return (
-    <>
+    <ProtectedRoute>
       <Head>
         <title>Truyện đang theo dõi - NetComic</title>
         <meta name="description" content="Truyện đang theo dõi - NetComic" />
@@ -83,7 +84,7 @@ const FollowPage = () => {
           )}
         </Template>
       </LayoutUser>
-    </>
+    </ProtectedRoute>
   );
 };
 

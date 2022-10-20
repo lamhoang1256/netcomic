@@ -15,6 +15,8 @@ interface IGlobalStore {
   addFollow: (slug: string) => void;
   removeFollow: (slug: string) => void;
   setHistory: (comics: IComicHistory[]) => void;
+  loading: boolean;
+  setLoading: (newLoading: boolean) => void;
 }
 
 const useGlobalStore = create<IGlobalStore>()(
@@ -48,6 +50,8 @@ const useGlobalStore = create<IGlobalStore>()(
       set(() => ({ history: comics }));
     },
     setCurrentUser: (user: ICurrentUser) => set(() => ({ currentUser: user })),
+    loading: true,
+    setLoading: (newLoading: boolean) => set(() => ({ loading: newLoading })),
   }))
 );
 

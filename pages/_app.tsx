@@ -17,10 +17,11 @@ Modal.defaultStyles = {
 };
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const { setCurrentUser, setFollow, setHistory } = useGlobalStore();
+  const { setCurrentUser, setFollow, setHistory, setLoading } = useGlobalStore();
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      if (!user) return setCurrentUser({} as ICurrentUser);
+      if (!user) return;
+      setLoading(true);
       const docRef = query(collection(db, "users"), where("email", "==", user.email));
       onSnapshot(docRef, (snapshot) => {
         snapshot.forEach(async (document) => {
@@ -30,9 +31,10 @@ function MyApp({ Component, pageProps }: AppProps) {
           setFollow(data?.data()?.follows);
         });
       });
+      setLoading(false);
     });
     setHistory(JSON.parse(localStorage.getItem("history") || "[]"));
-  }, [setCurrentUser, setHistory, setFollow]);
+  }, [setCurrentUser, setLoading, setHistory, setFollow]);
 
   return (
     <>

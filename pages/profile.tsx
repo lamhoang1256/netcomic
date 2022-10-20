@@ -1,3 +1,4 @@
+import { ProtectedRoute } from "components/auth";
 import { Button } from "components/button";
 import { FormGroup, Label } from "components/form";
 import { Image } from "components/image";
@@ -70,7 +71,7 @@ const ProfilePage = () => {
   }, [currentUser]);
 
   return (
-    <>
+    <ProtectedRoute>
       <Head>
         <title>Tài khoản</title>
         <meta name="description" content="Tài khoản" />
@@ -142,7 +143,7 @@ const ProfilePage = () => {
           </form>
         </Template>
       </LayoutUser>
-    </>
+    </ProtectedRoute>
   );
 };
 

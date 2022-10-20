@@ -1,6 +1,4 @@
-import { Button } from "components/button";
-import { FormGroup, Label } from "components/form";
-import { InputPassword } from "components/input";
+import { ProtectedRoute } from "components/auth";
 import { Template } from "layouts";
 import LayoutUser from "layouts/LayoutUser";
 import Head from "next/head";
@@ -9,7 +7,7 @@ interface CommentPageProps {}
 
 const CommentPage = ({}: CommentPageProps) => {
   return (
-    <>
+    <ProtectedRoute>
       <Head>
         <title>Bình luận của tôi - NetComic</title>
         <meta name="description" content="Bình luận của tôi - NetComic" />
@@ -20,7 +18,7 @@ const CommentPage = ({}: CommentPageProps) => {
           Bình luận của tôi
         </Template>
       </LayoutUser>
-    </>
+    </ProtectedRoute>
   );
 };
 

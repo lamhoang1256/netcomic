@@ -1,3 +1,4 @@
+import { CheckLoggedIn } from "components/auth";
 import { Button } from "components/button";
 import { FormGroup, Label } from "components/form";
 import { IconFacebook, IconGoogle } from "components/icons";
@@ -30,7 +31,7 @@ const SignInPage = () => {
     }
   };
   return (
-    <>
+    <CheckLoggedIn>
       <Head>
         <title>Đăng nhập</title>
         <meta name="description" content="Đăng nhập" />
@@ -78,7 +79,7 @@ const SignInPage = () => {
           </div>
         </form>
       </div>
-    </>
+    </CheckLoggedIn>
   );
 };
 
