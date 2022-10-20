@@ -15,7 +15,7 @@ import useFirebaseImage from "libs/firebase/useFirebaseImage";
 import Head from "next/head";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import useGlobalStore from "store/store";
+import useGlobalStore from "store/global-store";
 
 const options = [
   { value: "boy", label: "Nam" },

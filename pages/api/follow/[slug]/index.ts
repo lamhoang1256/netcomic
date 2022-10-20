@@ -36,10 +36,13 @@ async function crawlComicDetails(url: string) {
       .find(".col-image img")
       .attr("src")
       ?.replace(urlWithoutHttp, PATH.netTruyen) as string;
-    comic.slug = $(element)
+    const slugHasId = $(element)
       .find(".col-info .mrb10 a")
       .attr("href")
       ?.replace(`${PATH.netTruyenComic}/`, "") as string;
+    const slugArray = slugHasId?.split("-");
+    slugArray.pop();
+    comic.slug = slugArray.join("-");
     comic.viewCount = formatView(
       Number($(element).find(".list-info .col-xs-8").last().text().replace(/\./g, ""))
     );

@@ -1,21 +1,17 @@
-import { IComicHistory, IComicInfo, ILinkChapter } from "@types";
+import { IComicInfo, ILinkChapter } from "@types";
 import axios from "axios";
 import { Button } from "components/button";
 import { Heading } from "components/text";
 import { server } from "configs/server";
-import { LocalStorage, parseJson } from "constants/localStorage";
 import { PATH } from "constants/path";
-import { doc, updateDoc } from "firebase/firestore";
 import LayoutHome from "layouts/LayoutHome";
-import { db } from "libs/firebase/firebase-config";
 import { ComicChartRanking } from "modules/comic";
 import { GetServerSidePropsContext } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
-import useGlobalStore from "store/store";
+import { useState } from "react";
+import useGlobalStore from "store/global-store";
 import classNames from "utils/classNames";
 
 interface ComicDetailsPageProps {
@@ -26,35 +22,16 @@ interface ComicDetailsPageProps {
 const ComicDetailsPage = ({ info, chapters }: ComicDetailsPageProps) => {
   const router = useRouter();
   const { slug } = router.query;
-  const { follows, setFollow, currentUser } = useGlobalStore();
+  const { history, follows, addFollow, removeFollow } = useGlobalStore();
   const hasFollowed = follows.some((comic) => comic === slug);
   const [countChapters, setCountChapters] = useState(20);
-  const [history, setHistory] = useState<IComicHistory[]>([]);
   const currentChapterInHistory = history.find((comic) => comic.slug == slug);
   const handleShowAllChapter = () => {
     setCountChapters(chapters.length);
   };
-  const handleToggleFollow = async () => {
-    if (!currentUser) return;
-    const colRef = doc(db, "users", currentUser?.uid);
-    if (hasFollowed) {
-      const newFollows = follows.filter((comic) => comic !== slug);
-      setFollow(newFollows);
-      await updateDoc(colRef, { follows: newFollows });
-      toast.success("Đã hủy theo dõi truyện này!");
-      return;
-    }
-    if (!hasFollowed) {
-      const newFollows = [slug as string, ...follows];
-      setFollow(newFollows);
-      await updateDoc(colRef, { follows: newFollows });
-      toast.success("Đã theo dõi truyện này!");
-      return;
-    }
+  const handleToggleFollow = () => {
+    hasFollowed ? removeFollow(slug as string) : addFollow(slug as string);
   };
-  useEffect(() => {
-    setHistory(parseJson(localStorage.getItem(LocalStorage.history) || "[]"));
-  }, []);
   return (
     <>
       <Head>

@@ -8,7 +8,7 @@ import { ComicGrid, ComicImage, ComicTitle } from "modules/comic";
 import Head from "next/head";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
-import useGlobalStore from "store/store";
+import useGlobalStore from "store/global-store";
 
 const HistoryPage = () => {
   const { history, setHistory } = useGlobalStore();

@@ -8,7 +8,7 @@ import {
 import { useState } from "react";
 import { userRole } from "constants/global";
 import { toast } from "react-toastify";
-import useGlobalStore from "store/store";
+import useGlobalStore from "store/global-store";
 
 export default function useFirebaseImage(imageName?: string, callback?: () => void) {
   const { currentUser } = useGlobalStore();

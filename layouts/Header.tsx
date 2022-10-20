@@ -10,7 +10,7 @@ import { auth } from "libs/firebase/firebase-config";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
-import useGlobalStore from "store/store";
+import useGlobalStore from "store/global-store";
 import { createUsernameFromEmail } from "utils";
 
 const stylesPopoverLink =

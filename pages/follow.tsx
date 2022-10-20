@@ -13,23 +13,12 @@ import { ComicAmount, ComicChapters, ComicGrid, ComicImage, ComicTitle } from "m
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import useGlobalStore from "store/store";
+import useGlobalStore from "store/global-store";
 
 const FollowPage = () => {
-  const { follows, currentUser, setFollow } = useGlobalStore();
+  const { history, follows, removeFollow } = useGlobalStore();
   const [loading, setLoading] = useState(true);
   const [comics, setComics] = useState<IComic[]>([]);
-  const [history, setHistory] = useState<IComicHistory[]>([]);
-  const handleRemoveFollow = async (slug: string) => {
-    const colRef = doc(db, "users", currentUser?.uid);
-    const newFollows = follows.filter((comic) => comic !== slug);
-    setFollow(newFollows);
-    await updateDoc(colRef, { follows: newFollows });
-    toast.success("Đã hủy theo dõi truyện này!");
-  };
-  useEffect(() => {
-    setHistory(JSON.parse(localStorage.getItem("history") || "[]"));
-  }, []);
   useEffect(() => {
     const fetchFollow = async () => {
       setLoading(true);
@@ -80,7 +69,7 @@ const FollowPage = () => {
                       </button>
                       <button
                         className="flex items-center text-rede5 gap-x-[1px]"
-                        onClick={() => handleRemoveFollow(slug)}
+                        onClick={() => removeFollow(slug)}
                       >
                         <IconClose className="!w-3 !h-3" fill="#e52d27" />
                         <span>Bỏ theo dõi</span>

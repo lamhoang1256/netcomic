@@ -3,7 +3,7 @@ import { defaultAvatar } from "constants/image";
 import { PATH } from "constants/path";
 import { Sidebar } from "layouts";
 import Link from "next/link";
-import useGlobalStore from "store/store";
+import useGlobalStore from "store/global-store";
 import { createUsernameFromEmail } from "utils";
 
 const sidebarLinks = [

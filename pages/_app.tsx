@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useEffect } from "react";
 import { collection, doc, getDoc, onSnapshot, query, where } from "firebase/firestore";
 import { auth, db } from "libs/firebase/firebase-config";
-import useGlobalStore from "store/store";
+import useGlobalStore from "store/global-store";
 import { onAuthStateChanged } from "firebase/auth";
 import { ICurrentUser } from "@types";
 
