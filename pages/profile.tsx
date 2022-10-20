@@ -37,7 +37,8 @@ const ProfilePage = () => {
   const handleUpdateProfile = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const colRef = doc(db, "users", currentUser?.uid);
+      if (!currentUser) return;
+      const colRef = doc(db, "users", currentUser.uid);
       await updateDoc(colRef, { ...values });
       toast.success("Cập nhật thông tin thành công!");
     } catch (error) {
@@ -47,7 +48,7 @@ const ProfilePage = () => {
   const handleUpdateAvatar = async (e: ChangeEvent<HTMLInputElement>) => {
     try {
       const newAvatar = await handleUploadImage(e.target.files?.[0]);
-      if (!auth.currentUser) return;
+      if (!currentUser || !auth.currentUser) return;
       const colRef = doc(db, "users", currentUser?.uid);
       await updateProfile(auth.currentUser, {
         photoURL: newAvatar,
