@@ -1,35 +1,32 @@
-import { IComic, IComicHistory } from "@types";
+import { IComic } from "@types";
 import axios from "axios";
 import { IconCheck, IconClose } from "components/icons";
 import { CustomLink } from "components/link";
 import { LoadingSpinner } from "components/loading";
 import { server } from "configs/server";
 import { PATH } from "constants/path";
-import { doc, updateDoc } from "firebase/firestore";
 import { Template } from "layouts";
 import LayoutUser from "layouts/LayoutUser";
-import { db } from "libs/firebase/firebase-config";
 import { ComicAmount, ComicChapters, ComicGrid, ComicImage, ComicTitle } from "modules/comic";
 import Head from "next/head";
 import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
 import useGlobalStore from "store/global-store";
 
 const FollowPage = () => {
   const { history, follows, removeFollow } = useGlobalStore();
   const [loading, setLoading] = useState(true);
   const [comics, setComics] = useState<IComic[]>([]);
+  const fetchFollow = async () => {
+    setLoading(true);
+    const comics = await Promise.all(
+      follows.map(
+        async (follow: string) => (await axios.get(`${server}/api/follow/${follow}`)).data.data
+      )
+    );
+    setComics(comics);
+    setLoading(false);
+  };
   useEffect(() => {
-    const fetchFollow = async () => {
-      setLoading(true);
-      const comics = await Promise.all(
-        follows.map(
-          async (follow: string) => (await axios.get(`${server}/api/follow/${follow}`)).data.data
-        )
-      );
-      setComics(comics);
-      setLoading(false);
-    };
     fetchFollow();
   }, [follows]);
   return (

@@ -9,17 +9,16 @@ import {
   IconHome,
   IconList,
 } from "components/icons";
+import { CustomLink } from "components/link";
 import { ModalChapters } from "components/modal";
 import { server } from "configs/server";
 import { getImage } from "constants/image";
-import { LocalStorage } from "constants/localStorage";
 import { PATH } from "constants/path";
 import useModal from "hooks/useModal";
 import LayoutHome from "layouts/LayoutHome";
 import { ComicImage } from "modules/comic";
 import { GetStaticPaths, GetStaticPropsContext } from "next";
 import Head from "next/head";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import useGlobalStore from "store/global-store";
@@ -36,7 +35,11 @@ const ReadComicPage = ({ imageUrls, chapters, info, comments }: ReadComicPagePro
   const { query } = useRouter();
   const { slug, chapter, id } = query;
   const { isShow, toggleModal } = useModal();
-  let { history, setHistory } = useGlobalStore();
+  let { history, follows, removeFollow, addFollow, setHistory } = useGlobalStore();
+  const hasFollowed = follows.some((comic) => comic === slug);
+  const handleToggleFollow = () => {
+    hasFollowed ? removeFollow(slug as string) : addFollow(slug as string);
+  };
   const handleSaveHistory = () => {
     let comic: IComicHistory = {} as IComicHistory;
     let existComic = history.find((comic) => comic.slug === slug);
@@ -80,28 +83,23 @@ const ReadComicPage = ({ imageUrls, chapters, info, comments }: ReadComicPagePro
             <span className="block mt-[6px] italic text-gray8a">{info.updatedAt}</span>
           </div>
           <div className="flex items-center justify-center pb-4 gap-x-3">
-            <Link href={PATH.home}>
-              <a>
-                <IconHome fill="#d9534f" />
-              </a>
-            </Link>
-            <Link href={PATH.home}>
-              <a>
-                <IconList fill="#d9534f" />
-              </a>
-            </Link>
+            <CustomLink href={PATH.home}>
+              <IconHome fill="#d9534f" />
+            </CustomLink>
+            <CustomLink href={PATH.home}>
+              <IconList fill="#d9534f" />
+            </CustomLink>
             <div className="flex items-center flex-grow w-1/3 md:flex-grow-0 gap-x-1">
-              <Link href={`${PATH.comic}/${chapters[currentChapter + 1]?.href}`}>
-                <a
-                  className={classNames(
-                    "w-[34px] h-[34px] flex items-center justify-center rounded-l",
-                    !chapters[currentChapter + 1] && "pointer-events-none",
-                    currentChapter === chapters.length - 1 ? "bg-black opacity-30 " : "bg-[#d9534f]"
-                  )}
-                >
-                  <IconChevronLeft fill="#fff" />
-                </a>
-              </Link>
+              <CustomLink
+                href={`${PATH.comic}/${chapters[currentChapter + 1]?.href}`}
+                className={classNames(
+                  "w-[34px] h-[34px] flex items-center justify-center rounded-l",
+                  !chapters[currentChapter + 1] && "pointer-events-none",
+                  currentChapter === chapters.length - 1 ? "bg-black opacity-30 " : "bg-[#d9534f]"
+                )}
+              >
+                <IconChevronLeft fill="#fff" />
+              </CustomLink>
               <div
                 onClick={toggleModal}
                 className="h-9 cursor-pointer px-2 rounded-sm flex items-center justify-between border border-[#ccc] flex-grow"
@@ -109,21 +107,23 @@ const ReadComicPage = ({ imageUrls, chapters, info, comments }: ReadComicPagePro
                 <span>{info?.chapter}</span>
                 <IconDown />
               </div>
-              <Link href={`${PATH.comic}/${chapters[currentChapter - 1]?.href}`}>
-                <a
-                  className={classNames(
-                    "w-[34px] h-[34px] flex items-center justify-center rounded-r",
-                    !chapters[currentChapter - 1] && "pointer-events-none",
-                    currentChapter === 0 ? "bg-black opacity-30 " : "bg-[#d9534f]"
-                  )}
-                >
-                  <IconChevronRight fill="#fff" />
-                </a>
-              </Link>
+              <CustomLink
+                href={`${PATH.comic}/${chapters[currentChapter - 1]?.href}`}
+                className={classNames(
+                  "w-[34px] h-[34px] flex items-center justify-center rounded-r",
+                  !chapters[currentChapter - 1] && "pointer-events-none",
+                  currentChapter === 0 ? "bg-black opacity-30 " : "bg-[#d9534f]"
+                )}
+              >
+                <IconChevronRight fill="#fff" />
+              </CustomLink>
             </div>
-            <Button className="bg-[#5cb85c] flex items-center gap-x-1 text-white">
+            <Button
+              className="bg-[#5cb85c] flex items-center gap-x-1 text-white"
+              onClick={handleToggleFollow}
+            >
               <IconHeart className="w-[18px] h-[18px]" />
-              <span className="hidden md:block">Theo dõi</span>
+              <span className="hidden md:block">{hasFollowed ? "Đã theo dõi" : "Theo dõi"}</span>
             </Button>
           </div>
           <ModalChapters isShow={isShow} toggleModal={toggleModal} chapters={chapters} />
