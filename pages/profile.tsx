@@ -15,7 +15,7 @@ import useFirebaseImage from "libs/firebase/useFirebaseImage";
 import Head from "next/head";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import useStore from "store/store";
+import useGlobalStore from "store/store";
 
 const options = [
   { value: "boy", label: "Nam" },
@@ -23,7 +23,7 @@ const options = [
 ];
 
 const ProfilePage = () => {
-  const { currentUser } = useStore();
+  const { currentUser } = useGlobalStore();
   const [values, setValues] = useState({
     fullname: "",
     gender: { value: "", label: "" },

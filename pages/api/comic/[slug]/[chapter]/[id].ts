@@ -31,6 +31,7 @@ const getDetailsChapter = async (url: string) => {
   let info = {} as IDetailsChapter;
   let comments: IComment[] = [];
   let chapters: ILinkChapter[] = [];
+  info.posterUrl = $('meta[itemprop="image"]').attr("content") as string;
   $(".reading .container .top")
     .first()
     .each(function (index, element) {

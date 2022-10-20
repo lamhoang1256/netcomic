@@ -13,10 +13,10 @@ import { ComicAmount, ComicChapters, ComicGrid, ComicImage, ComicTitle } from "m
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import useStore from "store/store";
+import useGlobalStore from "store/store";
 
 const FollowPage = () => {
-  const { follows, currentUser, setFollow } = useStore();
+  const { follows, currentUser, setFollow } = useGlobalStore();
   const [loading, setLoading] = useState(true);
   const [comics, setComics] = useState<IComic[]>([]);
   const [history, setHistory] = useState<IComicHistory[]>([]);

@@ -1,26 +1,31 @@
-import { ICurrentUser } from "@types";
+import { IComicHistory, ICurrentUser } from "@types";
+import { LocalStorage } from "constants/localStorage";
 import create from "zustand";
+import { devtools } from "zustand/middleware";
 
-interface Stored {
-  currentUser: ICurrentUser;
+interface IGlobalStore {
+  currentUser: ICurrentUser | null;
   setCurrentUser: (user: ICurrentUser) => void;
   follows: string[];
-  history: string[];
-  loading: boolean;
+  history: IComicHistory[];
   setFollow: (comics: string[]) => void;
-  setHistory: (comics: string[]) => void;
-  setLoading: (newLoading: boolean) => void;
+  setHistory: (comics: IComicHistory[]) => void;
 }
 
-const useStore = create<Stored>((set) => ({
-  currentUser: {} as ICurrentUser,
-  follows: [],
-  history: [],
-  loading: false,
-  setFollow: (comics: string[]) => set(() => ({ follows: comics })),
-  setHistory: (comics: string[]) => set(() => ({ follows: comics })),
-  setCurrentUser: (user: ICurrentUser) => set(() => ({ currentUser: user })),
-  setLoading: (newLoading: boolean) => set(() => ({ loading: newLoading })),
-}));
+const useGlobalStore = create<IGlobalStore>()(
+  devtools((set) => ({
+    currentUser: null,
+    follows: [],
+    history: [],
+    setFollow: async (comics: string[]) => {
+      set(() => ({ follows: comics }));
+    },
+    setHistory: (comics: IComicHistory[]) => {
+      localStorage.setItem(LocalStorage.history, JSON.stringify(comics));
+      set(() => ({ history: comics }));
+    },
+    setCurrentUser: (user: ICurrentUser) => set(() => ({ currentUser: user })),
+  }))
+);
 
-export default useStore;
+export default useGlobalStore;

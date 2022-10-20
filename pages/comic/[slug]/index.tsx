@@ -15,7 +15,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import useStore from "store/store";
+import useGlobalStore from "store/store";
 import classNames from "utils/classNames";
 
 interface ComicDetailsPageProps {
@@ -26,7 +26,7 @@ interface ComicDetailsPageProps {
 const ComicDetailsPage = ({ info, chapters }: ComicDetailsPageProps) => {
   const router = useRouter();
   const { slug } = router.query;
-  const { follows, setFollow, currentUser } = useStore();
+  const { follows, setFollow, currentUser } = useGlobalStore();
   const hasFollowed = follows.some((comic) => comic === slug);
   const [countChapters, setCountChapters] = useState(20);
   const [history, setHistory] = useState<IComicHistory[]>([]);
@@ -35,6 +35,7 @@ const ComicDetailsPage = ({ info, chapters }: ComicDetailsPageProps) => {
     setCountChapters(chapters.length);
   };
   const handleToggleFollow = async () => {
+    if (!currentUser) return;
     const colRef = doc(db, "users", currentUser?.uid);
     if (hasFollowed) {
       const newFollows = follows.filter((comic) => comic !== slug);

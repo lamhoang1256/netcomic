@@ -1,5 +1,6 @@
 import { IconSearch } from "components/icons";
 import { Image } from "components/image";
+import { CustomLink } from "components/link";
 import { Popover } from "components/popover";
 import { defaultAvatar } from "constants/image";
 import { PATH } from "constants/path";
@@ -9,13 +10,13 @@ import { auth } from "libs/firebase/firebase-config";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
-import useStore from "store/store";
+import useGlobalStore from "store/store";
 import { createUsernameFromEmail } from "utils";
 
 const stylesPopoverLink =
   "text-[#000000cc] block px-5 py-2 hover:bg-[#fafafa] transition-all duration-300 hover:text-[#00bfa5]";
 const Header = () => {
-  const { currentUser } = useStore();
+  const { currentUser } = useGlobalStore();
   const { activePopover, hidePopover, showPopover } = usePopover();
   const router = useRouter();
   const [keyword, setKeyword] = useState("");
@@ -27,11 +28,9 @@ const Header = () => {
     <header style={{ backgroundImage: `url("/bg-header.jpg")` }}>
       <div className="layout-container">
         <nav className="flex items-center h-[52px] relative justify-between">
-          <Link href={PATH.home}>
-            <a>
-              <Image src="/logo-nettruyen.png" alt="logo" className="w-[150px]" />
-            </a>
-          </Link>
+          <CustomLink href={PATH.home}>
+            <Image src="/logo-nettruyen.png" alt="logo" className="w-[150px]" />
+          </CustomLink>
           <form
             onSubmit={handleSearchWithKeyword}
             className="md:flex hidden items-center justify-between flex-1 max-w-[400px] pl-3 h-8 bg-white rounded-sm"

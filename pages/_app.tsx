@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useEffect } from "react";
 import { collection, doc, getDoc, onSnapshot, query, where } from "firebase/firestore";
 import { auth, db } from "libs/firebase/firebase-config";
-import useStore from "store/store";
+import useGlobalStore from "store/store";
 import { onAuthStateChanged } from "firebase/auth";
 import { ICurrentUser } from "@types";
 
@@ -17,7 +17,7 @@ Modal.defaultStyles = {
 };
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const { setFollow, setCurrentUser } = useStore();
+  const { setCurrentUser, setFollow, setHistory } = useGlobalStore();
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (!user) return setCurrentUser({} as ICurrentUser);
@@ -28,11 +28,11 @@ function MyApp({ Component, pageProps }: AppProps) {
           const colRef = doc(db, "users", user.uid);
           const data = await getDoc(colRef);
           setFollow(data?.data()?.follows);
-          // setHistory(data?.data()?.history);
         });
       });
     });
-  }, [setCurrentUser, setFollow]);
+    setHistory(JSON.parse(localStorage.getItem("history") || "[]"));
+  }, [setCurrentUser, setHistory, setFollow]);
 
   return (
     <>

@@ -27,6 +27,7 @@ export interface IImageReading {
 }
 export interface IDetailsChapter {
   title: string;
+  posterUrl: string;
   chapter: string;
   updatedAt: string;
   href: string;

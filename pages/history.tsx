@@ -1,24 +1,22 @@
 import { IComicHistory } from "@types";
 import { IconClose } from "components/icons";
 import { CustomLink } from "components/link";
-import { LocalStorage } from "constants/localStorage";
 import { PATH } from "constants/path";
 import { Template } from "layouts";
 import LayoutUser from "layouts/LayoutUser";
 import { ComicGrid, ComicImage, ComicTitle } from "modules/comic";
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
+import useGlobalStore from "store/store";
 
 const HistoryPage = () => {
-  const [history, setHistory] = useState<IComicHistory[]>([]);
+  const { history, setHistory } = useGlobalStore();
   const handleRemoveHistory = (slug: string) => {
     const newHistory = history.filter((comic) => comic.slug !== slug);
-    localStorage.setItem(LocalStorage.history, JSON.stringify(newHistory));
     setHistory(newHistory);
+    toast.success("Đã xóa khỏi lịch sử xem!");
   };
-  useEffect(() => {
-    setHistory(JSON.parse(localStorage.getItem("history") || "[]"));
-  }, []);
   return (
     <>
       <Head>

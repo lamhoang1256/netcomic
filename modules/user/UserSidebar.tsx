@@ -3,7 +3,7 @@ import { defaultAvatar } from "constants/image";
 import { PATH } from "constants/path";
 import { Sidebar } from "layouts";
 import Link from "next/link";
-import useStore from "store/store";
+import useGlobalStore from "store/store";
 import { createUsernameFromEmail } from "utils";
 
 const sidebarLinks = [
@@ -35,7 +35,7 @@ const sidebarLinks = [
 ];
 
 const UserSidebar = () => {
-  const { currentUser } = useStore();
+  const { currentUser } = useGlobalStore();
   return (
     <Sidebar labelOpenSidebar="Tài khoản của tôi">
       <div className="flex items-center gap-x-2">
