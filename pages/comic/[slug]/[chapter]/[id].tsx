@@ -15,8 +15,10 @@ import { server } from "configs/server";
 import { getImage } from "constants/image";
 import { LocalStorage } from "constants/localStorage";
 import { PATH } from "constants/path";
+import { doc, FieldValue, increment, updateDoc } from "firebase/firestore";
 import useModal from "hooks/useModal";
 import LayoutHome from "layouts/LayoutHome";
+import { auth, db } from "libs/firebase/firebase-config";
 import { ComicImage } from "modules/comic";
 import { GetStaticPaths, GetStaticPropsContext } from "next";
 import Head from "next/head";
@@ -61,6 +63,21 @@ const ReadComicPage = ({ imageUrls, chapters, info, comments }: ReadComicPagePro
     history.unshift(comic);
     setHistory(history);
   };
+  const handleLevelUp = async () => {
+    try {
+      if (!auth.currentUser) return;
+      const colRef = doc(db, "users", auth.currentUser.uid);
+      console.log("colRef: ", colRef);
+      await updateDoc(colRef, { level: increment(1) });
+    } catch (error) {
+      console.log("error: ", error);
+    }
+  };
+  useEffect(() => {
+    if (!auth.currentUser) return;
+    handleLevelUp();
+  }, [slug, chapter, id]);
+
   useEffect(() => {
     handleSaveHistory();
   }, [slug, chapter, id]);
