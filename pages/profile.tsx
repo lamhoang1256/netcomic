@@ -17,6 +17,7 @@ import Head from "next/head";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import useGlobalStore from "store/global-store";
+import { checkLevel } from "utils";
 
 const options = [
   { value: "boy", label: "Nam" },
@@ -32,6 +33,7 @@ const ProfilePage = () => {
   });
   const { onChange } = useInputChange(values, setValues);
   const { handleUploadImage } = useFirebaseImage();
+  const { level, percent } = checkLevel(currentUser?.score || 0);
   const handleChangeGender = (option: IOption) => {
     setValues({ ...values, gender: option });
   };
@@ -89,6 +91,17 @@ const ProfilePage = () => {
           >
             <div className="w-full mt-3 max-w-[500px]">
               <FormGroup>
+                <div className="flex justify-between text-xs">
+                  <span>Cấp {level}</span>
+                  <span>Cấp {level + 1}</span>
+                </div>
+                <div className="progress">
+                  <div className="progress-level" style={{ width: `${percent}%` }}>
+                    {percent}%
+                  </div>
+                </div>
+              </FormGroup>
+              <FormGroup>
                 <Label htmlFor="email">Địa chỉ email</Label>
                 <Input
                   name="email"
@@ -119,26 +132,28 @@ const ProfilePage = () => {
                 Cập nhật
               </Button>
             </div>
-            <div className="flex flex-col items-center flex-1 mt-3">
-              <Label>Ảnh đại diện</Label>
-              <Image
-                alt="avatar"
-                src={currentUser?.photoURL || defaultAvatar}
-                className="w-[100px] h-[100px] mt-1 rounded-full"
-              />
-              <div className="relative">
-                <input
-                  type="file"
-                  accept=".png, .jpg, .jpeg"
-                  className="absolute inset-0 opacity-0"
-                  onChange={handleUpdateAvatar}
+            <div className="flex-1">
+              <div className="flex flex-col items-center mt-3">
+                <Label>Ảnh đại diện</Label>
+                <Image
+                  alt="avatar"
+                  src={currentUser?.photoURL || defaultAvatar}
+                  className="w-[100px] h-[100px] mt-1 rounded-full"
                 />
-                <Button className="bg-[#c9302c] text-white my-2 inline-block">Upload ảnh</Button>
+                <div className="relative">
+                  <input
+                    type="file"
+                    accept=".png, .jpg, .jpeg"
+                    className="absolute inset-0 opacity-0"
+                    onChange={handleUpdateAvatar}
+                  />
+                  <Button className="bg-[#c9302c] text-white my-2 inline-block">Upload ảnh</Button>
+                </div>
+                <span>jpg,jpeg,gif,png nhỏ hơn 2MB</span>
+                <span className="italic font-light text-red-500">
+                  Avatar tục tĩu sẽ bị khóa vĩnh viễn
+                </span>
               </div>
-              <span>jpg,jpeg,gif,png nhỏ hơn 2MB</span>
-              <span className="italic font-light text-red-500">
-                Avatar tục tĩu sẽ bị khóa vĩnh viễn
-              </span>
             </div>
           </form>
         </Template>

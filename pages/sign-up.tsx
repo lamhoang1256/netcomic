@@ -45,7 +45,7 @@ const SignUpPage = () => {
         status: userStatus.ACTIVE,
         role: userRole.USER,
         createdAt: serverTimestamp(),
-        level: 0,
+        score: 0,
       });
       toast.success("Đăng ký tài khoản thành công!");
     } catch (error: any) {

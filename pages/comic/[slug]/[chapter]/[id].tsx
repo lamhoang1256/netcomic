@@ -25,8 +25,10 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import useGlobalStore from "store/global-store";
+import { checkLevel } from "utils";
 import classNames from "utils/classNames";
 
+// Cấp 1 -> Cấp 2 =10 chap,Cấp 2 -> Cấp 3 =100 chap,Cấp 3 -> Cấp 4 =1000 chap,Cấp 4 -> Cấp 5=10000 chap,Cấp 5 -> Cấp 6 =100000 chap,Cấp 6 -> Cấp 7 =1000000 chap,Cấp 7 -> Cấp 8 =10000000 chap,Cấp 8 -> Cấp 9 =100000000 chap,Cấp 9 -> Cấp Max =1 Tỉ chap
 interface ReadComicPageProps {
   imageUrls: IImageReading[];
   info: IDetailsChapter;
@@ -63,23 +65,20 @@ const ReadComicPage = ({ imageUrls, chapters, info, comments }: ReadComicPagePro
     history.unshift(comic);
     setHistory(history);
   };
+
   const handleLevelUp = async () => {
     try {
       if (!auth.currentUser) return;
       const colRef = doc(db, "users", auth.currentUser.uid);
-      console.log("colRef: ", colRef);
-      await updateDoc(colRef, { level: increment(1) });
+      await updateDoc(colRef, { score: increment(1) });
     } catch (error) {
       console.log("error: ", error);
     }
   };
-  useEffect(() => {
-    if (!auth.currentUser) return;
-    handleLevelUp();
-  }, [slug, chapter, id]);
 
   useEffect(() => {
     handleSaveHistory();
+    handleLevelUp();
   }, [slug, chapter, id]);
 
   const currentChapter = chapters.findIndex((chapter) => chapter.id === query.id);
