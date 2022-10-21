@@ -1,15 +1,15 @@
 import { IComic, IFilters, IPagination } from "@types";
 import axios from "axios";
+import { FilterMultiple, FilterOne } from "components/filter";
 import { IconRefresh } from "components/icons";
+import { CustomLink } from "components/link";
 import { Pagination } from "components/pagination";
-import { FilterGenres, FilterOne } from "components/filter";
 import { server } from "configs/server";
 import { PATH } from "constants/path";
 import LayoutHome from "layouts/LayoutHome";
 import { ComicGrid, ComicItem } from "modules/comic";
 import { GetServerSidePropsContext } from "next";
 import Head from "next/head";
-import Link from "next/link";
 
 interface FilterPageProps {
   results: IComic[];
@@ -30,7 +30,7 @@ const FilterPage = ({ results, paginations, filters }: FilterPageProps) => {
           <h2 className="pt-4 pb-1 text-2xl text-center">Tìm truyện nâng cao</h2>
           <div className="items-center gap-2 mt-3 mb-2 md:flex">
             <div className="grid flex-1 grid-cols-5 gap-2 filter-grid filter">
-              <FilterGenres genres={filters.genres} />
+              <FilterMultiple genres={filters.genres} />
               <FilterOne
                 keyFilter="minchapter"
                 options={filters.minchapter}
@@ -40,12 +40,13 @@ const FilterPage = ({ results, paginations, filters }: FilterPageProps) => {
               <FilterOne keyFilter="gender" options={filters.gender} placeholder="Dành theo" />
               <FilterOne keyFilter="sort" options={filters.sort} placeholder="Sắp xếp theo" />
             </div>
-            <Link href={PATH.filter}>
-              <a className="bg-[#337ab7] h-9 inline-flex items-center rounded gap-x-1 px-4 text-white">
-                <IconRefresh />
-                Reset
-              </a>
-            </Link>
+            <CustomLink
+              href={PATH.filter}
+              className="bg-[#337ab7] h-9 inline-flex items-center rounded gap-x-1 px-4 text-white"
+            >
+              <IconRefresh />
+              <span>Reset</span>
+            </CustomLink>
           </div>
           <ComicGrid className="mt-4">
             {results.map((comic) => (

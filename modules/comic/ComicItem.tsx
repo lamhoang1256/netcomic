@@ -20,7 +20,7 @@ const ComicItem = ({ comic }: ComicItemProps) => {
   }, []);
   return (
     <div>
-      <div className="relative overflow-hidden rounded aspect-[2.2/3]">
+      <div className="relative overflow-hidden border border-graydd rounded aspect-[2.2/3]">
         <CustomLink href={`${PATH.comic}/${slug}`}>
           <ComicImage src={posterUrl} alt={slug} />
         </CustomLink>

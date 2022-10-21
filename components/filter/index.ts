@@ -1,4 +1,4 @@
 import FilterOne from "./FilterOne";
-import FilterGenres from "./FilterGenres";
+import FilterMultiple from "./FilterMultiple";
 
-export { FilterOne, FilterGenres };
+export { FilterOne, FilterMultiple };

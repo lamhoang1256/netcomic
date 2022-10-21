@@ -1,13 +1,13 @@
+import { IComic } from "@types";
 import { IconTime } from "components/icons";
+import { CustomLink } from "components/link";
 import { Heading } from "components/text";
 import { PATH } from "constants/path";
-import Link from "next/link";
+import { ComicImage } from "modules/comic";
 import { Navigation } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { IComic } from "@types";
-import { ComicImage } from "modules/comic";
 
 interface HomeBannerProps {
   banners: IComic[];
@@ -28,15 +28,20 @@ const HomeBanner = ({ banners }: HomeBannerProps) => {
         {banners.map((banner) => (
           <SwiperSlide key={banner.slug} className="!w-[187px]">
             <div className="relative overflow-hidden rounded">
-              <ComicImage src={banner.posterUrl} alt={banner.slug} className="aspect-[190/250]" />
+              <CustomLink href={`${PATH.comic}/${banner.slug}`}>
+                <ComicImage src={banner.posterUrl} alt={banner.slug} className="aspect-[190/250]" />
+              </CustomLink>
               <div className="absolute bottom-0 left-0 right-0 p-[5px] text-white bg-overlay">
-                <Link href={`${PATH.comic}/${banner.slug}`}>
-                  <a className="line-clamp-1 text-[15px] text-center">{banner.title}</a>
-                </Link>
+                <CustomLink
+                  href={`${PATH.comic}/${banner.slug}`}
+                  className="line-clamp-1 text-[15px] text-center"
+                >
+                  {banner.title}
+                </CustomLink>
                 <div className="flex items-center justify-center gap-[10px] mt-1">
-                  <Link href={`${PATH.comic}/${banner.newestHref}`}>
-                    <a className="text-xs">{banner.newestChapter}</a>
-                  </Link>
+                  <CustomLink href={`${PATH.comic}/${banner.newestHref}`} className="text-xs">
+                    {banner.newestChapter}
+                  </CustomLink>
                   <span className="flex items-center gap-[2px] text-[11px] italic">
                     <IconTime className="text-white" /> {banner.updatedAgo}
                   </span>

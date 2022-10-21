@@ -25,17 +25,8 @@ const HomePage = ({ banners, newestComics, paginations }: HomePageProps) => {
       <LayoutHome>
         <div className="bg-white rounded-lg layout-container">
           <HomeBanner banners={banners} />
-          <div className="flex flex-col gap-4 mt-6 lg:flex-row">
-            <div className="lg:w-2/3">
-              <HomeNewestComic newestComics={newestComics} />
-              <Pagination paginations={paginations} />
-            </div>
-            <div className="flex flex-col lg:w-1/3 gap-y-4">
-              <HomeFollow />
-              <HomeHistory />
-              <ComicChartRanking />
-            </div>
-          </div>
+          <HomeNewestComic newestComics={newestComics} />
+          <Pagination paginations={paginations} />
         </div>
       </LayoutHome>
     </>
