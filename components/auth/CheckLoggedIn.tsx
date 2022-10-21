@@ -7,7 +7,9 @@ const CheckLoggedIn = ({ children }: { children: React.ReactNode }) => {
   const { currentUser } = useGlobalStore();
   const router = useRouter();
   useEffect(() => {
-    if (currentUser && currentUser.email) router.push(PATH.home);
+    if (currentUser) {
+      router.query?.redirect ? router.push(`${router.query.redirect}`) : router.push(PATH.home);
+    }
   }, [currentUser, router]);
   return <>{children}</>;
 };

@@ -4,16 +4,13 @@ import { useEffect } from "react";
 import useGlobalStore from "store/global-store";
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
-  const { currentUser, loading } = useGlobalStore();
-  console.log("loading: ", loading);
-  console.log("currentUser: ", currentUser);
+  const { currentUser } = useGlobalStore();
   const router = useRouter();
   useEffect(() => {
-    if (loading) return;
-    if (!currentUser || !currentUser.email) {
-      router.push(PATH.signIn);
+    if (!currentUser) {
+      router.push(`${PATH.signIn}?redirect=${encodeURIComponent(router.asPath)}`);
     }
-  }, [currentUser, loading, router]);
+  }, [currentUser, router]);
   return <>{currentUser ? children : null}</>;
 };
 
