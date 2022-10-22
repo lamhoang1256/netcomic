@@ -1,4 +1,4 @@
-import { IComment, IDetailsChapter, IImageReading, ILinkChapter } from "@types";
+import { ICommentItem, IDetailsChapter, IImageReading, ILinkChapter } from "@types";
 import axios from "axios";
 import * as cheerio from "cheerio";
 import { PATH } from "constants/path";
@@ -29,7 +29,7 @@ const getDetailsChapter = async (url: string) => {
   const $ = cheerio.load(html);
   let imageUrls: IImageReading[] = [];
   let info = {} as IDetailsChapter;
-  let comments: IComment[] = [];
+  let comments: ICommentItem[] = [];
   let chapters: ILinkChapter[] = [];
   info.posterUrl = $('meta[itemprop="image"]').attr("content") as string;
   $(".reading .container .top")

@@ -1,7 +1,10 @@
 import { IComicInfo, ILinkChapter } from "@types";
 import axios from "axios";
 import { Button } from "components/button";
+import { CommentAddNew, CommentItem } from "components/comment";
+import { Tabs } from "components/tabs";
 import { Heading } from "components/text";
+import { Textarea } from "components/textarea";
 import { server } from "configs/server";
 import { PATH } from "constants/path";
 import LayoutHome from "layouts/LayoutHome";
@@ -166,6 +169,28 @@ const ComicDetailsPage = ({ info, chapters }: ComicDetailsPageProps) => {
                   </ul>
                 </div>
               </div>
+              <CommentAddNew />
+              <Tabs
+                className="mt-5"
+                tabs={[
+                  {
+                    name: "Tất cả",
+                    content: (
+                      <div>
+                        <CommentItem />
+                      </div>
+                    ),
+                  },
+                  {
+                    name: "Bình luận chap",
+                    content: (
+                      <div>
+                        <CommentItem /> <CommentItem />
+                      </div>
+                    ),
+                  },
+                ]}
+              />
             </div>
             <div className="flex flex-col lg:w-1/3 gap-y-4">
               <ComicChartRanking />

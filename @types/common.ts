@@ -42,11 +42,22 @@ export interface IReplyComment {
   createdAt: string;
   mentionUser: string;
 }
-export interface IComment {
+export interface ICommentItem {
   id: string;
   username: string;
   avatar: string;
   content: string;
   createdAt: string;
   replyComments: IReplyComment[];
+}
+export interface IComment {
+  id: string;
+  fullname: string;
+  avatar: string;
+  content: string;
+  like: number;
+  unlike: number;
+  createdAt: string;
+  level: number;
+  status: string;
 }

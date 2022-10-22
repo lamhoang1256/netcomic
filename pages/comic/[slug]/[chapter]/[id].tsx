@@ -1,4 +1,4 @@
-import { IComicHistory, IComment, IDetailsChapter, IImageReading, ILinkChapter } from "@types";
+import { IComicHistory, ICommentItem, IDetailsChapter, IImageReading, ILinkChapter } from "@types";
 import axios from "axios";
 import { Button } from "components/button";
 import {
@@ -32,7 +32,7 @@ import classNames from "utils/classNames";
 interface ReadComicPageProps {
   imageUrls: IImageReading[];
   info: IDetailsChapter;
-  comments: IComment[];
+  comments: ICommentItem[];
   chapters: ILinkChapter[];
 }
 

@@ -4,7 +4,7 @@ import {
   IComic,
   IComicChartRanking,
   IComicInfo,
-  IComment,
+  ICommentItem,
   IImageReading,
   ILinkChapter,
   IPagination,
@@ -102,7 +102,7 @@ export function crawlReplyComment(
 export function crawlComments(
   node: cheerio.Cheerio<cheerio.Element>,
   $: cheerio.CheerioAPI
-): IComment {
+): ICommentItem {
   const id = node.attr("id")?.replace("comment_", "") as string;
   const username = node.find(".authorname").first().text();
   const avatar = node

@@ -18,6 +18,8 @@ import IconFacebook from "./IconFacebook";
 import IconGoogle from "./IconGoogle";
 import IconGithub from "./IconGithub";
 import IconCheck from "./IconCheck";
+import IconUnlike from "./IconUnlike";
+import IconLike from "./IconLike";
 
 export {
   IconFacebook,
@@ -27,6 +29,8 @@ export {
   IconEye,
   IconChat,
   IconCheck,
+  IconUnlike,
+  IconLike,
   IconHeart,
   IconFilter,
   IconHome,
