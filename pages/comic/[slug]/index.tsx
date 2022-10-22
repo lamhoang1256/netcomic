@@ -1,19 +1,20 @@
-import { IComicInfo, ILinkChapter } from "@types";
+import { IComicInfo, IComment, ILinkChapter } from "@types";
 import axios from "axios";
 import { Button } from "components/button";
 import { CommentAddNew, CommentItem } from "components/comment";
-import { Tabs } from "components/tabs";
 import { Heading } from "components/text";
-import { Textarea } from "components/textarea";
 import { server } from "configs/server";
+import { commentStatus } from "constants/global";
 import { PATH } from "constants/path";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import LayoutHome from "layouts/LayoutHome";
+import { db } from "libs/firebase/firebase-config";
 import { ComicChartRanking } from "modules/comic";
 import { GetServerSidePropsContext } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useGlobalStore from "store/global-store";
 import classNames from "utils/classNames";
 
@@ -24,6 +25,7 @@ interface ComicDetailsPageProps {
 
 const ComicDetailsPage = ({ info, chapters }: ComicDetailsPageProps) => {
   const router = useRouter();
+  const [comments, setComments] = useState<IComment[]>([]);
   const { slug } = router.query;
   const { history, follows, addFollow, removeFollow } = useGlobalStore();
   const hasFollowed = follows.some((comic) => comic === slug);
@@ -35,6 +37,22 @@ const ComicDetailsPage = ({ info, chapters }: ComicDetailsPageProps) => {
   const handleToggleFollow = () => {
     hasFollowed ? removeFollow(slug as string) : addFollow(slug as string);
   };
+  useEffect(() => {
+    async function getComments() {
+      const colRef = collection(db, "comments");
+      const q = query(colRef, where("status", "==", commentStatus.APPROVED));
+      const querySnapshot = await getDocs(q);
+      let result: any[] = [];
+      querySnapshot.forEach((doc) => {
+        result.push({
+          id: doc.id,
+          ...doc.data(),
+        });
+      });
+      setComments(result);
+    }
+    getComments();
+  }, []);
   return (
     <>
       <Head>
@@ -170,27 +188,11 @@ const ComicDetailsPage = ({ info, chapters }: ComicDetailsPageProps) => {
                 </div>
               </div>
               <CommentAddNew />
-              <Tabs
-                className="mt-5"
-                tabs={[
-                  {
-                    name: "Tất cả",
-                    content: (
-                      <div>
-                        <CommentItem />
-                      </div>
-                    ),
-                  },
-                  {
-                    name: "Bình luận chap",
-                    content: (
-                      <div>
-                        <CommentItem /> <CommentItem />
-                      </div>
-                    ),
-                  },
-                ]}
-              />
+              <div>
+                {comments.map((comment) => (
+                  <CommentItem key={comment.id} comment={comment} />
+                ))}
+              </div>
             </div>
             <div className="flex flex-col lg:w-1/3 gap-y-4">
               <ComicChartRanking />

@@ -52,6 +52,7 @@ export interface ICommentItem {
 }
 export interface IComment {
   id: string;
+  slug: string;
   fullname: string;
   avatar: string;
   content: string;
@@ -60,4 +61,6 @@ export interface IComment {
   createdAt: string;
   level: number;
   status: string;
+  chapterId: string;
+  chapterName: string;
 }

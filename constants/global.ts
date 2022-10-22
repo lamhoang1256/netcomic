@@ -5,5 +5,11 @@ export const userRole = {
 };
 export const userStatus = {
   ACTIVE: "ACTIVE",
-  INACTIVE: "INACTIVE",
+  WARNING: "WARNING",
+  BANNED: "BANNED",
+};
+export const commentStatus = {
+  APPROVED: "APPROVED",
+  WARNING: "WARNING",
+  BANNED: "BANNED",
 };

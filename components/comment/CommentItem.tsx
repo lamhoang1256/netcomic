@@ -1,25 +1,32 @@
+import { IComment } from "@types";
 import { IconChat, IconLike, IconUnlike } from "components/icons";
 import { Image } from "components/image";
-import { defaultAvatar } from "constants/image";
 
-const CommentItem = () => {
+interface CommentItemProps {
+  comment: IComment;
+}
+
+const CommentItem = ({ comment }: CommentItemProps) => {
   return (
-    <div className="flex mt-3 gap-x-3">
-      <div>
+    <div className="flex mt-3 gap-x-3 comment" comment-filter={comment.chapterId}>
+      <div className="flex-shrink">
         <Image
           alt="avatar"
-          src={defaultAvatar}
+          src={comment?.avatar}
           className="object-cover w-12 h-12 mt-2 rounded-full"
         />
       </div>
-      <div>
-        <div>
-          <span className="text-base font-semibold">Nguyen Hoang Lam</span>
-          <span className="ml-2 text-xs inline-block px-[6px] py-[2px] border border-red-400 text-red-400 rounded">
+      <div className="flex-1">
+        <div className="flex items-center gap-x-2">
+          <span className="text-base font-semibold">{comment?.fullname}</span>
+          <span className="text-xs px-[6px] py-[2px] border border-red-400 text-red-400 rounded">
             Cấp 3
           </span>
+          {comment.chapterName && (
+            <span className="text-[#3f94d5]">Chapter {comment.chapterName}</span>
+          )}
         </div>
-        <p className="my-[6px]">Hết chap rồi vẫn không thấy hay !!!</p>
+        <p className="my-[6px]">{comment?.content}</p>
         <div className="flex items-center gap-x-5">
           <button className="text-[#3f94d5] flex items-center gap-x-1">
             <IconChat className="w-4 h-4" fill="#3f94d5" />
@@ -27,13 +34,13 @@ const CommentItem = () => {
           </button>
           <button className="text-[#3f94d5] flex items-center gap-x-1">
             <IconLike fill="#3f94d5" />
-            <span>1</span>
+            <span>{comment?.like}</span>
           </button>
           <button className="text-[#3f94d5] flex items-center gap-x-1">
             <IconUnlike fill="#3f94d5" />
-            <span>1</span>
+            <span>{comment?.unlike}</span>
           </button>
-          <span className="text-xs italic text-[#999]">20 phút trước</span>
+          {/* <span className="text-xs italic text-[#999]">{comment?.createdAt}</span> */}
         </div>
       </div>
     </div>
