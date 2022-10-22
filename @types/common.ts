@@ -58,7 +58,10 @@ export interface IComment {
   content: string;
   like: number;
   unlike: number;
-  createdAt: string;
+  createdAt?: {
+    nanoseconds: number;
+    seconds: number;
+  };
   level: number;
   status: string;
   chapterId: string;

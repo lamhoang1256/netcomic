@@ -1,5 +1,4 @@
 export const createUsernameFromEmail = (email: string) => email?.split("@")?.[0] || "User";
-
 export const formatView = (num: number) => {
   if (num >= 1000000000) return `${(num / 1000000000).toFixed(1).replace(/\.0$/, "")}B`;
   if (num >= 1000000) return `${(num / 1000000).toFixed(1).replace(/\.0$/, "")}M`;
@@ -14,4 +13,30 @@ export const checkLevel = (score: number) => {
   const percentNextLevel = Math.pow(10, level);
   const percent = Math.floor(((score - percentPrevLevel) / percentNextLevel) * 100);
   return { level, percent };
+};
+export const checkTimeAgo = (timeCreated: number) => {
+  const labels: { [key: string]: string } = {
+    year: "năm",
+    month: "tháng",
+    week: "tuần",
+    day: "ngày",
+    hour: "giờ",
+    minute: "phút",
+  };
+  let periods: { [key: string]: number } = {
+    year: 365 * 30 * 24 * 60 * 60 * 1000,
+    month: 30 * 24 * 60 * 60 * 1000,
+    week: 7 * 24 * 60 * 60 * 1000,
+    day: 24 * 60 * 60 * 1000,
+    hour: 60 * 60 * 1000,
+    minute: 60 * 1000,
+  };
+  let diff = Date.now() - timeCreated;
+  for (const key in periods) {
+    if (diff >= periods[key]) {
+      let result = Math.floor(diff / periods[key]);
+      return `${result} ${labels[key]} trước`;
+    }
+  }
+  return "Vừa xong";
 };
