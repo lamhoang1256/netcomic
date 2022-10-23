@@ -3,6 +3,7 @@ import { ProtectedRoute } from "components/auth";
 import { Image } from "components/image";
 import { CustomLink } from "components/link";
 import { PATH } from "constants/path";
+import { Unsubscribe } from "firebase/auth";
 import { collection, deleteDoc, doc, onSnapshot, query, where } from "firebase/firestore";
 import { Template } from "layouts";
 import LayoutUser from "layouts/LayoutUser";
@@ -19,6 +20,7 @@ import { checkTimeAgo } from "utils";
 const CommentPage = () => {
   const { currentUser } = useGlobalStore();
   const [comments, setComments] = useState<IComment[]>([]);
+  console.log("comments: ", comments);
   async function handleDeleteComment(commentId: string, userId: string) {
     if (!currentUser) return;
     const docRef = doc(db, "comments", commentId);
@@ -42,12 +44,14 @@ const CommentPage = () => {
     });
   }
   useEffect(() => {
+    let unSubscribe: Unsubscribe;
     async function getComments() {
       try {
         if (!currentUser) return;
+        console.log("currentUser: ", currentUser);
         const colRef = collection(db, "comments");
         const queryRef = query(colRef, where("userId", "==", currentUser.uid));
-        const unSubscribe = onSnapshot(queryRef, (snapshot) => {
+        unSubscribe = onSnapshot(queryRef, (snapshot) => {
           const results: IComment[] = [];
           snapshot.forEach((doc: any) => {
             results.push({
@@ -55,15 +59,16 @@ const CommentPage = () => {
               ...doc.data(),
             });
           });
+          console.log("results: ", results);
           setComments(results);
         });
-        return unSubscribe;
       } catch (error: any) {
         toast.error(error?.message);
       }
     }
+    getComments();
     return () => {
-      getComments();
+      unSubscribe();
     };
   }, [currentUser]);
   return (

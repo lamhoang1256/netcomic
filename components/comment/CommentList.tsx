@@ -25,7 +25,6 @@ const CommentList = () => {
         );
         unSubscribe = onSnapshot(queryRef, (snapshot) => {
           const results: IComment[] = [];
-          console.log("results: ", results);
           snapshot.forEach((doc: any) => {
             results.push({
               id: doc.id,

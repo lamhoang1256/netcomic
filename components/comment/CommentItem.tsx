@@ -61,7 +61,7 @@ const CommentItem = ({ comment }: CommentItemProps) => {
             Cấp {comment.level}
           </span>
           {comment.chapterName && (
-            <span className="text-[#3f94d5] text-[13px]">Chapter {comment.chapterName}</span>
+            <span className="text-[#3f94d5] text-[13px]">{comment.chapterName}</span>
           )}
         </div>
         <p className="my-[6px]">{comment?.content}</p>
