@@ -1,4 +1,4 @@
-import { IComic, IPagination } from "@types";
+import { ICategory, IComic, IPagination } from "@types";
 import axios from "axios";
 import { Pagination } from "components/pagination";
 import { server } from "configs/server";
@@ -12,9 +12,10 @@ interface HomePageProps {
   banners: IComic[];
   newestComics: IComic[];
   paginations: IPagination[];
+  categories: ICategory[];
 }
 
-const HomePage = ({ banners, newestComics, paginations }: HomePageProps) => {
+const HomePage = ({ banners, newestComics, paginations, categories }: HomePageProps) => {
   return (
     <>
       <Head>
@@ -25,7 +26,7 @@ const HomePage = ({ banners, newestComics, paginations }: HomePageProps) => {
       <LayoutHome>
         <div className="bg-white rounded-lg layout-container">
           <HomeBanner banners={banners} />
-          <HomeCategory />
+          <HomeCategory categories={categories} />
           <HomeNewestComic newestComics={newestComics} />
           <Pagination paginations={paginations} />
         </div>
@@ -41,6 +42,7 @@ export const getServerSideProps = async ({ query }: GetServerSidePropsContext) =
       banners: data.banners,
       newestComics: data.newestComics,
       paginations: data.paginations,
+      categories: data.categories,
     },
   };
 };

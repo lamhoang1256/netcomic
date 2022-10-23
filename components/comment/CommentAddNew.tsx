@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 import useGlobalStore from "store/global-store";
 import { checkLevel } from "utils";
 
-const CommentAddNew = () => {
+const CommentAddNew = ({ poster, title }: { poster: string; title: string }) => {
   const router = useRouter();
   const { id, slug } = router.query;
   const chapter = router.query.chapter as string;
@@ -40,7 +40,10 @@ const CommentAddNew = () => {
         slug,
         status: commentStatus.APPROVED,
         chapterId: id ? id : "",
-        chapterName: chapter ? chapter.replace("chap-", "") : "",
+        chapterName: chapter ? `Chapter ${chapter.replace("chap-", "")}` : "",
+        poster,
+        title,
+        userId: currentUser.uid,
       });
       toast.success("Thêm bình luận thành công!");
     } catch (error: any) {

@@ -35,6 +35,7 @@ interface ReadComicPageProps {
 }
 
 const ReadComicPage = ({ imageUrls, chapters, info }: ReadComicPageProps) => {
+  console.log("info: ", info);
   const router = useRouter();
   const { slug, chapter, id } = router.query;
   const { isShow, toggleModal } = useModal();
@@ -183,7 +184,7 @@ const ReadComicPage = ({ imageUrls, chapters, info }: ReadComicPageProps) => {
           </Button>
         </div>
         <div className="layout-container">
-          <CommentAddNew />
+          <CommentAddNew poster={info.posterUrl} title={info.title} />
           <CommentFilter />
           <CommentList />
         </div>

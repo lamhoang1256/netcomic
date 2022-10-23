@@ -13,7 +13,7 @@ import {
 import * as cheerio from "cheerio";
 import { PATH } from "constants/path";
 
-const urlWithoutHttp = PATH.netTruyen.split("http:")[1] as string;
+export const urlWithoutHttp = PATH.netTruyen.split("http:")[1] as string;
 export function crawlBanner(node: cheerio.Cheerio<cheerio.Element>): IBanner {
   const slugHasId = node
     .find(".slide-caption > h3 > a")

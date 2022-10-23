@@ -51,7 +51,7 @@ const FollowPage = () => {
                 const comicInHistory = history.find((h) => h.slug === slug);
                 return (
                   <div key={slug}>
-                    <div className="relative overflow-hidden rounded aspect-[2.2/3]">
+                    <div className="relative overflow-hidden rounded border border-graydd aspect-[2.2/3]">
                       <div className="absolute top-0 left-0 text-xs right-0 py-[5px] text-white bg-overlay text-center px-1">
                         {comicInHistory ? (
                           <CustomLink href={`${PATH.comic}/${comicInHistory.chapterUrl}`}>

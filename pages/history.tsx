@@ -31,7 +31,7 @@ const HistoryPage = () => {
           <ComicGrid className="mt-4">
             {history?.map((comic: IComicHistory) => (
               <div key={comic.slug}>
-                <div className="relative overflow-hidden rounded aspect-[2.2/3]">
+                <div className="relative border border-graydd overflow-hidden rounded aspect-[2.2/3]">
                   <CustomLink href={`${PATH.comic}/${comic.slug}`}>
                     <ComicImage src={comic.posterUrl} alt={comic.slug} />
                   </CustomLink>

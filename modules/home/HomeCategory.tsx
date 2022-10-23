@@ -7,19 +7,11 @@ import { PATH } from "constants/path";
 import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-const HomeCategory = () => {
-  const [categories, setCategories] = useState<ICategory[]>([]);
-  const fetchCategories = async () => {
-    try {
-      const { data } = (await axios.get(`${server}/api/category`)).data;
-      setCategories(data);
-    } catch (error) {
-      console.log("error: ", error);
-    }
-  };
-  useEffect(() => {
-    fetchCategories();
-  }, []);
+interface HomeCategoryProps {
+  categories: ICategory[];
+}
+
+const HomeCategory = ({ categories }: HomeCategoryProps) => {
   return (
     <div className="mt-5">
       <Heading className="text-xl">Thể loại</Heading>

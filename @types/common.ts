@@ -66,4 +66,6 @@ export interface IComment {
   status: string;
   chapterId: string;
   chapterName: string;
+  poster: string;
+  title: string;
 }

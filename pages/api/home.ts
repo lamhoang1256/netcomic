@@ -7,6 +7,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import catchAsync from "utils/catchAsync";
 import { crawlBanner, crawlComic, crawlPagination, crawlComicTopMonth } from "utils/crawl";
 import { ApiError, responseError, responseSuccess } from "utils/response";
+import { crawlSearchComics } from "./category";
 
 const HomePageApi = async (req: NextApiRequest, res: NextApiResponse) => {
   const { method, query } = req;
@@ -46,7 +47,8 @@ async function crawlHomePage(query: Partial<IQueryParams>) {
     const comic = crawlComicTopMonth($(element));
     chartRankings.push(comic);
   });
-  return { banners, newestComics, paginations, chartRankings };
+  const categories = await crawlSearchComics({});
+  return { banners, newestComics, paginations, chartRankings, categories };
 }
 
 export default catchAsync(HomePageApi);

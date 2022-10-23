@@ -167,7 +167,7 @@ const ComicDetailsPage = ({ info, chapters }: ComicDetailsPageProps) => {
                   </ul>
                 </div>
               </div>
-              <CommentAddNew />
+              <CommentAddNew poster={info.posterUrl} title={info.title} />
               <CommentList />
             </div>
             <div className="flex flex-col lg:w-1/3 gap-y-4">

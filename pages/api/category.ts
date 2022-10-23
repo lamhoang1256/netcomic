@@ -22,7 +22,7 @@ const GetCategoryListApi = async (req: NextApiRequest, res: NextApiResponse) => 
   responseSuccess(res, response);
 };
 
-async function crawlSearchComics(query: Partial<IQueryParams>) {
+export async function crawlSearchComics(query: Partial<IQueryParams>) {
   const response = await axios.get(`${PATH.netTruyenSearch}`, {
     params: query,
   });

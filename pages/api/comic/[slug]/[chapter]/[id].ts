@@ -5,7 +5,7 @@ import { PATH } from "constants/path";
 import { STATUS } from "constants/status";
 import type { NextApiRequest, NextApiResponse } from "next";
 import catchAsync from "utils/catchAsync";
-import { crawlLinkChapter, crawlComments, crawlImagesReading } from "utils/crawl";
+import { crawlLinkChapter, crawlComments, crawlImagesReading, urlWithoutHttp } from "utils/crawl";
 import { ApiError, responseError, responseSuccess } from "utils/response";
 
 const crawlChapterComic = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -31,7 +31,9 @@ const getDetailsChapter = async (url: string) => {
   let info = {} as IDetailsChapter;
   let comments: ICommentItem[] = [];
   let chapters: ILinkChapter[] = [];
-  info.posterUrl = $('meta[itemprop="image"]').attr("content") as string;
+  info.posterUrl = $('meta[itemprop="image"]')
+    .attr("content")
+    ?.replace("http://", "https://") as string;
   $(".reading .container .top")
     .first()
     .each(function (index, element) {
