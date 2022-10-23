@@ -44,7 +44,7 @@ const FollowPage = () => {
         >
           {loading && <LoadingSpinner />}
           {!loading && (
-            <ComicGrid className="mt-[10px]">
+            <ComicGrid className="mt-4">
               {comics.map((comic) => {
                 const { slug, posterUrl, viewCount, title, followCount, commentCount, chapters } =
                   comic;

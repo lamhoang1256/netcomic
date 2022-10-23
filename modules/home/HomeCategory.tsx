@@ -1,10 +1,7 @@
 import { ICategory } from "@types";
-import axios from "axios";
 import { CustomLink } from "components/link";
 import { Heading } from "components/text";
-import { server } from "configs/server";
 import { PATH } from "constants/path";
-import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 interface HomeCategoryProps {

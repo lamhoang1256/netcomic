@@ -1,9 +1,11 @@
 import { IComment } from "@types";
 import { IconChat, IconLike, IconUnlike } from "components/icons";
 import { Image } from "components/image";
-import { doc, increment, updateDoc } from "firebase/firestore";
+import { deleteDoc, doc, increment, updateDoc } from "firebase/firestore";
 import { auth, db } from "libs/firebase/firebase-config";
 import { toast } from "react-toastify";
+import useGlobalStore from "store/global-store";
+import Swal from "sweetalert2";
 import { checkTimeAgo } from "utils";
 
 interface CommentItemProps {
@@ -11,6 +13,7 @@ interface CommentItemProps {
 }
 
 const CommentItem = ({ comment }: CommentItemProps) => {
+  const { currentUser } = useGlobalStore();
   const handleClickStatus = async (status: string) => {
     try {
       if (!auth.currentUser) return;
@@ -20,6 +23,28 @@ const CommentItem = ({ comment }: CommentItemProps) => {
       toast.error(error?.message);
     }
   };
+  async function handleDeleteComment(commentId: string, userId: string) {
+    if (!currentUser) return;
+    const docRef = doc(db, "comments", commentId);
+    Swal.fire({
+      title: "Xác nhận",
+      text: "Bạn có chắc chắn muốn xóa bình luận này?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Đồng ý!",
+    }).then(async (result) => {
+      if (result.isConfirmed && currentUser.uid === userId) {
+        try {
+          await deleteDoc(docRef);
+          toast.success("Bình luận đã được xóa!");
+        } catch (error: any) {
+          toast.error(error?.message);
+        }
+      }
+    });
+  }
   return (
     <div className="flex mt-3 gap-x-3 comment" comment-filter={comment.chapterId}>
       <div className="flex-shrink">
@@ -41,9 +66,12 @@ const CommentItem = ({ comment }: CommentItemProps) => {
         </div>
         <p className="my-[6px]">{comment?.content}</p>
         <div className="flex items-center gap-x-5">
-          <button className="text-[#3f94d5] flex items-center gap-x-1">
+          <button
+            onClick={() => handleDeleteComment(comment?.id, comment?.userId)}
+            className="text-[#3f94d5] flex items-center gap-x-1"
+          >
             <IconChat className="w-4 h-4" fill="#3f94d5" />
-            <span>Trả lời</span>
+            <span>Xóa</span>
           </button>
           <button
             className="text-[#3f94d5] flex items-center gap-x-1"
