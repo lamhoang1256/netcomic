@@ -52,9 +52,11 @@ const CommentAddNew = () => {
 
   return (
     <div className="mt-5">
-      <Heading className="!text-base font-light mb-2">ĐÁNH GIÁ</Heading>
+      <Heading className="mb-2 text-lg">BÌNH LUẬN</Heading>
       <Textarea
+        rows={3}
         value={comment}
+        className="resize-none"
         onChange={(e) => setComment(e.target.value)}
         placeholder="Mời bạn thảo luận, hãy bình luận có văn hóa để tránh bị khóa tài khoản"
       />

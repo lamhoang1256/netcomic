@@ -1,6 +1,9 @@
 import { IComment } from "@types";
 import { IconChat, IconLike, IconUnlike } from "components/icons";
 import { Image } from "components/image";
+import { doc, increment, updateDoc } from "firebase/firestore";
+import { auth, db } from "libs/firebase/firebase-config";
+import { toast } from "react-toastify";
 import { checkTimeAgo } from "utils";
 
 interface CommentItemProps {
@@ -8,7 +11,15 @@ interface CommentItemProps {
 }
 
 const CommentItem = ({ comment }: CommentItemProps) => {
-  console.log("comment: ", comment);
+  const handleClickStatus = async (status: string) => {
+    try {
+      if (!auth.currentUser) return;
+      const colRef = doc(db, "comments", comment.id);
+      await updateDoc(colRef, { [status]: increment(1) });
+    } catch (error: any) {
+      toast.error(error?.message);
+    }
+  };
   return (
     <div className="flex mt-3 gap-x-3 comment" comment-filter={comment.chapterId}>
       <div className="flex-shrink">
@@ -34,13 +45,19 @@ const CommentItem = ({ comment }: CommentItemProps) => {
             <IconChat className="w-4 h-4" fill="#3f94d5" />
             <span>Trả lời</span>
           </button>
-          <button className="text-[#3f94d5] flex items-center gap-x-1">
+          <button
+            className="text-[#3f94d5] flex items-center gap-x-1"
+            onClick={() => handleClickStatus("like")}
+          >
             <IconLike fill="#3f94d5" />
-            <span>{comment?.like}</span>
+            <span>{comment.like}</span>
           </button>
-          <button className="text-[#3f94d5] flex items-center gap-x-1">
+          <button
+            className="text-[#3f94d5] flex items-center gap-x-1"
+            onClick={() => handleClickStatus("unlike")}
+          >
             <IconUnlike fill="#3f94d5" />
-            <span>{comment?.unlike}</span>
+            <span>{comment.unlike}</span>
           </button>
           <span className="text-xs italic text-[#999]">
             {checkTimeAgo((comment?.createdAt?.seconds as number) * 1000)}

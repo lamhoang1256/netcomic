@@ -1,9 +1,11 @@
+import classNames from "utils/classNames";
+
 interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}
 
-const Textarea = ({ ...props }: TextareaProps) => {
+const Textarea = ({ className, ...props }: TextareaProps) => {
   return (
     <textarea
-      className="w-full p-3 border rounded outline-none border-gray8a"
+      className={classNames("w-full p-3 border rounded outline-none border-gray8a", className)}
       {...props}
     ></textarea>
   );

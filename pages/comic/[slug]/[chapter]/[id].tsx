@@ -1,7 +1,7 @@
-import { IComicHistory, IComment, IDetailsChapter, IImageReading, ILinkChapter } from "@types";
+import { IComicHistory, IDetailsChapter, IImageReading, ILinkChapter } from "@types";
 import axios from "axios";
 import { Button } from "components/button";
-import { CommentAddNew, CommentFilter, CommentItem } from "components/comment";
+import { CommentAddNew, CommentFilter, CommentList } from "components/comment";
 import {
   IconChevronLeft,
   IconChevronRight,
@@ -13,11 +13,10 @@ import {
 import { CustomLink } from "components/link";
 import { ModalChapters } from "components/modal";
 import { server } from "configs/server";
-import { commentStatus } from "constants/global";
 import { getImage } from "constants/image";
 import { LocalStorage } from "constants/localStorage";
 import { PATH } from "constants/path";
-import { collection, doc, getDocs, increment, query, updateDoc, where } from "firebase/firestore";
+import { doc, increment, updateDoc } from "firebase/firestore";
 import useModal from "hooks/useModal";
 import LayoutHome from "layouts/LayoutHome";
 import { auth, db } from "libs/firebase/firebase-config";
@@ -25,11 +24,10 @@ import { ComicImage } from "modules/comic";
 import { GetStaticPaths, GetStaticPropsContext } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import useGlobalStore from "store/global-store";
 import classNames from "utils/classNames";
 
-// Cấp 1 -> Cấp 2 =10 chap,Cấp 2 -> Cấp 3 =100 chap,Cấp 3 -> Cấp 4 =1000 chap,Cấp 4 -> Cấp 5=10000 chap,Cấp 5 -> Cấp 6 =100000 chap,Cấp 6 -> Cấp 7 =1000000 chap,Cấp 7 -> Cấp 8 =10000000 chap,Cấp 8 -> Cấp 9 =100000000 chap,Cấp 9 -> Cấp Max =1 Tỉ chap
 interface ReadComicPageProps {
   imageUrls: IImageReading[];
   info: IDetailsChapter;
@@ -40,8 +38,6 @@ const ReadComicPage = ({ imageUrls, chapters, info }: ReadComicPageProps) => {
   const router = useRouter();
   const { slug, chapter, id } = router.query;
   const { isShow, toggleModal } = useModal();
-  const [comments, setComments] = useState<IComment[]>([]);
-
   let { follows, removeFollow, addFollow, setHistory } = useGlobalStore();
   const hasFollowed = follows.some((comic) => comic === slug);
   const handleToggleFollow = () => {
@@ -65,6 +61,7 @@ const ReadComicPage = ({ imageUrls, chapters, info }: ReadComicPageProps) => {
       history = history.filter((comic: IComicHistory) => comic.slug !== slug);
     }
     history.unshift(comic);
+    if (history.length >= 30) history = history.slice(0, 30);
     setHistory(history);
   };
 
@@ -77,23 +74,6 @@ const ReadComicPage = ({ imageUrls, chapters, info }: ReadComicPageProps) => {
       console.log("error: ", error);
     }
   };
-
-  useEffect(() => {
-    async function getComments() {
-      const colRef = collection(db, "comments");
-      const q = query(colRef, where("status", "==", commentStatus.APPROVED));
-      const querySnapshot = await getDocs(q);
-      let result: any[] = [];
-      querySnapshot.forEach((doc) => {
-        result.push({
-          id: doc.id,
-          ...doc.data(),
-        });
-      });
-      setComments(result);
-    }
-    getComments();
-  }, []);
 
   useEffect(() => {
     handleSaveHistory();
@@ -113,10 +93,12 @@ const ReadComicPage = ({ imageUrls, chapters, info }: ReadComicPageProps) => {
       <LayoutHome>
         <section className="bg-[#f9f9f9] layout-container rounded">
           <div className="py-4 text-center">
-            <h1 className="text-[22px] transition-all duration-200 text-[#0073f4]  hover:text-purpleae">
-              {info.title}
-              <span className="font-medium text-black"> - {info.chapter}</span>
-            </h1>
+            <CustomLink href={`${PATH.comic}/${slug}`}>
+              <h1 className="text-[22px] transition-all duration-200 text-[#0073f4]  hover:text-purpleae">
+                {info.title}
+                <span className="font-medium text-black"> - {info.chapter}</span>
+              </h1>
+            </CustomLink>
             <span className="block mt-[6px] italic text-gray8a">{info.updatedAt}</span>
           </div>
           <div className="flex items-center justify-center pb-4 gap-x-3">
@@ -156,16 +138,19 @@ const ReadComicPage = ({ imageUrls, chapters, info }: ReadComicPageProps) => {
               </CustomLink>
             </div>
             <Button
-              className="bg-[#5cb85c] flex items-center gap-x-1 text-white"
+              className={classNames(
+                "flex items-center gap-x-1 text-white",
+                hasFollowed ? "bg-[#d9534f]" : "bg-[#5cb85c]"
+              )}
               onClick={handleToggleFollow}
             >
               <IconHeart className="w-[18px] h-[18px]" />
-              <span className="hidden md:block">{hasFollowed ? "Đã theo dõi" : "Theo dõi"}</span>
+              <span className="hidden md:block">{hasFollowed ? "Hủy theo dõi" : "Theo dõi"}</span>
             </Button>
           </div>
           <ModalChapters isShow={isShow} toggleModal={toggleModal} chapters={chapters} />
         </section>
-        <div className="pt-3 bg-black">
+        <div className="pt-3 bg-[#262a2e]">
           {imageUrls.map((image) => (
             <ComicImage
               key={image.imageUrl}
@@ -184,7 +169,7 @@ const ReadComicPage = ({ imageUrls, chapters, info }: ReadComicPageProps) => {
             )}
           >
             <IconChevronLeft className="!w-3 !h-3" fill="#fff" />
-            <span className="hidden md:block">Chap trước</span>
+            <span>Chap trước</span>
           </Button>
           <Button
             to={`${PATH.comic}/${chapters[currentChapter - 1]?.href}`}
@@ -193,18 +178,14 @@ const ReadComicPage = ({ imageUrls, chapters, info }: ReadComicPageProps) => {
               !chapters[currentChapter - 1] && "pointer-events-none opacity-70 cursor-not-allowed"
             )}
           >
-            <span className="hidden md:block">Chap sau</span>
+            <span>Chap sau</span>
             <IconChevronRight className="!w-3 !h-3" fill="#fff" />
           </Button>
         </div>
         <div className="layout-container">
           <CommentAddNew />
           <CommentFilter />
-          <div>
-            {comments.map((comment) => (
-              <CommentItem key={comment.id} comment={comment} />
-            ))}
-          </div>
+          <CommentList />
         </div>
       </LayoutHome>
     </>
