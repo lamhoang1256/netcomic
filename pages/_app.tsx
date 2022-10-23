@@ -5,6 +5,8 @@ import Head from "next/head";
 import Modal from "react-modal";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "swiper/css";
+import "swiper/css/navigation";
 
 Modal.setAppElement("#__next");
 Modal.defaultStyles = {

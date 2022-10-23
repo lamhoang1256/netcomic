@@ -11,7 +11,7 @@ interface HomeNewestComicProps {
 
 const HomeNewestComic = ({ newestComics }: HomeNewestComicProps) => {
   return (
-    <div className="mt-6">
+    <div className="mt-5">
       <div className="flex items-center justify-between">
         <Heading className="text-xl">Truyện mới cập nhật</Heading>
         <CustomLink

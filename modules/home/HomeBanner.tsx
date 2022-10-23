@@ -5,8 +5,6 @@ import { Heading } from "components/text";
 import { PATH } from "constants/path";
 import { ComicImage } from "modules/comic";
 import { Navigation } from "swiper";
-import "swiper/css";
-import "swiper/css/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 interface HomeBannerProps {

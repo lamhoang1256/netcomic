@@ -4,7 +4,7 @@ import { Pagination } from "components/pagination";
 import { server } from "configs/server";
 import LayoutHome from "layouts/LayoutHome";
 import { ComicChartRanking } from "modules/comic";
-import { HomeBanner, HomeFollow, HomeHistory, HomeNewestComic } from "modules/home";
+import { HomeBanner, HomeCategory, HomeFollow, HomeHistory, HomeNewestComic } from "modules/home";
 import { GetServerSidePropsContext } from "next";
 import Head from "next/head";
 
@@ -25,6 +25,7 @@ const HomePage = ({ banners, newestComics, paginations }: HomePageProps) => {
       <LayoutHome>
         <div className="bg-white rounded-lg layout-container">
           <HomeBanner banners={banners} />
+          <HomeCategory />
           <HomeNewestComic newestComics={newestComics} />
           <Pagination paginations={paginations} />
         </div>

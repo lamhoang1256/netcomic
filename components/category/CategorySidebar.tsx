@@ -19,7 +19,6 @@ const CategorySidebar = () => {
   useEffect(() => {
     fetchCategories();
   }, []);
-
   return (
     <div className="p-3 mt-6 border rounded gap-y-2 border-graydd">
       <Heading className="pb-1 mb-2 text-lg font-medium border-b border-graydd">Thể loại</Heading>
