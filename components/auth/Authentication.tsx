@@ -13,7 +13,6 @@ function Authentication({ children }: { children: React.ReactNode }) {
         setLoading(false);
         return;
       }
-      console.log("user: ", user);
       setLoading(true);
       const docRef = query(collection(db, "users"), where("email", "==", user.email));
       onSnapshot(docRef, (snapshot) => {

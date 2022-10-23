@@ -1,5 +1,6 @@
 import { IComment } from "@types";
 import { commentStatus } from "constants/global";
+import { Unsubscribe } from "firebase/auth";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { db } from "libs/firebase/firebase-config";
 import { useRouter } from "next/router";
@@ -12,6 +13,7 @@ const CommentList = () => {
   const [comments, setComments] = useState<IComment[]>([]);
   const { slug } = router.query;
   useEffect(() => {
+    let unSubscribe: Unsubscribe;
     async function getComments() {
       try {
         if (!slug) return;
@@ -21,8 +23,9 @@ const CommentList = () => {
           where("status", "!=", commentStatus.BANNED),
           where("slug", "==", slug)
         );
-        const unSubscribe = onSnapshot(queryRef, (snapshot) => {
+        unSubscribe = onSnapshot(queryRef, (snapshot) => {
           const results: IComment[] = [];
+          console.log("results: ", results);
           snapshot.forEach((doc: any) => {
             results.push({
               id: doc.id,
@@ -36,8 +39,9 @@ const CommentList = () => {
         toast.error(error?.message);
       }
     }
+    getComments();
     return () => {
-      getComments();
+      unSubscribe();
     };
   }, [slug]);
   return (

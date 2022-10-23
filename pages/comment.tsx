@@ -1,6 +1,7 @@
 import { IComment } from "@types";
 import { ProtectedRoute } from "components/auth";
 import { Image } from "components/image";
+import { CustomLink } from "components/link";
 import { PATH } from "constants/path";
 import { collection, deleteDoc, doc, onSnapshot, query, where } from "firebase/firestore";
 import { Template } from "layouts";
@@ -84,13 +85,16 @@ const CommentPage = () => {
               {comments.map((comment) => (
                 <div className="flex mt-4 gap-x-1 md:gap-x-3" key={comment.id}>
                   <div className="flex w-1/2 md:w-2/5 gap-x-2 md:gap-x-3">
-                    <Link href={`${PATH.comic}/${comment.slug}`}>
+                    <CustomLink
+                      href={`${PATH.comic}/${comment.slug}`}
+                      className=" w-12 h-12 md:w-[60px] md:h-[60px] flex-grow-0"
+                    >
                       <Image
+                        alt={comment.slug}
                         src={comment.poster}
-                        alt="poster"
-                        className="border border-[#eee] flex-grow-0 w-12 h-12 md:w-[60px] object-cover cursor-pointer object-top md:h-[60px] rounded"
+                        className="border border-[#eee] w-12 h-12 md:w-[60px] object-cover object-top md:h-[60px] rounded"
                       />
-                    </Link>
+                    </CustomLink>
                     <div className="flex-1">
                       <ComicTitle
                         className="!text-sm line-clamp-none mb-1"

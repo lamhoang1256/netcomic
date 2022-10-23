@@ -4,7 +4,7 @@ interface ImageProps extends ImgHTMLAttributes<HTMLImageElement> {}
 
 const Image = ({ src, alt = "", className, ...props }: ImageProps) => {
   return (
-    <picture className={className}>
+    <picture>
       <source srcSet={src} type="image/webp" />
       <img src={src} alt={alt} className={className} {...props} />
     </picture>
