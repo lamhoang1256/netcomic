@@ -9,8 +9,8 @@ function Authentication({ children }: { children: React.ReactNode }) {
   const { setCurrentUser, setFollow, setHistory, loading, setLoading } = useGlobalStore();
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      setLoading(true);
       if (!user) return;
+      setLoading(true);
       const docRef = query(collection(db, "users"), where("email", "==", user.email));
       onSnapshot(docRef, (snapshot) => {
         snapshot.forEach(async (document) => {

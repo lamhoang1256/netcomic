@@ -35,7 +35,6 @@ interface ReadComicPageProps {
 }
 
 const ReadComicPage = ({ imageUrls, chapters, info }: ReadComicPageProps) => {
-  console.log("info: ", info);
   const router = useRouter();
   const { slug, chapter, id } = router.query;
   const { isShow, toggleModal } = useModal();
