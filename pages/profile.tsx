@@ -1,14 +1,17 @@
 import { ProtectedRoute } from "components/auth";
 import { Button } from "components/button";
 import { FormGroup, Label } from "components/form";
+import { IconQuestion } from "components/icons";
 import { Image } from "components/image";
 import { Input } from "components/input";
+import { ModalLevel } from "components/modal";
 import { Select } from "components/select";
 import { IOption } from "components/select/Select";
 import { defaultAvatar } from "constants/image";
 import { updateProfile } from "firebase/auth";
 import { doc, updateDoc } from "firebase/firestore";
 import useInputChange from "hooks/useInputChange";
+import useModal from "hooks/useModal";
 import { Template } from "layouts";
 import LayoutUser from "layouts/LayoutUser";
 import { auth, db } from "libs/firebase/firebase-config";
@@ -31,6 +34,7 @@ const ProfilePage = () => {
     gender: { value: "", label: "" },
     avatar: defaultAvatar,
   });
+  const { isShow, toggleModal } = useModal();
   const { onChange } = useInputChange(values, setValues);
   const { handleUploadImage } = useFirebaseImage();
   const { level, percent } = checkLevel(currentUser?.score || 0);
@@ -91,14 +95,21 @@ const ProfilePage = () => {
           >
             <div className="w-full mt-3 max-w-[500px]">
               <FormGroup>
-                <div className="flex justify-between text-xs">
-                  <span>Cấp {level}</span>
-                  <span>Cấp {level + 1}</span>
-                </div>
-                <div className="progress">
-                  <div className="progress-level" style={{ width: `${percent}%` }}>
-                    {percent}%
+                <div className="flex items-end gap-x-4">
+                  <div className="flex-1">
+                    <div className="flex justify-between text-xs">
+                      <span>Cấp {level}</span>
+                      <span>Cấp {level + 1}</span>
+                    </div>
+                    <div className="progress">
+                      <div className="progress-level" style={{ width: `${percent}%` }}>
+                        {percent}%
+                      </div>
+                    </div>
                   </div>
+                  <button type="button" onClick={toggleModal}>
+                    <IconQuestion />
+                  </button>
                 </div>
               </FormGroup>
               <FormGroup>
@@ -158,6 +169,7 @@ const ProfilePage = () => {
           </form>
         </Template>
       </LayoutUser>
+      <ModalLevel isShow={isShow} toggleModal={toggleModal} />
     </ProtectedRoute>
   );
 };

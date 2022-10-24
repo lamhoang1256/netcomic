@@ -191,3 +191,9 @@
     opacity: 1;
   }
 }
+.modal {
+  @apply max-w-[600px] w-[94%] outline-none min-w-[300px] bg-[#fff] top-1/2 absolute left-1/2 -translate-y-1/2 -translate-x-1/2 rounded-md shadow-modal;
+}
+.modal-overlay {
+  @apply bg-black bg-opacity-40 fixed inset-0 z-[300] flex items-center justify-center cursor-pointer;
+}

@@ -23,12 +23,12 @@ const sidebarLinks = [
     display: "Bình luận của tôi",
   },
   {
-    icon: "/icon-password.png",
+    icon: "/icon-follow.png",
     path: PATH.follow,
     display: "Truyện theo dõi",
   },
   {
-    icon: "/icon-password.png",
+    icon: "/icon-history.png",
     path: PATH.history,
     display: "Lịch sử xem",
   },

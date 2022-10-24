@@ -20,6 +20,7 @@ import IconGithub from "./IconGithub";
 import IconCheck from "./IconCheck";
 import IconUnlike from "./IconUnlike";
 import IconLike from "./IconLike";
+import IconQuestion from "./IconQuestion";
 
 export {
   IconFacebook,
@@ -33,6 +34,7 @@ export {
   IconLike,
   IconHeart,
   IconFilter,
+  IconQuestion,
   IconHome,
   IconList,
   IconChevronLeft,

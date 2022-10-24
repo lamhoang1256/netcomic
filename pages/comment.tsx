@@ -20,8 +20,7 @@ import { checkTimeAgo } from "utils";
 const CommentPage = () => {
   const { currentUser } = useGlobalStore();
   const [comments, setComments] = useState<IComment[]>([]);
-  console.log("comments: ", comments);
-  async function handleDeleteComment(commentId: string, userId: string) {
+  const handleDeleteComment = async (commentId: string, userId: string) => {
     if (!currentUser) return;
     const docRef = doc(db, "comments", commentId);
     Swal.fire({
@@ -42,13 +41,12 @@ const CommentPage = () => {
         }
       }
     });
-  }
+  };
   useEffect(() => {
     let unSubscribe: Unsubscribe;
     async function getComments() {
       try {
         if (!currentUser) return;
-        console.log("currentUser: ", currentUser);
         const colRef = collection(db, "comments");
         const queryRef = query(colRef, where("userId", "==", currentUser.uid));
         unSubscribe = onSnapshot(queryRef, (snapshot) => {
@@ -59,7 +57,6 @@ const CommentPage = () => {
               ...doc.data(),
             });
           });
-          console.log("results: ", results);
           setComments(results);
         });
       } catch (error: any) {
@@ -84,7 +81,7 @@ const CommentPage = () => {
             <div className="mt-4">
               <div className="flex items-center py-3 text-center gap-x-1 font-semibold bg-[#f7f7f8] md:gap-x-3 whitespace-nowrap md:text-[15px] rounded-tl rounded-tr">
                 <div className="w-1/2 md:w-2/5">Tên truyện</div>
-                <div className="w-14 md:w-20">Thời gian</div>
+                <div className="w-14 md:w-[88px]">Thời gian</div>
                 <div className="flex-1">Nội dung</div>
               </div>
               {comments.map((comment) => (
@@ -118,7 +115,7 @@ const CommentPage = () => {
                       </span>
                     </div>
                   </div>
-                  <div className="italic text-[13px] text-gray8a w-14 md:w-20">
+                  <div className="italic text-[13px] text-gray8a w-14 md:w-[88px]">
                     {checkTimeAgo((comment.createdAt?.seconds as number) * 1000)}
                   </div>
                   <div className="flex-1">{comment.content}</div>

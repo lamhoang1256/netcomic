@@ -1,3 +1,4 @@
 import ModalChapters from "./ModalChapters";
+import ModalLevel from "./ModalLevel";
 
-export { ModalChapters };
+export { ModalChapters, ModalLevel };
