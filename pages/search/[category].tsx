@@ -57,7 +57,7 @@ const CategoryPage = ({
                   <span>Reset</span>
                 </CustomLink>
               </div>
-              <ComicGrid className="mt-[10px]">
+              <ComicGrid className="mt-4">
                 {results.map((comic) => (
                   <ComicItem comic={comic} key={comic.slug} />
                 ))}

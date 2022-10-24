@@ -35,7 +35,7 @@ const FilterStatusCate = ({ options, ...props }: FilterStatusCateProps) => {
     router.push(`${PATH.search}/${router.query.category}${value.value}`);
   };
   return (
-    <div className="select2">
+    <div className="select-small">
       <Select options={options} value={value} onChange={handleChange} {...props} />
     </div>
   );

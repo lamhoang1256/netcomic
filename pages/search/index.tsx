@@ -33,7 +33,7 @@ const SearchPage = ({ results, paginations, categories, status, sort }: SearchPa
           <div className="flex flex-col gap-4 mt-6 lg:flex-row">
             <div className="lg:w-2/3">
               <h2 className="pt-4 pb-1 text-2xl text-center">Tìm truyện tranh</h2>
-              <div className="grid flex-1 gap-2 mt-2 filter-grid filter">
+              <div className="grid gap-2 mt-2 filter-grid filter">
                 <FilterStatus options={status} placeholder="Tình trạng" />
                 <FilterStatus options={sort} placeholder="Sắp xếp theo" />
                 <CustomLink

@@ -35,7 +35,7 @@ const FilterStatus = ({ options, ...props }: FilterStatusProps) => {
     router.push(`${PATH.search}${value.value}`);
   };
   return (
-    <div className="select2">
+    <div className="select-small">
       <Select options={options} value={value} onChange={handleChange} {...props} />
     </div>
   );
