@@ -45,9 +45,11 @@ const CommentList = () => {
   }, [slug]);
   return (
     <div>
-      {comments.map((comment) => (
-        <CommentItem key={comment.id} comment={comment} />
-      ))}
+      {comments.length > 0 ? (
+        comments.map((comment) => <CommentItem key={comment.id} comment={comment} />)
+      ) : (
+        <span className="block my-2">Không có nhận xét nào gần đây!</span>
+      )}
     </div>
   );
 };

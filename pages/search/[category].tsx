@@ -38,14 +38,12 @@ const CategoryPage = ({
       </Head>
       <LayoutHome>
         <div className="bg-white layout-container">
-          <div className="flex flex-col gap-4 mt-6 lg:flex-row">
+          <h1 className="pt-4 pb-1 text-2xl text-center">
+            Truyện thể loại <span className="font-semibold text-rede5">{info.name}</span>
+          </h1>
+          <div className="flex flex-col gap-4 mt-3 lg:flex-row">
             <div className="lg:w-2/3">
-              <h2 className="pt-4 pb-1 text-2xl text-center">
-                Truyện thể loại <span className="font-semibold text-rede5">{info.name}</span>
-              </h2>
-              <div className="border border-graydd p-[10px] mt-[10px] mb-3 rounded">
-                {info.description}
-              </div>
+              <div className="border border-graydd p-[10px] mb-3 rounded">{info.description}</div>
               <div className="grid gap-2 filter-grid filter">
                 <FilterStatusCate options={status} placeholder="Tình trạng" />
                 <FilterStatusCate options={sort} placeholder="Sắp xếp theo" />

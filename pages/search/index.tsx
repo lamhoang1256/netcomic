@@ -8,7 +8,7 @@ import { Pagination } from "components/pagination";
 import { server } from "configs/server";
 import { PATH } from "constants/path";
 import LayoutHome from "layouts/LayoutHome";
-import { ComicGrid, ComicItem } from "modules/comic";
+import { ComicChartRanking, ComicGrid, ComicItem } from "modules/comic";
 import { GetServerSidePropsContext } from "next";
 import Head from "next/head";
 
@@ -30,10 +30,10 @@ const SearchPage = ({ results, paginations, categories, status, sort }: SearchPa
       </Head>
       <LayoutHome>
         <div className="bg-white layout-container">
-          <div className="flex flex-col gap-4 mt-6 lg:flex-row">
+          <h1 className="pt-4 pb-1 text-2xl text-center">Tìm truyện tranh</h1>
+          <div className="flex flex-col gap-4 mt-3 lg:flex-row">
             <div className="lg:w-2/3">
-              <h2 className="pt-4 pb-1 text-2xl text-center">Tìm truyện tranh</h2>
-              <div className="grid gap-2 mt-2 filter-grid filter">
+              <div className="grid gap-2 filter-grid filter">
                 <FilterStatus options={status} placeholder="Tình trạng" />
                 <FilterStatus options={sort} placeholder="Sắp xếp theo" />
                 <CustomLink
@@ -53,6 +53,7 @@ const SearchPage = ({ results, paginations, categories, status, sort }: SearchPa
             </div>
             <div className="flex flex-col lg:w-1/3 gap-y-4">
               <CategorySidebar categories={categories} />
+              <ComicChartRanking />
             </div>
           </div>
         </div>
