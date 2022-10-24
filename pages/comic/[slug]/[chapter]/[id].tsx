@@ -182,7 +182,7 @@ const ReadComicPage = ({ imageUrls, chapters, info }: ReadComicPageProps) => {
             <IconChevronRight className="!w-3 !h-3" fill="#fff" />
           </Button>
         </div>
-        <div className="layout-container">
+        <div className="layout-container !max-w-[1000px]">
           <CommentAddNew poster={info.posterUrl} title={info.title} />
           <CommentFilter />
           <CommentList />

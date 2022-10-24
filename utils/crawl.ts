@@ -38,8 +38,8 @@ export function crawlComic(
 ): IComic {
   const slugHasId = node.find(".image > a").attr("href")?.replace(replaceHref, "") as string;
   const slugArray = slugHasId?.split("-");
-  slugArray.pop();
-  const slug = slugArray.join("-");
+  slugArray?.pop();
+  const slug = slugArray?.join("-");
   const title = node.find(".jtip").text();
   const posterUrl = node.find(".image > a > img").attr("data-original") as string;
   const updatedAgo = node.find(".comic-item .chapter .time").first().text();
@@ -229,4 +229,14 @@ export const crawlGenderComics = (html: any) => {
     pagination.push(paginationItem);
   });
   return { comics, pagination };
+};
+
+export const getComicOptions = (node: cheerio.Cheerio<cheerio.Element>) => {
+  const label = node.text();
+  const value =
+    node
+      .attr("href")
+      ?.replace(PATH.netTruyenCategory as string, "")
+      ?.replace(PATH.netTruyenFull as string, "?full=true") || "/";
+  return { label, value };
 };

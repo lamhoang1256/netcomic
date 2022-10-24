@@ -13,8 +13,6 @@ import { FormEvent, useState } from "react";
 import useGlobalStore from "store/global-store";
 import { createUsernameFromEmail } from "utils";
 
-const stylesPopoverLink =
-  "text-[#000000cc] block px-5 py-2 hover:bg-[#fafafa] transition-all duration-300 hover:text-[#00bfa5]";
 const Header = () => {
   const { currentUser } = useGlobalStore();
   const { activePopover, hidePopover, showPopover } = usePopover();
@@ -62,9 +60,12 @@ const Header = () => {
                 </span>
               </div>
               <Popover active={activePopover} className="w-max">
-                <Link href={PATH.profile}>
-                  <a className="popover-link">Tài khoản của tôi</a>
-                </Link>
+                <CustomLink href={PATH.profile} className="popover-link">
+                  Tài khoản của tôi
+                </CustomLink>
+                <CustomLink href={PATH.follow} className="popover-link">
+                  Truyện theo dõi
+                </CustomLink>
                 <button
                   type="button"
                   className={"popover-link w-full text-left"}
@@ -76,16 +77,18 @@ const Header = () => {
             </div>
           ) : (
             <div className="flex gap-x-4">
-              <Link href={PATH.signUp}>
-                <a className="text-[#ffffffb3] transition-all duration-100 hover:opacity-70">
-                  Đăng kí
-                </a>
-              </Link>
-              <Link href={PATH.signIn}>
-                <a className="text-[#ffffffb3] transition-all duration-100 hover:opacity-70">
-                  Đăng nhập
-                </a>
-              </Link>
+              <CustomLink
+                href={PATH.signUp}
+                className="text-[#ffffffb3] transition-all duration-100 hover:opacity-70"
+              >
+                Đăng kí
+              </CustomLink>
+              <CustomLink
+                href={PATH.signIn}
+                className="text-[#ffffffb3] transition-all duration-100 hover:opacity-70"
+              >
+                Đăng nhập
+              </CustomLink>
             </div>
           )}
         </nav>

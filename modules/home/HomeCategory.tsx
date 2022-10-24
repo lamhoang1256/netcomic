@@ -17,24 +17,13 @@ const HomeCategory = ({ categories }: HomeCategoryProps) => {
           <SwiperSlide key={index} className="!w-auto">
             <CustomLink
               href={`${PATH.search}/${category.href}`}
-              className="py-1 px-[10px] whitespace-pre rounded border border-blue33 text-blue33 bg-blue-100 scroll-snap-category inline-block"
+              className="py-1 px-[10px] whitespace-pre rounded border hover:text-redf6 hover:border-redf6 hover:bg-red-100 transition-all duration-300 border-blue33 text-blue33 bg-blue-100 scroll-snap-category inline-block"
             >
               {category.display}
             </CustomLink>
           </SwiperSlide>
         ))}
       </Swiper>
-      {/* <div className="scroll-snap-categories">
-        {categories.map((category, index) => (
-          <CustomLink
-            key={index}
-            href={`${PATH.search}/${category.href}`}
-            className="py-1 px-[10px] whitespace-pre rounded border border-blue33 text-blue33 bg-blue-100 scroll-snap-category"
-          >
-            {category.display}
-          </CustomLink>
-        ))}
-      </div> */}
     </div>
   );
 };

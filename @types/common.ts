@@ -70,3 +70,8 @@ export interface IComment {
   title: string;
   userId: string;
 }
+export interface IComicOption {
+  active: boolean;
+  label: string;
+  value: string;
+}

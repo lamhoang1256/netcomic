@@ -45,7 +45,10 @@ function FilterItem({ name, active, onClick }: FilterItemProps) {
   return (
     <div
       key={name}
-      className={classNames(`py-3 cursor-pointer gap-x-2 text-base`, active && "text-blue33")}
+      className={classNames(
+        `py-2 mt-2 cursor-pointer gap-x-2 text-base border-b-2`,
+        active ? "text-blue33 border-b-blue33" : "border-b-transparent"
+      )}
       onClick={onClick}
     >
       {name}
