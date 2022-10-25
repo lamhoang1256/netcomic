@@ -11,6 +11,8 @@ export const PATH = {
   comment: "/comment",
   follow: "/follow",
   history: "/history",
+  userManage: "/manage/user",
+  commentManage: "/manage/comment",
   changePassword: "/change-password",
   pageNotFound: "/404",
   netTruyen: process.env.NEXT_PUBLIC_NHATTRUYEN as string,

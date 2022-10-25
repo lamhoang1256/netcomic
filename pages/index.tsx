@@ -3,8 +3,7 @@ import axios from "axios";
 import { Pagination } from "components/pagination";
 import { server } from "configs/server";
 import LayoutHome from "layouts/LayoutHome";
-import { ComicChartRanking } from "modules/comic";
-import { HomeBanner, HomeCategory, HomeFollow, HomeHistory, HomeNewestComic } from "modules/home";
+import { HomeBanner, HomeCategory, HomeNewestComic } from "modules/home";
 import { GetServerSidePropsContext } from "next";
 import Head from "next/head";
 
