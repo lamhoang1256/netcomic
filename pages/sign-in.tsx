@@ -3,6 +3,8 @@ import { Button } from "components/button";
 import { FormGroup, Label } from "components/form";
 import { IconFacebook, IconGoogle } from "components/icons";
 import { Input, InputPassword } from "components/input";
+import { CustomLink } from "components/link";
+import { PATH } from "constants/path";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import useInputChange from "hooks/useInputChange";
 import { auth } from "libs/firebase/firebase-config";
@@ -66,7 +68,9 @@ const SignInPage = () => {
           <Button type="submit" className="w-full h-10 mt-1 text-base text-white bg-blue29">
             Đăng nhập
           </Button>
-          <span className="block my-3">Chưa có tài khoản? Đăng ký</span>
+          <span className="block my-3">
+            Chưa có tài khoản? <CustomLink href={PATH.signUp}>Đăng ký</CustomLink>
+          </span>
           <div className="grid grid-cols-2 gap-x-2">
             <Button className="flex items-center font-medium text-white border h-11 gap-x-2 bg-blue29">
               <IconGoogle />

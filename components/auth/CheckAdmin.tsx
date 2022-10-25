@@ -9,10 +9,9 @@ const CheckAdmin = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
   const { currentUser } = useGlobalStore();
   useEffect(() => {
-    if (!currentUser) return;
     if (currentUser?.role !== userRole.ADMIN) router.push(PATH.pageNotFound);
   }, [currentUser, router]);
-  return <ProtectedRoute>{currentUser ? children : null}</ProtectedRoute>;
+  return <ProtectedRoute>{currentUser?.role === userRole.ADMIN ? children : null}</ProtectedRoute>;
 };
 
 export default CheckAdmin;

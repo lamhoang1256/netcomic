@@ -3,8 +3,10 @@ import { Button } from "components/button";
 import { FormGroup, Label } from "components/form";
 import { IconFacebook, IconGoogle } from "components/icons";
 import { Input, InputPassword } from "components/input";
+import { CustomLink } from "components/link";
 import { userRole, userStatus } from "constants/global";
 import { defaultAvatar } from "constants/image";
+import { PATH } from "constants/path";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import useInputChange from "hooks/useInputChange";
@@ -46,6 +48,12 @@ const SignUpPage = () => {
         role: userRole.USER,
         createdAt: serverTimestamp(),
         score: 0,
+        follows: [],
+        gender: {
+          disabled: false,
+          label: "Nam",
+          value: "boy",
+        },
       });
       toast.success("Đăng ký tài khoản thành công!");
     } catch (error: any) {
@@ -96,7 +104,10 @@ const SignUpPage = () => {
         <Button type="submit" className="w-full h-10 mt-1 text-base text-white bg-blue29">
           Đăng ký
         </Button>
-        <span className="block my-3">Đã có tài khoản? Đăng nhập</span>
+        <span className="block my-3">
+          Đã có tài khoản?
+          <CustomLink href={PATH.signIn}>Đăng nhập</CustomLink>
+        </span>
         <div className="grid grid-cols-2 gap-x-2">
           <Button className="flex items-center font-medium text-white border h-11 gap-x-2 bg-blue29">
             <IconGoogle />
