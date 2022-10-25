@@ -3,6 +3,7 @@ import { ActionDelete, ActionEdit } from "components/action";
 import { CheckAdmin } from "components/auth";
 import { Image } from "components/image";
 import { LabelStatus } from "components/label";
+import { Table } from "components/table";
 import { userRole } from "constants/global";
 import { Unsubscribe } from "firebase/auth";
 import { collection, deleteDoc, doc, onSnapshot } from "firebase/firestore";
@@ -12,7 +13,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import useGlobalStore from "store/global-store";
 import Swal from "sweetalert2";
-import { checkLevel } from "utils";
+import { checkLevel, formatCreatedAt } from "utils";
 
 const UserManage = () => {
   const { currentUser } = useGlobalStore();
@@ -66,55 +67,64 @@ const UserManage = () => {
   }, []);
   return (
     <CheckAdmin>
-      <LayoutDashboard>
-        <div>
-          <div className="flex items-center py-3 text-center font-semibold bg-[#f7f7f8] border border-gray-200 gap-x-5 whitespace-nowrap text-[15px] rounded-tl rounded-tr">
-            <div className="w-[50px]">STT</div>
-            <div className="w-1/4">Họ và tên</div>
-            <div className="w-1/5">Email</div>
-            <div className="w-[120px]">Giới tính</div>
-            <div className="w-[120px]">Trạng thái</div>
-            <div className="w-[120px]">Quyền</div>
-            <div className="flex-1">Hành động</div>
-          </div>
-          {users.map((user, index) => (
-            <div className="flex items-center mt-4 text-base gap-x-5" key={user.id}>
-              <div className="w-[50px] text-center">{index + 1}</div>
-              <div className="w-1/4">
-                <div className="flex items-center gap-x-3">
-                  <div className="flex-shrink">
-                    <Image
-                      alt="avatar"
-                      src={user?.avatar}
-                      className="object-cover w-[44px] border border-graydd h-[44px] rounded"
-                    />
-                  </div>
-                  <div className="flex-1">
-                    <span className="block">{user?.fullname || "User"}</span>
-                    <span className="text-xs px-[6px] py-[1px] border border-red-400 text-red-400 rounded inline-block mt-[2px] mr-2">
-                      Cấp {checkLevel(user?.score).level}
-                    </span>
-                    <span className="text-sm">
-                      {new Date(user?.createdAt?.seconds * 1000).toLocaleDateString("vi-VI")}
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div className="flex w-1/5 gap-x-3">{user.email}</div>
-              <div className="text-center w-[120px]">{user.gender?.label}</div>
-              <div className="text-center w-[120px]">
-                <LabelStatus type="success">{user.status}</LabelStatus>
-              </div>
-              <div className="w-[120px] text-center">{user.role}</div>
-              <div className="flex items-center justify-center flex-1 gap-x-2">
-                <ActionEdit />
-                {currentUser?.role === userRole.ADMIN && (
-                  <ActionDelete onClick={() => handleDeleteUser(user.id)} />
-                )}
-              </div>
-            </div>
-          ))}
-        </div>
+      <LayoutDashboard
+        title="Quản lý người dùng"
+        desc="Quản lí tất cả người dùng đã đăng nhập NetComic"
+      >
+        <Table>
+          <table>
+            <thead>
+              <tr>
+                <th>STT</th>
+                <th>Họ và tên</th>
+                <th>Email</th>
+                <th>Giới tính</th>
+                <th>Trạng thái</th>
+                <th>Quyền</th>
+                <th>Hành động</th>
+              </tr>
+            </thead>
+            <tbody>
+              {users.map((user, index) => (
+                <tr key={user.id}>
+                  <td>{index + 1}</td>
+                  <td>
+                    <div className="flex items-center gap-x-3">
+                      <div className="flex-shrink">
+                        <Image
+                          alt="avatar"
+                          src={user?.avatar}
+                          className="object-cover w-[44px] border border-graydd h-[44px] rounded"
+                        />
+                      </div>
+                      <div className="flex-1">
+                        <span className="block">{user?.fullname || "User"}</span>
+                        <span className="text-xs px-[6px] py-[1px] border border-red-400 text-red-400 rounded inline-block mt-[2px] mr-2">
+                          Cấp {checkLevel(user?.score).level}
+                        </span>
+                        <span className="text-sm">
+                          {formatCreatedAt((user?.createdAt?.seconds as number) * 1000)}
+                        </span>
+                      </div>
+                    </div>
+                  </td>
+                  <td>{user.email}</td>
+                  <td>{user.gender?.label}</td>
+                  <td>
+                    <LabelStatus type="success">{user.status}</LabelStatus>
+                  </td>
+                  <td>{user.role}</td>
+                  <td className="flex items-center gap-x-2">
+                    <ActionEdit />
+                    {currentUser?.role === userRole.ADMIN && (
+                      <ActionDelete onClick={() => handleDeleteUser(user.id)} />
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </Table>
       </LayoutDashboard>
     </CheckAdmin>
   );

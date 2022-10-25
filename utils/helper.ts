@@ -40,3 +40,6 @@ export const checkTimeAgo = (timeCreated: number) => {
   }
   return "Vừa xong";
 };
+export const formatCreatedAt = (createdAt: number) => {
+  return new Date(createdAt).toLocaleDateString("vi-VI");
+};

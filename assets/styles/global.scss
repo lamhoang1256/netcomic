@@ -207,9 +207,13 @@
 .modal-overlay {
   @apply bg-black bg-opacity-40 fixed inset-0 z-[300] flex items-center justify-center cursor-pointer;
 }
-.table {
+.table-styles {
+  overflow-x: auto;
   table {
     width: 100%;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    overflow: hidden;
   }
   thead {
     background-color: #f7f7f8;
@@ -220,11 +224,11 @@
     white-space: nowrap;
   }
   th {
-    padding: 20px 30px;
+    padding: 12px 30px;
     font-weight: 600;
     text-align: left;
   }
   td {
-    padding: 15px 30px;
+    padding: 10px 30px;
   }
 }

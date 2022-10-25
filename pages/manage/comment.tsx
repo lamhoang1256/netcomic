@@ -4,6 +4,7 @@ import { CheckAdmin } from "components/auth";
 import { Image } from "components/image";
 import { LabelStatus } from "components/label";
 import { CustomLink } from "components/link";
+import { Table } from "components/table";
 import { userRole } from "constants/global";
 import { PATH } from "constants/path";
 import { Unsubscribe } from "firebase/auth";
@@ -15,7 +16,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import useGlobalStore from "store/global-store";
 import Swal from "sweetalert2";
-import { checkTimeAgo } from "utils";
+import { checkTimeAgo, formatCreatedAt } from "utils";
 
 const CommentManage = () => {
   const { currentUser } = useGlobalStore();
@@ -69,73 +70,81 @@ const CommentManage = () => {
   }, [currentUser]);
   return (
     <CheckAdmin>
-      <LayoutDashboard>
-        <div>
-          <div className="flex items-center py-3 text-center font-semibold bg-[#f7f7f8] border border-gray-200 gap-x-5 whitespace-nowrap text-[15px] rounded-tl rounded-tr">
-            <div className="w-1/5">Người dùng</div>
-            <div className="w-1/5">Tên truyện</div>
-            <div className="w-[100px]">Thời gian</div>
-            <div className="w-[120px]">Trạng thái</div>
-            <div className="flex-1">Nội dung</div>
-            <div className="w-28">Xóa</div>
-          </div>
-          {comments.map((comment) => (
-            <div className="flex items-center mt-4 text-base gap-x-5" key={comment.id}>
-              <div className="w-1/5">
-                <div className="flex items-center gap-x-3">
-                  <div className="flex-shrink">
-                    <Image
-                      alt="avatar"
-                      src={comment?.avatar}
-                      className="object-cover w-[44px] border border-graydd h-[44px] rounded"
-                    />
-                  </div>
-                  <div className="flex-1">
-                    <span className="block">{comment?.fullname}</span>
-                    <span className="text-xs px-[6px] py-[1px] border border-red-400 text-red-400 rounded inline-block mt-[2px] mr-2">
-                      Cấp {comment.level}
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div className="flex w-1/5 gap-x-3">
-                <CustomLink
-                  href={`${PATH.comic}/${comment.slug}`}
-                  className="flex-grow-0 w-12 h-12"
-                >
-                  <Image
-                    alt={comment.slug}
-                    src={comment.poster}
-                    className="border border-[#eee] w-12 h-12 object-cover object-top rounded"
-                  />
-                </CustomLink>
-                <div className="flex-1">
-                  <ComicTitle
-                    className="!text-sm line-clamp-none"
-                    href={`${PATH.comic}/${comment.slug}`}
-                  >
-                    {comment.title}
-                  </ComicTitle>
-                  <span className="text-sm italic text-blue33">{comment.chapterName}</span>
-                </div>
-              </div>
-              <div className="italic text-center text-[13px] text-gray8a w-[100px]">
-                {new Date((comment?.createdAt?.seconds as number) * 1000).toLocaleDateString(
-                  "vi-VI"
-                )}
-              </div>
-              <div className="w-[120px] text-sm text-center">
-                <LabelStatus type="success">{comment.status}</LabelStatus>
-              </div>
-              <div className="flex-1">{comment.content}</div>
-              <div className="flex justify-center w-28">
-                {currentUser?.role === userRole.ADMIN && (
-                  <ActionDelete onClick={() => handleDeleteComment(comment.id, comment.userId)} />
-                )}
-              </div>
-            </div>
-          ))}
-        </div>
+      <LayoutDashboard title="Quản lý bình luận" desc="Quản lí danh sách bình luận về truyện">
+        <Table>
+          <table>
+            <thead>
+              <tr>
+                <th>STT</th>
+                <th>Người dùng</th>
+                <th>Tên truyện</th>
+                <th>Thời gian</th>
+                <th>Trạng thái</th>
+                <th>Nội dung</th>
+                <th>Xóa</th>
+              </tr>
+            </thead>
+            <tbody>
+              {comments.map((comment, index) => (
+                <tr key={comment.id}>
+                  <td>{index + 1}</td>
+                  <td>
+                    <div className="flex items-center gap-x-3">
+                      <div className="flex-shrink">
+                        <Image
+                          alt="avatar"
+                          src={comment?.avatar}
+                          className="object-cover w-[44px] border border-graydd h-[44px] rounded"
+                        />
+                      </div>
+                      <div className="flex-1">
+                        <span className="block">{comment?.fullname}</span>
+                        <span className="text-xs px-[6px] py-[1px] border border-red-400 text-red-400 rounded inline-block mt-[2px] mr-2">
+                          Cấp {comment.level}
+                        </span>
+                      </div>
+                    </div>
+                  </td>
+                  <td className="flex gap-x-3">
+                    <CustomLink
+                      href={`${PATH.comic}/${comment.slug}`}
+                      className="flex-grow-0 w-12 h-12"
+                    >
+                      <Image
+                        alt={comment.slug}
+                        src={comment.poster}
+                        className="border border-[#eee] w-12 h-12 object-cover object-top rounded"
+                      />
+                    </CustomLink>
+                    <div className="flex-1">
+                      <ComicTitle
+                        className="!text-sm line-clamp-none"
+                        href={`${PATH.comic}/${comment.slug}`}
+                      >
+                        {comment.title}
+                      </ComicTitle>
+                      <span className="text-sm italic text-blue33">{comment.chapterName}</span>
+                    </div>
+                  </td>
+                  <td className="text-[13px] text-gray8a">
+                    {formatCreatedAt((comment?.createdAt?.seconds as number) * 1000)}
+                  </td>
+                  <td className="text-sm">
+                    <LabelStatus type="success">{comment.status}</LabelStatus>
+                  </td>
+                  <td>{comment.content}</td>
+                  <td>
+                    {currentUser?.role === userRole.ADMIN && (
+                      <ActionDelete
+                        onClick={() => handleDeleteComment(comment.id, comment.userId)}
+                      />
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </Table>
       </LayoutDashboard>
     </CheckAdmin>
   );
