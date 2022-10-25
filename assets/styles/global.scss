@@ -173,7 +173,7 @@
     height: 0;
   }
   &-link {
-    @apply text-[#000000cc] block px-5 py-2 hover:bg-[#fafafa] transition-all duration-300 hover:text-[#00bfa5];
+    @apply text-[#000000cc] block px-5 py-2 hover:bg-[#fafafa] transition-all duration-300 hover:text-[#00bfa5] text-left w-full;
   }
   &-content {
     box-shadow: 0 1px 3.125rem 0 rgb(0 0 0 /20%);

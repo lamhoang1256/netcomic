@@ -2,16 +2,42 @@ import { IconSearch } from "components/icons";
 import { Image } from "components/image";
 import { CustomLink } from "components/link";
 import { Popover } from "components/popover";
+import { userRole } from "constants/global";
 import { defaultAvatar } from "constants/image";
 import { PATH } from "constants/path";
 import { signOut } from "firebase/auth";
 import usePopover from "hooks/usePopover";
 import { auth } from "libs/firebase/firebase-config";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
 import useGlobalStore from "store/global-store";
 import { createUsernameFromEmail } from "utils";
+
+const links = [
+  {
+    display: "Tài khoản của tôi",
+    path: PATH.profile,
+  },
+  {
+    display: "Truyện theo dõi",
+    path: PATH.follow,
+  },
+  {
+    display: "Đăng xuất",
+    path: "/",
+    onClick: () => signOut(auth),
+  },
+];
+const linksWithoutLogged = [
+  {
+    display: "Đăng ký",
+    path: PATH.signUp,
+  },
+  {
+    display: "Đăng nhập",
+    path: PATH.signIn,
+  },
+];
 
 const Header = () => {
   const { currentUser } = useGlobalStore();
@@ -60,35 +86,34 @@ const Header = () => {
                 </span>
               </div>
               <Popover active={activePopover} className="w-max">
-                <CustomLink href={PATH.profile} className="popover-link">
-                  Tài khoản của tôi
-                </CustomLink>
-                <CustomLink href={PATH.follow} className="popover-link">
-                  Truyện theo dõi
-                </CustomLink>
-                <button
-                  type="button"
-                  className={"popover-link w-full text-left"}
-                  onClick={() => signOut(auth)}
-                >
-                  Đăng xuất
-                </button>
+                {currentUser?.role === userRole.ADMIN && (
+                  <CustomLink href={PATH.manage} className="popover-link">
+                    Dashboard
+                  </CustomLink>
+                )}
+                {links.map((link) => (
+                  <CustomLink
+                    href={link.path}
+                    key={link.display}
+                    onClick={link.onClick}
+                    className="popover-link"
+                  >
+                    {link.display}
+                  </CustomLink>
+                ))}
               </Popover>
             </div>
           ) : (
             <div className="flex gap-x-4">
-              <CustomLink
-                href={PATH.signUp}
-                className="text-[#ffffffb3] transition-all duration-100 hover:opacity-70"
-              >
-                Đăng kí
-              </CustomLink>
-              <CustomLink
-                href={PATH.signIn}
-                className="text-[#ffffffb3] transition-all duration-100 hover:opacity-70"
-              >
-                Đăng nhập
-              </CustomLink>
+              {linksWithoutLogged.map((link) => (
+                <CustomLink
+                  href={link.path}
+                  key={link.display}
+                  className="text-[#ffffffb3] transition-all duration-100 hover:opacity-70"
+                >
+                  {link.display}
+                </CustomLink>
+              ))}
             </div>
           )}
         </nav>

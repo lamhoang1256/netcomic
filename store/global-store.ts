@@ -8,7 +8,7 @@ import { devtools } from "zustand/middleware";
 
 interface IGlobalStore {
   currentUser: ICurrentUser | null;
-  setCurrentUser: (user: ICurrentUser) => void;
+  setCurrentUser: (user: ICurrentUser | null) => void;
   follows: string[];
   history: IComicHistory[];
   setFollow: (comics: string[]) => void;
@@ -49,7 +49,7 @@ const useGlobalStore = create<IGlobalStore>()(
       localStorage.setItem(LocalStorage.history, JSON.stringify(comics));
       set(() => ({ history: comics }));
     },
-    setCurrentUser: (user: ICurrentUser) => set(() => ({ currentUser: user })),
+    setCurrentUser: (user: ICurrentUser | null) => set(() => ({ currentUser: user })),
     loading: true,
     setLoading: (newLoading: boolean) => set(() => ({ loading: newLoading })),
   }))

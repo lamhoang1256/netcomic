@@ -11,6 +11,7 @@ function Authentication({ children }: { children: React.ReactNode }) {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (!user) {
         setLoading(false);
+        setCurrentUser(null);
         return;
       }
       setLoading(true);

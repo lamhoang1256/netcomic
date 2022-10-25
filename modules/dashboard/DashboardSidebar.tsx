@@ -5,12 +5,17 @@ import { Sidebar } from "layouts";
 
 const sidebarLinks = [
   {
+    icon: "/icon-dashboard.png",
+    path: PATH.manage,
+    display: "Trang tổng quan",
+  },
+  {
     icon: "/icon-account.png",
     path: PATH.userManage,
     display: "Quản lý người dùng",
   },
   {
-    icon: "/icon-account.png",
+    icon: "/icon-comment.png",
     path: PATH.commentManage,
     display: "Quản lý bình luận",
   },
@@ -21,7 +26,7 @@ const DashboardSidebar = () => {
     <Sidebar labelOpenSidebar="Danh mục">
       <ul>
         {sidebarLinks.map((link) => (
-          <li key={link.display} className="mb-4">
+          <li key={link.display} className="mb-5">
             <CustomLink href={link.path} className="flex items-center gap-x-3">
               <Image src={link.icon} alt={link.display} className="w-5 h-5" />
               <span>{link.display}</span>

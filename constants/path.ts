@@ -11,6 +11,7 @@ export const PATH = {
   comment: "/comment",
   follow: "/follow",
   history: "/history",
+  manage: "/manage",
   userManage: "/manage/user",
   commentManage: "/manage/comment",
   changePassword: "/change-password",

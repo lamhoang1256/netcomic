@@ -2,6 +2,7 @@ import { IComment } from "@types";
 import { ProtectedRoute } from "components/auth";
 import { Image } from "components/image";
 import { CustomLink } from "components/link";
+import { Table } from "components/table";
 import { PATH } from "constants/path";
 import { Unsubscribe } from "firebase/auth";
 import { collection, deleteDoc, doc, onSnapshot, query, where } from "firebase/firestore";
@@ -10,7 +11,6 @@ import LayoutUser from "layouts/LayoutUser";
 import { db } from "libs/firebase/firebase-config";
 import { ComicTitle } from "modules/comic";
 import Head from "next/head";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import useGlobalStore from "store/global-store";
@@ -78,50 +78,56 @@ const CommentPage = () => {
       <LayoutUser>
         <Template title="Bình luận của tôi" desc="Danh sách bình luận của bạn">
           {comments?.length > 0 ? (
-            <div className="mt-4">
-              <div className="flex items-center py-3 text-center gap-x-1 font-semibold bg-[#f7f7f8] md:gap-x-3 whitespace-nowrap md:text-[15px] rounded-tl rounded-tr">
-                <div className="w-1/2 md:w-2/5">Tên truyện</div>
-                <div className="w-14 md:w-[88px]">Thời gian</div>
-                <div className="flex-1">Nội dung</div>
-              </div>
-              {comments.map((comment) => (
-                <div className="flex mt-4 gap-x-1 md:gap-x-3" key={comment.id}>
-                  <div className="flex w-1/2 md:w-2/5 gap-x-2 md:gap-x-3">
-                    <CustomLink
-                      href={`${PATH.comic}/${comment.slug}`}
-                      className=" w-12 h-12 md:w-[60px] md:h-[60px] flex-grow-0"
-                    >
-                      <Image
-                        alt={comment.slug}
-                        src={comment.poster}
-                        className="border border-[#eee] w-12 h-12 md:w-[60px] object-cover object-top md:h-[60px] rounded"
-                      />
-                    </CustomLink>
-                    <div className="flex-1">
-                      <ComicTitle
-                        className="!text-sm line-clamp-none mb-1"
-                        href={`${PATH.comic}/${comment.slug}`}
-                      >
-                        {comment.title}
-                      </ComicTitle>
-                      <button
-                        className="inline-block text-rede5"
-                        onClick={() => handleDeleteComment(comment.id, comment.userId)}
-                      >
-                        Xóa bình luận
-                      </button>
-                      <span className="inline-block ml-3 italic text-blue33">
-                        {comment.chapterName}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="italic text-[13px] text-gray8a w-14 md:w-[88px]">
-                    {checkTimeAgo((comment.createdAt?.seconds as number) * 1000)}
-                  </div>
-                  <div className="flex-1">{comment.content}</div>
-                </div>
-              ))}
-            </div>
+            <Table className="mt-4">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Tên truyện</th>
+                    <th>Thời gian</th>
+                    <th>Nội dung</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {comments.map((comment) => (
+                    <tr key={comment.id}>
+                      <td className="flex gap-x-3">
+                        <CustomLink
+                          href={`${PATH.comic}/${comment.slug}`}
+                          className=" w-12 h-12 md:w-[60px] md:h-[60px] flex-grow-0"
+                        >
+                          <Image
+                            alt={comment.slug}
+                            src={comment.poster}
+                            className="border border-[#eee] w-12 h-12 md:w-[60px] object-cover object-top md:h-[60px] rounded"
+                          />
+                        </CustomLink>
+                        <div className="flex-1">
+                          <ComicTitle
+                            className="!text-sm line-clamp-none mb-1"
+                            href={`${PATH.comic}/${comment.slug}`}
+                          >
+                            {comment.title}
+                          </ComicTitle>
+                          <button
+                            className="inline-block text-rede5"
+                            onClick={() => handleDeleteComment(comment.id, comment.userId)}
+                          >
+                            Xóa bình luận
+                          </button>
+                          <span className="inline-block ml-3 italic text-blue33">
+                            {comment.chapterName}
+                          </span>
+                        </div>
+                      </td>
+                      <td className="italic text-[13px] text-gray8a w-14 md:w-[88px]">
+                        {checkTimeAgo((comment.createdAt?.seconds as number) * 1000)}
+                      </td>
+                      <td className="flex-1">{comment.content}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </Table>
           ) : (
             <div className="mt-3">Chưa có bình luận</div>
           )}
