@@ -23,7 +23,7 @@ const HomePage = ({ banners, newestComics, paginations, categories }: HomePagePr
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <LayoutHome>
-        <div className="bg-white rounded-lg layout-container">
+        <div className="bg-white rounded-lg dark:bg-bgdark layout-container">
           <HomeBanner banners={banners} />
           <HomeCategory categories={categories} />
           <HomeNewestComic newestComics={newestComics} />

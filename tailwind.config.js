@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: "class",
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
@@ -10,8 +11,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        bgdark: "#3d4044",
         purpleae: "#ae4ad9",
         blue33: "#337ab7",
+        blue1c: "#1bc7d0",
         blue00: "#0062cc",
         blue29: "#2979ff",
         gray8a: "#8a8a8f",
@@ -19,6 +22,7 @@ module.exports = {
         grayf2: "#f2f2f2",
         redf6: "#f64b15",
         rede5: "#e52d27",
+        yellowffc: "#ffc107",
       },
       fontFamily: {
         montserrat: ["Montserrat", "sans-serif"],

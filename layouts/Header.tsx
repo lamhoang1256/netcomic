@@ -1,3 +1,4 @@
+import { ButtonToggleTheme } from "components/button";
 import { IconSearch } from "components/icons";
 import { Image } from "components/image";
 import { CustomLink } from "components/link";
@@ -69,53 +70,56 @@ const Header = () => {
               <IconSearch />
             </button>
           </form>
-          {currentUser?.email ? (
-            <div
-              className="relative h-full text-white w-max"
-              onMouseEnter={showPopover}
-              onMouseLeave={hidePopover}
-            >
-              <div className="flex items-center justify-end h-full gap-x-2 transition-all duration-100 hover:text-[#ffffffb3] cursor-pointer">
-                <Image
-                  alt="avatar"
-                  src={currentUser?.photoURL || defaultAvatar}
-                  className="object-cover w-5 h-5 rounded-full"
-                />
-                <span className="font-medium max5se:line-clamp-1 ">
-                  {createUsernameFromEmail(currentUser?.email as string)}
-                </span>
+          <div className="flex items-center gap-x-4">
+            <ButtonToggleTheme></ButtonToggleTheme>
+            {currentUser?.email ? (
+              <div
+                className="relative h-full text-white w-max"
+                onMouseEnter={showPopover}
+                onMouseLeave={hidePopover}
+              >
+                <div className="flex items-center justify-end h-full gap-x-2 transition-all duration-100 hover:text-[#ffffffb3] cursor-pointer">
+                  <Image
+                    alt="avatar"
+                    src={currentUser?.photoURL || defaultAvatar}
+                    className="object-cover w-5 h-5 rounded-full"
+                  />
+                  <span className="font-medium max5se:line-clamp-1 ">
+                    {createUsernameFromEmail(currentUser?.email as string)}
+                  </span>
+                </div>
+                <Popover active={activePopover} className="w-max">
+                  {currentUser?.role === userRole.ADMIN && (
+                    <CustomLink href={PATH.manage} className="popover-link">
+                      Dashboard
+                    </CustomLink>
+                  )}
+                  {links.map((link) => (
+                    <CustomLink
+                      href={link.path}
+                      key={link.display}
+                      onClick={link.onClick}
+                      className="popover-link"
+                    >
+                      {link.display}
+                    </CustomLink>
+                  ))}
+                </Popover>
               </div>
-              <Popover active={activePopover} className="w-max">
-                {currentUser?.role === userRole.ADMIN && (
-                  <CustomLink href={PATH.manage} className="popover-link">
-                    Dashboard
-                  </CustomLink>
-                )}
-                {links.map((link) => (
+            ) : (
+              <div className="flex gap-x-4">
+                {linksWithoutLogged.map((link) => (
                   <CustomLink
                     href={link.path}
                     key={link.display}
-                    onClick={link.onClick}
-                    className="popover-link"
+                    className="text-[#ffffffb3] transition-all duration-100 hover:opacity-70"
                   >
                     {link.display}
                   </CustomLink>
                 ))}
-              </Popover>
-            </div>
-          ) : (
-            <div className="flex gap-x-4">
-              {linksWithoutLogged.map((link) => (
-                <CustomLink
-                  href={link.path}
-                  key={link.display}
-                  className="text-[#ffffffb3] transition-all duration-100 hover:opacity-70"
-                >
-                  {link.display}
-                </CustomLink>
-              ))}
-            </div>
-          )}
+              </div>
+            )}
+          </div>
         </nav>
       </div>
     </header>

@@ -25,7 +25,7 @@ const HomeBanner = ({ banners }: HomeBannerProps) => {
       >
         {banners.map((banner) => (
           <SwiperSlide key={banner.slug} className="!w-[187px]">
-            <div className="relative overflow-hidden rounded">
+            <div className="relative overflow-hidden border rounded border-graydd">
               <CustomLink href={`${PATH.comic}/${banner.slug}`}>
                 <ComicImage src={banner.posterUrl} alt={banner.slug} className="aspect-[190/250]" />
               </CustomLink>
