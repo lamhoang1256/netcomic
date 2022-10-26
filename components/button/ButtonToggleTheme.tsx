@@ -1,4 +1,4 @@
-import useDarkMode from "hooks/useDarkmode";
+import useDarkMode from "hooks/useDarkMode";
 import { ButtonHTMLAttributes } from "react";
 
 interface ButtonToggleThemeProps extends ButtonHTMLAttributes<HTMLButtonElement> {}
