@@ -1,3 +1,4 @@
+import { IQueryParams } from "@types";
 import axios from "axios";
 import * as cheerio from "cheerio";
 import { PATH } from "constants/path";
@@ -8,12 +9,12 @@ import { crawlComic } from "utils/crawl";
 import { ApiError, responseError, responseSuccess } from "utils/response";
 
 const RandomApi = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { method } = req;
+  const { method, query } = req;
   if (method !== "GET") {
     const error = new ApiError(STATUS.METHOD_NOT_ALLOWED, "Method not allowed");
     return responseError(error, res);
   }
-  const data = await randomComic();
+  const data = await randomComic(query);
   const response = {
     message: "Random truyện thành công!",
     data,
@@ -30,13 +31,14 @@ const getCountPage = async () => {
   return pageCount;
 };
 
-async function randomComic() {
+async function randomComic(query: Partial<IQueryParams>) {
   const PER_COMIC_AT_NHATTRUYEN = 36;
+  const limit = Number(query?.limit) || 24;
+  const pageCount = await getCountPage();
   const comics = await Promise.all(
-    Array(PER_COMIC_AT_NHATTRUYEN)
+    Array(limit)
       .fill(0)
       .map(async () => {
-        const pageCount = await getCountPage();
         const randomPage = Math.floor(Math.random() * pageCount);
         const response = await axios.get(PATH.netTruyen as string, {
           params: { page: randomPage },
@@ -49,7 +51,7 @@ async function randomComic() {
         return comic;
       })
   );
-  return comics;
+  return comics.filter((comic) => comic.slug);
 }
 
 export default catchAsync(RandomApi);

@@ -42,7 +42,6 @@ const RandomComicPage = ({ comics }: RandomComicPageProps) => {
 
 export const getServerSideProps = async ({ query }: GetServerSidePropsContext) => {
   const { data: comics } = (await axios.get(`${server}/api/random`, { params: query })).data;
-  console.log("data: ", comics);
   return {
     props: {
       comics,
