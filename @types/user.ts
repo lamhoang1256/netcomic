@@ -13,7 +13,7 @@ export interface IUser {
     seconds: number;
   };
   fullname: string;
-  gender: { value: string; label: string };
+  gender: string;
 }
 
 export interface ICurrentUser extends User {
@@ -26,5 +26,5 @@ export interface ICurrentUser extends User {
     seconds: number;
   };
   fullname?: string;
-  gender?: { value: string; label: string };
+  gender?: string;
 }

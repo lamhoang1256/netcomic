@@ -43,3 +43,9 @@ export const checkTimeAgo = (timeCreated: number) => {
 export const formatCreatedAt = (createdAt: number) => {
   return new Date(createdAt).toLocaleDateString("vi-VI");
 };
+export const createOptions = (obj: { [key: string]: string }) => {
+  return Object.entries(obj).map(([key, value]) => ({
+    label: value,
+    value: value,
+  }));
+};

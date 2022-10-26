@@ -2,25 +2,15 @@ import { CheckLoggedIn } from "components/auth";
 import { Button } from "components/button";
 import { FormGroup, Label } from "components/form";
 import { Input } from "components/input";
-import { server } from "configs/server";
-import { PATH } from "constants/path";
-import { sendPasswordResetEmail } from "firebase/auth";
-import { auth } from "libs/firebase/firebase-config";
+import { sendLinkResetPassword } from "libs/firebase/firebase-helper";
 import Head from "next/head";
 import { FormEvent, useState } from "react";
-import { toast } from "react-toastify";
 
 const ResetPasswordPage = () => {
   const [email, setEmail] = useState("");
   const handleSendResetLink = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!email) return;
-    try {
-      await sendPasswordResetEmail(auth, email);
-      toast.success("Đã gửi link reset password tới email của bạn!");
-    } catch (error: any) {
-      toast.error(error?.message);
-    }
+    await sendLinkResetPassword(email);
   };
   return (
     <CheckLoggedIn>

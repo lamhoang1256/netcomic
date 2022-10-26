@@ -1,8 +1,13 @@
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "./firebase-config";
+import { sendPasswordResetEmail } from "firebase/auth";
+import { toast } from "react-toastify";
+import { auth } from "./firebase-config";
 
-export const getFollowComics = async (userId: string) => {
-  const colRef = doc(db, "users", userId);
-  const data = await getDoc(colRef);
-  return data?.data()?.follows;
+export const sendLinkResetPassword = async (email: string) => {
+  try {
+    if (!email) return;
+    await sendPasswordResetEmail(auth, email);
+    toast.success("Đã gửi link reset password tới email!");
+  } catch (error: any) {
+    toast.error(error?.message);
+  }
 };

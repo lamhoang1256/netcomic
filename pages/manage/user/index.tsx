@@ -3,8 +3,10 @@ import { ActionDelete, ActionEdit } from "components/action";
 import { CheckAdmin } from "components/auth";
 import { Image } from "components/image";
 import { LabelStatus } from "components/label";
+import { CustomLink } from "components/link";
 import { Table } from "components/table";
 import { userRole } from "constants/global";
+import { PATH } from "constants/path";
 import { Unsubscribe } from "firebase/auth";
 import { collection, deleteDoc, doc, onSnapshot } from "firebase/firestore";
 import { LayoutDashboard } from "layouts";
@@ -109,13 +111,15 @@ const UserManage = () => {
                     </div>
                   </td>
                   <td>{user.email}</td>
-                  <td>{user.gender?.label}</td>
+                  <td>{user.gender}</td>
                   <td>
                     <LabelStatus type="success">{user.status}</LabelStatus>
                   </td>
                   <td>{user.role}</td>
                   <td className="flex items-center gap-x-2">
-                    <ActionEdit />
+                    <CustomLink href={`${PATH.userManage}/${user.id}`}>
+                      <ActionEdit />
+                    </CustomLink>
                     {currentUser?.role === userRole.ADMIN && (
                       <ActionDelete onClick={() => handleDeleteUser(user.id)} />
                     )}

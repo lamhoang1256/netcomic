@@ -7,9 +7,9 @@ interface LayoutHomeProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
-const LayoutHome = ({ children, className = "" }: LayoutHomeProps) => {
+const LayoutHome = ({ children, className, ...props }: LayoutHomeProps) => {
   return (
-    <div className={classNames("flex flex-col min-h-screen", className)}>
+    <div className={classNames("flex flex-col min-h-screen", className)} {...props}>
       <Header />
       <main className="flex-1 p-5">{children}</main>
       <Footer />

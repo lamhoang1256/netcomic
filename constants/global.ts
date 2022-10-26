@@ -1,3 +1,7 @@
+export const userGender = {
+  BOY: "NAM",
+  GRIL: "NỮ",
+};
 export const userRole = {
   USER: "USER",
   MOD: "MOD",

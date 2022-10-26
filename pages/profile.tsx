@@ -12,6 +12,7 @@ import { updateProfile } from "firebase/auth";
 import { doc, updateDoc } from "firebase/firestore";
 import useInputChange from "hooks/useInputChange";
 import useModal from "hooks/useModal";
+import useSelectChange from "hooks/useSelectChange";
 import { Template } from "layouts";
 import LayoutUser from "layouts/LayoutUser";
 import { auth, db } from "libs/firebase/firebase-config";
@@ -31,16 +32,14 @@ const ProfilePage = () => {
   const { currentUser } = useGlobalStore();
   const [values, setValues] = useState({
     fullname: "",
-    gender: { value: "", label: "" },
+    gender: "",
     avatar: defaultAvatar,
   });
   const { isShow, toggleModal } = useModal();
   const { onChange } = useInputChange(values, setValues);
   const { handleUploadImage } = useFirebaseImage();
   const { level, percent } = checkLevel(currentUser?.score || 0);
-  const handleChangeGender = (option: IOption) => {
-    setValues({ ...values, gender: option });
-  };
+  const { onChangeSelect } = useSelectChange(values, setValues);
   const handleUpdateProfile = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
@@ -71,7 +70,7 @@ const ProfilePage = () => {
     if (!currentUser) return;
     setValues({
       fullname: currentUser?.fullname || "",
-      gender: currentUser?.gender || { value: "", label: "" },
+      gender: currentUser?.gender || "",
       avatar: currentUser?.photoURL || defaultAvatar,
     });
   }, [currentUser]);
@@ -134,8 +133,11 @@ const ProfilePage = () => {
                 <Label htmlFor="gender">Giới tính</Label>
                 <Select
                   options={options}
-                  defaultValue={currentUser?.gender}
-                  callback={handleChangeGender}
+                  defaultValue={{
+                    label: currentUser?.gender as string,
+                    value: currentUser?.gender as string,
+                  }}
+                  callback={(option) => onChangeSelect("gender", option)}
                   placeholder="Chọn giới tính"
                 />
               </FormGroup>
