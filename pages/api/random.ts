@@ -37,7 +37,7 @@ async function randomComic() {
       .fill(0)
       .map(async () => {
         const pageCount = await getCountPage();
-        const randomPage = Math.floor(Math.random() * (pageCount + 1));
+        const randomPage = Math.floor(Math.random() * pageCount);
         const response = await axios.get(PATH.netTruyen as string, {
           params: { page: randomPage },
         });

@@ -12,6 +12,7 @@ export const PATH = {
   follow: "/follow",
   history: "/history",
   manage: "/manage",
+  random: "/random",
   userManage: "/manage/user",
   commentManage: "/manage/comment",
   changePassword: "/change-password",
