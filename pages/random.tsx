@@ -1,6 +1,7 @@
 import { IComic } from "@types";
 import axios from "axios";
 import { Button } from "components/button";
+import { IconRandom } from "components/icons";
 import { server } from "configs/server";
 import { PATH } from "constants/path";
 import LayoutHome from "layouts/LayoutHome";
@@ -22,17 +23,25 @@ const RandomComicPage = ({ comics }: RandomComicPageProps) => {
       </Head>
       <LayoutHome>
         <div className="!py-4 bg-white rounded layout-container">
-          <h2 className="pb-1 text-2xl text-center">Random truyện</h2>
-          <Button to={PATH.random} className="block mx-auto my-2 text-white bg-blue33">
-            Làm mới
+          <h2 className="text-2xl text-center">Random truyện</h2>
+          <Button
+            to={PATH.random}
+            className="flex items-center mx-auto my-3 text-white gap-x-[6px] bg-blue33"
+          >
+            <IconRandom fill="#fff" className="!w-[14px] !h-[14px]" />
+            <span>Làm mới</span>
           </Button>
           <ComicGrid className="mt-4">
             {comics.map((comic) => (
               <ComicItem comic={comic} key={comic.slug} />
             ))}
           </ComicGrid>
-          <Button to={PATH.random} className="block mx-auto mt-4 text-white bg-blue33">
-            Làm mới
+          <Button
+            to={PATH.random}
+            className="flex items-center mx-auto mt-4 text-white gap-x-[6px] bg-blue33"
+          >
+            <IconRandom fill="#fff" className="!w-[14px] !h-[14px]" />
+            <span>Làm mới</span>
           </Button>
         </div>
       </LayoutHome>

@@ -1,5 +1,5 @@
 import { IComic } from "@types";
-import { IconFilter } from "components/icons";
+import { IconFilter, IconRandom } from "components/icons";
 import { CustomLink } from "components/link";
 import { Heading } from "components/text";
 import { PATH } from "constants/path";
@@ -14,12 +14,20 @@ const HomeNewestComic = ({ newestComics }: HomeNewestComicProps) => {
     <div className="mt-5">
       <div className="flex items-center justify-between">
         <Heading className="text-xl">Truyện mới cập nhật</Heading>
-        <CustomLink
-          href={PATH.filter}
-          className="w-[30px] h-[30px] border border-[#ff9601] rounded-full flex items-center justify-center"
-        >
-          <IconFilter fill="#ff9601" />
-        </CustomLink>
+        <div className="flex items-center gap-x-2">
+          <CustomLink
+            href={PATH.random}
+            className="w-[30px] h-[30px] border border-[#ff9601] rounded-full flex items-center justify-center"
+          >
+            <IconRandom fill="#ff9601" />
+          </CustomLink>
+          <CustomLink
+            href={PATH.filter}
+            className="w-[30px] h-[30px] border border-[#ff9601] rounded-full flex items-center justify-center"
+          >
+            <IconFilter fill="#ff9601" />
+          </CustomLink>
+        </div>
       </div>
       <ComicGrid className="mt-[10px]">
         {newestComics.map((comic) => (

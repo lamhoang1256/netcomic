@@ -21,8 +21,10 @@ import IconCheck from "./IconCheck";
 import IconUnlike from "./IconUnlike";
 import IconLike from "./IconLike";
 import IconQuestion from "./IconQuestion";
+import IconRandom from "./IconRandom";
 
 export {
+  IconRandom,
   IconFacebook,
   IconTime,
   IconGoogle,

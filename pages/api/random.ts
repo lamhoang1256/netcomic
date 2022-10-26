@@ -22,19 +22,10 @@ const RandomApi = async (req: NextApiRequest, res: NextApiResponse) => {
   responseSuccess(res, response);
 };
 
-const getCountPage = async () => {
-  const response = await axios.get(PATH.netTruyen as string);
-  const html = response.data;
-  const $ = cheerio.load(html);
-  const lastPaginationElement = $("#ctl00_divCenter .pagination li", html).last();
-  const pageCount = Number($(lastPaginationElement).find("a").attr("href")?.split("?page=")[1]);
-  return pageCount;
-};
-
 async function randomComic(query: Partial<IQueryParams>) {
   const PER_COMIC_AT_NHATTRUYEN = 36;
   const limit = Number(query?.limit) || 24;
-  const pageCount = await getCountPage();
+  const pageCount = 50;
   const comics = await Promise.all(
     Array(limit)
       .fill(0)
