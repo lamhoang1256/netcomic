@@ -16,13 +16,13 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import useGlobalStore from "store/global-store";
 import Swal from "sweetalert2";
-import { checkTimeAgo, formatCreatedAt } from "utils";
+import { formatCreatedAt } from "utils";
 
 const CommentManage = () => {
   const { currentUser } = useGlobalStore();
   const [comments, setComments] = useState<IComment[]>([]);
   const handleDeleteComment = async (commentId: string, userId: string) => {
-    if (!currentUser) return;
+    if (currentUser?.role !== userRole.ADMIN) return;
     const docRef = doc(db, "comments", commentId);
     Swal.fire({
       title: "Xác nhận",
@@ -33,13 +33,12 @@ const CommentManage = () => {
       cancelButtonColor: "#d33",
       confirmButtonText: "Đồng ý!",
     }).then(async (result) => {
-      if (result.isConfirmed && currentUser.uid === userId) {
-        try {
-          await deleteDoc(docRef);
-          toast.success("Bình luận đã được xóa!");
-        } catch (error: any) {
-          toast.error(error?.message);
-        }
+      if (!result.isConfirmed) return;
+      try {
+        await deleteDoc(docRef);
+        toast.success("Bình luận đã được xóa!");
+      } catch (error: any) {
+        toast.error(error?.message);
       }
     });
   };
@@ -47,7 +46,6 @@ const CommentManage = () => {
     let unSubscribe: Unsubscribe = () => {};
     async function getComments() {
       try {
-        if (!currentUser) return;
         const colRef = collection(db, "comments");
         unSubscribe = onSnapshot(colRef, (snapshot) => {
           const results: IComment[] = [];
@@ -67,7 +65,7 @@ const CommentManage = () => {
     return () => {
       unSubscribe();
     };
-  }, [currentUser]);
+  }, []);
   return (
     <CheckAdmin>
       <LayoutDashboard title="Quản lý bình luận" desc="Quản lí danh sách bình luận về truyện">

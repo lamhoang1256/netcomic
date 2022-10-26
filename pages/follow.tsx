@@ -43,7 +43,7 @@ const FollowPage = () => {
           desc='Truyện chưa đọc sẽ hiển thị ở đầu danh sách, nhấn vào "Đã đọc" nếu truyện đọc rồi.'
         >
           {loading && <LoadingSpinner />}
-          {!loading && (
+          {!loading && comics?.length > 0 ? (
             <ComicGrid className="mt-4">
               {comics.map((comic) => {
                 const { slug, posterUrl, viewCount, title, followCount, commentCount, chapters } =
@@ -87,6 +87,8 @@ const FollowPage = () => {
                 );
               })}
             </ComicGrid>
+          ) : (
+            <span className="block mt-3">Danh sách theo dõi đang trống!</span>
           )}
         </Template>
       </LayoutUser>
