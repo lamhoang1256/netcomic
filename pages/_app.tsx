@@ -1,5 +1,6 @@
 import "assets/styles/global.scss";
 import { Authentication } from "components/auth";
+import useDarkMode from "hooks/useDarkMode";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import Modal from "react-modal";
@@ -14,6 +15,7 @@ Modal.defaultStyles = {
 };
 
 function MyApp({ Component, pageProps }: AppProps) {
+  useDarkMode();
   return (
     <Authentication>
       <Head>

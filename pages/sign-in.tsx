@@ -1,7 +1,7 @@
 import { CheckLoggedIn } from "components/auth";
 import { Button } from "components/button";
 import { FormGroup, Label } from "components/form";
-import { IconFacebook, IconGoogle } from "components/icons";
+import { IconFacebook, IconGoogle, IconHome } from "components/icons";
 import { Input, InputPassword } from "components/input";
 import { CustomLink } from "components/link";
 import { PATH } from "constants/path";
@@ -41,7 +41,7 @@ const SignInPage = () => {
       </Head>
       <div className="auth">
         <form
-          className="w-full z-10 mt-20 mx-auto bg-white dark:bg-dark1a rounded-xl p-10 max-w-[580px]"
+          className="w-full z-10 mt-20 mx-auto bg-white dark:bg-dark26 rounded-xl p-10 max-w-[580px]"
           onSubmit={(e) => handleSignIn(e)}
           autoComplete="off"
         >
@@ -68,18 +68,14 @@ const SignInPage = () => {
           <Button type="submit" className="w-full h-10 mt-1 text-base text-white bg-blue29">
             Đăng nhập
           </Button>
-          <span className="block my-3">
-            Chưa có tài khoản? <CustomLink href={PATH.signUp}>Đăng ký</CustomLink>
-          </span>
-          <div className="grid grid-cols-2 gap-x-2">
-            <Button className="flex items-center font-medium text-white border h-11 gap-x-2 bg-blue29">
-              <IconGoogle />
-              <span>Đăng nhập bằng Google</span>
-            </Button>
-            <Button className="flex items-center text-white gap-x-2 bg-[#385ca8]">
-              <IconFacebook />
-              <span>Đăng nhập bằng Facebook</span>
-            </Button>
+          <div className="flex items-center justify-between my-3">
+            <CustomLink href={PATH.home} className="flex items-center dark:text-white gap-x-1">
+              <IconHome className="!w-[14px] !h-[14px]" />
+              <span>Về trang chủ</span>
+            </CustomLink>
+            <span>
+              Chưa có tài khoản? <CustomLink href={PATH.signUp}>Đăng ký</CustomLink>
+            </span>
           </div>
         </form>
       </div>

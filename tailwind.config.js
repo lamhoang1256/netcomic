@@ -13,7 +13,7 @@ module.exports = {
       colors: {
         bgdark: "#3d4044",
         dark42: "#423e3e",
-        dark1a: "#1a1a1a",
+        dark26: "#26292c",
         purpleae: "#ae4ad9",
         blue33: "#337ab7",
         blue1c: "#1bc7d0",

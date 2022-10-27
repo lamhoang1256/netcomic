@@ -1,7 +1,7 @@
 import { CheckLoggedIn } from "components/auth";
 import { Button } from "components/button";
 import { FormGroup, Label } from "components/form";
-import { IconFacebook, IconGoogle } from "components/icons";
+import { IconFacebook, IconGoogle, IconHome } from "components/icons";
 import { Input, InputPassword } from "components/input";
 import { CustomLink } from "components/link";
 import { userRole, userStatus } from "constants/global";
@@ -67,58 +67,56 @@ const SignUpPage = () => {
         <meta name="description" content="Đăng ký" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <form
-        className="w-full mt-20 mx-auto bg-white rounded-xl p-10 max-w-[580px]"
-        onSubmit={(e) => handleSignUp(e)}
-        autoComplete="off"
-      >
-        <h1 className="text-xl font-bold text-center">Đăng ký</h1>
-        <FormGroup>
-          <Label htmlFor="email">Địa chỉ email</Label>
-          <Input
-            name="email"
-            type="email"
-            placeholder="Tài khoản/email của bạn"
-            onChange={onChange}
-            required
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label htmlFor="password">Mật khẩu</Label>
-          <InputPassword
-            name="password"
-            placeholder="Mật khẩu của bạn"
-            onChange={onChange}
-            required
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label htmlFor="confirmPassword">Xác nhận Mật khẩu</Label>
-          <InputPassword
-            name="confirmPassword"
-            placeholder="Xác nhận mật khẩu"
-            onChange={onChange}
-            required
-          />
-        </FormGroup>
-        <Button type="submit" className="w-full h-10 mt-1 text-base text-white bg-blue29">
-          Đăng ký
-        </Button>
-        <span className="block my-3">
-          Đã có tài khoản?
-          <CustomLink href={PATH.signIn}>Đăng nhập</CustomLink>
-        </span>
-        <div className="grid grid-cols-2 gap-x-2">
-          <Button className="flex items-center font-medium text-white border h-11 gap-x-2 bg-blue29">
-            <IconGoogle />
-            <span>Đăng ký bằng Google</span>
+      <div className="auth">
+        <form
+          className="w-full z-10 dark:bg-dark26 mt-20 mx-auto bg-white rounded-xl p-10 max-w-[580px]"
+          onSubmit={(e) => handleSignUp(e)}
+          autoComplete="off"
+        >
+          <h1 className="text-xl font-bold text-center">Đăng ký</h1>
+          <FormGroup>
+            <Label htmlFor="email">Địa chỉ email</Label>
+            <Input
+              name="email"
+              type="email"
+              placeholder="Tài khoản/email của bạn"
+              onChange={onChange}
+              required
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label htmlFor="password">Mật khẩu</Label>
+            <InputPassword
+              name="password"
+              placeholder="Mật khẩu của bạn"
+              onChange={onChange}
+              required
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label htmlFor="confirmPassword">Xác nhận Mật khẩu</Label>
+            <InputPassword
+              name="confirmPassword"
+              placeholder="Xác nhận mật khẩu"
+              onChange={onChange}
+              required
+            />
+          </FormGroup>
+          <Button type="submit" className="w-full h-10 mt-1 text-base text-white bg-blue29">
+            Đăng ký
           </Button>
-          <Button className="flex items-center text-white gap-x-2 bg-[#385ca8]">
-            <IconFacebook />
-            <span>Đăng ký bằng Facebook</span>
-          </Button>
-        </div>
-      </form>
+          <div className="flex items-center justify-between my-3">
+            <CustomLink href={PATH.home} className="flex items-center dark:text-white gap-x-1">
+              <IconHome className="!w-[14px] !h-[14px]" />
+              <span>Về trang chủ</span>
+            </CustomLink>
+            <span>
+              Đã có tài khoản?
+              <CustomLink href={PATH.signIn}> Đăng nhập</CustomLink>
+            </span>
+          </div>
+        </form>
+      </div>
     </CheckLoggedIn>
   );
 };

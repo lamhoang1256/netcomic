@@ -11,7 +11,7 @@ const SidebarCloseAction = ({ onCloseSidebar }: SidebarCloseActionProps) => {
       onClick={onCloseSidebar}
       className="flex items-center mb-5 cursor-pointer gap-x-2 lg:hidden"
     >
-      <IconChevronLeft className="w-4 h-4" />
+      <IconChevronLeft className="w-4 h-4" fill="currentColor" />
       <span className="text-base font-medium">Trở lại</span>
     </div>
   );
