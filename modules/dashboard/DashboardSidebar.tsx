@@ -23,7 +23,7 @@ const sidebarLinks = [
 
 const DashboardSidebar = () => {
   return (
-    <Sidebar labelOpenSidebar="Danh mục">
+    <Sidebar labelOpenSidebar="Danh mục" className="flex-grow-0 !max-w-[230px]">
       <ul>
         {sidebarLinks.map((link) => (
           <li key={link.display} className="mb-5">

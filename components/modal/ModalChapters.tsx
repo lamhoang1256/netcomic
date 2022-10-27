@@ -53,7 +53,7 @@ const ModalChapters = ({ isShow, toggleModal, chapters }: ModalChaptersProps) =>
           className="px-3 py-[6px] rounded border border-[#ccc] w-[82%] h-9 bg-white text-base outline-none"
           onChange={(e) => setSearchChapter(e.target.value)}
         />
-        <button onClick={toggleModal}>
+        <button onClick={toggleModal} className="dark:text-white">
           <IconClose />
         </button>
       </form>
@@ -81,7 +81,7 @@ const ModalChapters = ({ isShow, toggleModal, chapters }: ModalChaptersProps) =>
       <div className="flex justify-end px-5 py-[10px]">
         <button
           onClick={toggleModal}
-          className="rounded px-3 py-[6px] bg-white border border-graydd"
+          className="rounded px-3 py-[6px] bg-white text-black border border-graydd"
         >
           Đóng
         </button>

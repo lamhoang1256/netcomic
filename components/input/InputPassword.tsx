@@ -13,7 +13,7 @@ const InputPassword = ({ name, className, ...props }: InputPasswordProps) => {
   return (
     <div
       className={classNames(
-        "flex items-center border shadow-input pr-4 bg-white rounded overflow-hidden",
+        "flex items-center border shadow-input pr-4 text-black bg-white rounded overflow-hidden",
         focus ? "border-[#0000008a]" : "border-[#00000023]"
       )}
     >

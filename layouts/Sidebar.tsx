@@ -32,7 +32,13 @@ const Sidebar = ({ children, labelOpenSidebar, className }: SidebarProps) => {
         <IconList />
         <span>{labelOpenSidebar}</span>
       </Button>
-      <aside className={classNames("layout-sidebar", className)} ref={sidebarRef}>
+      <aside
+        className={classNames(
+          "-translate-x-full z-[300] bg-[#f8fafc] lg:bg-transparent w-full max-w-[300px] fixed top-0 left-0 bottom-0 lg:translate-x-0 p-5 lg:rounded-xl lg:h-fit transition-all duration-300 lg:static overflow-auto dark:bg-dark1a",
+          className
+        )}
+        ref={sidebarRef}
+      >
         <SidebarCloseAction onCloseSidebar={toggleSidebar} />
         <div>{children}</div>
       </aside>

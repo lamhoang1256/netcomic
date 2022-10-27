@@ -1,4 +1,5 @@
 import { Image } from "components/image";
+import { CustomLink } from "components/link";
 import { defaultAvatar } from "constants/image";
 import { PATH } from "constants/path";
 import { Sidebar } from "layouts";
@@ -54,12 +55,10 @@ const UserSidebar = () => {
       <ul className="mt-7">
         {sidebarLinks.map((link) => (
           <li key={link.display} className="mb-4">
-            <Link href={link.path}>
-              <a className="flex items-center gap-x-3">
-                <Image src={link.icon} alt={link.display} className="w-5 h-5" />
-                <span>{link.display}</span>
-              </a>
-            </Link>
+            <CustomLink href={link.path} className="flex items-center gap-x-3">
+              <Image src={link.icon} alt={link.display} className="w-5 h-5" />
+              <span>{link.display}</span>
+            </CustomLink>
           </li>
         ))}
       </ul>

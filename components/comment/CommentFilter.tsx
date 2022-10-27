@@ -20,7 +20,7 @@ const CommentFilter = () => {
     handleFilterComment("all");
   }, [id]);
   return (
-    <div className="flex border-b gap-x-5 border-b-graydd">
+    <div className="flex gap-x-5">
       <FilterItem
         name="Tất cả"
         onClick={() => handleFilterComment("all")}

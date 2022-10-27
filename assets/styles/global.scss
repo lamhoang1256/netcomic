@@ -20,9 +20,6 @@
   }
 }
 @layer utilities {
-  .layout-sidebar {
-    @apply -translate-x-full z-[300] bg-[#f8fafc] lg:bg-transparent w-full max-w-[300px] fixed top-0 left-0 bottom-0 lg:translate-x-0 p-4 lg:p-0 transition-all duration-300 lg:static overflow-auto;
-  }
 }
 .auth {
   min-height: 100vh;
@@ -202,7 +199,7 @@
   }
 }
 .modal {
-  @apply max-w-[600px] w-[94%] outline-none min-w-[300px] bg-[#fff] top-1/2 absolute left-1/2 -translate-y-1/2 -translate-x-1/2 rounded-md shadow-modal;
+  @apply max-w-[620px] w-[94%] outline-none min-w-[300px] dark:bg-bgdark bg-[#fff] top-1/2 absolute left-1/2 -translate-y-1/2 -translate-x-1/2 rounded-md shadow-modal;
 }
 .modal-overlay {
   @apply bg-black bg-opacity-40 fixed inset-0 z-[300] flex items-center justify-center cursor-pointer;
@@ -216,7 +213,7 @@
     overflow: hidden;
   }
   thead {
-    background-color: #f7f7f8;
+    @apply bg-[#f7f7f8] dark:bg-transparent;
   }
   th,
   td {

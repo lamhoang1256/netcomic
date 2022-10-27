@@ -12,6 +12,8 @@ module.exports = {
     extend: {
       colors: {
         bgdark: "#3d4044",
+        dark42: "#423e3e",
+        dark1a: "#1a1a1a",
         purpleae: "#ae4ad9",
         blue33: "#337ab7",
         blue1c: "#1bc7d0",
