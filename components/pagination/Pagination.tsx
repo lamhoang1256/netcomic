@@ -20,10 +20,10 @@ const Pagination = ({ paginations, className, ...props }: PaginationProps) => {
             key={pagination.display}
             href={pagination.href}
             className={classNames(
-              "border w-[37px] h-[37px] flex items-center justify-center rounded-sm",
+              "border w-[38px] h-[38px] dark:border-[#4c4c4c] flex items-center justify-center rounded-sm",
               pagination.active
-                ? "text-white bg-[#00a5f0] border-blue33"
-                : "bg-white text-[#999] border-[#ddd]"
+                ? "text-white dark:bg-yellowffc bg-[#00a5f0] border-blue33 dark:text-black"
+                : "bg-white text-[#999] dark:bg-[#343a40] dark:text-white border-[#ddd]"
             )}
           >
             {pagination.display}

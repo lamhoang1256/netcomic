@@ -11,7 +11,7 @@ const LayoutHome = ({ children, className, ...props }: LayoutHomeProps) => {
   return (
     <div className={classNames("flex flex-col min-h-screen", className)} {...props}>
       <Header />
-      <main className="flex-1 p-5">{children}</main>
+      <main className="flex-1 md:p-5">{children}</main>
       <Footer />
     </div>
   );

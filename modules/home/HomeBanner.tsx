@@ -13,7 +13,7 @@ interface HomeBannerProps {
 
 const HomeBanner = ({ banners }: HomeBannerProps) => {
   return (
-    <section className="pt-4">
+    <section className="pt-4 md:pt-3">
       <Heading className="text-xl mb-[10px]">Truyện đề cử</Heading>
       <Swiper
         loop

@@ -10,7 +10,7 @@ const ComicTitle = ({ children, className, href = "/", ...props }: ComicTitlePro
     <CustomLink
       href={href}
       className={classNames(
-        "transition-all duration-200 md:text-base line-clamp-2 cursor-pointer hover:text-blue29",
+        "transition-all duration-200 md:text-base font-bold line-clamp-2 cursor-pointer hover:text-blue29 dark:text-blue1c",
         className
       )}
       {...props}

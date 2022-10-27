@@ -16,21 +16,22 @@ interface HomePageProps {
 
 const HomePage = ({ banners, newestComics, paginations, categories }: HomePageProps) => {
   return (
-    <>
+    <LayoutHome>
       <Head>
-        <title>Trang chủ</title>
-        <meta name="description" content="Trang chủ" />
+        <title>Đọc Truyện Tranh Manga, Manhua, Manhwa Online - NetComic</title>
+        <meta
+          name="description"
+          content="Đọc Truyện Tranh Manga, Manhua, Manhwa Online - NetComic"
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <LayoutHome>
-        <div className="bg-white rounded-lg dark:bg-bgdark layout-container">
-          <HomeBanner banners={banners} />
-          <HomeCategory categories={categories} />
-          <HomeNewestComic newestComics={newestComics} />
-          <Pagination paginations={paginations} />
-        </div>
-      </LayoutHome>
-    </>
+      <div className="bg-white rounded-lg dark:bg-bgdark layout-container">
+        <HomeBanner banners={banners} />
+        <HomeCategory categories={categories} />
+        <HomeNewestComic newestComics={newestComics} />
+        <Pagination paginations={paginations} />
+      </div>
+    </LayoutHome>
   );
 };
 

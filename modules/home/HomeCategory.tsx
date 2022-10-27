@@ -17,7 +17,7 @@ const HomeCategory = ({ categories }: HomeCategoryProps) => {
           <SwiperSlide key={index} className="!w-auto">
             <CustomLink
               href={`${PATH.search}/${category.href}`}
-              className="py-1 px-[10px] whitespace-pre rounded border hover:text-redf6 hover:border-redf6 hover:bg-red-100 transition-all duration-300 border-blue33 text-blue33 bg-blue-100 scroll-snap-category inline-block"
+              className="py-1 px-[10px] dark:bg-transparent dark:hover:border-yellowffc dark:border-blue1c dark:text-white whitespace-pre rounded border hover:text-redf6 hover:border-redf6 hover:bg-red-100 transition-all duration-300 border-blue33 text-blue33 bg-blue-100 scroll-snap-category inline-block"
             >
               {category.display}
             </CustomLink>
