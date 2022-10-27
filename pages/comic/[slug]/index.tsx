@@ -119,8 +119,14 @@ const ComicDetailsPage = ({ info, chapters }: ComicDetailsPageProps) => {
                   >
                     Đọc mới nhất
                   </Button>
-                  <Button className="bg-[#0079f7] !py-[6px] text-white">Thích</Button>
-                  <Button className="bg-[#dc3545] !py-[6px] text-white">Đọc tiếp</Button>
+                  {currentChapterInHistory && (
+                    <Button
+                      to={currentChapterInHistory.chapterUrl}
+                      className="bg-[#dc3545] !py-[6px] text-white"
+                    >
+                      Đọc tiếp
+                    </Button>
+                  )}
                 </li>
               </ul>
             </div>
@@ -140,7 +146,7 @@ const ComicDetailsPage = ({ info, chapters }: ComicDetailsPageProps) => {
                   <span className="w-4/12 text-center md:w-1/4">Cập nhật</span>
                   <span className="w-3/12 text-center md:w-1/4">Lượt xem</span>
                 </div>
-                <ul className="border border-[#080808] pt-[6px] pr-[6px] pl-[10px] rounded mt-[10px] pb-4">
+                <ul className="border border-[#080808] dark:border-graydd pt-[6px] pr-[6px] pl-[10px] rounded mt-[10px] pb-4">
                   {chapters.slice(0, countChapters).map((chapter) => (
                     <li
                       className={classNames(

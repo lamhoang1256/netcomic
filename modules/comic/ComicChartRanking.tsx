@@ -21,11 +21,11 @@ const ComicChartRanking = () => {
   }, []);
 
   return (
-    <div className="border border-graydd">
+    <div className="border rounded border-graydd">
       <div className="flex items-center">
         <CustomLink
           href="/"
-          className="bg-[#f9f9f9] dark:bg-dark42 w-1/3 h-[42px] text-center border-r border-graydd border-t-2 border-t-[#721799] leading-[42px]"
+          className="bg-[#f9f9f9] dark:text-blue1c dark:bg-dark42 w-1/3 h-[42px] text-center border-r border-graydd border-t-2 border-t-[#721799] leading-[42px]"
         >
           Top Tháng
         </CustomLink>
@@ -39,16 +39,16 @@ const ComicChartRanking = () => {
       <div className="px-[10px]">
         {chartRankings.map((comic) => (
           <div
-            key={comic.view}
+            key={comic.href}
             className="flex items-center gap-x-[10px] py-[10px] border-b border-[#dedede]"
           >
-            <span className="text-xl">{comic.rank}</span>
+            <span className="text-xl w-7">{comic.rank}</span>
             <picture>
               <source srcSet={comic.posterUrl} type="image/webp" />
               <img
                 alt={comic.title}
                 src={comic.posterUrl}
-                className="w-[55px] h-[45px] object-cover object-top"
+                className="w-[55px] border border-graydd h-[45px] object-cover object-top"
               />
             </picture>
             <div className="flex-1">
@@ -62,7 +62,7 @@ const ComicChartRanking = () => {
                 <CustomLink href={`${PATH.comic}/${comic.newestHref}`} className="text-[13px]">
                   {comic.newestChapter}
                 </CustomLink>
-                <div className="flex items-center text-[#666] text-xs gap-x-1 italic">
+                <div className="flex items-center text-[#666] dark:text-[#c0c0c0] text-xs gap-x-1 italic">
                   <IconEye />
                   <span>{comic.view}</span>
                 </div>
