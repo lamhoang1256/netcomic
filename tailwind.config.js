@@ -11,6 +11,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        bglight: "#f8fafc",
         bgdark: "#3d4044",
         dark42: "#423e3e",
         dark26: "#26292c",

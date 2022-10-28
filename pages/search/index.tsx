@@ -29,7 +29,7 @@ const SearchPage = ({ results, paginations, categories, status, sort }: SearchPa
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <LayoutHome>
-        <div className="bg-white layout-container">
+        <div className="bg-white dark:bg-bgdark layout-container">
           <h1 className="pt-4 pb-1 text-2xl text-center">Tìm truyện tranh</h1>
           <div className="flex flex-col gap-4 mt-3 lg:flex-row">
             <div className="lg:w-2/3">

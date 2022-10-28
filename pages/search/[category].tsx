@@ -37,7 +37,7 @@ const CategoryPage = ({
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <LayoutHome>
-        <div className="bg-white layout-container">
+        <div className="bg-white dark:bg-bgdark layout-container">
           <h1 className="pt-4 pb-1 text-2xl text-center">
             Truyện thể loại <span className="font-semibold text-rede5">{info.name}</span>
           </h1>

@@ -62,7 +62,7 @@ const Header = () => {
           >
             <input
               type="text"
-              className="flex-1 h-8 text-sm outline-none"
+              className="flex-1 h-8 text-sm text-black outline-none"
               placeholder="Tìm truyện"
               onChange={(e) => setKeyword(e.target.value)}
             />

@@ -82,7 +82,7 @@ const ReadComicPage = ({ imageUrls, chapters, info }: ReadComicPageProps) => {
 
   const currentChapter = chapters.findIndex((chapter) => chapter.id === router.query.id);
   return (
-    <LayoutHome>
+    <LayoutHome className="bg-bgdark">
       <Head>
         <title>
           {info?.title} {info?.chapter}
@@ -90,15 +90,21 @@ const ReadComicPage = ({ imageUrls, chapters, info }: ReadComicPageProps) => {
         <meta name="description" content="Trang chi tiết truyện" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <section className="rounded layout-container">
+      <section className="lg:rounded-lg layout-container bg-bglight dark:bg-bgdark">
         <div className="py-4 text-center">
-          <CustomLink href={`${PATH.comic}/${slug}`}>
-            <h1 className="text-[22px] transition-all duration-200 text-[#0073f4]  hover:text-purpleae">
+          <h1 className="flex-wrap text-[22px] gap-1 flex items-center justify-center">
+            <CustomLink
+              href={`${PATH.comic}/${slug}`}
+              className="text-[22px] transition-all duration-200 dark:text-white text-[#0073f4] hover:text-purpleae"
+            >
               {info.title}
-              <span className="font-medium"> - {info.chapter}</span>
-            </h1>
-          </CustomLink>
-          <span className="block mt-[6px] italic text-gray8a">{info.updatedAt}</span>
+            </CustomLink>
+            <span>-</span>
+            <span>{info.chapter}</span>
+          </h1>
+          <span className="block mt-[6px] italic text-gray8a dark:text-[#c0c0c0]">
+            {info.updatedAt}
+          </span>
         </div>
         <div className="flex items-center justify-center pb-4 gap-x-3">
           <CustomLink href={PATH.home}>
@@ -181,7 +187,7 @@ const ReadComicPage = ({ imageUrls, chapters, info }: ReadComicPageProps) => {
           <IconChevronRight className="!w-3 !h-3" fill="#fff" />
         </Button>
       </div>
-      <div className="layout-container !max-w-[1000px]">
+      <div className="mx-auto max-w-[1000px] p-5 lg:rounded-lg bg-bglight dark:bg-bgdark">
         <CommentAddNew poster={info.posterUrl} title={info.title} />
         <CommentFilter />
         <CommentList />
