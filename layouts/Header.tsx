@@ -102,12 +102,12 @@ const Header = () => {
                   </Popover>
                 </div>
               ) : (
-                <div className="flex gap-x-4">
+                <div className="flex flex-col md:flex-row gap-x-4">
                   {linksWithoutLogged.map((link) => (
                     <CustomLink
                       href={link.path}
                       key={link.display}
-                      className="text-[#ffffffb3] transition-all duration-100 hover:opacity-70"
+                      className="text-[#ffffffb3] whitespace-nowrap transition-all duration-100 hover:opacity-70"
                     >
                       {link.display}
                     </CustomLink>

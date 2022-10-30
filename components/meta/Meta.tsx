@@ -1,5 +1,5 @@
-import React from "react";
 import Head from "next/head";
+import { server } from "configs/server";
 
 interface MetaProps {
   title?: string;
@@ -21,6 +21,13 @@ const Meta = ({
       <meta property="og:title" content={title} key="ogTitle" />
       <meta property="og:description" content={description} key="ogDescription" />
       <meta property="og:image" content={image} key="ogImage" />
+      <meta
+        property="og:image:alt"
+        content="Netcomic đọc truyện tranh online, không quảng cáo và cập nhật nhanh nhất"
+        key="ogImageAlt"
+      />
+      <link rel="canonical" href={server} key="canonical" />
+      <meta property="og:url" content={server} key="ogUrl" />
       <meta property="twitter:card" content="summary_large_image" key="twitterCard" />
       <meta property="twitter:title" content={title} key="twitterTitle" />
       <meta property="twitter:description" content={description} key="twitterDescription" />
