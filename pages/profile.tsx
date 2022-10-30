@@ -76,103 +76,107 @@ const ProfilePage = () => {
   }, [currentUser]);
 
   return (
-    <ProtectedRoute>
+    <>
       <Meta
         title="Thông tin chung - NetComic"
         description="Thông tin chung"
         image="https://raw.githubusercontent.com/lamhoang1256/shopbee/main/screenshots/thumbnail-youtube.png"
       />
-      <LayoutUser>
-        <Template
-          title="Thông tin tài khoản"
-          desc="Cập nhật đầy đủ thông tin của bạn để hoạt động tốt hơn trên NetComic"
-        >
-          <form
-            autoComplete="off"
-            onSubmit={handleUpdateProfile}
-            className="flex flex-col-reverse gap-5 lg:flex-row"
+      <ProtectedRoute>
+        <LayoutUser>
+          <Template
+            title="Thông tin tài khoản"
+            desc="Cập nhật đầy đủ thông tin của bạn để hoạt động tốt hơn trên NetComic"
           >
-            <div className="w-full mt-3 max-w-[500px]">
-              <FormGroup>
-                <div className="flex items-end gap-x-4">
-                  <div className="flex-1">
-                    <div className="flex justify-between text-xs">
-                      <span>Cấp {level}</span>
-                      <span>Cấp {level + 1}</span>
-                    </div>
-                    <div className="progress">
-                      <div className="progress-level" style={{ width: `${percent}%` }}>
-                        {percent}%
+            <form
+              autoComplete="off"
+              onSubmit={handleUpdateProfile}
+              className="flex flex-col-reverse gap-5 lg:flex-row"
+            >
+              <div className="w-full mt-3 max-w-[500px]">
+                <FormGroup>
+                  <div className="flex items-end gap-x-4">
+                    <div className="flex-1">
+                      <div className="flex justify-between text-xs">
+                        <span>Cấp {level}</span>
+                        <span>Cấp {level + 1}</span>
+                      </div>
+                      <div className="progress">
+                        <div className="progress-level" style={{ width: `${percent}%` }}>
+                          {percent}%
+                        </div>
                       </div>
                     </div>
+                    <button type="button" onClick={toggleModal}>
+                      <IconQuestion />
+                    </button>
                   </div>
-                  <button type="button" onClick={toggleModal}>
-                    <IconQuestion />
-                  </button>
-                </div>
-              </FormGroup>
-              <FormGroup>
-                <Label htmlFor="email">Địa chỉ email</Label>
-                <Input
-                  name="email"
-                  disabled={currentUser?.email ? true : false}
-                  defaultValue={currentUser?.email || ""}
-                  onChange={onChange}
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label htmlFor="fullname">Họ và tên</Label>
-                <Input
-                  name="fullname"
-                  placeholder="Nhập họ và tên"
-                  defaultValue={currentUser?.fullname as string}
-                  onChange={onChange}
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label htmlFor="gender">Giới tính</Label>
-                <Select
-                  options={options}
-                  defaultValue={{
-                    label: currentUser?.gender as string,
-                    value: currentUser?.gender as string,
-                  }}
-                  callback={(option) => onChangeSelect("gender", option)}
-                  placeholder="Chọn giới tính"
-                />
-              </FormGroup>
-              <Button type="submit" className="w-full h-10 mt-1 text-white bg-blue33">
-                Cập nhật
-              </Button>
-            </div>
-            <div className="flex-1">
-              <div className="flex flex-col items-center mt-3">
-                <Label>Ảnh đại diện</Label>
-                <Image
-                  alt="avatar"
-                  src={currentUser?.photoURL || defaultAvatar}
-                  className="w-[100px] h-[100px] mt-1 rounded-full"
-                />
-                <div className="relative">
-                  <input
-                    type="file"
-                    accept=".png, .jpg, .jpeg"
-                    className="absolute inset-0 opacity-0"
-                    onChange={handleUpdateAvatar}
+                </FormGroup>
+                <FormGroup>
+                  <Label htmlFor="email">Địa chỉ email</Label>
+                  <Input
+                    name="email"
+                    disabled={currentUser?.email ? true : false}
+                    defaultValue={currentUser?.email || ""}
+                    onChange={onChange}
                   />
-                  <Button className="bg-[#c9302c] text-white my-2 inline-block">Upload ảnh</Button>
-                </div>
-                <span>jpg,jpeg,gif,png nhỏ hơn 2MB</span>
-                <span className="italic font-light text-red-500">
-                  Avatar tục tĩu sẽ bị khóa vĩnh viễn
-                </span>
+                </FormGroup>
+                <FormGroup>
+                  <Label htmlFor="fullname">Họ và tên</Label>
+                  <Input
+                    name="fullname"
+                    placeholder="Nhập họ và tên"
+                    defaultValue={currentUser?.fullname as string}
+                    onChange={onChange}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <Label htmlFor="gender">Giới tính</Label>
+                  <Select
+                    options={options}
+                    defaultValue={{
+                      label: currentUser?.gender as string,
+                      value: currentUser?.gender as string,
+                    }}
+                    callback={(option) => onChangeSelect("gender", option)}
+                    placeholder="Chọn giới tính"
+                  />
+                </FormGroup>
+                <Button type="submit" className="w-full h-10 mt-1 text-white bg-blue33">
+                  Cập nhật
+                </Button>
               </div>
-            </div>
-          </form>
-        </Template>
-      </LayoutUser>
-      <ModalLevel isShow={isShow} toggleModal={toggleModal} />
-    </ProtectedRoute>
+              <div className="flex-1">
+                <div className="flex flex-col items-center mt-3">
+                  <Label>Ảnh đại diện</Label>
+                  <Image
+                    alt="avatar"
+                    src={currentUser?.photoURL || defaultAvatar}
+                    className="w-[100px] h-[100px] mt-1 rounded-full"
+                  />
+                  <div className="relative">
+                    <input
+                      type="file"
+                      accept=".png, .jpg, .jpeg"
+                      className="absolute inset-0 opacity-0"
+                      onChange={handleUpdateAvatar}
+                    />
+                    <Button className="bg-[#c9302c] text-white my-2 inline-block">
+                      Upload ảnh
+                    </Button>
+                  </div>
+                  <span>jpg,jpeg,gif,png nhỏ hơn 2MB</span>
+                  <span className="italic font-light text-red-500">
+                    Avatar tục tĩu sẽ bị khóa vĩnh viễn
+                  </span>
+                </div>
+              </div>
+            </form>
+          </Template>
+        </LayoutUser>
+        <ModalLevel isShow={isShow} toggleModal={toggleModal} />
+      </ProtectedRoute>
+    </>
   );
 };
 
