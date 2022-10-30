@@ -198,20 +198,18 @@ export const getStaticPaths: GetStaticPaths = () => {
 
 export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
   const slug = params?.slug as string;
-  if (slug) {
-    try {
-      const { info, chapters } = (await axios.get(`${server}/api/comic/${slug}`)).data.data;
-      return {
-        props: { info, chapters },
-        revalidate: 300,
-      };
-    } catch (error) {
-      return {
-        props: {},
-        revalidate: 60,
-        notFound: true,
-      };
-    }
+  try {
+    const { info, chapters } = (await axios.get(`${server}/api/comic/${slug}`)).data.data;
+    return {
+      props: { info, chapters },
+      revalidate: 300,
+    };
+  } catch (error) {
+    return {
+      props: {},
+      revalidate: 60,
+      notFound: true,
+    };
   }
 };
 
