@@ -17,13 +17,10 @@ Modal.defaultStyles = {
 function MyApp({ Component, pageProps }: AppProps) {
   useDarkMode();
   return (
-    <>
-      <Meta />
-      <Authentication>
-        <Component {...pageProps} />
-        <ToastContainer></ToastContainer>
-      </Authentication>
-    </>
+    <Authentication>
+      <Component {...pageProps} />
+      <ToastContainer></ToastContainer>
+    </Authentication>
   );
 }
 
