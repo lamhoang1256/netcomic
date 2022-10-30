@@ -10,6 +10,7 @@ import { PATH } from "constants/path";
 import { Template } from "layouts";
 import LayoutUser from "layouts/LayoutUser";
 import { ComicAmount, ComicChapters, ComicGrid, ComicImage, ComicTitle } from "modules/comic";
+import Head from "next/head";
 import { useEffect, useState } from "react";
 import useGlobalStore from "store/global-store";
 
@@ -32,11 +33,19 @@ const FollowPage = () => {
   }, [follows]);
   return (
     <>
-      <Meta
+      {/* <Meta
         title="Truyện đang theo dõi - NetComic"
         description="Theo dõi những bộ truyện hay nhất tại NetComic"
         image="https://raw.githubusercontent.com/lamhoang1256/shopbee/main/screenshots/thumbnail-youtube.png"
-      />
+      /> */}
+      <Head>
+        <title>Truyện đang theo dõi - NetComic</title>
+        <meta
+          name="description"
+          content="Theo dõi những bộ truyện hay nhất tại NetComic"
+          title="title"
+        />
+      </Head>
       <ProtectedRoute>
         <LayoutUser>
           <Template
