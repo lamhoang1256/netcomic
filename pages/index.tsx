@@ -1,5 +1,6 @@
 import { ICategory, IComic, IPagination } from "@types";
 import axios from "axios";
+import { Meta } from "components/meta";
 import { Pagination } from "components/pagination";
 import { server } from "configs/server";
 import LayoutHome from "layouts/LayoutHome";
@@ -15,14 +16,17 @@ interface HomePageProps {
 
 const HomePage = ({ banners, newestComics, paginations, categories }: HomePageProps) => {
   return (
-    <LayoutHome>
-      <div className="bg-white rounded-lg dark:bg-bgdark layout-container">
-        <HomeBanner banners={banners} />
-        <HomeCategory categories={categories} />
-        <HomeNewestComic newestComics={newestComics} />
-        <Pagination paginations={paginations} />
-      </div>
-    </LayoutHome>
+    <>
+      <Meta />
+      <LayoutHome>
+        <div className="bg-white rounded-lg dark:bg-bgdark layout-container">
+          <HomeBanner banners={banners} />
+          <HomeCategory categories={categories} />
+          <HomeNewestComic newestComics={newestComics} />
+          <Pagination paginations={paginations} />
+        </div>
+      </LayoutHome>
+    </>
   );
 };
 
