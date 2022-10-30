@@ -9,7 +9,7 @@ import { server } from "configs/server";
 import { PATH } from "constants/path";
 import LayoutHome from "layouts/LayoutHome";
 import { ComicChartRanking } from "modules/comic";
-import { GetServerSidePropsContext } from "next";
+import { GetStaticPaths, GetStaticPropsContext } from "next";
 
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -189,15 +189,30 @@ const ComicDetailsPage = ({ info, chapters }: ComicDetailsPageProps) => {
   );
 };
 
-export async function getServerSideProps({ query }: GetServerSidePropsContext) {
-  const { slug } = query;
-  const { data } = (await axios.get(`${server}/api/comic/${slug}`)).data;
+export const getStaticPaths: GetStaticPaths = () => {
   return {
-    props: {
-      info: data.info,
-      chapters: data.chapters,
-    },
+    paths: [],
+    fallback: "blocking",
   };
-}
+};
+
+export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
+  const slug = params?.slug as string;
+  if (slug) {
+    try {
+      const { info, chapters } = (await axios.get(`${server}/api/comic/${slug}`)).data.data;
+      return {
+        props: { info, chapters },
+        revalidate: 300,
+      };
+    } catch (error) {
+      return {
+        props: {},
+        revalidate: 60,
+        notFound: true,
+      };
+    }
+  }
+};
 
 export default ComicDetailsPage;
