@@ -16,19 +16,21 @@ interface BoyComicPageProps {
 
 const BoyComicPage = ({ banners, newestComics, paginations, categories }: BoyComicPageProps) => {
   return (
-    <LayoutHome>
+    <>
       <Meta
         title="Truyện tranh con trai - NetComic"
         description="Truyện tranh dành cho nam, nội dung thường liên quan đến bạo lực, đánh nhau, phiêu lưu, kinh dị,.."
         image="https://raw.githubusercontent.com/lamhoang1256/shopbee/main/screenshots/thumbnail-youtube.png"
       />
-      <div className="bg-white rounded-lg dark:bg-bgdark layout-container">
-        <HomeBanner banners={banners} />
-        <HomeCategory categories={categories} />
-        <HomeNewestComic title="Truyện con trai" newestComics={newestComics} />
-        <Pagination paginations={paginations} />
-      </div>
-    </LayoutHome>
+      <LayoutHome>
+        <div className="bg-white rounded-lg dark:bg-bgdark layout-container">
+          <HomeBanner banners={banners} />
+          <HomeCategory categories={categories} />
+          <HomeNewestComic title="Truyện con trai" newestComics={newestComics} />
+          <Pagination paginations={paginations} />
+        </div>
+      </LayoutHome>
+    </>
   );
 };
 

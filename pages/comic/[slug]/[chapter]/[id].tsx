@@ -83,117 +83,119 @@ const ReadComicPage = ({ imageUrls, chapters, info }: ReadComicPageProps) => {
 
   const currentChapter = chapters.findIndex((chapter) => chapter.id === router.query.id);
   return (
-    <LayoutHome className="bg-bgdark">
+    <>
       <Meta
         title={`${info.title} - NetComic`}
         description={`Đọc truyện tranh ${info.title} Tiếng Việt bản đẹp chất lượng cao, cập nhật nhanh và sớm nhất tại NetComic`}
         image={info.posterUrl}
       />
-      <div className="layout-container">
-        <section className="lg:rounded-lg bg-bglight dark:bg-bgdark">
-          <div className="py-4 text-center">
-            <h1 className="flex-wrap text-[22px] gap-1 flex items-center justify-center">
-              <CustomLink
-                href={`${PATH.comic}/${slug}`}
-                className="text-[22px] transition-all duration-200 dark:text-white text-[#0073f4] hover:text-purpleae"
-              >
-                {info.title}
-              </CustomLink>
-              <span>-</span>
-              <span>{info.chapter}</span>
-            </h1>
-            <span className="block mt-[6px] italic text-gray8a dark:text-[#c0c0c0]">
-              {info.updatedAt}
-            </span>
-          </div>
-          <div className="flex items-center justify-center pb-4 gap-x-3">
-            <CustomLink href={PATH.home}>
-              <IconHome fill="#d9534f" />
-            </CustomLink>
-            <CustomLink href={`${PATH.comic}/${slug}`}>
-              <IconList fill="#d9534f" />
-            </CustomLink>
-            <div className="flex items-center flex-grow w-1/3 md:flex-grow-0 gap-x-1">
-              <CustomLink
-                href={`${PATH.comic}/${chapters[currentChapter + 1]?.href}`}
-                className={classNames(
-                  "w-[34px] h-[34px] flex items-center justify-center rounded-l",
-                  !chapters[currentChapter + 1] && "pointer-events-none",
-                  currentChapter === chapters.length - 1 ? "bg-black opacity-30 " : "bg-[#d9534f]"
-                )}
-              >
-                <IconChevronLeft fill="#fff" />
-              </CustomLink>
-              <div
-                onClick={toggleModal}
-                className="h-9 cursor-pointer px-2 rounded-sm flex items-center justify-between border border-[#ccc] flex-grow"
-              >
-                <span>{info?.chapter}</span>
-                <IconDown />
-              </div>
-              <CustomLink
-                href={`${PATH.comic}/${chapters[currentChapter - 1]?.href}`}
-                className={classNames(
-                  "w-[34px] h-[34px] flex items-center justify-center rounded-r",
-                  !chapters[currentChapter - 1] && "pointer-events-none",
-                  currentChapter === 0 ? "bg-black opacity-30 " : "bg-[#d9534f]"
-                )}
-              >
-                <IconChevronRight fill="#fff" />
-              </CustomLink>
+      <LayoutHome className="bg-bgdark">
+        <div className="layout-container">
+          <section className="lg:rounded-lg bg-bglight dark:bg-bgdark">
+            <div className="py-4 text-center">
+              <h1 className="flex-wrap text-[22px] gap-1 flex items-center justify-center">
+                <CustomLink
+                  href={`${PATH.comic}/${slug}`}
+                  className="text-[22px] transition-all duration-200 dark:text-white text-[#0073f4] hover:text-purpleae"
+                >
+                  {info.title}
+                </CustomLink>
+                <span>-</span>
+                <span>{info.chapter}</span>
+              </h1>
+              <span className="block mt-[6px] italic text-gray8a dark:text-[#c0c0c0]">
+                {info.updatedAt}
+              </span>
             </div>
-            <Button
-              className={classNames(
-                "flex items-center gap-x-1 text-white",
-                hasFollowed ? "bg-[#d9534f]" : "bg-[#5cb85c]"
-              )}
-              onClick={handleToggleFollow}
-            >
-              <IconHeart className="w-[18px] h-[18px]" />
-              <span className="hidden md:block">{hasFollowed ? "Hủy theo dõi" : "Theo dõi"}</span>
-            </Button>
-          </div>
-          <ModalChapters isShow={isShow} toggleModal={toggleModal} chapters={chapters} />
-        </section>
-      </div>
-      <div className="pt-3 bg-bgdark">
-        {imageUrls.map((image) => (
-          <ComicImage
-            key={image.imageUrl}
-            src={getImage(image.imageUrl)}
-            alt={image.alt}
-            className="mx-auto w-[unset]"
-          />
-        ))}
-      </div>
-      <div className="flex items-center justify-center py-4 gap-x-2">
-        <Button
-          to={`${PATH.comic}/${chapters[currentChapter + 1]?.href}`}
-          className={classNames(
-            "bg-[#d9534f] flex items-center gap-x-1 text-white hover:bg-[#AB2925]",
-            !chapters[currentChapter + 1] && "pointer-events-none opacity-70 cursor-not-allowed"
-          )}
-        >
-          <IconChevronLeft className="!w-3 !h-3" fill="#fff" />
-          <span>Chap trước</span>
-        </Button>
-        <Button
-          to={`${PATH.comic}/${chapters[currentChapter - 1]?.href}`}
-          className={classNames(
-            "bg-[#d9534f] flex items-center gap-x-1 text-white hover:bg-[#AB2925]",
-            !chapters[currentChapter - 1] && "pointer-events-none opacity-70 cursor-not-allowed"
-          )}
-        >
-          <span>Chap sau</span>
-          <IconChevronRight className="!w-3 !h-3" fill="#fff" />
-        </Button>
-      </div>
-      <div className="mx-auto max-w-[1000px] p-5 lg:rounded-lg bg-bglight dark:bg-bgdark">
-        <CommentAddNew poster={info.posterUrl} title={info.title} />
-        <CommentFilter />
-        <CommentList />
-      </div>
-    </LayoutHome>
+            <div className="flex items-center justify-center pb-4 gap-x-3">
+              <CustomLink href={PATH.home}>
+                <IconHome fill="#d9534f" />
+              </CustomLink>
+              <CustomLink href={`${PATH.comic}/${slug}`}>
+                <IconList fill="#d9534f" />
+              </CustomLink>
+              <div className="flex items-center flex-grow w-1/3 md:flex-grow-0 gap-x-1">
+                <CustomLink
+                  href={`${PATH.comic}/${chapters[currentChapter + 1]?.href}`}
+                  className={classNames(
+                    "w-[34px] h-[34px] flex items-center justify-center rounded-l",
+                    !chapters[currentChapter + 1] && "pointer-events-none",
+                    currentChapter === chapters.length - 1 ? "bg-black opacity-30 " : "bg-[#d9534f]"
+                  )}
+                >
+                  <IconChevronLeft fill="#fff" />
+                </CustomLink>
+                <div
+                  onClick={toggleModal}
+                  className="h-9 cursor-pointer px-2 rounded-sm flex items-center justify-between border border-[#ccc] flex-grow"
+                >
+                  <span>{info?.chapter}</span>
+                  <IconDown />
+                </div>
+                <CustomLink
+                  href={`${PATH.comic}/${chapters[currentChapter - 1]?.href}`}
+                  className={classNames(
+                    "w-[34px] h-[34px] flex items-center justify-center rounded-r",
+                    !chapters[currentChapter - 1] && "pointer-events-none",
+                    currentChapter === 0 ? "bg-black opacity-30 " : "bg-[#d9534f]"
+                  )}
+                >
+                  <IconChevronRight fill="#fff" />
+                </CustomLink>
+              </div>
+              <Button
+                className={classNames(
+                  "flex items-center gap-x-1 text-white",
+                  hasFollowed ? "bg-[#d9534f]" : "bg-[#5cb85c]"
+                )}
+                onClick={handleToggleFollow}
+              >
+                <IconHeart className="w-[18px] h-[18px]" />
+                <span className="hidden md:block">{hasFollowed ? "Hủy theo dõi" : "Theo dõi"}</span>
+              </Button>
+            </div>
+            <ModalChapters isShow={isShow} toggleModal={toggleModal} chapters={chapters} />
+          </section>
+        </div>
+        <div className="pt-3 bg-bgdark">
+          {imageUrls.map((image) => (
+            <ComicImage
+              key={image.imageUrl}
+              src={getImage(image.imageUrl)}
+              alt={image.alt}
+              className="mx-auto w-[unset]"
+            />
+          ))}
+        </div>
+        <div className="flex items-center justify-center py-4 gap-x-2">
+          <Button
+            to={`${PATH.comic}/${chapters[currentChapter + 1]?.href}`}
+            className={classNames(
+              "bg-[#d9534f] flex items-center gap-x-1 text-white hover:bg-[#AB2925]",
+              !chapters[currentChapter + 1] && "pointer-events-none opacity-70 cursor-not-allowed"
+            )}
+          >
+            <IconChevronLeft className="!w-3 !h-3" fill="#fff" />
+            <span>Chap trước</span>
+          </Button>
+          <Button
+            to={`${PATH.comic}/${chapters[currentChapter - 1]?.href}`}
+            className={classNames(
+              "bg-[#d9534f] flex items-center gap-x-1 text-white hover:bg-[#AB2925]",
+              !chapters[currentChapter - 1] && "pointer-events-none opacity-70 cursor-not-allowed"
+            )}
+          >
+            <span>Chap sau</span>
+            <IconChevronRight className="!w-3 !h-3" fill="#fff" />
+          </Button>
+        </div>
+        <div className="mx-auto max-w-[1000px] p-5 lg:rounded-lg bg-bglight dark:bg-bgdark">
+          <CommentAddNew poster={info.posterUrl} title={info.title} />
+          <CommentFilter />
+          <CommentList />
+        </div>
+      </LayoutHome>
+    </>
   );
 };
 

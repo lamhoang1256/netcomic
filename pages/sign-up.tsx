@@ -62,63 +62,65 @@ const SignUpPage = () => {
     }
   };
   return (
-    <CheckLoggedIn>
+    <>
       <Meta
         title="Đăng ký - NetComic"
         description="NetComic Trang đăng ký tài khoản"
         image="https://raw.githubusercontent.com/lamhoang1256/shopbee/main/screenshots/thumbnail-youtube.png"
       />
-      <div className="auth">
-        <form
-          className="w-full z-10 dark:bg-dark26 mt-20 mx-auto bg-white rounded-xl p-10 max-w-[580px]"
-          onSubmit={(e) => handleSignUp(e)}
-          autoComplete="off"
-        >
-          <h1 className="text-xl font-bold text-center">Đăng ký</h1>
-          <FormGroup>
-            <Label htmlFor="email">Địa chỉ email</Label>
-            <Input
-              name="email"
-              type="email"
-              placeholder="Tài khoản/email của bạn"
-              onChange={onChange}
-              required
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label htmlFor="password">Mật khẩu</Label>
-            <InputPassword
-              name="password"
-              placeholder="Mật khẩu của bạn"
-              onChange={onChange}
-              required
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label htmlFor="confirmPassword">Xác nhận Mật khẩu</Label>
-            <InputPassword
-              name="confirmPassword"
-              placeholder="Xác nhận mật khẩu"
-              onChange={onChange}
-              required
-            />
-          </FormGroup>
-          <Button type="submit" className="w-full h-10 mt-1 text-base text-white bg-blue29">
-            Đăng ký
-          </Button>
-          <div className="flex items-center justify-between my-3">
-            <CustomLink href={PATH.home} className="flex items-center dark:text-white gap-x-1">
-              <IconHome className="!w-[14px] !h-[14px]" />
-              <span>Về trang chủ</span>
-            </CustomLink>
-            <span>
-              Đã có tài khoản?
-              <CustomLink href={PATH.signIn}> Đăng nhập</CustomLink>
-            </span>
-          </div>
-        </form>
-      </div>
-    </CheckLoggedIn>
+      <CheckLoggedIn>
+        <div className="auth">
+          <form
+            className="w-full z-10 dark:bg-dark26 mt-20 mx-auto bg-white rounded-xl p-10 max-w-[580px]"
+            onSubmit={(e) => handleSignUp(e)}
+            autoComplete="off"
+          >
+            <h1 className="text-xl font-bold text-center">Đăng ký</h1>
+            <FormGroup>
+              <Label htmlFor="email">Địa chỉ email</Label>
+              <Input
+                name="email"
+                type="email"
+                placeholder="Tài khoản/email của bạn"
+                onChange={onChange}
+                required
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label htmlFor="password">Mật khẩu</Label>
+              <InputPassword
+                name="password"
+                placeholder="Mật khẩu của bạn"
+                onChange={onChange}
+                required
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label htmlFor="confirmPassword">Xác nhận Mật khẩu</Label>
+              <InputPassword
+                name="confirmPassword"
+                placeholder="Xác nhận mật khẩu"
+                onChange={onChange}
+                required
+              />
+            </FormGroup>
+            <Button type="submit" className="w-full h-10 mt-1 text-base text-white bg-blue29">
+              Đăng ký
+            </Button>
+            <div className="flex items-center justify-between my-3">
+              <CustomLink href={PATH.home} className="flex items-center dark:text-white gap-x-1">
+                <IconHome className="!w-[14px] !h-[14px]" />
+                <span>Về trang chủ</span>
+              </CustomLink>
+              <span>
+                Đã có tài khoản?
+                <CustomLink href={PATH.signIn}> Đăng nhập</CustomLink>
+              </span>
+            </div>
+          </form>
+        </div>
+      </CheckLoggedIn>
+    </>
   );
 };
 

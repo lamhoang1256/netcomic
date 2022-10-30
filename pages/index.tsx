@@ -1,6 +1,5 @@
 import { ICategory, IComic, IPagination } from "@types";
 import axios from "axios";
-import { Meta } from "components/meta";
 import { Pagination } from "components/pagination";
 import { server } from "configs/server";
 import LayoutHome from "layouts/LayoutHome";

@@ -16,19 +16,21 @@ interface GirlComicPageProps {
 
 const GirlComicPage = ({ banners, categories, newestComics, paginations }: GirlComicPageProps) => {
   return (
-    <LayoutHome>
+    <>
       <Meta
         title="Truyện tranh con gái, tình cảm & lãng mạn - NetComic"
         description="Truyện tranh dành cho phái nữ, nội dung thường liên quan đến tình cảm, lãng mạn, có nhiều cung bậc cảm xúc trong tình yêu"
         image="https://raw.githubusercontent.com/lamhoang1256/shopbee/main/screenshots/thumbnail-youtube.png"
       />
-      <div className="bg-white rounded-lg dark:bg-bgdark layout-container">
-        <HomeBanner banners={banners} />
-        <HomeCategory categories={categories} />
-        <HomeNewestComic title="Truyện con gái" newestComics={newestComics} />
-        <Pagination paginations={paginations} />
-      </div>
-    </LayoutHome>
+      <LayoutHome>
+        <div className="bg-white rounded-lg dark:bg-bgdark layout-container">
+          <HomeBanner banners={banners} />
+          <HomeCategory categories={categories} />
+          <HomeNewestComic title="Truyện con gái" newestComics={newestComics} />
+          <Pagination paginations={paginations} />
+        </div>
+      </LayoutHome>
+    </>
   );
 };
 
