@@ -20,8 +20,7 @@ const Meta = ({
       {/* HTML Meta Tags */}
       <title>{title}</title>
       <meta name="title" content={title} key="title" />
-      <meta name="robots" content="index,follow" key="robots" />
-      <meta name="googlebot" content="noindex,nofollow" key="googlebot" />
+      <meta name="robots" content="index,follow" />
       <meta name="description" content={description} key="description" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" key="viewport" />
       <link rel="icon" href="/favicon.png" key="favicon" />
