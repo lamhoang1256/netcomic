@@ -12,6 +12,7 @@ import {
 } from "@types";
 import * as cheerio from "cheerio";
 import { PATH } from "constants/path";
+import { crawlSearchComics } from "pages/api/category";
 
 export const urlWithoutHttp = PATH.netTruyen.split("http:")[1] as string;
 export function crawlBanner(node: cheerio.Cheerio<cheerio.Element>): IBanner {
@@ -214,21 +215,26 @@ export function crawlImagesReading(node: cheerio.Cheerio<cheerio.Element>): IIma
   const alt = node.find("img").attr("alt") as string;
   return { alt, imageUrl };
 }
-/// not optimized
 
-export const crawlGenderComics = (html: any) => {
+export const crawlGenderComics = async (html: any) => {
   const $ = cheerio.load(html);
-  let comics: IComic[] = [];
-  let pagination: IPagination[] = [];
+  let banners: IBanner[] = [];
+  let newestComics: IComic[] = [];
+  let paginations: IPagination[] = [];
+  $("#ctl00_divAlt1 .items-slide .item", html).each(function (index, element) {
+    const banner = crawlBanner($(element));
+    banners.push(banner);
+  });
   $("#ctl00_divCenter .ModuleContent .item", html).each(function (index, element) {
     const comic = crawlComic($(element), $);
-    comics.push(comic);
+    newestComics.push(comic);
   });
   $("#ctl00_divCenter .pagination li", html).each(function (index, element) {
     const paginationItem = crawlPagination($(element), `${URL}`);
-    pagination.push(paginationItem);
+    paginations.push(paginationItem);
   });
-  return { comics, pagination };
+  const categories = await crawlSearchComics({});
+  return { banners, categories, newestComics, paginations };
 };
 
 export const getComicOptions = (node: cheerio.Cheerio<cheerio.Element>) => {

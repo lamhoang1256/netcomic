@@ -6,14 +6,15 @@ import { PATH } from "constants/path";
 import { ComicGrid, ComicItem } from "modules/comic";
 
 interface HomeNewestComicProps {
+  title?: string;
   newestComics: IComic[];
 }
 
-const HomeNewestComic = ({ newestComics }: HomeNewestComicProps) => {
+const HomeNewestComic = ({ title = "Truyện mới cập nhật", newestComics }: HomeNewestComicProps) => {
   return (
     <div className="mt-5">
       <div className="flex items-center justify-between">
-        <Heading className="text-xl">Truyện mới cập nhật</Heading>
+        <Heading className="text-xl">{title}</Heading>
         <div className="flex items-center gap-x-2">
           <CustomLink
             href={PATH.random}

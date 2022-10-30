@@ -13,6 +13,8 @@ export const PATH = {
   history: "/history",
   manage: "/manage",
   random: "/random",
+  girl: "/girl",
+  boy: "/boy",
   userManage: "/manage/user",
   commentManage: "/manage/comment",
   changePassword: "/change-password",

@@ -25,16 +25,13 @@ const Sidebar = ({ children, labelOpenSidebar, className }: SidebarProps) => {
   useClickOutside(sidebarRef, () => closeSidebar());
   return (
     <>
-      <Button
-        onClick={() => toggleSidebar()}
-        className="flex items-center lg:hidden gap-x-2 max-w-fit"
-      >
-        <IconList className="!w-5 !h-5" />
+      <Button onClick={toggleSidebar} className="flex items-center lg:hidden gap-x-2 max-w-fit">
+        <IconList className="!w-4 !h-4 lg:!w-5 lg:!h-5" />
         <span>{labelOpenSidebar}</span>
       </Button>
       <aside
         className={classNames(
-          "-translate-x-full z-[300] bg-[#f8fafc] lg:bg-transparent w-full max-w-[300px] fixed top-0 left-0 bottom-0 lg:translate-x-0 p-5 lg:rounded-xl lg:h-fit transition-all duration-300 lg:static overflow-auto dark:bg-dark26",
+          "-translate-x-full z-[300] bg-[#f8fafc] lg:bg-transparent w-full max-w-[300px] fixed top-0 left-0 bottom-0 lg:translate-x-0 p-5 lg:h-fit transition-all duration-300 lg:static overflow-auto dark:bg-dark26",
           className
         )}
         ref={sidebarRef}

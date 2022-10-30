@@ -1,5 +1,6 @@
 import { ButtonToggleTheme } from "components/button";
-import { IconSearch } from "components/icons";
+import { SearchBox } from "components/form";
+import { IconList } from "components/icons";
 import { Image } from "components/image";
 import { CustomLink } from "components/link";
 import { Popover } from "components/popover";
@@ -7,12 +8,13 @@ import { userRole } from "constants/global";
 import { defaultAvatar } from "constants/image";
 import { PATH } from "constants/path";
 import { signOut } from "firebase/auth";
+import useClickOutside from "hooks/useClickOutside";
 import usePopover from "hooks/usePopover";
 import { auth } from "libs/firebase/firebase-config";
-import { useRouter } from "next/router";
-import { FormEvent, useState } from "react";
+import { useRef } from "react";
 import useGlobalStore from "store/global-store";
 import { createUsernameFromEmail } from "utils";
+import Menu from "./Menu";
 
 const links = [
   {
@@ -43,85 +45,88 @@ const linksWithoutLogged = [
 const Header = () => {
   const { currentUser } = useGlobalStore();
   const { activePopover, hidePopover, showPopover } = usePopover();
-  const router = useRouter();
-  const [keyword, setKeyword] = useState("");
-  const handleSearchWithKeyword = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    router.push(`${PATH.search}?keyword=${keyword}`);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
+  const toggleMenu = () => {
+    if (menuRef.current) menuRef.current.classList.toggle("!translate-x-0");
+    if (overlayRef.current) overlayRef.current.classList.toggle("fixed");
   };
+  const closeMenu = () => {
+    if (menuRef.current) menuRef.current.classList.remove("!translate-x-0");
+    if (overlayRef.current) overlayRef.current.classList.remove("fixed");
+  };
+  useClickOutside(menuRef, () => closeMenu());
   return (
-    <header style={{ backgroundImage: `url("/bg-header.jpg")` }}>
-      <div className="layout-container">
-        <nav className="flex items-center h-[52px] relative justify-between">
-          <CustomLink href={PATH.home}>
-            <Image src="/logo-nettruyen.png" alt="logo" className="w-[150px]" />
-          </CustomLink>
-          <form
-            onSubmit={handleSearchWithKeyword}
-            className="md:flex hidden items-center justify-between flex-1 max-w-[400px] pl-3 h-8 bg-white rounded-sm"
-          >
-            <input
-              type="text"
-              className="flex-1 h-8 text-sm text-black outline-none"
-              placeholder="Tìm truyện"
-              onChange={(e) => setKeyword(e.target.value)}
-            />
-            <button type="submit" className="px-3">
-              <IconSearch />
-            </button>
-          </form>
-          <div className="flex items-center gap-x-4">
-            <ButtonToggleTheme></ButtonToggleTheme>
-            {currentUser?.email ? (
-              <div
-                className="relative h-full text-white w-max"
-                onMouseEnter={showPopover}
-                onMouseLeave={hidePopover}
-              >
-                <div className="flex items-center justify-end h-full gap-x-2 transition-all duration-100 hover:text-[#ffffffb3] cursor-pointer">
-                  <Image
-                    alt="avatar"
-                    src={currentUser?.photoURL || defaultAvatar}
-                    className="object-cover w-5 h-5 rounded-full"
-                  />
-                  <span className="font-medium max5se:line-clamp-1 ">
-                    {createUsernameFromEmail(currentUser?.email as string)}
-                  </span>
+    <header className="h-[52px] lg:h-[96px]">
+      <div style={{ backgroundImage: `url("/bg-header.jpg")` }} className="h-[52px]">
+        <div className="layout-container">
+          <nav className="relative h-[52px] flex items-center justify-between">
+            <CustomLink href={PATH.home}>
+              <Image src="/logo-nettruyen.png" alt="logo" className="w-[150px]" />
+            </CustomLink>
+            <SearchBox className="hidden lg:flex" />
+            <div className="flex items-center gap-x-4">
+              <ButtonToggleTheme />
+              {currentUser?.email ? (
+                <div
+                  className="relative h-full text-white w-max"
+                  onMouseEnter={showPopover}
+                  onMouseLeave={hidePopover}
+                >
+                  <div className="flex items-center justify-end h-full gap-x-2 transition-all duration-100 hover:text-[#ffffffb3] cursor-pointer">
+                    <Image
+                      alt="avatar"
+                      src={currentUser?.photoURL || defaultAvatar}
+                      className="object-cover w-[22px] h-[22px] rounded-full"
+                    />
+                    <span className="hidden font-medium max5se:line-clamp-1 md:inline-block">
+                      {createUsernameFromEmail(currentUser?.email as string)}
+                    </span>
+                  </div>
+                  <Popover active={activePopover} className="w-max">
+                    {currentUser?.role === userRole.ADMIN && (
+                      <CustomLink href={PATH.manage} className="popover-link">
+                        Dashboard
+                      </CustomLink>
+                    )}
+                    {links.map((link) => (
+                      <CustomLink
+                        href={link.path}
+                        key={link.display}
+                        onClick={link.onClick}
+                        className="popover-link"
+                      >
+                        {link.display}
+                      </CustomLink>
+                    ))}
+                  </Popover>
                 </div>
-                <Popover active={activePopover} className="w-max">
-                  {currentUser?.role === userRole.ADMIN && (
-                    <CustomLink href={PATH.manage} className="popover-link">
-                      Dashboard
-                    </CustomLink>
-                  )}
-                  {links.map((link) => (
+              ) : (
+                <div className="flex gap-x-4">
+                  {linksWithoutLogged.map((link) => (
                     <CustomLink
                       href={link.path}
                       key={link.display}
-                      onClick={link.onClick}
-                      className="popover-link"
+                      className="text-[#ffffffb3] transition-all duration-100 hover:opacity-70"
                     >
                       {link.display}
                     </CustomLink>
                   ))}
-                </Popover>
-              </div>
-            ) : (
-              <div className="flex gap-x-4">
-                {linksWithoutLogged.map((link) => (
-                  <CustomLink
-                    href={link.path}
-                    key={link.display}
-                    className="text-[#ffffffb3] transition-all duration-100 hover:opacity-70"
-                  >
-                    {link.display}
-                  </CustomLink>
-                ))}
-              </div>
-            )}
-          </div>
-        </nav>
+                </div>
+              )}
+              <button onClick={toggleMenu} className="lg:hidden">
+                <IconList className="!w-5 !h-5" fill="#fff" />
+              </button>
+            </div>
+          </nav>
+        </div>
       </div>
+      <Menu
+        menuRef={menuRef}
+        overlayRef={overlayRef}
+        toggleMenu={toggleMenu}
+        closeMenu={closeMenu}
+      />
     </header>
   );
 };
