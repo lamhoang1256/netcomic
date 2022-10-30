@@ -40,7 +40,8 @@ const ComicDetailsPage = ({ info, chapters }: ComicDetailsPageProps) => {
       <Meta
         title={`${info.title} [Tới Chap ${chapters[0].title}] Tiếng Việt`}
         description={`Đọc truyện tranh ${info.title} Tiếng Việt bản đẹp chất lượng cao, cập nhật nhanh và sớm nhất tại NetComic`}
-        image={info.posterUrl}
+        // image={info.posterUrl}
+        image="http://res.cloudinary.com/annnn/image/upload/v1657346489/290717828_1072115733435959_6212475330637442786_n_k49hf0.png"
       />
       <LayoutHome>
         <section className="layout-container">

@@ -1,6 +1,5 @@
 import "assets/styles/global.scss";
 import { Authentication } from "components/auth";
-import { Meta } from "components/meta";
 import useDarkMode from "hooks/useDarkMode";
 import type { AppProps } from "next/app";
 import Modal from "react-modal";
@@ -17,13 +16,10 @@ Modal.defaultStyles = {
 function MyApp({ Component, pageProps }: AppProps) {
   useDarkMode();
   return (
-    <>
-      <Meta />
-      <Authentication>
-        <Component {...pageProps} />
-        <ToastContainer></ToastContainer>
-      </Authentication>
-    </>
+    <Authentication>
+      <Component {...pageProps} />
+      <ToastContainer></ToastContainer>
+    </Authentication>
   );
 }
 
