@@ -20,7 +20,7 @@ const GirlComicPage = ({ banners, categories, newestComics, paginations }: GirlC
       <Head>
         <title>Truyện con gái - NetComic</title>
         <meta name="description" content="Truyện con gái - NetComic" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.png" />
       </Head>
       <div className="bg-white rounded-lg dark:bg-bgdark layout-container">
         <HomeBanner banners={banners} />

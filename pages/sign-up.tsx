@@ -65,7 +65,7 @@ const SignUpPage = () => {
       <Head>
         <title>Đăng ký</title>
         <meta name="description" content="Đăng ký" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.png" />
       </Head>
       <div className="auth">
         <form

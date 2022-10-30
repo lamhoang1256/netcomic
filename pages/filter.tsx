@@ -23,7 +23,7 @@ const FilterPage = ({ results, paginations, filters }: FilterPageProps) => {
       <Head>
         <title>Tìm truyện nâng cao</title>
         <meta name="description" content="Tìm truyện nâng cao" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.png" />
       </Head>
       <LayoutHome>
         <div className="bg-white rounded layout-container">

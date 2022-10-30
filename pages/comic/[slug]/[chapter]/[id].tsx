@@ -88,7 +88,7 @@ const ReadComicPage = ({ imageUrls, chapters, info }: ReadComicPageProps) => {
           {info?.title} {info?.chapter}
         </title>
         <meta name="description" content="Trang chi tiết truyện" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.png" />
       </Head>
       <div className="layout-container">
         <section className="lg:rounded-lg bg-bglight dark:bg-bgdark">

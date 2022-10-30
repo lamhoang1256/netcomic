@@ -73,7 +73,7 @@ const CommentPage = () => {
       <Head>
         <title>Bình luận của tôi - NetComic</title>
         <meta name="description" content="Bình luận của tôi - NetComic" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.png" />
       </Head>
       <LayoutUser>
         <Template title="Bình luận của tôi" desc="Danh sách bình luận của bạn">

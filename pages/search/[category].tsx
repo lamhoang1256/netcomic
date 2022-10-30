@@ -34,7 +34,7 @@ const CategoryPage = ({
       <Head>
         <title>{info.name} - NetComic</title>
         <meta name="description" content={`${info.name} - NetComic`} />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.png" />
       </Head>
       <LayoutHome>
         <div className="bg-white dark:bg-bgdark layout-container">

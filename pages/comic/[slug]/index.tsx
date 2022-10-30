@@ -41,7 +41,7 @@ const ComicDetailsPage = ({ info, chapters }: ComicDetailsPageProps) => {
           {info.title} [Tới Chap {chapters[0].title}] Tiếng Việt
         </title>
         <meta name="description" content="Trang chi tiết truyện" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.png" />
       </Head>
       <section className="layout-container">
         <div className="flex flex-col gap-6 pt-5 lg:flex-row">

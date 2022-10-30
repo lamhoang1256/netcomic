@@ -37,7 +37,7 @@ const SignInPage = () => {
       <Head>
         <title>Đăng nhập</title>
         <meta name="description" content="Đăng nhập" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.png" />
       </Head>
       <div className="auth">
         <form

@@ -19,7 +19,7 @@ const RandomComicPage = ({ comics }: RandomComicPageProps) => {
       <Head>
         <title>Random truyện</title>
         <meta name="description" content="Random truyện" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.png" />
       </Head>
       <div className="bg-white rounded-lg dark:bg-bgdark layout-container">
         <h2 className="pt-3 text-2xl text-center">Random truyện</h2>

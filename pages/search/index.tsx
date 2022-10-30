@@ -26,7 +26,7 @@ const SearchPage = ({ results, paginations, categories, status, sort }: SearchPa
       <Head>
         <title>Thể loại - NetComic</title>
         <meta name="description" content="Thể loại - NetComic" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.png" />
       </Head>
       <LayoutHome>
         <div className="bg-white dark:bg-bgdark layout-container">
