@@ -2,6 +2,7 @@ import { IComic } from "@types";
 import axios from "axios";
 import { Button } from "components/button";
 import { IconRandom } from "components/icons";
+import { Meta } from "components/meta";
 import { server } from "configs/server";
 import { PATH } from "constants/path";
 import LayoutHome from "layouts/LayoutHome";
@@ -16,10 +17,11 @@ interface RandomComicPageProps {
 const RandomComicPage = ({ comics }: RandomComicPageProps) => {
   return (
     <LayoutHome>
-      <Head>
-        <title>Random truyện</title>
-        <meta name="description" content="Random truyện" />
-      </Head>
+      <Meta
+        title="Random truyện - NetComic"
+        description="Random truyện"
+        image="https://raw.githubusercontent.com/lamhoang1256/shopbee/main/screenshots/thumbnail-youtube.png"
+      />
       <div className="bg-white rounded-lg dark:bg-bgdark layout-container">
         <h2 className="pt-3 text-2xl text-center">Random truyện</h2>
         <Button

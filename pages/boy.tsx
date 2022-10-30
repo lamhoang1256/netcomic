@@ -1,5 +1,6 @@
 import { ICategory, IComic, IPagination } from "@types";
 import axios from "axios";
+import { Meta } from "components/meta";
 import { Pagination } from "components/pagination";
 import { server } from "configs/server";
 import LayoutHome from "layouts/LayoutHome";
@@ -17,10 +18,11 @@ interface BoyComicPageProps {
 const BoyComicPage = ({ banners, newestComics, paginations, categories }: BoyComicPageProps) => {
   return (
     <LayoutHome>
-      <Head>
-        <title>Truyện Con Trai - NetComic</title>
-        <meta name="description" content="Truyện Con Trai - NetComic" />
-      </Head>
+      <Meta
+        title="Truyện tranh con trai - NetComic"
+        description="Truyện tranh dành cho nam, nội dung thường liên quan đến bạo lực, đánh nhau, phiêu lưu, kinh dị,.."
+        image="https://raw.githubusercontent.com/lamhoang1256/shopbee/main/screenshots/thumbnail-youtube.png"
+      />
       <div className="bg-white rounded-lg dark:bg-bgdark layout-container">
         <HomeBanner banners={banners} />
         <HomeCategory categories={categories} />

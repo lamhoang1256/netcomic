@@ -2,6 +2,7 @@ import { CheckLoggedIn } from "components/auth";
 import { Button } from "components/button";
 import { FormGroup, Label } from "components/form";
 import { Input } from "components/input";
+import { Meta } from "components/meta";
 import { sendLinkResetPassword } from "libs/firebase/firebase-helper";
 import Head from "next/head";
 import { FormEvent, useState } from "react";
@@ -14,10 +15,11 @@ const ResetPasswordPage = () => {
   };
   return (
     <CheckLoggedIn>
-      <Head>
-        <title>Quên mật khẩu</title>
-        <meta name="description" content="Quên mật khẩu" />
-      </Head>
+      <Meta
+        title="Đổi mật khẩu - NetComic"
+        description="Đổi mật khẩu"
+        image="https://raw.githubusercontent.com/lamhoang1256/shopbee/main/screenshots/thumbnail-youtube.png"
+      />
       <div className="auth">
         <form
           className="w-full z-10 mt-20 mx-auto bg-white rounded-xl p-10 max-w-[580px]"

@@ -4,6 +4,7 @@ import { FormGroup, Label } from "components/form";
 import { IconHome } from "components/icons";
 import { Input, InputPassword } from "components/input";
 import { CustomLink } from "components/link";
+import { Meta } from "components/meta";
 import { userRole, userStatus } from "constants/global";
 import { defaultAvatar } from "constants/image";
 import { PATH } from "constants/path";
@@ -62,10 +63,11 @@ const SignUpPage = () => {
   };
   return (
     <CheckLoggedIn>
-      <Head>
-        <title>Đăng ký</title>
-        <meta name="description" content="Đăng ký" />
-      </Head>
+      <Meta
+        title="Đăng ký - NetComic"
+        description="NetComic Trang đăng ký tài khoản"
+        image="https://raw.githubusercontent.com/lamhoang1256/shopbee/main/screenshots/thumbnail-youtube.png"
+      />
       <div className="auth">
         <form
           className="w-full z-10 dark:bg-dark26 mt-20 mx-auto bg-white rounded-xl p-10 max-w-[580px]"

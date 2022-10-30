@@ -4,6 +4,7 @@ import { FormGroup, Label } from "components/form";
 import { IconHome } from "components/icons";
 import { Input, InputPassword } from "components/input";
 import { CustomLink } from "components/link";
+import { Meta } from "components/meta";
 import { PATH } from "constants/path";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import useInputChange from "hooks/useInputChange";
@@ -34,10 +35,11 @@ const SignInPage = () => {
   };
   return (
     <CheckLoggedIn>
-      <Head>
-        <title>Đăng nhập</title>
-        <meta name="description" content="Đăng nhập" />
-      </Head>
+      <Meta
+        title="Đăng nhập - NetComic"
+        description="NetComic Trang đăng nhập"
+        image="https://raw.githubusercontent.com/lamhoang1256/shopbee/main/screenshots/thumbnail-youtube.png"
+      />
       <div className="auth">
         <form
           className="w-full z-10 mt-20 mx-auto bg-white dark:bg-dark26 rounded-xl p-10 max-w-[580px]"

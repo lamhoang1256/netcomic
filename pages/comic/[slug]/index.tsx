@@ -3,6 +3,7 @@ import axios from "axios";
 import { Button } from "components/button";
 import { CommentAddNew, CommentList } from "components/comment";
 import { CustomLink } from "components/link";
+import { Meta } from "components/meta";
 import { Heading } from "components/text";
 import { server } from "configs/server";
 import { PATH } from "constants/path";
@@ -36,22 +37,11 @@ const ComicDetailsPage = ({ info, chapters }: ComicDetailsPageProps) => {
   };
   return (
     <LayoutHome>
-      <Head>
-        <title>
-          {info.title} [Tới Chap {chapters[0].title}] Tiếng Việt
-        </title>
-        <meta
-          property="og:title"
-          content={`${info.title} [Tới Chap ${chapters[0].title}] Tiếng Việt`}
-        />
-        <meta property="og:image" content={info.posterUrl} />
-        <meta name="name" content={`${info.title} [Tới Chap ${chapters[0].title}] Tiếng Việt`} />
-        <meta
-          name="description"
-          content={`Đọc truyện tranh ${info.title} Tiếng Việt bản đẹp chất lượng cao, cập nhật nhanh và sớm nhất tại NetComic`}
-        />
-        <meta name="image" content={info.posterUrl} />
-      </Head>
+      <Meta
+        title={`${info.title} [Tới Chap ${chapters[0].title}] Tiếng Việt`}
+        description={`Đọc truyện tranh ${info.title} Tiếng Việt bản đẹp chất lượng cao, cập nhật nhanh và sớm nhất tại NetComic`}
+        image={info.posterUrl}
+      />
       <section className="layout-container">
         <div className="flex flex-col gap-6 pt-5 lg:flex-row">
           <div className="lg:w-2/3">

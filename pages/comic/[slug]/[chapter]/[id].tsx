@@ -11,6 +11,7 @@ import {
   IconList,
 } from "components/icons";
 import { CustomLink } from "components/link";
+import { Meta } from "components/meta";
 import { ModalChapters } from "components/modal";
 import { server } from "configs/server";
 import { getImage } from "constants/image";
@@ -83,12 +84,11 @@ const ReadComicPage = ({ imageUrls, chapters, info }: ReadComicPageProps) => {
   const currentChapter = chapters.findIndex((chapter) => chapter.id === router.query.id);
   return (
     <LayoutHome className="bg-bgdark">
-      <Head>
-        <title>
-          {info?.title} {info?.chapter}
-        </title>
-        <meta name="description" content="Trang chi tiết truyện" />
-      </Head>
+      <Meta
+        title={`${info.title} - NetComic`}
+        description={`Đọc truyện tranh ${info.title} Tiếng Việt bản đẹp chất lượng cao, cập nhật nhanh và sớm nhất tại NetComic`}
+        image={info.posterUrl}
+      />
       <div className="layout-container">
         <section className="lg:rounded-lg bg-bglight dark:bg-bgdark">
           <div className="py-4 text-center">

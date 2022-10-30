@@ -2,6 +2,7 @@ import { IComment } from "@types";
 import { ProtectedRoute } from "components/auth";
 import { Image } from "components/image";
 import { CustomLink } from "components/link";
+import { Meta } from "components/meta";
 import { Table } from "components/table";
 import { PATH } from "constants/path";
 import { Unsubscribe } from "firebase/auth";
@@ -70,10 +71,11 @@ const CommentPage = () => {
   }, [currentUser]);
   return (
     <ProtectedRoute>
-      <Head>
-        <title>Bình luận của tôi - NetComic</title>
-        <meta name="description" content="Bình luận của tôi - NetComic" />
-      </Head>
+      <Meta
+        title="Bình luận của tôi - NetComic"
+        description="Danh sách bình luận của tôi tại NetComic"
+        image="https://raw.githubusercontent.com/lamhoang1256/shopbee/main/screenshots/thumbnail-youtube.png"
+      />
       <LayoutUser>
         <Template title="Bình luận của tôi" desc="Danh sách bình luận của bạn">
           {comments?.length > 0 ? (

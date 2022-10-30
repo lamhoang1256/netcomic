@@ -4,6 +4,7 @@ import { CategorySidebar } from "components/category";
 import { FilterStatusCate } from "components/filter";
 import { IconRefresh } from "components/icons";
 import { CustomLink } from "components/link";
+import { Meta } from "components/meta";
 import { Pagination } from "components/pagination";
 import { server } from "configs/server";
 import { PATH } from "constants/path";
@@ -31,10 +32,11 @@ const CategoryPage = ({
 }: CategoryPageProps) => {
   return (
     <LayoutHome>
-      <Head>
-        <title>{info.name} - NetComic</title>
-        <meta name="description" content={`${info.name} - NetComic`} />
-      </Head>
+      <Meta
+        title={`${info.name} - NetComic`}
+        description={`Truyện Thể loại ${info.name} - ${info.description}`}
+        image="https://raw.githubusercontent.com/lamhoang1256/shopbee/main/screenshots/thumbnail-youtube.png"
+      />
       <div className="bg-white dark:bg-bgdark layout-container">
         <h1 className="pt-4 pb-1 text-2xl text-center">
           Truyện thể loại <span className="font-semibold text-rede5">{info.name}</span>

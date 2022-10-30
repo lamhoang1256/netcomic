@@ -2,6 +2,7 @@ import { ProtectedRoute } from "components/auth";
 import { Button } from "components/button";
 import { FormGroup, Label } from "components/form";
 import { InputPassword } from "components/input";
+import { Meta } from "components/meta";
 import { EmailAuthProvider, reauthenticateWithCredential, updatePassword } from "firebase/auth";
 import useInputChange from "hooks/useInputChange";
 import { Template } from "layouts";
@@ -41,10 +42,11 @@ const ChangePasswordPage = () => {
 
   return (
     <ProtectedRoute>
-      <Head>
-        <title>Đổi mật khẩu - NetComic</title>
-        <meta name="description" content="Đổi mật khẩu - NetComic" />
-      </Head>
+      <Meta
+        title="Đổi mật khẩu - NetComic"
+        description="Đổi thông tin mật khẩu của người dùng"
+        image="https://raw.githubusercontent.com/lamhoang1256/shopbee/main/screenshots/thumbnail-youtube.png"
+      />
       <LayoutUser>
         <Template title="Đổi mật khẩu" desc="Cập nhật mật khẩu của bạn">
           <form

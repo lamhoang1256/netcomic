@@ -4,9 +4,9 @@ import { FormGroup, Label } from "components/form";
 import { IconQuestion } from "components/icons";
 import { Image } from "components/image";
 import { Input } from "components/input";
+import { Meta } from "components/meta";
 import { ModalLevel } from "components/modal";
 import { Select } from "components/select";
-import { IOption } from "components/select/Select";
 import { defaultAvatar } from "constants/image";
 import { updateProfile } from "firebase/auth";
 import { doc, updateDoc } from "firebase/firestore";
@@ -77,10 +77,11 @@ const ProfilePage = () => {
 
   return (
     <ProtectedRoute>
-      <Head>
-        <title>Tài khoản</title>
-        <meta name="description" content="Tài khoản" />
-      </Head>
+      <Meta
+        title="Thông tin chung - NetComic"
+        description="Thông tin chung"
+        image="https://raw.githubusercontent.com/lamhoang1256/shopbee/main/screenshots/thumbnail-youtube.png"
+      />
       <LayoutUser>
         <Template
           title="Thông tin tài khoản"
