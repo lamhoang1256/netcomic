@@ -23,10 +23,6 @@ const menuLinks = [
     path: PATH.filter,
   },
   {
-    display: "XẾP HẠNG",
-    path: `${PATH.search}?status=-1&sort=10`,
-  },
-  {
     display: "CON TRAI",
     path: PATH.boy,
   },
