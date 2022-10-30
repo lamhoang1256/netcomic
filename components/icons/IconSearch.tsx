@@ -2,7 +2,7 @@ import classNames from "utils/classNames";
 
 interface IconSearchProps extends React.SVGProps<SVGSVGElement> {}
 
-const IconSearch = ({ className }: IconSearchProps) => {
+const IconSearch = ({ className, ...props }: IconSearchProps) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

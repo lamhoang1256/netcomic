@@ -35,7 +35,6 @@ const FollowPage = () => {
       <Head>
         <title>Truyện đang theo dõi - NetComic</title>
         <meta name="description" content="Truyện đang theo dõi - NetComic" />
-        <link rel="icon" href="/favicon.png" />
       </Head>
       <LayoutUser>
         <Template

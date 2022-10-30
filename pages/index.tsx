@@ -23,7 +23,6 @@ const HomePage = ({ banners, newestComics, paginations, categories }: HomePagePr
           name="description"
           content="Đọc Truyện Tranh Manga, Manhua, Manhwa Online - NetComic"
         />
-        <link rel="icon" href="/favicon.png" />
       </Head>
       <div className="bg-white rounded-lg dark:bg-bgdark layout-container">
         <HomeBanner banners={banners} />

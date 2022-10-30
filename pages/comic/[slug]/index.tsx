@@ -40,8 +40,17 @@ const ComicDetailsPage = ({ info, chapters }: ComicDetailsPageProps) => {
         <title>
           {info.title} [Tới Chap {chapters[0].title}] Tiếng Việt
         </title>
-        <meta name="description" content="Trang chi tiết truyện" />
-        <link rel="icon" href="/favicon.png" />
+        <meta
+          property="og:title"
+          content={`${info.title} [Tới Chap ${chapters[0].title}] Tiếng Việt`}
+        />
+        <meta property="og:image" content={info.posterUrl} />
+        <meta name="name" content={`${info.title} [Tới Chap ${chapters[0].title}] Tiếng Việt`} />
+        <meta
+          name="description"
+          content={`Đọc truyện tranh ${info.title} Tiếng Việt bản đẹp chất lượng cao, cập nhật nhanh và sớm nhất tại NetComic`}
+        />
+        <meta name="image" content={info.posterUrl} />
       </Head>
       <section className="layout-container">
         <div className="flex flex-col gap-6 pt-5 lg:flex-row">
@@ -73,7 +82,7 @@ const ComicDetailsPage = ({ info, chapters }: ComicDetailsPageProps) => {
                       <CustomLink
                         href={`${PATH.search}/${category.href}`}
                         key={category.href}
-                        className="transition-all duration-200 px-[6px] py-[2px] text-blue29 hover:text-redf6 border-blue29 hover:border-redf6 border rounded-[3px] text-sm"
+                        className="transition-all duration-200 px-[6px] py-[2px] text-blue29 hover:text-redf6 dark:text-blue1c dark:border-blue29 border-blue29 hover:border-redf6 border rounded-[3px] text-sm dark:hover:border-yellowffc dark:hover:text-yellowffc"
                       >
                         {category.display}
                       </CustomLink>

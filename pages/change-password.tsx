@@ -44,7 +44,6 @@ const ChangePasswordPage = () => {
       <Head>
         <title>Đổi mật khẩu - NetComic</title>
         <meta name="description" content="Đổi mật khẩu - NetComic" />
-        <link rel="icon" href="/favicon.png" />
       </Head>
       <LayoutUser>
         <Template title="Đổi mật khẩu" desc="Cập nhật mật khẩu của bạn">

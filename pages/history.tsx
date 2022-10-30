@@ -21,7 +21,6 @@ const HistoryPage = () => {
       <Head>
         <title>Lịch sử xem - NetComic</title>
         <meta name="description" content="Lịch sử xem - NetComic" />
-        <link rel="icon" href="/favicon.png" />
       </Head>
       <LayoutUser>
         <Template

@@ -45,16 +45,16 @@ interface MenuProps {
 
 const Menu = ({ menuRef, overlayRef, toggleMenu, closeMenu }: MenuProps) => {
   return (
-    <div className="bg-[#e4e4e4] dark:bg-[#242526]">
+    <div className="bg-[#eee] dark:bg-[#242526]">
       <div className="layout-container">
         <aside
-          className="-translate-x-full z-[300] lg:dark:bg-bg-[#242526] lg:bg-[#e4e4e4] bg-[#242526] text-white lg:text-black lg:dark:text-white w-full fixed top-0 left-0 bottom-0 lg:translate-x-0 p-5 lg:p-0 transition-all duration-300 lg:static dark:bg-dark26 rounded-none"
+          className="-translate-x-full z-[300] lg:dark:bg-[#242526] lg:bg-[#eee] bg-[#242526] text-white lg:text-black lg:dark:text-white w-full fixed top-0 left-0 bottom-0 lg:translate-x-0 p-5 lg:p-0 transition-transform duration-300 lg:static"
           ref={menuRef}
         >
           <SidebarCloseAction onCloseSidebar={toggleMenu} />
           <ul className="flex flex-col lg:flex-row gap-x-2">
             <li className="block lg:hidden">
-              <SearchBox className="mb-2 lg:mb-0" />
+              <SearchBox className="mb-2 lg:mb-0" callback={closeMenu} />
             </li>
             <li>
               <CustomLink href={PATH.home} className="flex items-center px-2 h-11">

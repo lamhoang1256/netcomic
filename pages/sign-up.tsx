@@ -1,7 +1,7 @@
 import { CheckLoggedIn } from "components/auth";
 import { Button } from "components/button";
 import { FormGroup, Label } from "components/form";
-import { IconFacebook, IconGoogle, IconHome } from "components/icons";
+import { IconHome } from "components/icons";
 import { Input, InputPassword } from "components/input";
 import { CustomLink } from "components/link";
 import { userRole, userStatus } from "constants/global";
@@ -65,7 +65,6 @@ const SignUpPage = () => {
       <Head>
         <title>Đăng ký</title>
         <meta name="description" content="Đăng ký" />
-        <link rel="icon" href="/favicon.png" />
       </Head>
       <div className="auth">
         <form

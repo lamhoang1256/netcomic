@@ -20,7 +20,6 @@ const BoyComicPage = ({ banners, newestComics, paginations, categories }: BoyCom
       <Head>
         <title>Truyện Con Trai - NetComic</title>
         <meta name="description" content="Truyện Con Trai - NetComic" />
-        <link rel="icon" href="/favicon.png" />
       </Head>
       <div className="bg-white rounded-lg dark:bg-bgdark layout-container">
         <HomeBanner banners={banners} />

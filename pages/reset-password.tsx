@@ -17,7 +17,6 @@ const ResetPasswordPage = () => {
       <Head>
         <title>Quên mật khẩu</title>
         <meta name="description" content="Quên mật khẩu" />
-        <link rel="icon" href="/favicon.png" />
       </Head>
       <div className="auth">
         <form
