@@ -6,7 +6,7 @@ import { PATH } from "constants/path";
 import { Template } from "layouts";
 import LayoutUser from "layouts/LayoutUser";
 import { ComicGrid, ComicImage, ComicTitle } from "modules/comic";
-import Head from "next/head";
+
 import { toast } from "react-toastify";
 import useGlobalStore from "store/global-store";
 

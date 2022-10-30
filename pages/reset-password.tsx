@@ -4,7 +4,7 @@ import { FormGroup, Label } from "components/form";
 import { Input } from "components/input";
 import { Meta } from "components/meta";
 import { sendLinkResetPassword } from "libs/firebase/firebase-helper";
-import Head from "next/head";
+
 import { FormEvent, useState } from "react";
 
 const ResetPasswordPage = () => {

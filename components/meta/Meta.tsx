@@ -1,3 +1,4 @@
+import React from "react";
 import Head from "next/head";
 
 interface MetaProps {
@@ -14,16 +15,18 @@ const Meta = ({
   return (
     <Head>
       <title>{title}</title>
-      <meta name="title" content={title} />
-      <meta name="description" content={description} />
-      <meta property="og:type" content="website" />
-      <meta property="og:title" content={title} />
-      <meta property="og:description" content={description} />
-      <meta property="og:image" content={image} />
-      <meta property="twitter:card" content="summary_large_image" />
-      <meta property="twitter:title" content={title} />
-      <meta property="twitter:description" content={description} />
-      <meta property="twitter:image" content={image} />
+      <meta name="title" content={title} key="title" />
+      <meta name="description" content={description} key="description" />
+      <meta property="og:type" content="website" key="ogType" />
+      <meta property="og:title" content={title} key="ogTitle" />
+      <meta property="og:description" content={description} key="ogDescription" />
+      <meta property="og:image" content={image} key="ogImage" />
+      <meta property="twitter:card" content="summary_large_image" key="twitterCard" />
+      <meta property="twitter:title" content={title} key="twitterTitle" />
+      <meta property="twitter:description" content={description} key="twitterDescription" />
+      <meta property="twitter:image" content={image} key="twitterImage" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" key="viewport" />
+      <link rel="icon" href="/favicon.png" key="favicon" />
     </Head>
   );
 };

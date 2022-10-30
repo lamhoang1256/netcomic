@@ -11,7 +11,6 @@ import { Template } from "layouts";
 import LayoutUser from "layouts/LayoutUser";
 import { db } from "libs/firebase/firebase-config";
 import { ComicTitle } from "modules/comic";
-import Head from "next/head";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import useGlobalStore from "store/global-store";

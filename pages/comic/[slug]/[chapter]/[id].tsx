@@ -23,7 +23,7 @@ import LayoutHome from "layouts/LayoutHome";
 import { auth, db } from "libs/firebase/firebase-config";
 import { ComicImage } from "modules/comic";
 import { GetStaticPaths, GetStaticPropsContext } from "next";
-import Head from "next/head";
+
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import useGlobalStore from "store/global-store";

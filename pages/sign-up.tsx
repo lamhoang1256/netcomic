@@ -12,7 +12,7 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import useInputChange from "hooks/useInputChange";
 import { auth, db } from "libs/firebase/firebase-config";
-import Head from "next/head";
+
 import { FormEvent, useState } from "react";
 import { toast } from "react-toastify";
 

@@ -10,7 +10,7 @@ import { PATH } from "constants/path";
 import LayoutHome from "layouts/LayoutHome";
 import { ComicChartRanking } from "modules/comic";
 import { GetServerSidePropsContext } from "next";
-import Head from "next/head";
+
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";

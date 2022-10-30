@@ -11,7 +11,6 @@ import { PATH } from "constants/path";
 import LayoutHome from "layouts/LayoutHome";
 import { ComicGrid, ComicItem } from "modules/comic";
 import { GetServerSidePropsContext } from "next";
-import Head from "next/head";
 
 interface CategoryPageProps {
   info: ICategoryInfo;

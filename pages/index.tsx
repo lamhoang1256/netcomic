@@ -16,21 +16,14 @@ interface HomePageProps {
 
 const HomePage = ({ banners, newestComics, paginations, categories }: HomePageProps) => {
   return (
-    <>
-      <Meta
-        title="Đọc truyện tranh online - Truyện gì cũng có - NetComic"
-        description="Bất cứ truyện bạn thích đều có và miễn phí tại NetComic, Web đọc truyện tranh online, không quảng cáo và cập nhật nhanh nhất"
-        image="https://raw.githubusercontent.com/lamhoang1256/shopbee/main/screenshots/thumbnail-youtube.png"
-      />
-      <LayoutHome>
-        <div className="bg-white rounded-lg dark:bg-bgdark layout-container">
-          <HomeBanner banners={banners} />
-          <HomeCategory categories={categories} />
-          <HomeNewestComic newestComics={newestComics} />
-          <Pagination paginations={paginations} />
-        </div>
-      </LayoutHome>
-    </>
+    <LayoutHome>
+      <div className="bg-white rounded-lg dark:bg-bgdark layout-container">
+        <HomeBanner banners={banners} />
+        <HomeCategory categories={categories} />
+        <HomeNewestComic newestComics={newestComics} />
+        <Pagination paginations={paginations} />
+      </div>
+    </LayoutHome>
   );
 };
 

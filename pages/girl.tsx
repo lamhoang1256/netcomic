@@ -6,7 +6,6 @@ import { server } from "configs/server";
 import LayoutHome from "layouts/LayoutHome";
 import { HomeBanner, HomeCategory, HomeNewestComic } from "modules/home";
 import { GetServerSidePropsContext } from "next";
-import Head from "next/head";
 
 interface GirlComicPageProps {
   banners: IComic[];

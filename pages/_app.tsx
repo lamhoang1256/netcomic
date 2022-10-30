@@ -1,8 +1,8 @@
 import "assets/styles/global.scss";
 import { Authentication } from "components/auth";
+import { Meta } from "components/meta";
 import useDarkMode from "hooks/useDarkMode";
 import type { AppProps } from "next/app";
-import Head from "next/head";
 import Modal from "react-modal";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -17,17 +17,11 @@ Modal.defaultStyles = {
 function MyApp({ Component, pageProps }: AppProps) {
   useDarkMode();
   return (
-    <>
-      <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="icon" href="/favicon.png" />
-        <title>Đọc truyện tranh online - Truyện gì cũng có - NetComic</title>
-      </Head>
-      <Authentication>
-        <Component {...pageProps} />
-        <ToastContainer></ToastContainer>
-      </Authentication>
-    </>
+    <Authentication>
+      <Meta />
+      <Component {...pageProps} />
+      <ToastContainer></ToastContainer>
+    </Authentication>
   );
 }
 
