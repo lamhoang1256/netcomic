@@ -22,7 +22,7 @@ const GrilComicsApi = async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 async function crawlGrilComics(query: Partial<IQueryParams>) {
-  const response = await axios.get(PATH.netTruyenGirl as string, { params: query });
+  const response = await axios.get(PATH.nhatTruyenGirl as string, { params: query });
   const html = response.data;
   const data = crawlGenderComics(html);
   return data;

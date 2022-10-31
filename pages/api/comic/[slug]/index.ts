@@ -15,7 +15,7 @@ const ComicDetailsApi = async (req: NextApiRequest, res: NextApiResponse) => {
     const error = new ApiError(STATUS.METHOD_NOT_ALLOWED, "Method not allowed");
     return responseError(error, res);
   }
-  const data = await crawlComicDetails(`${PATH.netTruyenComic}/${slug}`);
+  const data = await crawlComicDetails(`${PATH.nhatTruyenComic}/${slug}`);
   const response = {
     message: "Lấy chi tiết truyện thành công!",
     data,
@@ -31,7 +31,7 @@ async function crawlComicDetails(url: string) {
   let chapters: ILinkChapter[] = [];
   let comments: ICommentItem[] = [];
   $("#ctl00_divCenter").each(function (index, element) {
-    info = crawlInfoComic($(element), `${PATH.netTruyenComic}/`, $);
+    info = crawlInfoComic($(element), `${PATH.nhatTruyenComic}/`, $);
   });
   $("#ctl00_divCenter .list-chapter li.row").each(function (index, element) {
     const chapter = crawlLinkChapter($(element));

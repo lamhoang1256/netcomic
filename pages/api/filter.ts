@@ -23,7 +23,7 @@ const filterComicsApi = async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 async function crawlFilterComics(query: Partial<IQueryParams>) {
-  const response = await axios.get(PATH.netTruyenFilter, { params: query });
+  const response = await axios.get(PATH.nhatTruyenFilter, { params: query });
   const html = response.data;
   const $ = cheerio.load(html);
   let results: IComic[] = [];
@@ -63,7 +63,7 @@ async function crawlFilterComics(query: Partial<IQueryParams>) {
     filters.sort.push(sort);
   });
   $("#ctl00_divCenter .pagination li", html).each(function (index, element) {
-    const pagination = crawlPagination($(element), PATH.netTruyenFilter);
+    const pagination = crawlPagination($(element), PATH.nhatTruyenFilter);
     paginations.push(pagination);
   });
   return { filters, results, paginations };

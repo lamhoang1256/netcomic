@@ -2,7 +2,7 @@ import axios from "axios";
 import { PATH } from "constants/path";
 import queryString from "query-string";
 
-export const baseURL = `${PATH.netTruyen}/api`;
+export const baseURL = `${PATH.nhatTruyen}/api`;
 
 const axiosClient = axios.create({
   baseURL,

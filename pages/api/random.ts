@@ -31,7 +31,7 @@ async function randomComic(query: Partial<IQueryParams>) {
       .fill(0)
       .map(async () => {
         const randomPage = Math.floor(Math.random() * pageCount);
-        const response = await axios.get(PATH.netTruyen as string, {
+        const response = await axios.get(PATH.nhatTruyen as string, {
           params: { page: randomPage },
         });
         const html = response.data;

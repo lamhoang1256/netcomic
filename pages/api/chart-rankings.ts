@@ -23,7 +23,7 @@ const ChartRankingsApi = async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 async function crawlChartRankings(query: Partial<IQueryParams>) {
-  const response = await axios.get(PATH.netTruyen as string, { params: query });
+  const response = await axios.get(PATH.nhatTruyen as string, { params: query });
   const html = response.data;
   const $ = cheerio.load(html);
   let chartRankings: IComicChartRanking[] = [];

@@ -8,13 +8,13 @@ import catchAsync from "utils/catchAsync";
 import { crawlCategory } from "utils/crawl";
 import { ApiError, responseError, responseSuccess } from "utils/response";
 
-const GetCategoryListApi = async (req: NextApiRequest, res: NextApiResponse) => {
+const GetCategoriesApi = async (req: NextApiRequest, res: NextApiResponse) => {
   const { method, query } = req;
   if (method !== "GET") {
     const error = new ApiError(STATUS.METHOD_NOT_ALLOWED, "Method not allowed");
     return responseError(error, res);
   }
-  const data = await crawlSearchComics(query);
+  const data = await crawlCategories(query);
   const response = {
     message: "Lấy danh sách thể loại thành công!",
     data,
@@ -22,10 +22,8 @@ const GetCategoryListApi = async (req: NextApiRequest, res: NextApiResponse) => 
   responseSuccess(res, response);
 };
 
-export async function crawlSearchComics(query: Partial<IQueryParams>) {
-  const response = await axios.get(`${PATH.netTruyenSearch}`, {
-    params: query,
-  });
+export async function crawlCategories(query: Partial<IQueryParams>) {
+  const response = await axios.get(`${PATH.nhatTruyenSearch}`, { params: query });
   const html = response.data;
   const $ = cheerio.load(html);
   let categories: ICategory[] = [];
@@ -36,4 +34,4 @@ export async function crawlSearchComics(query: Partial<IQueryParams>) {
   return categories;
 }
 
-export default catchAsync(GetCategoryListApi);
+export default catchAsync(GetCategoriesApi);

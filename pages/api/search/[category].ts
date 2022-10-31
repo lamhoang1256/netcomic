@@ -14,7 +14,7 @@ const SearchByCategoryApi = async (req: NextApiRequest, res: NextApiResponse) =>
     const error = new ApiError(STATUS.METHOD_NOT_ALLOWED, "Method not allowed");
     return responseError(error, res);
   }
-  const data = await crawlSearchComics(query);
+  const data = await crawlCategories(query);
   const response = {
     message: "Lấy truyện theo thể loại thành công!",
     data,
@@ -22,13 +22,13 @@ const SearchByCategoryApi = async (req: NextApiRequest, res: NextApiResponse) =>
   responseSuccess(res, response);
 };
 
-async function crawlSearchComics(query: Partial<IQueryParams>) {
-  const response = await axios.get(`${PATH.netTruyenCategory}/${query?.category}`, {
+async function crawlCategories(query: Partial<IQueryParams>) {
+  const response = await axios.get(`${PATH.nhatTruyenCategory}/${query?.category}`, {
     params: query,
   });
   const html = response.data;
   const $ = cheerio.load(html);
-  const response2 = await axios.get(PATH.netTruyenSearch);
+  const response2 = await axios.get(PATH.nhatTruyenSearch);
   const html2 = response2.data;
   const $2 = cheerio.load(html2);
   let results: IComic[] = [];
@@ -56,7 +56,7 @@ async function crawlSearchComics(query: Partial<IQueryParams>) {
     results.push(result);
   });
   $("#ctl00_divCenter .pagination li", html).each(function (index, element) {
-    const pagination = crawlPagination($(element), `${PATH.netTruyenCategory}/`);
+    const pagination = crawlPagination($(element), `${PATH.nhatTruyenCategory}/`);
     paginations.push(pagination);
   });
   $("#ctl00_divRight .nav li a", html).each(function (index, element) {

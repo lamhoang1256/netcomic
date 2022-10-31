@@ -22,7 +22,7 @@ const BoyComicsApi = async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 async function crawlBoyComics(query: Partial<IQueryParams>) {
-  const response = await axiosClient.get(PATH.netTruyenBoy, { params: query });
+  const response = await axiosClient.get(PATH.nhatTruyenBoy, { params: query });
   const html = response.data;
   const data = crawlGenderComics(html);
   return data;
