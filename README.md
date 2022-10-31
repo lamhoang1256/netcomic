@@ -1,12 +1,10 @@
 # Shopbee
 A Website Read Comic Using NextJS, Typescript, Firebase, Tailwindcss, Zustand
 
-## Live demo
+## Overview
 
-Official website: https://netcomic.vercel.app
-
-## Author
-- Nguyễn Hoàng Lâm ( [@lamhoang1256](https://github.com/lamhoang1256) )
+ - Official website: https://netcomic.vercel.app
+-  Author: Nguyễn Hoàng Lâm ( [@lamhoang1256](https://github.com/lamhoang1256) )
 
 ## Preview
 
@@ -52,9 +50,43 @@ NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=
 ## Screenshots
 
 <details>
- <summary>Home Page</summary>
+ <summary>Home page</summary>
  <p>
  
  ![homepage](https://user-images.githubusercontent.com/61537853/198968769-85739c4c-7b50-40a6-a38b-020a2eba05da.png)
+ </p>
+</details>
+
+<details>
+ <summary>Comic details page</summary>
+ <p>
+ 
+ ![detail](https://user-images.githubusercontent.com/61537853/198970344-c4087645-cb48-4794-beab-1404e72dd3e4.png)
+ </p>
+</details>
+
+
+
+<details>
+ <summary>Boy genre comic page</summary>
+ <p>
+ 
+![boy](https://user-images.githubusercontent.com/61537853/198970223-59970bb5-54de-42d2-9495-aacdefd3c2cf.png)
+ </p>
+</details>
+
+<details>
+ <summary>Girl genre comic page</summary>
+ <p>
+ 
+ ![girl](https://user-images.githubusercontent.com/61537853/198970159-1ade4311-6a5f-4eb9-96e7-1edd3ec7672e.png)
+ </p>
+</details>
+
+<details>
+ <summary>History page</summary>
+ <p>
+ 
+![history](https://user-images.githubusercontent.com/61537853/198970281-e81a788d-401c-43a6-b606-4c70aeab8c2a.png)
  </p>
 </details>
