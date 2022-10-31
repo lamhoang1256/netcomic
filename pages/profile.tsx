@@ -76,11 +76,7 @@ const ProfilePage = () => {
   }, [currentUser]);
   return (
     <>
-      <Meta
-        title="Thông tin chung - NetComic"
-        description="Thông tin chung"
-        image="https://i.ibb.co/Ltz6nB4/preview.png"
-      />
+      <Meta title="Thông tin chung - NetComic" description="Thông tin chung" />
       <ProtectedRoute>
         <LayoutUser>
           <Template

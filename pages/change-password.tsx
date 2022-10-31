@@ -42,11 +42,7 @@ const ChangePasswordPage = () => {
 
   return (
     <>
-      <Meta
-        title="Đổi mật khẩu - NetComic"
-        description="Đổi thông tin mật khẩu của người dùng"
-        image="https://i.ibb.co/Ltz6nB4/preview.png"
-      />
+      <Meta title="Đổi mật khẩu - NetComic" description="Đổi thông tin mật khẩu của người dùng" />
       <ProtectedRoute>
         <LayoutUser>
           <Template title="Đổi mật khẩu" desc="Cập nhật mật khẩu của bạn">

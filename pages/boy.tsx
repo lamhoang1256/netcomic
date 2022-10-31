@@ -20,7 +20,7 @@ const BoyComicPage = ({ banners, newestComics, paginations, categories }: BoyCom
       <Meta
         title="Truyện tranh con trai - NetComic"
         description="Truyện tranh dành cho nam, nội dung thường liên quan đến bạo lực, đánh nhau, phiêu lưu, kinh dị,.."
-        image="https://i.ibb.co/Ltz6nB4/preview.png"
+        image={`${server}/preview-boy.png`}
       />
       <LayoutHome>
         <div className="bg-white rounded-lg dark:bg-bgdark layout-container">

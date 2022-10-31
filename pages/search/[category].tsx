@@ -34,7 +34,6 @@ const CategoryPage = ({
       <Meta
         title={`${info.name} - NetComic`}
         description={`Truyện Thể loại ${info.name} - ${info.description}`}
-        image="https://i.ibb.co/Ltz6nB4/preview.png"
       />
       <LayoutHome>
         <div className="bg-white dark:bg-bgdark layout-container">

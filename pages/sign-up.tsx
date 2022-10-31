@@ -63,11 +63,7 @@ const SignUpPage = () => {
   };
   return (
     <>
-      <Meta
-        title="Đăng ký - NetComic"
-        description="NetComic Trang đăng ký tài khoản"
-        image="https://i.ibb.co/Ltz6nB4/preview.png"
-      />
+      <Meta title="Đăng ký - NetComic" description="NetComic Trang đăng ký tài khoản" />
       <CheckLoggedIn>
         <div className="auth">
           <form

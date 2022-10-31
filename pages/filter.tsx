@@ -23,10 +23,10 @@ const FilterPage = ({ results, paginations, filters }: FilterPageProps) => {
       <Meta
         title="Tìm truyện nâng cao - NetComic"
         description="Tìm truyện - Web đọc truyện tranh online lớn nhất - Truyện tranh hay nhất, chất lượng được cập nhật liên tục mỗi ngày"
-        image="https://i.ibb.co/Ltz6nB4/preview.png"
+        image={`${server}/preview-filter.png`}
       />
       <LayoutHome>
-        <div className="bg-white rounded layout-container">
+        <div className="bg-white rounded dark:bg-bgdark layout-container">
           <h2 className="pt-4 pb-1 text-2xl text-center">Tìm truyện nâng cao</h2>
           <div className="items-center gap-2 mt-3 mb-2 md:flex">
             <div className="grid flex-1 grid-cols-5 gap-2 filter-grid filter">
@@ -42,7 +42,7 @@ const FilterPage = ({ results, paginations, filters }: FilterPageProps) => {
             </div>
             <CustomLink
               href={PATH.filter}
-              className="bg-[#337ab7] h-9 inline-flex items-center rounded gap-x-1 px-4 text-white"
+              className="bg-[#337ab7] h-[42px] mt-2 lg:mt-0 inline-flex items-center rounded gap-x-1 px-4 text-white"
             >
               <IconRefresh />
               <span>Reset</span>

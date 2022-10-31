@@ -35,11 +35,7 @@ const SignInPage = () => {
   };
   return (
     <>
-      <Meta
-        title="Đăng nhập - NetComic"
-        description="NetComic Trang đăng nhập"
-        image="https://i.ibb.co/Ltz6nB4/preview.png"
-      />
+      <Meta title="Đăng nhập - NetComic" description="NetComic Trang đăng nhập" />
       <CheckLoggedIn>
         <div className="auth">
           <form

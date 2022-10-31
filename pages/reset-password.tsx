@@ -17,11 +17,7 @@ const ResetPasswordPage = () => {
   };
   return (
     <>
-      <Meta
-        title="Đổi mật khẩu - NetComic"
-        description="Đổi mật khẩu"
-        image="https://i.ibb.co/Ltz6nB4/preview.png"
-      />
+      <Meta title="Đổi mật khẩu - NetComic" description="Đổi mật khẩu" />
       <CheckLoggedIn>
         <div className="auth">
           <form
