@@ -66,7 +66,7 @@ const SignUpPage = () => {
       <Meta
         title="Đăng ký - NetComic"
         description="NetComic Trang đăng ký tài khoản"
-        image="https://i.ibb.co/VMC8pDm/preview.png"
+        image="https://i.ibb.co/Ltz6nB4/preview.png"
       />
       <CheckLoggedIn>
         <div className="auth">

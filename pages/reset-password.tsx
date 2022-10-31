@@ -20,7 +20,7 @@ const ResetPasswordPage = () => {
       <Meta
         title="Đổi mật khẩu - NetComic"
         description="Đổi mật khẩu"
-        image="https://i.ibb.co/VMC8pDm/preview.png"
+        image="https://i.ibb.co/Ltz6nB4/preview.png"
       />
       <CheckLoggedIn>
         <div className="auth">

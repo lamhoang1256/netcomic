@@ -35,7 +35,7 @@ const FollowPage = () => {
       <Meta
         title="Truyện đang theo dõi - NetComic"
         description="Theo dõi những bộ truyện hay nhất tại NetComic"
-        image="https://i.ibb.co/VMC8pDm/preview.png"
+        image="https://i.ibb.co/Ltz6nB4/preview.png"
       />
       <ProtectedRoute>
         <LayoutUser>

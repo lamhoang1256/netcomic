@@ -22,7 +22,7 @@ const HistoryPage = () => {
       <Meta
         title="Lịch sử đọc truyện - NetComic"
         description="Lịch sử các bộ truyện bạn đã đọc"
-        image="https://i.ibb.co/VMC8pDm/preview.png"
+        image="https://i.ibb.co/Ltz6nB4/preview.png"
       />
       <LayoutUser>
         <Template

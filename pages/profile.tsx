@@ -79,7 +79,7 @@ const ProfilePage = () => {
       <Meta
         title="Thông tin chung - NetComic"
         description="Thông tin chung"
-        image="https://i.ibb.co/VMC8pDm/preview.png"
+        image="https://i.ibb.co/Ltz6nB4/preview.png"
       />
       <ProtectedRoute>
         <LayoutUser>

@@ -19,7 +19,7 @@ const RandomComicPage = ({ comics }: RandomComicPageProps) => {
       <Meta
         title="Random truyện - NetComic"
         description="Random truyện"
-        image="https://i.ibb.co/VMC8pDm/preview.png"
+        image="https://i.ibb.co/Ltz6nB4/preview.png"
       />
       <LayoutHome>
         <div className="bg-white rounded-lg dark:bg-bgdark layout-container">

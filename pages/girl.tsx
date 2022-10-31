@@ -20,7 +20,7 @@ const GirlComicPage = ({ banners, categories, newestComics, paginations }: GirlC
       <Meta
         title="Truyện tranh con gái, tình cảm & lãng mạn - NetComic"
         description="Truyện tranh dành cho phái nữ, nội dung thường liên quan đến tình cảm, lãng mạn, có nhiều cung bậc cảm xúc trong tình yêu"
-        image="https://i.ibb.co/VMC8pDm/preview.png"
+        image="https://i.ibb.co/Ltz6nB4/preview.png"
       />
       <LayoutHome>
         <div className="bg-white rounded-lg dark:bg-bgdark layout-container">

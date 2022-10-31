@@ -9,7 +9,7 @@ const PageNotFound = () => {
       <Meta
         title="Không tìm thấy trang - NetComic"
         description="Trang của bạn đang truy cập không tồn tại hoặc đã bị xóa"
-        image="https://i.ibb.co/VMC8pDm/preview.png"
+        image="https://i.ibb.co/Ltz6nB4/preview.png"
       />
       <div className="flex flex-col items-center justify-center min-h-screen text-center gap-y-3">
         <Icon404 />

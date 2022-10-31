@@ -45,7 +45,7 @@ const ChangePasswordPage = () => {
       <Meta
         title="Đổi mật khẩu - NetComic"
         description="Đổi thông tin mật khẩu của người dùng"
-        image="https://i.ibb.co/VMC8pDm/preview.png"
+        image="https://i.ibb.co/Ltz6nB4/preview.png"
       />
       <ProtectedRoute>
         <LayoutUser>

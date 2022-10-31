@@ -38,7 +38,7 @@ const SignInPage = () => {
       <Meta
         title="Đăng nhập - NetComic"
         description="NetComic Trang đăng nhập"
-        image="https://i.ibb.co/VMC8pDm/preview.png"
+        image="https://i.ibb.co/Ltz6nB4/preview.png"
       />
       <CheckLoggedIn>
         <div className="auth">

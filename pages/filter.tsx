@@ -23,7 +23,7 @@ const FilterPage = ({ results, paginations, filters }: FilterPageProps) => {
       <Meta
         title="Tìm truyện nâng cao - NetComic"
         description="Tìm truyện - Web đọc truyện tranh online lớn nhất - Truyện tranh hay nhất, chất lượng được cập nhật liên tục mỗi ngày"
-        image="https://i.ibb.co/VMC8pDm/preview.png"
+        image="https://i.ibb.co/Ltz6nB4/preview.png"
       />
       <LayoutHome>
         <div className="bg-white rounded layout-container">

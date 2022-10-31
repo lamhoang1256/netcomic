@@ -26,7 +26,7 @@ const SearchPage = ({ results, paginations, categories, status, sort }: SearchPa
       <Meta
         title="Tìm truyện tranh online - NetComic"
         description="Tìm truyện tranh - Tất cả truyện đều có thể tìm thấy tại NetComic"
-        image="https://i.ibb.co/VMC8pDm/preview.png"
+        image="https://i.ibb.co/Ltz6nB4/preview.png"
       />
       <LayoutHome>
         <div className="bg-white dark:bg-bgdark layout-container">
