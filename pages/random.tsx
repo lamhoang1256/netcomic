@@ -16,7 +16,11 @@ interface RandomComicPageProps {
 const RandomComicPage = ({ comics }: RandomComicPageProps) => {
   return (
     <>
-      <Meta title="Random truyện - NetComic" description="Random truyện" />
+      <Meta
+        title="Random truyện - NetComic"
+        description="Random truyện"
+        image={`${server}/preview-random.png`}
+      />
       <LayoutHome>
         <div className="bg-white rounded-lg dark:bg-bgdark layout-container">
           <h2 className="pt-3 text-2xl text-center">Random truyện</h2>
