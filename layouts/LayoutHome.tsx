@@ -1,7 +1,7 @@
 import { HTMLAttributes } from "react";
 import classNames from "utils/classNames";
-import Footer from "./Footer";
 import Header from "./Header";
+import Footer from "./Footer";
 
 interface LayoutHomeProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;

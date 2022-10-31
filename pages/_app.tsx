@@ -1,5 +1,6 @@
 import "assets/styles/global.scss";
 import { Authentication } from "components/auth";
+import { ErrorBoundary } from "components/errorBoundary";
 import { Meta } from "components/meta";
 import useDarkMode from "hooks/useDarkMode";
 import type { AppProps } from "next/app";
@@ -20,7 +21,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <Meta />
       <Authentication>
-        <Component {...pageProps} />
+        <ErrorBoundary>
+          <Component {...pageProps} />
+        </ErrorBoundary>
         <ToastContainer></ToastContainer>
       </Authentication>
     </>
