@@ -1,4 +1,4 @@
-# Shopbee
+# Netcomic
 A Website Read Comic Using NextJS, Typescript, Firebase, Tailwindcss, Zustand
 
 ## Overview
@@ -8,11 +8,12 @@ A Website Read Comic Using NextJS, Typescript, Firebase, Tailwindcss, Zustand
 
 ## Preview
 
-![homepage]![home](https://user-images.githubusercontent.com/61537853/198968769-85739c4c-7b50-40a6-a38b-020a2eba05da.png)
+![home](https://user-images.githubusercontent.com/61537853/198968769-85739c4c-7b50-40a6-a38b-020a2eba05da.png)
 
 ## Resources
 ```
-Will soon updated
+Data: comic crawled from website Nhat Truyen (https://nhattruyenin.com)
+Font Family: Averta
 ```
 ## Main technology used
 
@@ -27,7 +28,15 @@ Will soon updated
 
 ## Features
 
-- Update
+- Suggested featured comics
+- Search comic by name
+- Filter by categories, top rank, date, ...
+- Save comic history
+- Follow comic you like
+- Update information profile
+- Level up through reading comic
+- Comments (require sign in)
+- Theme: dark mode, light mode
 
 ## Environment Variables
 
