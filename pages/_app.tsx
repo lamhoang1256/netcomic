@@ -18,7 +18,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   useDarkMode();
   return (
     <>
-      <Meta></Meta>
+      <Meta />
       <Authentication>
         <Component {...pageProps} />
         <ToastContainer></ToastContainer>

@@ -1,4 +1,3 @@
-import { LoadingSpinner } from "components/loading";
 import { onAuthStateChanged } from "firebase/auth";
 import { collection, doc, getDoc, onSnapshot, query, where } from "firebase/firestore";
 import { auth, db } from "libs/firebase/firebase-config";
