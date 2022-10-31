@@ -31,7 +31,7 @@ const Sidebar = ({ children, labelOpenSidebar, className }: SidebarProps) => {
       </Button>
       <aside
         className={classNames(
-          "-translate-x-full z-[300] bg-[#f8fafc] lg:bg-transparent w-full max-w-[300px] fixed top-0 left-0 bottom-0 lg:translate-x-0 p-5 lg:h-fit transition-all duration-300 lg:static overflow-auto dark:bg-dark26",
+          "-translate-x-full z-[300] bg-[#f8fafc] lg:bg-transparent w-full max-w-[300px] fixed top-0 left-0 bottom-0 lg:translate-x-0 p-5 lg:h-fit transition-all duration-300 lg:static overflow-auto dark:bg-dark26 rounded-xl",
           className
         )}
         ref={sidebarRef}

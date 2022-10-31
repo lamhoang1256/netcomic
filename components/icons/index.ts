@@ -22,9 +22,11 @@ import IconUnlike from "./IconUnlike";
 import IconLike from "./IconLike";
 import IconQuestion from "./IconQuestion";
 import IconRandom from "./IconRandom";
+import Icon404 from "./Icon404";
 
 export {
   IconRandom,
+  Icon404,
   IconFacebook,
   IconTime,
   IconGoogle,
