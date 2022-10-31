@@ -73,7 +73,7 @@ const CommentPage = () => {
       <Meta
         title="Bình luận của tôi - NetComic"
         description="Danh sách bình luận của tôi tại NetComic"
-        image="https://raw.githubusercontent.com/lamhoang1256/shopbee/main/screenshots/thumbnail-youtube.png"
+        image="https://i.ibb.co/VMC8pDm/preview.png"
       />
       <ProtectedRoute>
         <LayoutUser>

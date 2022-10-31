@@ -12,7 +12,7 @@ interface MetaProps {
 const Meta = ({
   title = "Đọc truyện tranh online - Truyện gì cũng có - NetComic",
   description = "Bất cứ truyện bạn thích đều có và miễn phí tại NetComic, Web đọc truyện tranh online, không quảng cáo và cập nhật nhanh nhất",
-  image = "https://raw.githubusercontent.com/lamhoang1256/shopbee/main/screenshots/thumbnail-youtube.png",
+  image = "https://i.ibb.co/VMC8pDm/preview.png",
 }: MetaProps) => {
   const router = useRouter();
   return (

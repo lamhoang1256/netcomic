@@ -79,7 +79,7 @@ const ProfilePage = () => {
       <Meta
         title="Thông tin chung - NetComic"
         description="Thông tin chung"
-        image="https://raw.githubusercontent.com/lamhoang1256/shopbee/main/screenshots/thumbnail-youtube.png"
+        image="https://i.ibb.co/VMC8pDm/preview.png"
       />
       <ProtectedRoute>
         <LayoutUser>
