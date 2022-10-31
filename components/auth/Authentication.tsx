@@ -29,7 +29,7 @@ function Authentication({ children }: { children: React.ReactNode }) {
     });
     return () => unsubscribe();
   }, [setCurrentUser, setLoading, setHistory, setFollow]);
-  return <>{loading ? <LoadingSpinner /> : children}</>;
+  return <>{children}</>;
 }
 
 export default Authentication;
