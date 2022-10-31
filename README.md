@@ -8,7 +8,12 @@ A Website Read Comic Using NextJS, Typescript, Firebase, Tailwindcss, Zustand
 
 ## Preview
 
-![home](https://user-images.githubusercontent.com/61537853/198968769-85739c4c-7b50-40a6-a38b-020a2eba05da.png)
+Dark Mode:
+![home-darkmode·](https://user-images.githubusercontent.com/61537853/198968769-85739c4c-7b50-40a6-a38b-020a2eba05da.png)
+
+Light Mode:
+![home-lightmode](https://user-images.githubusercontent.com/61537853/198992036-e3b1c77e-93fa-483d-92f0-634b72c47bf0.png)
+
 
 ## Resources
 ```
