@@ -62,7 +62,7 @@ const Header = () => {
         <div className="layout-container">
           <nav className="relative h-[52px] flex items-center justify-between">
             <CustomLink href={PATH.home}>
-              <Image src="/logo-nettruyen.png" alt="logo" className="w-[150px]" />
+              <Image src="/logo-netcomic.png" alt="logo" className="w-[116px]" />
             </CustomLink>
             <SearchBox className="hidden lg:flex" />
             <div className="flex items-center gap-x-4">

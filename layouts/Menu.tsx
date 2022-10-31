@@ -7,6 +7,14 @@ import SidebarCloseAction from "./SidebarCloseAction";
 
 const menuLinks = [
   {
+    display: "TRANG CHỦ",
+    path: PATH.home,
+  },
+  {
+    display: "TÀI KHOẢN",
+    path: PATH.profile,
+  },
+  {
     display: "THEO DÕI",
     path: PATH.follow,
   },
@@ -52,15 +60,9 @@ const Menu = ({ menuRef, overlayRef, toggleMenu, closeMenu }: MenuProps) => {
             <li className="block lg:hidden">
               <SearchBox className="mb-2 lg:mb-0" callback={closeMenu} />
             </li>
-            <li>
-              <CustomLink href={PATH.home} className="flex items-center px-2 h-11">
-                <IconHome className="w-[18px] h-5 mr-2" />
-                TRANG CHỦ
-              </CustomLink>
-            </li>
             {menuLinks.map((link) => (
               <li key={link.display}>
-                <CustomLink href={link.path} className="flex items-center px-2 h-11">
+                <CustomLink href={link.path} className="flex items-center pr-3 h-11">
                   {link.display}
                 </CustomLink>
               </li>

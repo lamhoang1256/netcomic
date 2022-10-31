@@ -1,5 +1,6 @@
 import { Button } from "components/button";
 import { Icon404 } from "components/icons";
+import { PATH } from "constants/path";
 import React, { Component, ErrorInfo } from "react";
 
 interface IErrorBoundaryProps {
@@ -32,7 +33,9 @@ class ErrorBoundary extends Component<IErrorBoundaryProps, IErrorBoundaryState> 
         <div className="flex flex-col items-center justify-center px-2 py-6 text-base text-red-500 bg-red-100 gap-y-2">
           <Icon404 />
           <span className="text-lg font-semibold">Đã xảy ra lỗi vui lòng thử lại sau!</span>
-          <Button className="mt-2 text-white bg-red-400">Về trang chủ</Button>
+          <Button to={PATH.home} className="mt-2 text-white bg-red-400">
+            Về trang chủ
+          </Button>
         </div>
       );
     }
