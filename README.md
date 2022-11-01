@@ -16,20 +16,22 @@ Light Mode:
 
 
 ## Resources
-```
-Data: comic crawled from website Nhat Truyen (https://nhattruyenin.com)
-Font Family: Averta
-```
+
+- API: https://netcomic.vercel.app/api-doc (Crawl data from website Nhat Truyen - https://nhattruyenin.com)
+- Font Family: Averta
+
 ## Main technology used
 
-- React, Typescript
+- NextJS, Typescript
 - Firebase
 - Tailwindcss
 - Zustand (State management)
 - Axios (Support fetching data)
-- Swiper (Slider), react-modal
+- Swiper (Slider), react-modal (Modal)
 - React-toastify, sweetalert2 (Message UI)
-- Other: cheerio, react-tailwindcss-select, query-string, react-lazy-load-image-component, ...
+- Next-swagger-doc, swagger-ui-react (Document API)
+- Cheerio (Crawl data from website Nhat Truyen)
+- Other: react-tailwindcss-select, query-string, react-lazy-load-image-component, ...
 
 ## Features
 
