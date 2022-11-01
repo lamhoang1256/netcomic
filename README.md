@@ -106,3 +106,13 @@ NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=
 ![history](https://user-images.githubusercontent.com/61537853/198970281-e81a788d-401c-43a6-b606-4c70aeab8c2a.png)
  </p>
 </details>
+
+<details>
+ <summary>Change password page</summary>
+ <p>
+ 
+ ![change-password-light](https://user-images.githubusercontent.com/61537853/199253432-7a8db713-8046-489b-af1c-ac19cc5ba2f5.png)
+ ![change-password-dark](https://user-images.githubusercontent.com/61537853/199253449-30fa4d95-984c-4d20-97b0-aba836085f35.png)
+
+ </p>
+</details>
