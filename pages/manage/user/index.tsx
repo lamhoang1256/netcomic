@@ -10,7 +10,7 @@ import { PATH } from "constants/path";
 import { Unsubscribe } from "firebase/auth";
 import { collection, deleteDoc, doc, onSnapshot } from "firebase/firestore";
 import { LayoutDashboard } from "layouts";
-import { db } from "libs/firebase/firebase-config";
+import { db } from "libs/firebase-app";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import useGlobalStore from "store/global-store";
@@ -33,13 +33,12 @@ const UserManage = () => {
       cancelButtonColor: "#d33",
       confirmButtonText: "Đồng ý!",
     }).then(async (result) => {
-      if (result.isConfirmed) {
-        try {
-          await deleteDoc(docRef);
-          toast.success("User đã được xóa!");
-        } catch (error: any) {
-          toast.error(error?.message);
-        }
+      if (!result.isConfirmed) return;
+      try {
+        await deleteDoc(docRef);
+        toast.success("User đã được xóa!");
+      } catch (error: any) {
+        toast.error(error?.message);
       }
     });
   };
@@ -51,10 +50,7 @@ const UserManage = () => {
         unSubscribe = onSnapshot(colRef, (snapshot) => {
           const results: any[] = [];
           snapshot.forEach((doc: any) => {
-            results.push({
-              id: doc.id,
-              ...doc.data(),
-            });
+            results.push({ id: doc.id, ...doc.data() });
           });
           setUsers(results);
         });
@@ -111,7 +107,7 @@ const UserManage = () => {
                     </div>
                   </td>
                   <td>{user.email}</td>
-                  <td>{user.gender}</td>
+                  <td>{user?.gender?.label}</td>
                   <td>
                     <LabelStatus type="success">{user.status}</LabelStatus>
                   </td>

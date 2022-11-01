@@ -1,6 +1,6 @@
 import { onAuthStateChanged } from "firebase/auth";
 import { collection, doc, getDoc, onSnapshot, query, where } from "firebase/firestore";
-import { auth, db } from "libs/firebase/firebase-config";
+import { auth, db } from "libs/firebase-app";
 import React, { useEffect } from "react";
 import useGlobalStore from "store/global-store";
 

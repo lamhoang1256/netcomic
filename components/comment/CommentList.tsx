@@ -2,7 +2,7 @@ import { IComment } from "@types";
 import { commentStatus } from "constants/global";
 import { Unsubscribe } from "firebase/auth";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
-import { db } from "libs/firebase/firebase-config";
+import { db } from "libs/firebase-app";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";

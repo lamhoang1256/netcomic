@@ -2,7 +2,7 @@ import { IComment } from "@types";
 import { IconChat, IconLike, IconUnlike } from "components/icons";
 import { Image } from "components/image";
 import { deleteDoc, doc, increment, updateDoc } from "firebase/firestore";
-import { auth, db } from "libs/firebase/firebase-config";
+import { auth, db } from "libs/firebase-app";
 import { toast } from "react-toastify";
 import useGlobalStore from "store/global-store";
 import Swal from "sweetalert2";

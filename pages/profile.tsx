@@ -1,27 +1,18 @@
 import { ProtectedRoute } from "components/auth";
 import { Button } from "components/button";
 import { FormGroup, Label } from "components/form";
-import { IconQuestion } from "components/icons";
-import { Image } from "components/image";
 import { Input } from "components/input";
 import { Meta } from "components/meta";
-import { ModalLevel } from "components/modal";
 import { Select } from "components/select";
 import { optionsGender } from "constants/global";
 import { defaultAvatar } from "constants/image";
-import { updateProfile } from "firebase/auth";
-import { doc, updateDoc } from "firebase/firestore";
 import useInputChange from "hooks/useInputChange";
-import useModal from "hooks/useModal";
-import useSelectChange from "hooks/useSelectChange";
 import { Template } from "layouts";
 import LayoutUser from "layouts/LayoutUser";
-import { auth, db } from "libs/firebase/firebase-config";
-import useFirebaseImage from "libs/firebase/useFirebaseImage";
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import { toast } from "react-toastify";
+import { handleUpdateUser } from "libs/firebase-app";
+import { UserLevelProgress, UserUploadAvatar } from "modules/user";
+import { useEffect, useState } from "react";
 import useGlobalStore from "store/global-store";
-import { checkLevel } from "utils";
 
 const ProfilePage = () => {
   const { currentUser } = useGlobalStore();
@@ -30,45 +21,10 @@ const ProfilePage = () => {
     gender: optionsGender[0],
     avatar: defaultAvatar,
   });
-  console.log("values: ", values);
-  const { isShow, toggleModal } = useModal();
   const { onChange } = useInputChange(values, setValues);
-  const { handleUploadImage } = useFirebaseImage();
-  const { level, percent } = checkLevel(currentUser?.score || 0);
-  const { onChangeSelect } = useSelectChange(values, setValues);
-  const handleUpdateProfile = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    try {
-      if (!currentUser) return;
-      const colRef = doc(db, "users", currentUser.uid);
-      await updateDoc(colRef, { ...values });
-      toast.success("Cập nhật thông tin thành công!");
-    } catch (error) {
-      toast.error("Cập nhật thông tin thất bại!");
-    }
-  };
-  const handleUpdateAvatar = async (e: ChangeEvent<HTMLInputElement>) => {
-    try {
-      const newAvatar = await handleUploadImage(e.target.files?.[0]);
-      if (!currentUser || !auth.currentUser) return;
-      const colRef = doc(db, "users", currentUser?.uid);
-      await updateProfile(auth.currentUser, {
-        photoURL: newAvatar,
-      });
-      await updateDoc(colRef, { avatar: newAvatar });
-      toast.success("Cập nhật ảnh đại diện thành công!");
-      setValues({ ...values, avatar: newAvatar });
-    } catch (error) {
-      toast.error("Cập nhật ảnh đại diện thất bại!");
-    }
-  };
   useEffect(() => {
     if (!currentUser) return;
-    setValues({
-      fullname: currentUser?.fullname || "",
-      gender: currentUser?.gender || optionsGender[0],
-      avatar: currentUser?.photoURL || defaultAvatar,
-    });
+    setValues({ ...values, ...currentUser });
   }, [currentUser]);
   return (
     <>
@@ -81,27 +37,12 @@ const ProfilePage = () => {
           >
             <form
               autoComplete="off"
-              onSubmit={handleUpdateProfile}
+              onSubmit={(e) => handleUpdateUser(e, currentUser?.uid as string, values)}
               className="flex flex-col-reverse gap-5 lg:flex-row"
             >
               <div className="w-full mt-3 max-w-[500px]">
                 <FormGroup>
-                  <div className="flex items-end gap-x-4">
-                    <div className="flex-1">
-                      <div className="flex justify-between text-xs">
-                        <span>Cấp {level}</span>
-                        <span>Cấp {level + 1}</span>
-                      </div>
-                      <div className="progress">
-                        <div className="progress-level" style={{ width: `${percent}%` }}>
-                          {percent}%
-                        </div>
-                      </div>
-                    </div>
-                    <button type="button" onClick={toggleModal}>
-                      <IconQuestion />
-                    </button>
-                  </div>
+                  <UserLevelProgress />
                 </FormGroup>
                 <FormGroup>
                   <Label htmlFor="email">Địa chỉ email</Label>
@@ -135,34 +76,16 @@ const ProfilePage = () => {
                 </Button>
               </div>
               <div className="flex-1">
-                <div className="flex flex-col items-center mt-3">
-                  <Label>Ảnh đại diện</Label>
-                  <Image
-                    alt="avatar"
-                    src={currentUser?.photoURL || defaultAvatar}
-                    className="w-[100px] h-[100px] mt-1 rounded-full"
-                  />
-                  <div className="relative">
-                    <input
-                      type="file"
-                      accept=".png, .jpg, .jpeg"
-                      className="absolute inset-0 opacity-0"
-                      onChange={handleUpdateAvatar}
-                    />
-                    <Button className="bg-[#c9302c] text-white my-2 inline-block">
-                      Upload ảnh
-                    </Button>
-                  </div>
-                  <span>jpg,jpeg,gif,png nhỏ hơn 2MB</span>
-                  <span className="italic font-light text-red-500">
-                    Avatar tục tĩu sẽ bị khóa vĩnh viễn
-                  </span>
-                </div>
+                <UserUploadAvatar
+                  avatar={currentUser?.avatar as string}
+                  userId={currentUser?.uid as string}
+                  values={values}
+                  setValues={setValues}
+                />
               </div>
             </form>
           </Template>
         </LayoutUser>
-        <ModalLevel isShow={isShow} toggleModal={toggleModal} />
       </ProtectedRoute>
     </>
   );

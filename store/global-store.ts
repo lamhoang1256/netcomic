@@ -1,7 +1,7 @@
 import { IComicHistory, ICurrentUser } from "@types";
 import { LocalStorage } from "constants/localStorage";
 import { doc, updateDoc } from "firebase/firestore";
-import { db } from "libs/firebase/firebase-config";
+import { db } from "libs/firebase-app";
 import { toast } from "react-toastify";
 import create from "zustand";
 import { devtools } from "zustand/middleware";

@@ -1,21 +1,17 @@
 import { CheckAdmin } from "components/auth";
 import { Button } from "components/button";
 import { FormGroup, Label } from "components/form";
-import { Image } from "components/image";
 import { Input } from "components/input";
 import { Select } from "components/select";
 import { optionsGender, userGender, userRole, userStatus } from "constants/global";
-import { defaultAvatar } from "constants/image";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import useInputChange from "hooks/useInputChange";
 import useSelectChange from "hooks/useSelectChange";
 import { LayoutDashboard } from "layouts";
-import { db } from "libs/firebase/firebase-config";
-import { sendLinkResetPassword } from "libs/firebase/firebase-helper";
-import useFirebaseImage from "libs/firebase/useFirebaseImage";
+import { db, handleUpdateUser, sendLinkResetPassword } from "libs/firebase-app";
+import { UserUploadAvatar } from "modules/user";
 import { useRouter } from "next/router";
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import { toast } from "react-toastify";
+import { useEffect, useState } from "react";
 import { createOptions } from "utils";
 
 const UserUpdate = () => {
@@ -32,30 +28,6 @@ const UserUpdate = () => {
   });
   const { onChange } = useInputChange(values, setValues);
   const { onChangeSelect } = useSelectChange(values, setValues);
-  const { handleUploadImage } = useFirebaseImage();
-  const handleUpdateAvatar = async (e: ChangeEvent<HTMLInputElement>) => {
-    try {
-      const newAvatar = await handleUploadImage(e.target.files?.[0]);
-      if (!id) return;
-      const colRef = doc(db, "users", id);
-      await updateDoc(colRef, { avatar: newAvatar });
-      toast.success("Cập nhật ảnh đại diện thành công!");
-      setValues({ ...values, avatar: newAvatar });
-    } catch (error) {
-      toast.error("Cập nhật ảnh đại diện thất bại!");
-    }
-  };
-  const handleUpdateUser = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    try {
-      if (!id) return;
-      const colRef = doc(db, "users", id);
-      await updateDoc(colRef, { ...values });
-      toast.success("Cập nhật thông tin thành công!");
-    } catch (error) {
-      toast.error("Cập nhật thông tin thất bại!");
-    }
-  };
   useEffect(() => {
     async function fetchUser() {
       if (!id) return;
@@ -74,7 +46,7 @@ const UserUpdate = () => {
       >
         <form
           autoComplete="off"
-          onSubmit={handleUpdateUser}
+          onSubmit={(e) => handleUpdateUser(e, id, values)}
           className="flex flex-col-reverse gap-5 gap-x-16 lg:flex-row"
         >
           <div className="w-full mt-3 max-w-[500px]">
@@ -113,7 +85,7 @@ const UserUpdate = () => {
               <Label htmlFor="role">Quyền</Label>
               <Select
                 options={createOptions(userRole)}
-                defaultValue={values.gender}
+                defaultValue={{ label: values?.role, value: values?.role }}
                 callback={(option) => onChangeSelect("role", option)}
                 placeholder="Chọn quyền"
               />
@@ -123,27 +95,12 @@ const UserUpdate = () => {
             </Button>
           </div>
           <div>
-            <div className="flex flex-col items-center mt-3">
-              <Label>Ảnh đại diện</Label>
-              <Image
-                alt="avatar"
-                src={values?.avatar || defaultAvatar}
-                className="w-[100px] h-[100px] mt-1 rounded-full"
-              />
-              <div className="relative">
-                <input
-                  type="file"
-                  accept=".png, .jpg, .jpeg"
-                  className="absolute inset-0 opacity-0"
-                  onChange={handleUpdateAvatar}
-                />
-                <Button className="bg-[#c9302c] text-white my-2 inline-block">Upload ảnh</Button>
-              </div>
-              <span>jpg,jpeg,gif,png nhỏ hơn 2MB</span>
-              <span className="italic font-light text-red-500">
-                Avatar tục tĩu sẽ bị khóa vĩnh viễn
-              </span>
-            </div>
+            <UserUploadAvatar
+              avatar={values?.avatar as string}
+              userId={id as string}
+              values={values}
+              setValues={setValues}
+            />
             <Button
               type="button"
               className="block mx-auto mt-4 text-white bg-blue33"

@@ -42,8 +42,8 @@ const UserSidebar = () => {
       <div className="flex items-center gap-x-2">
         <Image
           alt="avatar"
-          src={currentUser?.photoURL || defaultAvatar}
-          className="w-10 h-10 rounded-full"
+          src={currentUser?.avatar || defaultAvatar}
+          className="object-cover w-10 h-10 rounded-full"
         />
         <div>
           <h3 className="font-semibold line-clamp-1">

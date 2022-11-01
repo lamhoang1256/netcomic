@@ -10,7 +10,7 @@ import { PATH } from "constants/path";
 import { signOut } from "firebase/auth";
 import useClickOutside from "hooks/useClickOutside";
 import usePopover from "hooks/usePopover";
-import { auth } from "libs/firebase/firebase-config";
+import { auth } from "libs/firebase-app";
 import { useRef } from "react";
 import useGlobalStore from "store/global-store";
 import { createUsernameFromEmail } from "utils";
@@ -76,7 +76,7 @@ const Header = () => {
                   <div className="flex items-center justify-end h-full gap-x-2 transition-all duration-100 hover:text-[#ffffffb3] cursor-pointer">
                     <Image
                       alt="avatar"
-                      src={currentUser?.photoURL || defaultAvatar}
+                      src={currentUser?.avatar || defaultAvatar}
                       className="object-cover w-[22px] h-[22px] rounded-full"
                     />
                     <span className="hidden font-medium max5se:line-clamp-1 md:inline-block">

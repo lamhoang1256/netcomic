@@ -4,7 +4,7 @@ import { Textarea } from "components/textarea";
 import { commentStatus } from "constants/global";
 import { defaultAvatar } from "constants/image";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import { db } from "libs/firebase/firebase-config";
+import { db } from "libs/firebase-app";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { toast } from "react-toastify";
@@ -30,7 +30,7 @@ const CommentAddNew = ({ poster, title }: { poster: string; title: string }) => 
     try {
       const colRef = collection(db, "comments");
       await addDoc(colRef, {
-        avatar: currentUser.photoURL || defaultAvatar,
+        avatar: currentUser.avatar || defaultAvatar,
         fullname: currentUser.fullname,
         content: comment,
         like: 0,

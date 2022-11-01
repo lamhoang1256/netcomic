@@ -13,10 +13,14 @@ export interface IUser {
     seconds: number;
   };
   fullname: string;
-  gender: string;
+  gender: {
+    value: string;
+    label: string;
+  };
 }
 
 export interface ICurrentUser extends User {
+  avatar?: string;
   password?: string;
   role?: string;
   status?: string;
