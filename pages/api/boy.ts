@@ -29,3 +29,14 @@ async function crawlBoyComics(query: Partial<IQueryParams>) {
 }
 
 export default catchAsync(BoyComicsApi);
+
+/** Lấy truyện thể loại con trai
+ * @swagger
+ * /boy:
+ *  get:
+ *      summary: Lấy truyện thể loại con trai
+ *      tags: [Category]
+ *      responses:
+ *          200:
+ *            description: Success
+ */

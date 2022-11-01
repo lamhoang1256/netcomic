@@ -29,3 +29,14 @@ async function crawlGrilComics(query: Partial<IQueryParams>) {
 }
 
 export default catchAsync(GrilComicsApi);
+
+/** Lấy truyện thể loại con gái
+ * @swagger
+ * /girl:
+ *  get:
+ *      summary: Lấy truyện thể loại con gái
+ *      tags: [Category]
+ *      responses:
+ *          200:
+ *            description: Success
+ */

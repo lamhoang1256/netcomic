@@ -35,3 +35,14 @@ export async function crawlCategories(query: Partial<IQueryParams>) {
 }
 
 export default catchAsync(GetCategoriesApi);
+
+/** Lấy danh sách thể loại
+ * @swagger
+ * /category:
+ *  get:
+ *      summary: Lấy danh sách thể loại
+ *      tags: [Category]
+ *      responses:
+ *          200:
+ *            description: Success
+ */

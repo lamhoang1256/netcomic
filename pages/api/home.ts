@@ -52,3 +52,19 @@ async function crawlHomePage(query: Partial<IQueryParams>) {
 }
 
 export default catchAsync(HomePageApi);
+
+/** Lấy dữ liệu trang home
+ * @swagger
+ * /home:
+ *  get:
+ *      summary: Lấy dữ liệu trang home
+ *      tags: [Home]
+ *      parameters:
+ *        - in: query
+ *          name: page
+ *          schema:
+ *            type: number
+ *      responses:
+ *          200:
+ *            description: Success
+ */

@@ -14,6 +14,7 @@
     "cheerio": "^1.0.0-rc.12",
     "firebase": "^9.12.1",
     "next": "12.3.0",
+    "next-swagger-doc": "^0.3.6",
     "query-string": "^7.1.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -21,6 +22,7 @@
     "react-tailwindcss-select": "^1.3.3",
     "react-toastify": "^9.0.8",
     "sass": "^1.54.9",
+    "swagger-ui-react": "^4.15.2",
     "sweetalert2": "^11.6.1",
     "swiper": "^8.4.2",
     "zustand": "^4.1.2"

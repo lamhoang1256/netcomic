@@ -46,3 +46,14 @@ async function randomComic(query: Partial<IQueryParams>) {
 }
 
 export default catchAsync(RandomApi);
+
+/** Random truyện
+ * @swagger
+ * /random:
+ *  get:
+ *      summary: Random truyện
+ *      tags: [Comic]
+ *      responses:
+ *          200:
+ *            description: Success
+ */

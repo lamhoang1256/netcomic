@@ -68,3 +68,36 @@ const getDetailsChapter = async (url: string) => {
 };
 
 export default catchAsync(crawlChapterComic);
+
+/** Lấy thông tin chapter
+ * @swagger
+ * /comic/{slug}/{chapter}/{id}:
+ *  get:
+ *      summary: Lấy thông tin chapter
+ *      tags: [Comic]
+ *      parameters:
+ *       - in: path
+ *         name: slug
+ *         required: true
+ *         example: dai-quan-gia-la-ma-hoang
+ *         schema:
+ *           type: string
+ *           description: slug comic
+ *       - in: path
+ *         name: chapter
+ *         required: true
+ *         example: chap-332
+ *         schema:
+ *           type: string
+ *           description: chapter id
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         example: 921580
+ *         schema:
+ *           type: string
+ *           description: id comic
+ *      responses:
+ *          200:
+ *              description: Success
+ */

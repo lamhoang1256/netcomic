@@ -77,3 +77,43 @@ function crawlFilterOption(node: cheerio.Cheerio<cheerio.Element>) {
 }
 
 export default catchAsync(filterComicsApi);
+
+/** Tìm truyện nâng cao
+ * @swagger
+ * /filter:
+ *  get:
+ *      summary: Tìm truyện nâng cao
+ *      tags: [Comic]
+ *      parameters:
+ *        - in: query
+ *          name: page
+ *          schema:
+ *            type: number
+ *        - in: query
+ *          name: genres
+ *          schema:
+ *            type: number
+ *        - in: query
+ *          name: notgenres
+ *          schema:
+ *            type: number
+ *        - in: query
+ *          name: gender
+ *          schema:
+ *            type: number
+ *        - in: query
+ *          name: status
+ *          schema:
+ *            type: number
+ *        - in: query
+ *          name: minchapter
+ *          schema:
+ *            type: number
+ *        - in: query
+ *          name: sort
+ *          schema:
+ *            type: number
+ *      responses:
+ *          200:
+ *            description: Success
+ */

@@ -67,3 +67,22 @@ async function crawlComicDetails(url: string) {
 }
 
 export default catchAsync(ComicFollowApi);
+
+/** Lấy thông tin truyện đã theo dõi với slug
+ * @swagger
+ * /follow/{slug}:
+ *  get:
+ *      summary: Lấy thông tin truyện đã theo dõi với slug
+ *      tags: [Comic]
+ *      parameters:
+ *       - in: path
+ *         name: slug
+ *         required: true
+ *         example: dai-quan-gia-la-ma-hoang
+ *         schema:
+ *           type: string
+ *           description: slug
+ *      responses:
+ *          200:
+ *              description: Success
+ */

@@ -35,3 +35,14 @@ async function crawlChartRankings(query: Partial<IQueryParams>) {
 }
 
 export default catchAsync(ChartRankingsApi);
+
+/** Lấy bảng xếp hạng truyện
+ * @swagger
+ * /ranking:
+ *  get:
+ *      summary: Lấy bảng xếp hạng truyện
+ *      tags: [Comic]
+ *      responses:
+ *          200:
+ *            description: Success
+ */

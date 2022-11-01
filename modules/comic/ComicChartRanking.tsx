@@ -10,7 +10,7 @@ const ComicChartRanking = () => {
   const [chartRankings, setChartRankings] = useState<IComicChartRanking[]>([]);
   const fetchChartRankings = async () => {
     try {
-      const { data } = (await axios.get(`${server}/api/chart-rankings`)).data;
+      const { data } = (await axios.get(`${server}/api/ranking`)).data;
       setChartRankings(data);
     } catch (error) {
       console.log("error: ", error);

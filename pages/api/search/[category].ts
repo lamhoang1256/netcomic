@@ -67,3 +67,22 @@ async function crawlCategories(query: Partial<IQueryParams>) {
 }
 
 export default catchAsync(SearchByCategoryApi);
+
+/** Lấy truyện theo danh mục
+ * @swagger
+ * /search/{category}:
+ *  get:
+ *      summary: Lấy truyện theo danh mục
+ *      tags: [Search]
+ *      parameters:
+ *       - in: path
+ *         name: category
+ *         required: true
+ *         example: action
+ *         schema:
+ *           type: string
+ *           description: category
+ *      responses:
+ *          200:
+ *              description: Success
+ */

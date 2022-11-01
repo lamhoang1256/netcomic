@@ -60,3 +60,20 @@ async function crawlCategories(query: Partial<IQueryParams>) {
 }
 
 export default catchAsync(SearchComicsApi);
+
+/** Tìm kiếm truyện
+ * @swagger
+ * /search:
+ *  get:
+ *      summary: Tìm kiếm truyện
+ *      tags: [Search]
+ *      parameters:
+ *        - in: query
+ *          name: keyword
+ *          example: Thám tử
+ *          schema:
+ *            type: string
+ *      responses:
+ *          200:
+ *            description: Success
+ */
