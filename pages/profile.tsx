@@ -7,6 +7,7 @@ import { Input } from "components/input";
 import { Meta } from "components/meta";
 import { ModalLevel } from "components/modal";
 import { Select } from "components/select";
+import { optionsGender } from "constants/global";
 import { defaultAvatar } from "constants/image";
 import { updateProfile } from "firebase/auth";
 import { doc, updateDoc } from "firebase/firestore";
@@ -17,24 +18,19 @@ import { Template } from "layouts";
 import LayoutUser from "layouts/LayoutUser";
 import { auth, db } from "libs/firebase/firebase-config";
 import useFirebaseImage from "libs/firebase/useFirebaseImage";
-
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import useGlobalStore from "store/global-store";
 import { checkLevel } from "utils";
 
-const options = [
-  { value: "boy", label: "Nam" },
-  { value: "girl", label: "Nữ" },
-];
-
 const ProfilePage = () => {
   const { currentUser } = useGlobalStore();
   const [values, setValues] = useState({
     fullname: "",
-    gender: "",
+    gender: optionsGender[0],
     avatar: defaultAvatar,
   });
+  console.log("values: ", values);
   const { isShow, toggleModal } = useModal();
   const { onChange } = useInputChange(values, setValues);
   const { handleUploadImage } = useFirebaseImage();
@@ -70,7 +66,7 @@ const ProfilePage = () => {
     if (!currentUser) return;
     setValues({
       fullname: currentUser?.fullname || "",
-      gender: currentUser?.gender || "",
+      gender: currentUser?.gender || optionsGender[0],
       avatar: currentUser?.photoURL || defaultAvatar,
     });
   }, [currentUser]);
@@ -128,12 +124,9 @@ const ProfilePage = () => {
                 <FormGroup>
                   <Label htmlFor="gender">Giới tính</Label>
                   <Select
-                    options={options}
-                    defaultValue={{
-                      label: currentUser?.gender as string,
-                      value: currentUser?.gender as string,
-                    }}
-                    callback={(option) => onChangeSelect("gender", option)}
+                    options={optionsGender}
+                    defaultValue={currentUser?.gender}
+                    callback={(option) => setValues({ ...values, gender: option })}
                     placeholder="Chọn giới tính"
                   />
                 </FormGroup>

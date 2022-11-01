@@ -26,5 +26,8 @@ export interface ICurrentUser extends User {
     seconds: number;
   };
   fullname?: string;
-  gender?: string;
+  gender?: {
+    value: string;
+    label: string;
+  };
 }

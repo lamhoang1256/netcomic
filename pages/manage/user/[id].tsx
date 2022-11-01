@@ -4,7 +4,7 @@ import { FormGroup, Label } from "components/form";
 import { Image } from "components/image";
 import { Input } from "components/input";
 import { Select } from "components/select";
-import { userGender, userRole, userStatus } from "constants/global";
+import { optionsGender, userGender, userRole, userStatus } from "constants/global";
 import { defaultAvatar } from "constants/image";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import useInputChange from "hooks/useInputChange";
@@ -23,7 +23,7 @@ const UserUpdate = () => {
   const id = query?.id as string;
   const [values, setValues] = useState({
     fullname: "",
-    gender: "",
+    gender: optionsGender[0],
     score: 0,
     role: "USER",
     avatar: "",
@@ -95,8 +95,8 @@ const UserUpdate = () => {
               <Label htmlFor="gender">Giới tính</Label>
               <Select
                 options={createOptions(userGender)}
-                defaultValue={{ label: values?.gender, value: values?.gender }}
-                callback={(option) => onChangeSelect("gender", option)}
+                defaultValue={values.gender}
+                callback={(option) => setValues({ ...values, gender: option })}
                 placeholder="Chọn giới tính"
               />
             </FormGroup>
@@ -113,10 +113,7 @@ const UserUpdate = () => {
               <Label htmlFor="role">Quyền</Label>
               <Select
                 options={createOptions(userRole)}
-                defaultValue={{
-                  label: values?.role as string,
-                  value: values?.role as string,
-                }}
+                defaultValue={values.gender}
                 callback={(option) => onChangeSelect("role", option)}
                 placeholder="Chọn quyền"
               />

@@ -1,8 +1,7 @@
 import { IconGithub } from "components/icons";
 import { PATH } from "constants/path";
-import type { NextPage } from "next";
 
-const Footer: NextPage = () => {
+const Footer = () => {
   return (
     <div className="bg-[#222] text-graydd">
       <div className="flex items-center justify-between !py-5 layout-container">

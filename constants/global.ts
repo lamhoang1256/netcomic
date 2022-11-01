@@ -1,3 +1,7 @@
+export const optionsGender = [
+  { value: "BOY", label: "NAM" },
+  { value: "GIRL", label: "NỮ" },
+];
 export const userGender = {
   BOY: "NAM",
   GRIL: "NỮ",

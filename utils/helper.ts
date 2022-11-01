@@ -46,7 +46,7 @@ export const formatCreatedAt = (createdAt: number) => {
 };
 export const createOptions = (obj: { [key: string]: string }) => {
   return Object.entries(obj).map(([key, value]) => ({
-    label: value,
+    label: key,
     value: value,
   }));
 };
