@@ -2,7 +2,7 @@ import { Button } from "components/button";
 import { Label } from "components/form";
 import { Image } from "components/image";
 import { defaultAvatar } from "constants/image";
-import { handleUpdateAvatar } from "libs/firebase-app";
+import { handleUpdateAvatar } from "libs/firebase";
 
 interface UserUploadAvatarProps {
   avatar: string;

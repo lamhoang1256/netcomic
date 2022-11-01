@@ -20,7 +20,7 @@ import { PATH } from "constants/path";
 import { doc, increment, updateDoc } from "firebase/firestore";
 import useModal from "hooks/useModal";
 import LayoutHome from "layouts/LayoutHome";
-import { auth, db } from "libs/firebase-app";
+import { auth, db } from "libs/firebase";
 import { ComicImage } from "modules/comic";
 import { GetStaticPaths, GetStaticPropsContext } from "next";
 

@@ -9,7 +9,7 @@ import { defaultAvatar } from "constants/image";
 import useInputChange from "hooks/useInputChange";
 import { Template } from "layouts";
 import LayoutUser from "layouts/LayoutUser";
-import { handleUpdateUser } from "libs/firebase-app";
+import { handleUpdateUser } from "libs/firebase";
 import { UserLevelProgress, UserUploadAvatar } from "modules/user";
 import { useEffect, useState } from "react";
 import useGlobalStore from "store/global-store";

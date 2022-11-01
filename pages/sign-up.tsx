@@ -11,7 +11,7 @@ import { PATH } from "constants/path";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import useInputChange from "hooks/useInputChange";
-import { auth, db } from "libs/firebase-app";
+import { auth, db } from "libs/firebase";
 
 import { FormEvent, useState } from "react";
 import { toast } from "react-toastify";

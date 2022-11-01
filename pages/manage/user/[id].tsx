@@ -8,7 +8,7 @@ import { doc, getDoc } from "firebase/firestore";
 import useInputChange from "hooks/useInputChange";
 import useSelectChange from "hooks/useSelectChange";
 import { LayoutDashboard } from "layouts";
-import { db, handleUpdateUser, sendLinkResetPassword } from "libs/firebase-app";
+import { db, handleUpdateUser, sendLinkResetPassword } from "libs/firebase";
 import { UserUploadAvatar } from "modules/user";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";

@@ -1,5 +1,4 @@
-import { ICurrentUser } from "@types";
-import { sendPasswordResetEmail, updateProfile } from "firebase/auth";
+import { sendPasswordResetEmail } from "firebase/auth";
 import { doc, updateDoc } from "firebase/firestore";
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
 import { ChangeEvent, FormEvent } from "react";
@@ -50,7 +49,6 @@ export const handleUpdateAvatar = async (
     toast.success("Cập nhật ảnh đại diện thành công!");
     setValues({ ...values, avatar: newAvatar });
   } catch (error) {
-    console.log("error: ", error);
     toast.error("Cập nhật ảnh đại diện thất bại!");
   }
 };

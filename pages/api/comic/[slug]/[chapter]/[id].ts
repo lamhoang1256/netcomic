@@ -5,7 +5,7 @@ import { PATH } from "constants/path";
 import { STATUS } from "constants/status";
 import type { NextApiRequest, NextApiResponse } from "next";
 import catchAsync from "utils/catchAsync";
-import { crawlComments, crawlImagesReading, crawlLinkChapter } from "utils/crawl";
+import { crawlComments, crawlImagesReading, crawlLinkChapter } from "libs/cheerio";
 import { ApiError, responseError, responseSuccess } from "utils/response";
 
 const crawlChapterComic = async (req: NextApiRequest, res: NextApiResponse) => {

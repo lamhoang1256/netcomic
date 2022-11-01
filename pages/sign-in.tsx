@@ -8,7 +8,7 @@ import { Meta } from "components/meta";
 import { PATH } from "constants/path";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import useInputChange from "hooks/useInputChange";
-import { auth } from "libs/firebase-app";
+import { auth } from "libs/firebase";
 
 import { FormEvent, useState } from "react";
 import { toast } from "react-toastify";

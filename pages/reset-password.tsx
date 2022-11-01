@@ -6,7 +6,7 @@ import { Input } from "components/input";
 import { CustomLink } from "components/link";
 import { Meta } from "components/meta";
 import { PATH } from "constants/path";
-import { sendLinkResetPassword } from "libs/firebase-app";
+import { sendLinkResetPassword } from "libs/firebase";
 import { FormEvent, useState } from "react";
 
 const ResetPasswordPage = () => {

@@ -10,7 +10,7 @@ import { PATH } from "constants/path";
 import { Unsubscribe } from "firebase/auth";
 import { collection, deleteDoc, doc, onSnapshot } from "firebase/firestore";
 import { LayoutDashboard } from "layouts";
-import { db } from "libs/firebase-app";
+import { db } from "libs/firebase";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import useGlobalStore from "store/global-store";

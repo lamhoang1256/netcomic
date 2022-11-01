@@ -5,7 +5,7 @@ import { STATUS } from "constants/status";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { IFilters, IComic, IQueryParams, IPagination } from "@types";
 import catchAsync from "utils/catchAsync";
-import { crawlComic, crawlPagination } from "utils/crawl";
+import { crawlComic, crawlPagination } from "libs/cheerio";
 import { ApiError, responseError, responseSuccess } from "utils/response";
 
 const filterComicsApi = async (req: NextApiRequest, res: NextApiResponse) => {

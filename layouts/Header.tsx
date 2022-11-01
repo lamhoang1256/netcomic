@@ -10,7 +10,7 @@ import { PATH } from "constants/path";
 import { signOut } from "firebase/auth";
 import useClickOutside from "hooks/useClickOutside";
 import usePopover from "hooks/usePopover";
-import { auth } from "libs/firebase-app";
+import { auth } from "libs/firebase";
 import { useRef } from "react";
 import useGlobalStore from "store/global-store";
 import { createUsernameFromEmail } from "utils";

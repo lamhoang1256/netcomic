@@ -9,7 +9,7 @@ import { Unsubscribe } from "firebase/auth";
 import { collection, deleteDoc, doc, onSnapshot, query, where } from "firebase/firestore";
 import { Template } from "layouts";
 import LayoutUser from "layouts/LayoutUser";
-import { db } from "libs/firebase-app";
+import { db } from "libs/firebase";
 import { ComicTitle } from "modules/comic";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";

@@ -5,7 +5,7 @@ import { STATUS } from "constants/status";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { IComicChartRanking, IQueryParams } from "@types";
 import catchAsync from "utils/catchAsync";
-import { crawlComicTopMonth } from "utils/crawl";
+import { crawlComicTopMonth } from "libs/cheerio";
 import { ApiError, responseError, responseSuccess } from "utils/response";
 
 const ChartRankingsApi = async (req: NextApiRequest, res: NextApiResponse) => {

@@ -5,7 +5,7 @@ import { PATH } from "constants/path";
 import { STATUS } from "constants/status";
 import type { NextApiRequest, NextApiResponse } from "next";
 import catchAsync from "utils/catchAsync";
-import { crawlBanner, crawlComic, crawlPagination, crawlComicTopMonth } from "utils/crawl";
+import { crawlBanner, crawlComic, crawlPagination, crawlComicTopMonth } from "libs/cheerio";
 import { ApiError, responseError, responseSuccess } from "utils/response";
 import { crawlCategories } from "./category";
 

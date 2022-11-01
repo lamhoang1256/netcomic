@@ -2,7 +2,7 @@ import axios from "axios";
 import * as cheerio from "cheerio";
 import { ICategory, IComic, IComicOption, IPagination, IQueryParams } from "@types";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { crawlCategory, crawlComic, crawlPagination, getComicOptions } from "utils/crawl";
+import { crawlCategory, crawlComic, crawlPagination, getComicOptions } from "libs/cheerio";
 import catchAsync from "utils/catchAsync";
 import { ApiError, responseError, responseSuccess } from "utils/response";
 import { STATUS } from "constants/status";

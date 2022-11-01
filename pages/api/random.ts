@@ -5,7 +5,7 @@ import { PATH } from "constants/path";
 import { STATUS } from "constants/status";
 import type { NextApiRequest, NextApiResponse } from "next";
 import catchAsync from "utils/catchAsync";
-import { crawlComic } from "utils/crawl";
+import { crawlComic } from "libs/cheerio";
 import { ApiError, responseError, responseSuccess } from "utils/response";
 
 const RandomApi = async (req: NextApiRequest, res: NextApiResponse) => {
