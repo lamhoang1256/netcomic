@@ -1,7 +1,7 @@
 import { IComic } from "@types";
 import axios from "axios";
 import { ProtectedRoute } from "components/auth";
-import { IconCheck, IconClose } from "components/icons";
+import { IconClose } from "components/icons";
 import { CustomLink } from "components/link";
 import { LoadingSpinner } from "components/loading";
 import { Meta } from "components/meta";
@@ -38,58 +38,61 @@ const FollowPage = () => {
       />
       <ProtectedRoute>
         <LayoutUser>
-          <Template
-            title="Truyện đang theo dõi"
-            desc='Truyện chưa đọc sẽ hiển thị ở đầu danh sách, nhấn vào "Đã đọc" nếu truyện đọc rồi.'
-          >
+          <Template title="Truyện đang theo dõi" desc="Danh sách truyện yêu thích của bạn">
             {loading && <LoadingSpinner />}
-            {!loading && comics?.length > 0 ? (
-              <ComicGrid className="mt-4">
-                {comics.map((comic) => {
-                  const { slug, posterUrl, viewCount, title, followCount, commentCount, chapters } =
-                    comic;
-                  const comicInHistory = history.find((h) => h.slug === slug);
-                  return (
-                    <div key={slug}>
-                      <div className="relative overflow-hidden rounded border border-graydd aspect-[2.2/3]">
-                        <div className="absolute top-0 left-0 text-xs right-0 py-[5px] text-white bg-overlay text-center px-1">
-                          {comicInHistory ? (
-                            <CustomLink href={`${PATH.comic}/${comicInHistory.chapterUrl}`}>
-                              Đọc tiếp {comicInHistory?.chapterName}
-                            </CustomLink>
-                          ) : (
-                            <CustomLink href={`${PATH.comic}/${slug}`}>Đọc ngay</CustomLink>
-                          )}
+            {!loading &&
+              (comics?.length > 0 ? (
+                <ComicGrid className="mt-4">
+                  {comics.map((comic) => {
+                    const {
+                      slug,
+                      posterUrl,
+                      viewCount,
+                      title,
+                      followCount,
+                      commentCount,
+                      chapters,
+                    } = comic;
+                    const comicInHistory = history.find((h) => h.slug === slug);
+                    return (
+                      <div key={slug}>
+                        <div className="relative overflow-hidden rounded border border-graydd aspect-[2.2/3]">
+                          <div className="absolute top-0 left-0 text-xs right-0 py-[5px] text-white bg-overlay text-center px-1">
+                            {comicInHistory ? (
+                              <CustomLink href={`${PATH.comic}/${comicInHistory.chapterUrl}`}>
+                                Đọc tiếp {comicInHistory?.chapterName}
+                              </CustomLink>
+                            ) : (
+                              <CustomLink href={`${PATH.comic}/${slug}`}>Đọc ngay</CustomLink>
+                            )}
+                          </div>
+                          <CustomLink href={`${PATH.comic}/${slug}`}>
+                            <ComicImage src={posterUrl} alt={slug} />
+                          </CustomLink>
+                          <ComicAmount
+                            view={viewCount}
+                            comment={commentCount}
+                            follow={followCount}
+                          />
                         </div>
-                        <CustomLink href={`${PATH.comic}/${slug}`}>
-                          <ComicImage src={posterUrl} alt={slug} />
-                        </CustomLink>
-                        <ComicAmount view={viewCount} comment={commentCount} follow={followCount} />
-                      </div>
-                      <div className="flex justify-between mt-2 text-[13px]">
-                        <button className="flex items-center text-[#23a903] gap-x-[2px]">
-                          <IconCheck className="!w-3 !h-3" fill="#23a903" />
-                          <span>Đã đọc</span>
-                        </button>
                         <button
-                          className="flex items-center text-rede5 gap-x-[1px]"
+                          className="flex items-center mt-2 text-[13px] text-rede5 gap-x-[1px]"
                           onClick={() => removeFollow(slug)}
                         >
                           <IconClose className="!w-3 !h-3" fill="#e52d27" />
                           <span>Bỏ theo dõi</span>
                         </button>
+                        <ComicTitle href={`${PATH.comic}/${slug}`} className="mt-1">
+                          {title}
+                        </ComicTitle>
+                        <ComicChapters chapters={chapters} comicInHistory={comicInHistory} />
                       </div>
-                      <ComicTitle href={`${PATH.comic}/${slug}`} className="mt-1">
-                        {title}
-                      </ComicTitle>
-                      <ComicChapters chapters={chapters} comicInHistory={comicInHistory} />
-                    </div>
-                  );
-                })}
-              </ComicGrid>
-            ) : (
-              <span className="block mt-3">Danh sách theo dõi đang trống!</span>
-            )}
+                    );
+                  })}
+                </ComicGrid>
+              ) : (
+                <span className="block mt-3">Danh sách theo dõi đang trống !</span>
+              ))}
           </Template>
         </LayoutUser>
       </ProtectedRoute>

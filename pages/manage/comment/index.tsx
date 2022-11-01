@@ -88,7 +88,7 @@ const CommentManage = () => {
                   <td>{index + 1}</td>
                   <td>
                     <div className="flex items-center gap-x-3">
-                      <div className="flex-shrink">
+                      <div className="flex-shrink-0">
                         <Image
                           alt="avatar"
                           src={comment?.avatar}
@@ -96,7 +96,7 @@ const CommentManage = () => {
                         />
                       </div>
                       <div className="flex-1">
-                        <span className="block">{comment?.fullname}</span>
+                        <span className="block whitespace-nowrap">{comment?.fullname}</span>
                         <span className="text-xs px-[6px] py-[1px] border border-red-400 text-red-400 rounded inline-block mt-[2px] mr-2">
                           Cấp {comment.level}
                         </span>

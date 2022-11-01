@@ -6,7 +6,6 @@ import { PATH } from "constants/path";
 import { Template } from "layouts";
 import LayoutUser from "layouts/LayoutUser";
 import { ComicGrid, ComicImage, ComicTitle } from "modules/comic";
-
 import { toast } from "react-toastify";
 import useGlobalStore from "store/global-store";
 
@@ -21,10 +20,7 @@ const HistoryPage = () => {
     <>
       <Meta title="Lịch sử đọc truyện - NetComic" description="Lịch sử các bộ truyện bạn đã đọc" />
       <LayoutUser>
-        <Template
-          title="Lịch sử xem"
-          desc='Truyện chưa đọc sẽ hiển thị ở đầu danh sách, nhấn vào "Đã đọc" nếu truyện đọc rồi.'
-        >
+        <Template title="Lịch sử xem" desc="Danh sách các bộ truyện bạn đã đọc">
           <ComicGrid className="mt-4">
             {history?.map((comic: IComicHistory) => (
               <div key={comic.slug}>

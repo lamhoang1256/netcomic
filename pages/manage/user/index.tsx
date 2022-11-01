@@ -96,7 +96,7 @@ const UserManage = () => {
                         />
                       </div>
                       <div className="flex-1">
-                        <span className="block">{user?.fullname || "User"}</span>
+                        <span className="block whitespace-nowrap">{user?.fullname || "User"}</span>
                         <span className="text-xs px-[6px] py-[1px] border border-red-400 text-red-400 rounded inline-block mt-[2px] mr-2">
                           Cấp {checkLevel(user?.score).level}
                         </span>
