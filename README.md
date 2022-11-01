@@ -116,3 +116,45 @@ NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=
 
  </p>
 </details>
+
+<details>
+ <summary>Profile page</summary>
+ <p>
+ 
+ Light mode
+![profile-light](https://user-images.githubusercontent.com/61537853/199259731-b7ba73f6-aede-4af1-9864-ed5b7f499197.png)
+
+ Dark mode
+![profile-dark](https://user-images.githubusercontent.com/61537853/199259756-f7703acc-18b7-4f71-81bf-15742ca1e28a.png)
+
+ </p>
+</details>
+
+<details>
+ <summary>Manage user page</summary>
+ <p>
+ 
+ Light mode
+![manage-user-light](https://user-images.githubusercontent.com/61537853/199260057-5f5a6aba-c17f-42fd-b3b8-34456bae0753.png)
+
+ Dark mode
+![manage-user-dark](https://user-images.githubusercontent.com/61537853/199260033-022c3513-4f8c-4aa5-a0c4-10fc219b5bb8.png)
+
+ </p>
+</details>
+
+<details>
+ <summary>Manage comment page</summary>
+ <p>
+ 
+ Light mode
+![manage-comment-light](https://user-images.githubusercontent.com/61537853/199260143-292bc056-efee-4807-83e7-f1c6a4a91160.png)
+
+
+ Dark mode
+![manage-comment-dark](https://user-images.githubusercontent.com/61537853/199260163-939ea4bc-f22d-4b07-b2fa-bab0ff661fb1.png)
+
+
+ </p>
+</details>
+
