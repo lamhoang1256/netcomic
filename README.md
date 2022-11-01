@@ -69,7 +69,12 @@ NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=
  <summary>Home page</summary>
  <p>
  
- ![homepage](https://user-images.githubusercontent.com/61537853/198968769-85739c4c-7b50-40a6-a38b-020a2eba05da.png)
+ Light mode
+ ![home-light](https://user-images.githubusercontent.com/61537853/199261314-dc9dd474-6788-480d-9331-2d9f1305dd99.png)
+  
+ Dark mode
+ ![home-dark](https://user-images.githubusercontent.com/61537853/199261622-593214a3-81d7-47db-96a5-57c1821d2777.png)
+
  </p>
 </details>
 
@@ -77,11 +82,14 @@ NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=
  <summary>Comic details page</summary>
  <p>
  
- ![detail](https://user-images.githubusercontent.com/61537853/198970344-c4087645-cb48-4794-beab-1404e72dd3e4.png)
+ Light mode
+ ![detail-light](https://user-images.githubusercontent.com/61537853/199262110-842c1379-c936-48be-89d0-04e0104892e8.png)
+ 
+ Dark mode
+ ![detail-dark](https://user-images.githubusercontent.com/61537853/199262083-0c10df07-afee-4007-a63e-86398565d2cb.png)
+
  </p>
 </details>
-
-
 
 <details>
  <summary>Boy genre comic page</summary>
@@ -111,7 +119,10 @@ NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=
  <summary>Change password page</summary>
  <p>
  
+  Light mode
  ![change-password-light](https://user-images.githubusercontent.com/61537853/199253432-7a8db713-8046-489b-af1c-ac19cc5ba2f5.png)
+  
+  Dark mode
  ![change-password-dark](https://user-images.githubusercontent.com/61537853/199253449-30fa4d95-984c-4d20-97b0-aba836085f35.png)
 
  </p>
@@ -126,6 +137,19 @@ NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=
 
  Dark mode
 ![profile-dark](https://user-images.githubusercontent.com/61537853/199259756-f7703acc-18b7-4f71-81bf-15742ca1e28a.png)
+
+ </p>
+</details>
+
+<details>
+ <summary>Follow comic page</summary>
+ <p>
+ 
+ Light mode
+![follow-light](https://user-images.githubusercontent.com/61537853/199262766-198b0fa9-742d-4f2f-ba7d-d05382cf8745.png)
+
+ Dark mode
+![follow-dark](https://user-images.githubusercontent.com/61537853/199262785-ca158fd4-c914-4910-9eea-de8472e9d3bf.png)
 
  </p>
 </details>
@@ -150,11 +174,9 @@ NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=
  Light mode
 ![manage-comment-light](https://user-images.githubusercontent.com/61537853/199260143-292bc056-efee-4807-83e7-f1c6a4a91160.png)
 
-
  Dark mode
 ![manage-comment-dark](https://user-images.githubusercontent.com/61537853/199260163-939ea4bc-f22d-4b07-b2fa-bab0ff661fb1.png)
-
-
+  
  </p>
 </details>
 
