@@ -90,8 +90,8 @@ const ReadComicPage = ({ imageUrls, chapters, info }: ReadComicPageProps) => {
         image={info.posterUrl}
       />
       <LayoutHome className="bg-bgdark">
-        <div className="layout-container">
-          <section className="lg:rounded-lg bg-bglight dark:bg-bgdark">
+        <div className="max-w-[1000px] mx-auto">
+          <section className="p-5 lg:rounded-lg bg-bglight dark:bg-bgdark">
             <div className="py-4 text-center">
               <h1 className="flex-wrap text-[22px] gap-1 flex items-center justify-center">
                 <CustomLink
