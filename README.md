@@ -92,6 +92,19 @@ NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=
 </details>
 
 <details>
+ <summary>Read chapter comic page</summary>
+ <p>
+ 
+ Light mode
+![read-light](https://user-images.githubusercontent.com/61537853/199382272-b640ef5f-9d52-4f57-bd57-d607696d4dde.png)
+
+ Dark mode
+ ![read-dark](https://user-images.githubusercontent.com/61537853/199382257-162399ac-bf77-4e86-9138-562aa5a76aa6.png)
+  
+ </p>
+</details>
+
+<details>
  <summary>Boy genre comic page</summary>
  <p>
  
