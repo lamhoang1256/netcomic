@@ -15,7 +15,7 @@ const ApiDoc = ({ spec }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <>
       <Meta title="NetComic Api" description="A api comic crawled from website Nhat Truyen" />
-      <div className="bg-bglight dark:bg-bglight">
+      <div className="pt-4 bg-bglight dark:bg-bglight">
         <SwaggerUI spec={spec} />;
       </div>
     </>

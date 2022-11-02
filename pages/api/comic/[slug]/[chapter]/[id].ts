@@ -82,21 +82,18 @@ export default catchAsync(crawlChapterComic);
  *         example: dai-quan-gia-la-ma-hoang
  *         schema:
  *           type: string
- *           description: slug comic
  *       - in: path
  *         name: chapter
  *         required: true
  *         example: chap-332
  *         schema:
  *           type: string
- *           description: chapter id
  *       - in: path
  *         name: id
  *         required: true
  *         example: 921580
  *         schema:
  *           type: string
- *           description: id comic
  *      responses:
  *          200:
  *              description: Success
