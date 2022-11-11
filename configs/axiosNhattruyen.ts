@@ -1,5 +1,4 @@
 import axios from "axios";
-import queryString from "query-string";
 
 const BASE_URL_API = process.env.NEXT_PUBLIC_NHATTRUYEN as string;
 

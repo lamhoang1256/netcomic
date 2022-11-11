@@ -1,4 +1,5 @@
 import { IBanner, IComic, IComicChartRanking, IPagination, IQueryParams } from "@types";
+import axios from "axios";
 import * as cheerio from "cheerio";
 import axiosNhattruyen from "configs/axiosNhattruyen";
 import { STATUS } from "constants/status";
@@ -23,7 +24,9 @@ const HomePageApi = async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 async function crawlHomePage(query: Partial<IQueryParams>) {
-  const response = await axiosNhattruyen("/", { params: query });
+  const response = await axios.get("https://corsproxy.io/?https%3A%2F%2Fnhattruyenin.com", {
+    params: query,
+  });
   const html = response.data;
   const $ = cheerio.load(html);
   let banners: IBanner[] = [];
