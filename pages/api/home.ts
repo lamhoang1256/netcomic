@@ -25,7 +25,7 @@ const HomePageApi = async (req: NextApiRequest, res: NextApiResponse) => {
 
 async function crawlHomePage(query: Partial<IQueryParams>) {
   try {
-    const response = await axios.get("https://corsproxy.io/?https%3A%2F%2Fnhattruyenin.com", {
+    const response = await axiosNhattruyen.get("/", {
       params: query,
     });
     const html = response.data;
