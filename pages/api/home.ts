@@ -26,7 +26,7 @@ const HomePageApi = async (req: NextApiRequest, res: NextApiResponse) => {
 
 async function crawlHomePage(query: Partial<IQueryParams>) {
   try {
-    const response = await axiosCors("https://corsproxy.io/?https://www.nhattruyenin.com");
+    const response = await axiosNhattruyen("");
     const html = response.data;
     const $ = cheerio.load(html);
     let banners: IBanner[] = [];
