@@ -1,11 +1,11 @@
 import { ICommentItem, IDetailsChapter, IImageReading, ILinkChapter } from "@types";
-import axios from "axios";
 import * as cheerio from "cheerio";
+import axiosNhattruyen from "configs/axiosNhattruyen";
 import { PATH } from "constants/path";
 import { STATUS } from "constants/status";
+import { crawlComments, crawlImagesReading, crawlLinkChapter } from "libs/cheerio";
 import type { NextApiRequest, NextApiResponse } from "next";
 import catchAsync from "utils/catchAsync";
-import { crawlComments, crawlImagesReading, crawlLinkChapter } from "libs/cheerio";
 import { ApiError, responseError, responseSuccess } from "utils/response";
 
 const crawlChapterComic = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -24,7 +24,7 @@ const crawlChapterComic = async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 const getDetailsChapter = async (url: string) => {
-  const response = await axios.get(url);
+  const response = await axiosNhattruyen(url);
   const html = response.data;
   const $ = cheerio.load(html);
   let imageUrls: IImageReading[] = [];
@@ -49,7 +49,7 @@ const getDetailsChapter = async (url: string) => {
     const comment = crawlComments($(element), $);
     comments.push(comment);
   });
-  const response2 = await axios.get(
+  const response2 = await axiosNhattruyen(
     `${PATH.nhatTruyenComic}/${info.href?.replace("truyen-tranh/", "")}`
   );
   const html2 = response2.data;

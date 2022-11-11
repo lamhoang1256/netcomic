@@ -1,11 +1,11 @@
-import { ILinkChapter, IComicInfo, ICommentItem } from "@types";
-import axios from "axios";
+import { IComicInfo, ICommentItem, ILinkChapter } from "@types";
 import * as cheerio from "cheerio";
+import axiosNhattruyen from "configs/axiosNhattruyen";
 import { PATH } from "constants/path";
 import { STATUS } from "constants/status";
+import { crawlComments, crawlInfoComic, crawlLinkChapter } from "libs/cheerio";
 import type { NextApiRequest, NextApiResponse } from "next";
 import catchAsync from "utils/catchAsync";
-import { crawlLinkChapter, crawlComments, crawlInfoComic } from "libs/cheerio";
 import { ApiError, responseError, responseSuccess } from "utils/response";
 
 const ComicDetailsApi = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -24,7 +24,7 @@ const ComicDetailsApi = async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 async function crawlComicDetails(url: string) {
-  const response = await axios.get(url);
+  const response = await axiosNhattruyen.get(url);
   const html = response.data;
   const $ = cheerio.load(html);
   let info: IComicInfo = {} as IComicInfo;

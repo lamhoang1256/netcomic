@@ -1,10 +1,10 @@
 import { IQueryParams } from "@types";
-import axios from "axios";
+import axiosNhattruyen from "configs/axiosNhattruyen";
 import { PATH } from "constants/path";
 import { STATUS } from "constants/status";
+import { crawlGenderComics } from "libs/cheerio";
 import type { NextApiRequest, NextApiResponse } from "next";
 import catchAsync from "utils/catchAsync";
-import { crawlGenderComics } from "libs/cheerio";
 import { ApiError, responseError, responseSuccess } from "utils/response";
 
 const GrilComicsApi = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -22,7 +22,7 @@ const GrilComicsApi = async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 async function crawlGrilComics(query: Partial<IQueryParams>) {
-  const response = await axios.get(PATH.nhatTruyenGirl as string, { params: query });
+  const response = await axiosNhattruyen(PATH.nhatTruyenGirl, { params: query });
   const html = response.data;
   const data = crawlGenderComics(html);
   return data;

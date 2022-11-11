@@ -5,7 +5,7 @@ import catchAsync from "utils/catchAsync";
 import { ApiError, responseError } from "utils/response";
 
 const NetComicApi = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { method, query } = req;
+  const { method } = req;
   if (method !== "GET") {
     const error = new ApiError(STATUS.METHOD_NOT_ALLOWED, "Method not allowed");
     return responseError(error, res);

@@ -1,11 +1,11 @@
 import { ICategory, IQueryParams } from "@types";
-import axios from "axios";
 import * as cheerio from "cheerio";
+import axiosNhattruyen from "configs/axiosNhattruyen";
 import { PATH } from "constants/path";
 import { STATUS } from "constants/status";
+import { crawlCategory } from "libs/cheerio";
 import type { NextApiRequest, NextApiResponse } from "next";
 import catchAsync from "utils/catchAsync";
-import { crawlCategory } from "libs/cheerio";
 import { ApiError, responseError, responseSuccess } from "utils/response";
 
 const GetCategoriesApi = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -23,7 +23,7 @@ const GetCategoriesApi = async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 export async function crawlCategories(query: Partial<IQueryParams>) {
-  const response = await axios.get(`${PATH.nhatTruyenSearch}`, { params: query });
+  const response = await axiosNhattruyen.get(PATH.nhatTruyenSearch, { params: query });
   const html = response.data;
   const $ = cheerio.load(html);
   let categories: ICategory[] = [];

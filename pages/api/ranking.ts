@@ -1,11 +1,11 @@
-import axios from "axios";
+import { IComicChartRanking, IQueryParams } from "@types";
 import * as cheerio from "cheerio";
+import axiosNhattruyen from "configs/axiosNhattruyen";
 import { PATH } from "constants/path";
 import { STATUS } from "constants/status";
-import type { NextApiRequest, NextApiResponse } from "next";
-import { IComicChartRanking, IQueryParams } from "@types";
-import catchAsync from "utils/catchAsync";
 import { crawlComicTopMonth } from "libs/cheerio";
+import type { NextApiRequest, NextApiResponse } from "next";
+import catchAsync from "utils/catchAsync";
 import { ApiError, responseError, responseSuccess } from "utils/response";
 
 const ChartRankingsApi = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -23,7 +23,7 @@ const ChartRankingsApi = async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 async function crawlChartRankings(query: Partial<IQueryParams>) {
-  const response = await axios.get(PATH.nhatTruyen as string, { params: query });
+  const response = await axiosNhattruyen(PATH.nhatTruyen, { params: query });
   const html = response.data;
   const $ = cheerio.load(html);
   let chartRankings: IComicChartRanking[] = [];

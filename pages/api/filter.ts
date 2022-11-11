@@ -1,11 +1,11 @@
-import axios from "axios";
+import { IComic, IFilters, IPagination, IQueryParams } from "@types";
 import * as cheerio from "cheerio";
+import axiosNhattruyen from "configs/axiosNhattruyen";
 import { PATH } from "constants/path";
 import { STATUS } from "constants/status";
-import type { NextApiRequest, NextApiResponse } from "next";
-import { IFilters, IComic, IQueryParams, IPagination } from "@types";
-import catchAsync from "utils/catchAsync";
 import { crawlComic, crawlPagination } from "libs/cheerio";
+import type { NextApiRequest, NextApiResponse } from "next";
+import catchAsync from "utils/catchAsync";
 import { ApiError, responseError, responseSuccess } from "utils/response";
 
 const filterComicsApi = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -23,7 +23,7 @@ const filterComicsApi = async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 async function crawlFilterComics(query: Partial<IQueryParams>) {
-  const response = await axios.get(PATH.nhatTruyenFilter, { params: query });
+  const response = await axiosNhattruyen(PATH.nhatTruyenFilter, { params: query });
   const html = response.data;
   const $ = cheerio.load(html);
   let results: IComic[] = [];

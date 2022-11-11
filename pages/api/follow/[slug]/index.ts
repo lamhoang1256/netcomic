@@ -1,6 +1,6 @@
 import { IComic } from "@types";
-import axios from "axios";
 import * as cheerio from "cheerio";
+import axiosNhattruyen from "configs/axiosNhattruyen";
 import { PATH } from "constants/path";
 import { STATUS } from "constants/status";
 import type { NextApiRequest, NextApiResponse } from "next";
@@ -25,7 +25,7 @@ const ComicFollowApi = async (req: NextApiRequest, res: NextApiResponse) => {
 
 const urlWithoutHttp = PATH.nhatTruyen.split("http:")[1] as string;
 async function crawlComicDetails(url: string) {
-  const response = await axios.get(url);
+  const response = await axiosNhattruyen(url);
   const html = response.data;
   const $ = cheerio.load(html);
   let comic: IComic = {} as IComic;

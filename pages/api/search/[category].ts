@@ -1,12 +1,12 @@
-import axios from "axios";
-import * as cheerio from "cheerio";
 import { ICategory, ICategoryInfo, IComic, IComicOption, IPagination, IQueryParams } from "@types";
-import type { NextApiRequest, NextApiResponse } from "next";
+import * as cheerio from "cheerio";
+import axiosNhattruyen from "configs/axiosNhattruyen";
+import { PATH } from "constants/path";
+import { STATUS } from "constants/status";
 import { crawlCategory, crawlComic, crawlPagination, getComicOptions } from "libs/cheerio";
+import type { NextApiRequest, NextApiResponse } from "next";
 import catchAsync from "utils/catchAsync";
 import { ApiError, responseError, responseSuccess } from "utils/response";
-import { STATUS } from "constants/status";
-import { PATH } from "constants/path";
 
 const SearchByCategoryApi = async (req: NextApiRequest, res: NextApiResponse) => {
   const { method, query } = req;
@@ -23,12 +23,12 @@ const SearchByCategoryApi = async (req: NextApiRequest, res: NextApiResponse) =>
 };
 
 async function crawlCategories(query: Partial<IQueryParams>) {
-  const response = await axios.get(`${PATH.nhatTruyenCategory}/${query?.category}`, {
+  const response = await axiosNhattruyen(`${PATH.nhatTruyenCategory}/${query?.category}`, {
     params: query,
   });
   const html = response.data;
   const $ = cheerio.load(html);
-  const response2 = await axios.get(PATH.nhatTruyenSearch);
+  const response2 = await axiosNhattruyen(PATH.nhatTruyenSearch);
   const html2 = response2.data;
   const $2 = cheerio.load(html2);
   let results: IComic[] = [];
