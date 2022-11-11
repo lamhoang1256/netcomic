@@ -49,8 +49,8 @@ async function crawlHomePage(query: Partial<IQueryParams>) {
     const comic = crawlComicTopMonth($(element));
     chartRankings.push(comic);
   });
-  const categories = await crawlCategories({});
-  return { banners, newestComics, paginations, chartRankings, categories };
+  // const categories = await crawlCategories({});
+  return { banners, newestComics, paginations, chartRankings };
 }
 
 export default catchAsync(HomePageApi);
