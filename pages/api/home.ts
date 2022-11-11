@@ -1,6 +1,7 @@
 import { IBanner, IComic, IComicChartRanking, IPagination, IQueryParams } from "@types";
 import axios from "axios";
 import * as cheerio from "cheerio";
+import axiosCors from "configs/axiosCors";
 import axiosNhattruyen from "configs/axiosNhattruyen";
 import { STATUS } from "constants/status";
 import { crawlBanner, crawlComic, crawlComicTopMonth, crawlPagination } from "libs/cheerio";
@@ -25,13 +26,7 @@ const HomePageApi = async (req: NextApiRequest, res: NextApiResponse) => {
 
 async function crawlHomePage(query: Partial<IQueryParams>) {
   try {
-    const response = await axios.get("https://corsproxy.io/?https://www.nhattruyenin.com", {
-      headers: {
-        origin: "https://www.nettruyenin.com",
-        referer: "https://www.nettruyenin.com",
-      },
-      params: query,
-    });
+    const response = await axiosCors("https://corsproxy.io/?https://www.nhattruyenin.com");
     const html = response.data;
     const $ = cheerio.load(html);
     let banners: IBanner[] = [];
