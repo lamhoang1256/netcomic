@@ -1,3 +1,5 @@
+const nhatTruyenUrl = process.env.NEXT_PUBLIC_NHATTRUYEN as string;
+
 export const PATH = {
   home: "/",
   topComic: "/top-comic",
@@ -19,13 +21,13 @@ export const PATH = {
   commentManage: "/manage/comment",
   changePassword: "/change-password",
   pageNotFound: "/404",
-  nhatTruyen: process.env.NEXT_PUBLIC_NHATTRUYEN as string,
-  nhatTruyenComic: `/truyen-tranh`,
-  nhatTruyenSearch: `/tim-truyen`,
-  nhatTruyenFull: `/truyen-full`,
-  nhatTruyenGirl: `/truyen-con-gai`,
-  nhatTruyenCategory: `/the-loai`,
-  nhatTruyenBoy: `/truyen-con-trai`,
-  nhatTruyenFilter: `/tim-truyen-nang-cao`,
+  nhatTruyen: nhatTruyenUrl,
+  nhatTruyenComic: `${nhatTruyenUrl}/truyen-tranh`,
+  nhatTruyenSearch: `${nhatTruyenUrl}/tim-truyen`,
+  nhatTruyenFull: `${nhatTruyenUrl}/truyen-full`,
+  nhatTruyenGirl: `${nhatTruyenUrl}/truyen-con-gai`,
+  nhatTruyenCategory: `${nhatTruyenUrl}/the-loai`,
+  nhatTruyenBoy: `${nhatTruyenUrl}/truyen-con-trai`,
+  nhatTruyenFilter: `${nhatTruyenUrl}/tim-truyen-nang-cao`,
   projectGithub: "https://github.com/lamhoang1256/netcomic",
 };

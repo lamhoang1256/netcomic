@@ -1,9 +1,7 @@
 import axios from "axios";
 
-const BASE_URL_API = process.env.NEXT_PUBLIC_NHATTRUYEN as string;
-
 const axiosNhattruyen = axios.create({
-  baseURL: "https://nct.napdev.workers.dev/" + BASE_URL_API,
+  baseURL: "https://nct.napdev.workers.dev/",
   headers: {
     Accept: "application/json",
   },

@@ -1,6 +1,7 @@
 import { IQueryParams } from "@types";
 import * as cheerio from "cheerio";
 import axiosNhattruyen from "configs/axiosNhattruyen";
+import { PATH } from "constants/path";
 import { STATUS } from "constants/status";
 import { crawlComic } from "libs/cheerio";
 import type { NextApiRequest, NextApiResponse } from "next";
@@ -30,9 +31,7 @@ async function randomComic(query: Partial<IQueryParams>) {
       .fill(0)
       .map(async () => {
         const randomPage = Math.floor(Math.random() * pageCount);
-        const response = await axiosNhattruyen.get(
-          `https://corsproxy.io/?https%3A%2F%2Fnhattruyenin.com?page=${randomPage}`
-        );
+        const response = await axiosNhattruyen.get(`${PATH.nhatTruyen}?page=${randomPage}`);
         const html = response.data;
         const $ = cheerio.load(html);
         const randomElement = Math.floor(Math.random() * (PER_COMIC_AT_NHATTRUYEN + 1));
