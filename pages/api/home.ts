@@ -1,5 +1,4 @@
 import { IBanner, IComic, IComicChartRanking, IPagination, IQueryParams } from "@types";
-import axios from "axios";
 import * as cheerio from "cheerio";
 import axiosNhattruyen from "configs/axiosNhattruyen";
 import { STATUS } from "constants/status";
@@ -14,9 +13,7 @@ const HomePageApi = async (req: NextApiRequest, res: NextApiResponse) => {
     const error = new ApiError(STATUS.METHOD_NOT_ALLOWED, "Method not allowed");
     return responseError(error, res);
   }
-  const { data } = await axios.get(
-    "https://corsproxy.io/?https%3A%2F%2Fjsonplaceholder.typicode.com%2Fposts"
-  );
+  const data = await crawlHomePage(query);
   const response = {
     message: "Lấy dữ liệu trang home thành công!",
     data,
@@ -26,7 +23,7 @@ const HomePageApi = async (req: NextApiRequest, res: NextApiResponse) => {
 
 async function crawlHomePage(query: Partial<IQueryParams>) {
   try {
-    const response = await axiosNhattruyen.post("/");
+    const response = await axiosNhattruyen.get("/");
     const html = response.data;
     const $ = cheerio.load(html);
     let banners: IBanner[] = [];
