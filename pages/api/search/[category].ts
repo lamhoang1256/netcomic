@@ -23,28 +23,23 @@ const SearchByCategoryApi = async (req: NextApiRequest, res: NextApiResponse) =>
 };
 
 async function crawlCategories(query: Partial<IQueryParams>) {
-  const response = await axiosNhattruyen(`${PATH.nhatTruyenCategory}/${query?.category}`, {
-    params: query,
-  });
+  const response = await axiosNhattruyen(`${PATH.nhatTruyenCategory}/${query?.category}`);
   const html = response.data;
   const $ = cheerio.load(html);
-  const response2 = await axiosNhattruyen(PATH.nhatTruyenSearch);
-  const html2 = response2.data;
-  const $2 = cheerio.load(html2);
   let results: IComic[] = [];
   let info: ICategoryInfo = {} as ICategoryInfo;
   let status: IComicOption[] = [];
   let sort: IComicOption[] = [];
   let paginations: IPagination[] = [];
   let categories: ICategory[] = [];
-  $2("#ctl00_mainContent_ctl00_ulStatus li").each(function (index, element) {
-    const active = $2(element).hasClass("active");
-    const option = getComicOptions($2(element).find("a"));
+  $("#ctl00_mainContent_ctl00_ulStatus li").each(function (index, element) {
+    const active = $(element).hasClass("active");
+    const option = getComicOptions($(element).find("a"));
     status.push({ active, ...option });
   });
-  $2("#ctl00_mainContent_ctl00_divSort .ajaxlink").each(function (index, element) {
-    const active = $2(element).hasClass("active");
-    const option = getComicOptions($2(element));
+  $("#ctl00_mainContent_ctl00_divSort .ajaxlink").each(function (index, element) {
+    const active = $(element).hasClass("active");
+    const option = getComicOptions($(element));
     sort.push({ active, ...option });
   });
   $("#ctl00_divCenter .Module .comic-filter", html).each(function (index, element) {
