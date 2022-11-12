@@ -1,4 +1,5 @@
 import { ICategory, IQueryParams } from "@types";
+import axios from "axios";
 import * as cheerio from "cheerio";
 import axiosNhattruyen from "configs/axiosNhattruyen";
 import { PATH } from "constants/path";
@@ -23,7 +24,9 @@ const GetCategoriesApi = async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 export async function crawlCategories(query: Partial<IQueryParams>) {
-  const response = await axiosNhattruyen.get(PATH.nhatTruyenSearch, { params: query });
+  const response = await axios.get("https://nct.napdev.workers.dev/" + PATH.nhatTruyenSearch, {
+    params: query,
+  });
   const html = response.data;
   const $ = cheerio.load(html);
   let categories: ICategory[] = [];

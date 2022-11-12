@@ -1,4 +1,5 @@
 import { IBanner, IComic, IComicChartRanking, IPagination, IQueryParams } from "@types";
+import axios from "axios";
 import * as cheerio from "cheerio";
 import axiosNhattruyen from "configs/axiosNhattruyen";
 import { PATH } from "constants/path";
@@ -25,7 +26,7 @@ const HomePageApi = async (req: NextApiRequest, res: NextApiResponse) => {
 
 async function crawlHomePage(query: Partial<IQueryParams>) {
   try {
-    const response = await axiosNhattruyen.get("https://nct.napdev.workers.dev/" + PATH.nhatTruyen);
+    const response = await axios.get("https://nct.napdev.workers.dev/" + PATH.nhatTruyen);
     const html = response.data;
     const $ = cheerio.load(html);
     let banners: IBanner[] = [];
