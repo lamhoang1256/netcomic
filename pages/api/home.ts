@@ -6,6 +6,7 @@ import { crawlBanner, crawlComic, crawlComicTopMonth, crawlPagination } from "li
 import type { NextApiRequest, NextApiResponse } from "next";
 import catchAsync from "utils/catchAsync";
 import { ApiError, responseError, responseSuccess } from "utils/response";
+import { crawlCategories } from "./category";
 
 const HomePageApi = async (req: NextApiRequest, res: NextApiResponse) => {
   const { method, query } = req;
@@ -23,9 +24,7 @@ const HomePageApi = async (req: NextApiRequest, res: NextApiResponse) => {
 
 async function crawlHomePage(query: Partial<IQueryParams>) {
   try {
-    const response = await axiosNhattruyen.get(
-      "https://nct.napdev.workers.dev/https://nhattruyenin.com"
-    );
+    const response = await axiosNhattruyen.get("/");
     const html = response.data;
     const $ = cheerio.load(html);
     let banners: IBanner[] = [];
@@ -48,8 +47,8 @@ async function crawlHomePage(query: Partial<IQueryParams>) {
       const comic = crawlComicTopMonth($(element));
       chartRankings.push(comic);
     });
-    // const categories = await crawlCategories({});
-    return { banners, newestComics, paginations, chartRankings };
+    const categories = await crawlCategories({});
+    return { banners, newestComics, paginations, chartRankings, categories };
   } catch (error) {
     return error;
   }
