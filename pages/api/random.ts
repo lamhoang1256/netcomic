@@ -24,7 +24,7 @@ const RandomApi = async (req: NextApiRequest, res: NextApiResponse) => {
 
 async function randomComic(query: Partial<IQueryParams>) {
   const PER_COMIC_AT_NHATTRUYEN = 36;
-  const limit = Number(query?.limit) || 10;
+  const limit = Number(query?.limit) || 6;
   const pageCount = 50;
   const comics = await Promise.all(
     Array(limit)

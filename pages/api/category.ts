@@ -24,9 +24,7 @@ const GetCategoriesApi = async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 export async function crawlCategories(query: Partial<IQueryParams>) {
-  const response = await axios.get("https://nct.napdev.workers.dev/" + PATH.nhatTruyenSearch, {
-    params: query,
-  });
+  const response = await axiosNhattruyen.get(PATH.nhatTruyenCategory);
   const html = response.data;
   const $ = cheerio.load(html);
   let categories: ICategory[] = [];
