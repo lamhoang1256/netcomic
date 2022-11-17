@@ -26,7 +26,7 @@ const HomePageApi = async (req: NextApiRequest, res: NextApiResponse) => {
 
 async function crawlHomePage(query: Partial<IQueryParams>) {
   try {
-    const response = await axios.get("https://nct.napdev.workers.dev/" + PATH.nhatTruyen);
+    const response = await axiosNhattruyen.post("/");
     const html = response.data;
     const $ = cheerio.load(html);
     let banners: IBanner[] = [];
