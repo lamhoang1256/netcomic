@@ -7,6 +7,6 @@ export default function usePopover() {
   return {
     activePopover,
     showPopover,
-    hidePopover,
+    hidePopover
   };
 }

@@ -6,7 +6,7 @@ function useInputChange(values: any, setValues: Dispatch<SetStateAction<any>>) {
     setValues({ ...values, [name]: value.replace(/  +/g, "") });
   };
   return {
-    onChange,
+    onChange
   };
 }
 

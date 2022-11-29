@@ -18,7 +18,7 @@ const GetCategoriesApi = async (req: NextApiRequest, res: NextApiResponse) => {
   const data = await crawlCategories(query);
   const response = {
     message: "Lấy danh sách thể loại thành công!",
-    data,
+    data
   };
   responseSuccess(res, response);
 };

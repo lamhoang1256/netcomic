@@ -3,7 +3,7 @@ import {
   getDownloadURL,
   getStorage,
   ref,
-  uploadBytesResumable,
+  uploadBytesResumable
 } from "firebase/storage";
 import { useState } from "react";
 import { userRole } from "constants/global";
@@ -47,6 +47,6 @@ export default function useFirebaseImage(imageName?: string, callback?: () => vo
     progress,
     handleResetUpload,
     handleUploadImage,
-    handleDeleteImage,
+    handleDeleteImage
   };
 }

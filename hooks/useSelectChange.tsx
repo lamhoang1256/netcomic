@@ -6,7 +6,7 @@ function useSelectChange(values: any, setValues: Dispatch<SetStateAction<any>>) 
     setValues({ ...values, [key]: option.value });
   };
   return {
-    onChangeSelect,
+    onChangeSelect
   };
 }
 

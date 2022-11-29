@@ -8,7 +8,7 @@ import {
   IImageReading,
   ILinkChapter,
   IPagination,
-  IReplyComment,
+  IReplyComment
 } from "@types";
 import * as cheerio from "cheerio";
 import { PATH } from "constants/path";
@@ -74,7 +74,7 @@ export function crawlComic(
     viewCount,
     commentCount,
     followCount,
-    chapters,
+    chapters
   };
 }
 
@@ -206,7 +206,7 @@ export function crawlInfoComic(
     ratingCount,
     ratingValue,
     followCount,
-    description,
+    description
   };
 }
 

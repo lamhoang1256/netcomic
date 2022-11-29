@@ -17,7 +17,7 @@ const SearchByCategoryApi = async (req: NextApiRequest, res: NextApiResponse) =>
   const data = await crawlCategories(query);
   const response = {
     message: "Lấy truyện theo thể loại thành công!",
-    data,
+    data
   };
   responseSuccess(res, response);
 };

@@ -11,28 +11,28 @@ const sidebarLinks = [
   {
     icon: "/icon-account.png",
     path: PATH.profile,
-    display: "Tài khoản của tôi",
+    display: "Tài khoản của tôi"
   },
   {
     icon: "/icon-password.png",
     path: PATH.changePassword,
-    display: "Đổi mật khẩu",
+    display: "Đổi mật khẩu"
   },
   {
     icon: "/icon-comment.png",
     path: PATH.comment,
-    display: "Bình luận của tôi",
+    display: "Bình luận của tôi"
   },
   {
     icon: "/icon-follow.png",
     path: PATH.follow,
-    display: "Truyện theo dõi",
+    display: "Truyện theo dõi"
   },
   {
     icon: "/icon-history.png",
     path: PATH.history,
-    display: "Lịch sử xem",
-  },
+    display: "Lịch sử xem"
+  }
 ];
 
 const UserSidebar = () => {

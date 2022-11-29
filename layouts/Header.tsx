@@ -19,27 +19,27 @@ import Menu from "./Menu";
 const links = [
   {
     display: "Tài khoản của tôi",
-    path: PATH.profile,
+    path: PATH.profile
   },
   {
     display: "Truyện theo dõi",
-    path: PATH.follow,
+    path: PATH.follow
   },
   {
     display: "Đăng xuất",
     path: "/",
-    onClick: () => signOut(auth),
-  },
+    onClick: () => signOut(auth)
+  }
 ];
 const linksWithoutLogged = [
   {
     display: "Đăng ký",
-    path: PATH.signUp,
+    path: PATH.signUp
   },
   {
     display: "Đăng nhập",
-    path: PATH.signIn,
-  },
+    path: PATH.signIn
+  }
 ];
 
 const Header = () => {

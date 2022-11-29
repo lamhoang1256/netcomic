@@ -51,7 +51,7 @@ const Sidebar = ({ children, labelOpenSidebar, className }: SidebarProps) => {
 
 Sidebar.defaultProps = {
   labelOpenSidebar: "Mở sidebar",
-  className: "lg:w-48",
+  className: "lg:w-48"
 };
 
 export default Sidebar;

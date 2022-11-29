@@ -51,7 +51,7 @@ const FollowPage = () => {
                       title,
                       followCount,
                       commentCount,
-                      chapters,
+                      chapters
                     } = comic;
                     const comicInHistory = history.find((h) => h.slug === slug);
                     return (

@@ -68,8 +68,8 @@ export const getServerSideProps = async ({ query }: GetServerSidePropsContext) =
     props: {
       results,
       filters,
-      paginations,
-    },
+      paginations
+    }
   };
 };
 

@@ -53,8 +53,8 @@ export const getServerSideProps = async ({ query }: GetServerSidePropsContext) =
   const { data: comics } = (await axios.get(`${server}/api/random`, { params: query })).data;
   return {
     props: {
-      comics,
-    },
+      comics
+    }
   };
 };
 

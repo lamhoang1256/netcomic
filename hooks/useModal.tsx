@@ -7,6 +7,6 @@ export default function useModal() {
   }
   return {
     isShow,
-    toggleModal,
+    toggleModal
   };
 }

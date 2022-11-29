@@ -31,7 +31,7 @@ const CommentManage = () => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Đồng ý!",
+      confirmButtonText: "Đồng ý!"
     }).then(async (result) => {
       if (!result.isConfirmed) return;
       try {
@@ -52,7 +52,7 @@ const CommentManage = () => {
           snapshot.forEach((doc: any) => {
             results.push({
               id: doc.id,
-              ...doc.data(),
+              ...doc.data()
             });
           });
           setComments(results);

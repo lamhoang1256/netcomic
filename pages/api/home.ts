@@ -19,14 +19,14 @@ const HomePageApi = async (req: NextApiRequest, res: NextApiResponse) => {
   const data = await crawlHomePage(query);
   const response = {
     message: "Lấy dữ liệu trang home thành công!",
-    data,
+    data
   };
   responseSuccess(res, response);
 };
 
 async function crawlHomePage(query: Partial<IQueryParams>) {
   try {
-    const response = await axiosNhattruyen.get(PATH.nhatTruyen, { params: query });
+    const response = await axios.post("https://nct.napdev.workers.dev/https://nhattruyenne.com");
     const html = response.data;
     const $ = cheerio.load(html);
     let banners: IBanner[] = [];

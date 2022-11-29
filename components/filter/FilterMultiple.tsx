@@ -27,7 +27,7 @@ const FilterMultiple = ({ genres }: FilterMultipleProps) => {
     }
     router.push({
       href: PATH.filter,
-      query: { ...router.query, genres: genres.toString() as string },
+      query: { ...router.query, genres: genres.toString() as string }
     });
   };
   return (

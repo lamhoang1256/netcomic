@@ -16,7 +16,7 @@ import "nprogress/nprogress.css";
 
 Modal.setAppElement("#__next");
 Modal.defaultStyles = {
-  content: {},
+  content: {}
 };
 
 function MyApp({ Component, pageProps }: AppProps) {

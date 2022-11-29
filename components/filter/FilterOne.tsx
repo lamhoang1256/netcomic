@@ -37,7 +37,7 @@ const FilterOne = ({ keyFilter, options, ...props }: FilterOneProps) => {
     filter[keyFilter] = value.value;
     router.push({
       href: PATH.filter,
-      query: { ...router.query, ...filter },
+      query: { ...router.query, ...filter }
     });
   };
   return (

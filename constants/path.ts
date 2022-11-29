@@ -29,5 +29,5 @@ export const PATH = {
   nhatTruyenCategory: `${nhatTruyenUrl}/the-loai`,
   nhatTruyenBoy: `${nhatTruyenUrl}/truyen-con-trai`,
   nhatTruyenFilter: `${nhatTruyenUrl}/tim-truyen-nang-cao`,
-  projectGithub: "https://github.com/lamhoang1256/netcomic",
+  projectGithub: "https://github.com/lamhoang1256/netcomic"
 };

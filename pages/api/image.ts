@@ -12,8 +12,8 @@ const GetImageApi: NextApiHandler = (req, res) => {
     .get(url, {
       responseType: "arraybuffer",
       headers: {
-        referer: PATH.nhatTruyen as string,
-      },
+        referer: PATH.nhatTruyen as string
+      }
     })
     .then(({ data, headers: { "content-type": contentType } }) => {
       res

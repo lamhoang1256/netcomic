@@ -17,5 +17,5 @@ export {
   ComicChartRanking,
   ComicTitle,
   ComicChapters,
-  ComicAmount,
+  ComicAmount
 };

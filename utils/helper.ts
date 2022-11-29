@@ -22,7 +22,7 @@ export const checkTimeAgo = (timeCreated: number) => {
     week: "tuần",
     day: "ngày",
     hour: "giờ",
-    minute: "phút",
+    minute: "phút"
   };
   let periods: { [key: string]: number } = {
     year: 365 * 30 * 24 * 60 * 60 * 1000,
@@ -30,7 +30,7 @@ export const checkTimeAgo = (timeCreated: number) => {
     week: 7 * 24 * 60 * 60 * 1000,
     day: 24 * 60 * 60 * 1000,
     hour: 60 * 60 * 1000,
-    minute: 60 * 1000,
+    minute: 60 * 1000
   };
   let diff = Date.now() - timeCreated;
   for (const key in periods) {
@@ -47,7 +47,7 @@ export const formatCreatedAt = (createdAt: number) => {
 export const createOptions = (obj: { [key: string]: string }) => {
   return Object.entries(obj).map(([key, value]) => ({
     label: value,
-    value: value,
+    value: value
   }));
 };
 export const removeDotRegex = (str: string) => str.replace(/\./g, "");

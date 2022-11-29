@@ -71,8 +71,8 @@ export const getServerSideProps = async ({ query }: GetServerSidePropsContext) =
       results,
       categories,
       sort,
-      status,
-    },
+      status
+    }
   };
 };
 

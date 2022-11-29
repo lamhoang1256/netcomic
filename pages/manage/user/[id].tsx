@@ -24,7 +24,7 @@ const UserUpdate = () => {
     role: "USER",
     avatar: "",
     status: "ACTIVE",
-    email: "",
+    email: ""
   });
   const { onChange } = useInputChange(values, setValues);
   const { onChangeSelect } = useSelectChange(values, setValues);

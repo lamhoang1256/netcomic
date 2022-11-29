@@ -41,7 +41,7 @@ const Button = ({ children, type, className, to, ...props }: ButtonProps) => {
 };
 
 Button.defaultProps = {
-  to: "",
+  to: ""
 };
 
 export default Button;

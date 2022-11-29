@@ -16,7 +16,7 @@ const GrilComicsApi = async (req: NextApiRequest, res: NextApiResponse) => {
   const data = await crawlGrilComics(query);
   const response = {
     message: "Lấy truyện thể loại con gái thành công!",
-    data,
+    data
   };
   responseSuccess(res, response);
 };

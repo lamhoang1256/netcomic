@@ -49,5 +49,5 @@ export {
   IconRefresh,
   IconHiddenPassword,
   IconShowPassword,
-  IconMail,
+  IconMail
 };

@@ -8,7 +8,7 @@ import {
   IconDown,
   IconHeart,
   IconHome,
-  IconList,
+  IconList
 } from "components/icons";
 import { CustomLink } from "components/link";
 import { Meta } from "components/meta";
@@ -210,16 +210,16 @@ export async function getStaticProps({ params }: GetStaticPropsContext) {
     props: {
       imageUrls,
       info,
-      chapters,
+      chapters
     },
-    revalidate: 300,
+    revalidate: 300
   };
 }
 
 export const getStaticPaths: GetStaticPaths = () => {
   return {
     paths: [],
-    fallback: "blocking",
+    fallback: "blocking"
   };
 };
 

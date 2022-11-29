@@ -16,7 +16,7 @@ import { toast } from "react-toastify";
 const SignInPage = () => {
   const [values, setValues] = useState({
     email: "",
-    password: "",
+    password: ""
   });
   const { onChange } = useInputChange(values, setValues);
   const handleSignIn = async (e: FormEvent<HTMLFormElement>) => {

@@ -27,7 +27,7 @@ const CategoryPage = ({
   paginations,
   categories,
   sort,
-  status,
+  status
 }: CategoryPageProps) => {
   return (
     <>
@@ -83,8 +83,8 @@ export const getServerSideProps = async ({ query, params }: GetServerSidePropsCo
       paginations,
       categories,
       sort,
-      status,
-    },
+      status
+    }
   };
 };
 

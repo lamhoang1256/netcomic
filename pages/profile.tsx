@@ -19,7 +19,7 @@ const ProfilePage = () => {
   const [values, setValues] = useState({
     fullname: "",
     gender: optionsGender[0],
-    avatar: defaultAvatar,
+    avatar: defaultAvatar
   });
   const { onChange } = useInputChange(values, setValues);
   useEffect(() => {

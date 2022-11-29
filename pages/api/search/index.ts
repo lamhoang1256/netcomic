@@ -17,7 +17,7 @@ const SearchComicsApi = async (req: NextApiRequest, res: NextApiResponse) => {
   const data = await crawlCategories(query);
   const response = {
     message: "Tìm truyện thành công!",
-    data,
+    data
   };
   responseSuccess(res, response);
 };

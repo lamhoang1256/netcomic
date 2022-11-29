@@ -17,7 +17,7 @@ const ChartRankingsApi = async (req: NextApiRequest, res: NextApiResponse) => {
   const data = await crawlChartRankings(query);
   const response = {
     message: "Lấy dữ liệu bảng xếp hạng thành công!",
-    data,
+    data
   };
   responseSuccess(res, response);
 };

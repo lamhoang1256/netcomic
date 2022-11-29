@@ -18,7 +18,7 @@ const ComicDetailsApi = async (req: NextApiRequest, res: NextApiResponse) => {
   const data = await crawlComicDetails(`${PATH.nhatTruyenComic}/${slug}`);
   const response = {
     message: "Lấy chi tiết truyện thành công!",
-    data,
+    data
   };
   responseSuccess(res, response);
 };

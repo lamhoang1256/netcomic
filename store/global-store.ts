@@ -51,7 +51,7 @@ const useGlobalStore = create<IGlobalStore>()(
     },
     setCurrentUser: (user: ICurrentUser | null) => set(() => ({ currentUser: user })),
     loading: true,
-    setLoading: (newLoading: boolean) => set(() => ({ loading: newLoading })),
+    setLoading: (newLoading: boolean) => set(() => ({ loading: newLoading }))
   }))
 );
 

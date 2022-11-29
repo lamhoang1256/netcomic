@@ -28,7 +28,7 @@ const CommentList = () => {
           snapshot.forEach((doc: any) => {
             results.push({
               id: doc.id,
-              ...doc.data(),
+              ...doc.data()
             });
           });
           setComments(results);

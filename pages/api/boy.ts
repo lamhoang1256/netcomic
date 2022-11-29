@@ -16,7 +16,7 @@ const BoyComicsApi = async (req: NextApiRequest, res: NextApiResponse) => {
   const data = await crawlBoyComics(query);
   const response = {
     message: "Lấy truyện thể loại con trai thành công!",
-    data,
+    data
   };
   responseSuccess(res, response);
 };

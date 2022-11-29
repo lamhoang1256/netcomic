@@ -1,12 +1,16 @@
 {
   "name": "netcomic",
   "version": "0.1.0",
+  "repository": "https://github.com/lamhoang1256/netcomic",
+  "author": "Nguyen Hoang Lam",
+  "license": "MIT",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format": "npx prettier --write ."
   },
   "dependencies": {
     "@tailwindcss/line-clamp": "^0.4.2",
@@ -16,6 +20,7 @@
     "next": "12.3.0",
     "next-swagger-doc": "^0.3.6",
     "nprogress": "^0.2.0",
+    "prettier": "^2.8.0",
     "query-string": "^7.1.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",

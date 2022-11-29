@@ -17,7 +17,7 @@ const Template = ({ title, desc, children }: TemplateProps) => {
 };
 
 Template.defaultProps = {
-  subtitle: "",
+  subtitle: ""
 };
 
 export default Template;

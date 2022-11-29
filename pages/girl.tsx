@@ -41,8 +41,8 @@ export const getServerSideProps = async ({ query }: GetServerSidePropsContext) =
       banners: data.banners,
       categories: data.categories,
       newestComics: data.newestComics,
-      paginations: data.paginations,
-    },
+      paginations: data.paginations
+    }
   };
 };
 

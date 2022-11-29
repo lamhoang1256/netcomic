@@ -33,7 +33,7 @@ const CommentItem = ({ comment }: CommentItemProps) => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Đồng ý!",
+      confirmButtonText: "Đồng ý!"
     }).then(async (result) => {
       if (result.isConfirmed && currentUser.uid === userId) {
         try {

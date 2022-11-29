@@ -8,36 +8,36 @@ import SidebarCloseAction from "./SidebarCloseAction";
 const menuLinks = [
   {
     display: "TRANG CHỦ",
-    path: PATH.home,
+    path: PATH.home
   },
   {
     display: "TÀI KHOẢN",
-    path: PATH.profile,
+    path: PATH.profile
   },
   {
     display: "THEO DÕI",
-    path: PATH.follow,
+    path: PATH.follow
   },
   {
     display: "LỊCH SỬ",
-    path: PATH.history,
+    path: PATH.history
   },
   {
     display: "XẾP HẠNG",
-    path: `${PATH.search}?status=-1&sort=10`,
+    path: `${PATH.search}?status=-1&sort=10`
   },
   {
     display: "TÌM TRUYỆN",
-    path: PATH.filter,
+    path: PATH.filter
   },
   {
     display: "CON TRAI",
-    path: PATH.boy,
+    path: PATH.boy
   },
   {
     display: "CON GÁI",
-    path: PATH.girl,
-  },
+    path: PATH.girl
+  }
 ];
 
 interface MenuProps {

@@ -31,14 +31,14 @@ export const getStaticProps: GetStaticProps = async () => {
       info: {
         title: "NetComic Api",
         version: "1.0.0",
-        description: "A api comic crawled from website Nhat Truyen",
-      },
-    },
+        description: "A api comic crawled from website Nhat Truyen"
+      }
+    }
   });
   return {
     props: {
-      spec,
-    },
+      spec
+    }
   };
 };
 

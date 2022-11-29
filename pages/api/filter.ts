@@ -17,7 +17,7 @@ const filterComicsApi = async (req: NextApiRequest, res: NextApiResponse) => {
   const data = await crawlFilterComics(query);
   const response = {
     message: "Lấy danh sách truyện thành công!",
-    data,
+    data
   };
   responseSuccess(res, response);
 };
@@ -33,7 +33,7 @@ async function crawlFilterComics(query: Partial<IQueryParams>) {
     genres: [],
     status: [],
     gender: [],
-    sort: [],
+    sort: []
   };
   $(".ModuleContent .item", html).each(function (index, element) {
     const comic = crawlComic($(element), $);

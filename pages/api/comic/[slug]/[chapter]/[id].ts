@@ -18,7 +18,7 @@ const crawlChapterComic = async (req: NextApiRequest, res: NextApiResponse) => {
   const data = await getDetailsChapter(`${PATH.nhatTruyenComic}/${slug}/${chapter}/${id}`);
   const response = {
     message: "Lấy chi tiết chapter thành công!",
-    data,
+    data
   };
   responseSuccess(res, response);
 };
@@ -63,7 +63,7 @@ const getDetailsChapter = async (url: string) => {
     imageUrls,
     info,
     chapters,
-    comments,
+    comments
   };
 };
 

@@ -43,7 +43,7 @@ const CommentAddNew = ({ poster, title }: { poster: string; title: string }) => 
         chapterName: chapter ? `Chapter ${chapter.replace("chap-", "")}` : "",
         poster,
         title,
-        userId: currentUser.uid,
+        userId: currentUser.uid
       });
       toast.success("Thêm bình luận thành công!");
     } catch (error: any) {

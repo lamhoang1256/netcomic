@@ -1,23 +1,23 @@
 export const optionsGender = [
   { value: "BOY", label: "NAM" },
-  { value: "GIRL", label: "NỮ" },
+  { value: "GIRL", label: "NỮ" }
 ];
 export const userGender = {
   BOY: "NAM",
-  GRIL: "NỮ",
+  GRIL: "NỮ"
 };
 export const userRole = {
   USER: "USER",
   MOD: "MOD",
-  ADMIN: "ADMIN",
+  ADMIN: "ADMIN"
 };
 export const userStatus = {
   ACTIVE: "ACTIVE",
   WARNING: "WARNING",
-  BANNED: "BANNED",
+  BANNED: "BANNED"
 };
 export const commentStatus = {
   APPROVED: "APPROVED",
   WARNING: "WARNING",
-  BANNED: "BANNED",
+  BANNED: "BANNED"
 };

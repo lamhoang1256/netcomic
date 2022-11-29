@@ -192,7 +192,7 @@ const ComicDetailsPage = ({ info, chapters }: ComicDetailsPageProps) => {
 export const getStaticPaths: GetStaticPaths = () => {
   return {
     paths: [],
-    fallback: "blocking",
+    fallback: "blocking"
   };
 };
 
@@ -202,13 +202,13 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
     const { info, chapters } = (await axios.get(`${server}/api/comic/${slug}`)).data.data;
     return {
       props: { info, chapters },
-      revalidate: 300,
+      revalidate: 300
     };
   } catch (error) {
     return {
       props: {},
       revalidate: 60,
-      notFound: true,
+      notFound: true
     };
   }
 };

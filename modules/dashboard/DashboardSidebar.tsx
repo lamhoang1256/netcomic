@@ -7,18 +7,18 @@ const sidebarLinks = [
   {
     icon: "/icon-dashboard.png",
     path: PATH.manage,
-    display: "Trang tổng quan",
+    display: "Trang tổng quan"
   },
   {
     icon: "/icon-account.png",
     path: PATH.userManage,
-    display: "Quản lý người dùng",
+    display: "Quản lý người dùng"
   },
   {
     icon: "/icon-comment.png",
     path: PATH.commentManage,
-    display: "Quản lý bình luận",
-  },
+    display: "Quản lý bình luận"
+  }
 ];
 
 const DashboardSidebar = () => {

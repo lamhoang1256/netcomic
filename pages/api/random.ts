@@ -17,7 +17,7 @@ const RandomApi = async (req: NextApiRequest, res: NextApiResponse) => {
   const data = await randomComic(query);
   const response = {
     message: "Random truyện thành công!",
-    data,
+    data
   };
   responseSuccess(res, response);
 };

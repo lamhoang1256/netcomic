@@ -31,7 +31,7 @@ const UserManage = () => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Đồng ý!",
+      confirmButtonText: "Đồng ý!"
     }).then(async (result) => {
       if (!result.isConfirmed) return;
       try {

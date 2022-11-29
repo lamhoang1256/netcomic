@@ -20,7 +20,7 @@ const SignUpPage = () => {
   const [values, setValues] = useState({
     email: "",
     password: "",
-    confirmPassword: "",
+    confirmPassword: ""
   });
   const { onChange } = useInputChange(values, setValues);
   const handleSignUp = async (e: FormEvent<HTMLFormElement>) => {
@@ -38,7 +38,7 @@ const SignUpPage = () => {
       await createUserWithEmailAndPassword(auth, values.email, values.password);
       if (!auth.currentUser) return;
       await updateProfile(auth.currentUser, {
-        photoURL: defaultAvatar,
+        photoURL: defaultAvatar
       });
       await setDoc(doc(db, "users", auth?.currentUser?.uid as string), {
         avatar: defaultAvatar,
@@ -53,8 +53,8 @@ const SignUpPage = () => {
         gender: {
           disabled: false,
           label: "Nam",
-          value: "boy",
-        },
+          value: "boy"
+        }
       });
       toast.success("Đăng ký tài khoản thành công!");
     } catch (error: any) {

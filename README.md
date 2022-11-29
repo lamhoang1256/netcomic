@@ -1,10 +1,11 @@
 # Netcomic
+
 A Website Read Comic Using NextJS, Typescript, Firebase, Tailwindcss, Zustand
 
 ## Overview
 
- - Official website: https://netcomic.vercel.app
--  Author: Nguyễn Hoàng Lâm ( [@lamhoang1256](https://github.com/lamhoang1256) )
+- Official website: https://netcomic.vercel.app
+- Author: Nguyễn Hoàng Lâm ( [@lamhoang1256](https://github.com/lamhoang1256) )
 
 ## Preview
 
@@ -13,7 +14,6 @@ Dark Mode:
 
 Light Mode:
 ![home-lightmode](https://user-images.githubusercontent.com/61537853/198992036-e3b1c77e-93fa-483d-92f0-634b72c47bf0.png)
-
 
 ## Resources
 
@@ -98,9 +98,9 @@ NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=
  Light mode
 ![read-light](https://user-images.githubusercontent.com/61537853/199382272-b640ef5f-9d52-4f57-bd57-d607696d4dde.png)
 
- Dark mode
- ![read-dark](https://user-images.githubusercontent.com/61537853/199382257-162399ac-bf77-4e86-9138-562aa5a76aa6.png)
-  
+Dark mode
+![read-dark](https://user-images.githubusercontent.com/61537853/199382257-162399ac-bf77-4e86-9138-562aa5a76aa6.png)
+
  </p>
 </details>
 
@@ -148,7 +148,7 @@ NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=
  Light mode
 ![profile-light](https://user-images.githubusercontent.com/61537853/199259731-b7ba73f6-aede-4af1-9864-ed5b7f499197.png)
 
- Dark mode
+Dark mode
 ![profile-dark](https://user-images.githubusercontent.com/61537853/199259756-f7703acc-18b7-4f71-81bf-15742ca1e28a.png)
 
  </p>
@@ -161,7 +161,7 @@ NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=
  Light mode
 ![follow-light](https://user-images.githubusercontent.com/61537853/199262766-198b0fa9-742d-4f2f-ba7d-d05382cf8745.png)
 
- Dark mode
+Dark mode
 ![follow-dark](https://user-images.githubusercontent.com/61537853/199262785-ca158fd4-c914-4910-9eea-de8472e9d3bf.png)
 
  </p>
@@ -174,7 +174,7 @@ NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=
  Light mode
 ![manage-user-light](https://user-images.githubusercontent.com/61537853/199260057-5f5a6aba-c17f-42fd-b3b8-34456bae0753.png)
 
- Dark mode
+Dark mode
 ![manage-user-dark](https://user-images.githubusercontent.com/61537853/199260033-022c3513-4f8c-4aa5-a0c4-10fc219b5bb8.png)
 
  </p>
@@ -187,9 +187,8 @@ NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=
  Light mode
 ![manage-comment-light](https://user-images.githubusercontent.com/61537853/199260143-292bc056-efee-4807-83e7-f1c6a4a91160.png)
 
- Dark mode
+Dark mode
 ![manage-comment-dark](https://user-images.githubusercontent.com/61537853/199260163-939ea4bc-f22d-4b07-b2fa-bab0ff661fb1.png)
-  
+
  </p>
 </details>
-
