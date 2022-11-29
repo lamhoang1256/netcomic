@@ -10,7 +10,7 @@ const Icon404 = ({ ...props }: Icon404Props) => {
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
-      <g clip-path="url(#clip0_1939_72580)">
+      <g clipPath="url(#clip0_1939_72580)">
         <path
           d="M120 18L120.241 18.4578C120.554 19.012 120.988 19.4699 121.542 19.759L122 20L121.542 20.241C120.988 20.5542 120.53 20.988 120.241 21.5422L120 22L119.759 21.5422C119.446 20.988 119.012 20.5301 118.458 20.241L118 20L118.458 19.759C119.012 19.4458 119.47 19.012 119.759 18.4578L120 18Z"
           fill="#FFCE73"
@@ -53,9 +53,9 @@ const Icon404 = ({ ...props }: Icon404Props) => {
           width="142.667"
           height="142.667"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+          <feFlood floodOpacity="0" result="BackgroundImageFix"></feFlood>
           <feColorMatrix
             in="SourceAlpha"
             type="matrix"
@@ -88,8 +88,8 @@ const Icon404 = ({ ...props }: Icon404Props) => {
           y2="122.012"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FF66A9"></stop>
-          <stop offset="1" stop-color="#F53689"></stop>
+          <stop stopColor="#FF66A9"></stop>
+          <stop offset="1" stopColor="#F53689"></stop>
         </linearGradient>
         <linearGradient
           id="paint1_linear_1939_72580"
@@ -99,8 +99,8 @@ const Icon404 = ({ ...props }: Icon404Props) => {
           y2="17.0175"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FF66A9"></stop>
-          <stop offset="1" stop-color="#F53689"></stop>
+          <stop stopColor="#FF66A9"></stop>
+          <stop offset="1" stopColor="#F53689"></stop>
         </linearGradient>
         <clipPath id="clip0_1939_72580">
           <rect width="140" height="140" fill="white"></rect>
