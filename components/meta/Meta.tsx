@@ -12,7 +12,7 @@ interface MetaProps {
 const Meta = ({
   title = "Đọc truyện tranh online - Truyện gì cũng có - NetComic",
   description = "Bất cứ truyện bạn thích đều có và miễn phí tại NetComic, Web đọc truyện tranh online, không quảng cáo và cập nhật nhanh nhất",
-  image = `${server}/preview-home.png`
+  image = `/image-seo.png`
 }: MetaProps) => {
   const router = useRouter();
   return (
@@ -23,6 +23,12 @@ const Meta = ({
       <meta name="robots" content="index,follow" />
       <meta name="description" content={description} key="description" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" key="viewport" />
+      <meta name="copyright" content="lamhoang1256" key="copyright" />
+      <meta
+        name="keywords"
+        content={`netcomic, net-comic, , lamhoang1256, ${server}`}
+        key="keywords"
+      />
       <link rel="icon" href="/favicon.png" key="favicon" />
       <link rel="canonical" href={server} key="canonical" />
       {/* Google / Search Engine Tags */}
