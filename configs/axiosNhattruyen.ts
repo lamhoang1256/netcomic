@@ -2,7 +2,7 @@ import axios from "axios";
 import queryString from "query-string";
 
 const axiosNhattruyen = axios.create({
-  baseURL: "https://nct.napdev.workers.dev"
+  baseURL: "https://kaguya.app/proxy/?url="
 });
 
 axiosNhattruyen.interceptors.request.use(
