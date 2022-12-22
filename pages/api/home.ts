@@ -1,7 +1,6 @@
 import { IBanner, IComic, IComicChartRanking, IPagination, IQueryParams } from "@types";
+import axios from "axios";
 import * as cheerio from "cheerio";
-import axiosNhattruyen from "configs/axiosNhattruyen";
-import { PATH } from "constants/path";
 import { STATUS } from "constants/status";
 import { crawlBanner, crawlComic, crawlComicTopMonth, crawlPagination } from "libs/cheerio";
 import type { NextApiRequest, NextApiResponse } from "next";
@@ -24,7 +23,7 @@ const HomePageApi = async (req: NextApiRequest, res: NextApiResponse) => {
 
 async function crawlHomePage(query: Partial<IQueryParams>) {
   try {
-    const response = await axiosNhattruyen.get(PATH.nhatTruyen);
+    const response = await axios.get("https://kaguya.app/proxy/?url=https://nhattruyenup.com");
     const html = response.data;
     const $ = cheerio.load(html);
     let banners: IBanner[] = [];
