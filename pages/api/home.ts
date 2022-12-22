@@ -26,7 +26,7 @@ const HomePageApi = async (req: NextApiRequest, res: NextApiResponse) => {
 
 async function crawlHomePage(query: Partial<IQueryParams>) {
   try {
-    const response = await axiosNhattruyen.post(PATH.nhatTruyen);
+    const response = await axios.get("https://kaguya.app/proxy/?url=https://nhattruyenup.com");
     const html = response.data;
     const $ = cheerio.load(html);
     let banners: IBanner[] = [];
