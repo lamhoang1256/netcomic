@@ -7,10 +7,10 @@ const axiosNhattruyen = axios.create({
 
 axiosNhattruyen.interceptors.request.use(
   async (config) => {
-    if (!config.params) return { ...config, url: `/${config.url}` };
+    if (!config.params) return { ...config, url: `${config.url}` };
     const strParams = queryString.stringify(config.params);
     delete config.params;
-    const customConfigs = { ...config, url: `/${config.url}?${strParams}` };
+    const customConfigs = { ...config, url: `${config.url}?${strParams}` };
     return customConfigs;
   },
   (err) => {
