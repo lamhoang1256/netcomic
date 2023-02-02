@@ -2,7 +2,7 @@ import axios from "axios";
 import queryString from "query-string";
 
 const axiosNhattruyen = axios.create({
-  baseURL: "https://proxy.braflix.workers.dev"
+  baseURL: "https://proxy.braflix.workers.dev/?destination="
 });
 
 axiosNhattruyen.interceptors.request.use(
