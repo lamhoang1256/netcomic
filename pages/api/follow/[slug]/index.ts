@@ -39,7 +39,7 @@ async function crawlComicDetails(url: string) {
     const slugHasId = $(element)
       .find(".col-info .mrb10 a")
       .attr("href")
-      ?.replace(`${PATH.nhatTruyenComic}/`, "") as string;
+      ?.replace(`${PATH.proxyComic}/`, "") as string;
     const slugArray = slugHasId?.split("-");
     slugArray.pop();
     comic.slug = slugArray.join("-");

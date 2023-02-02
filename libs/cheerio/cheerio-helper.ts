@@ -19,7 +19,7 @@ export function crawlBanner(node: cheerio.Cheerio<cheerio.Element>): IBanner {
   const slugHasId = node
     .find(".slide-caption > h3 > a")
     .attr("href")
-    ?.replace(`${PATH.nhatTruyenComic}/`, "") as string;
+    ?.replace(`${PATH.proxyComic}/`, "") as string;
   const slugArray = slugHasId?.split("-");
   slugArray.pop();
   const slug = slugArray.join("-");
@@ -28,14 +28,14 @@ export function crawlBanner(node: cheerio.Cheerio<cheerio.Element>): IBanner {
   const updatedAgo = node.find(".slide-caption .time").first().text();
   const newestEle = node.find(".slide-caption > a").first();
   const newestChapter = newestEle.text();
-  const newestHref = newestEle.attr("href")?.replace(`${PATH.nhatTruyenComic}/`, "") as string;
+  const newestHref = newestEle.attr("href")?.replace(`${PATH.proxyComic}/`, "") as string;
   return { slug, title, posterUrl, newestChapter, updatedAgo, newestHref };
 }
 
 export function crawlComic(
   node: cheerio.Cheerio<cheerio.Element>,
   $: cheerio.CheerioAPI,
-  replaceHref = `${PATH.nhatTruyenComic}/`
+  replaceHref = `${PATH.proxyComic}/`
 ): IComic {
   const slugHasId = node.find(".image > a").attr("href")?.replace(replaceHref, "") as string;
   const slugArray = slugHasId?.split("-");
@@ -119,10 +119,7 @@ export function crawlComments(
 
 export function crawlLinkChapter(node: cheerio.Cheerio<cheerio.Element>): ILinkChapter {
   const id = node.find(".chapter a").attr("data-id") as string;
-  const href = node
-    .find(".chapter a")
-    .attr("href")
-    ?.replace(`${PATH.nhatTruyenComic}/`, "") as string;
+  const href = node.find(".chapter a").attr("href")?.replace(`${PATH.proxyComic}/`, "") as string;
   const title = node.find(".chapter a").text();
   const updatedAt = node.find(".col-xs-4").text();
   const viewCount = node.find(".col-xs-3").text();
@@ -151,7 +148,7 @@ export function crawlCategory(
 
 export function crawlComicTopMonth(
   node: cheerio.Cheerio<cheerio.Element>,
-  replaceHref = `${PATH.nhatTruyenComic}/`
+  replaceHref = `${PATH.proxyComic}/`
 ): IComicChartRanking {
   const rank = node.find(".txt-rank").text();
   const title = node.find(".title a").text();

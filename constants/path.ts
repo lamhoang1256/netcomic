@@ -1,4 +1,5 @@
 const nhatTruyenUrl = process.env.NEXT_PUBLIC_NHATTRUYEN as string;
+const proxyUrl = "https://kaguya.app";
 
 export const PATH = {
   home: "/",
@@ -29,5 +30,13 @@ export const PATH = {
   nhatTruyenCategory: `${nhatTruyenUrl}/the-loai`,
   nhatTruyenBoy: `${nhatTruyenUrl}/truyen-con-trai`,
   nhatTruyenFilter: `${nhatTruyenUrl}/tim-truyen-nang-cao`,
+  proxyUrl: proxyUrl,
+  proxyComic: `${proxyUrl}/truyen-tranh`,
+  proxySearch: `${proxyUrl}/tim-truyen`,
+  proxyFull: `${proxyUrl}/truyen-full`,
+  proxyGirl: `${proxyUrl}/truyen-con-gai`,
+  proxyCategory: `${proxyUrl}/the-loai`,
+  proxyBoy: `${proxyUrl}/truyen-con-trai`,
+  proxyFilter: `${proxyUrl}/tim-truyen-nang-cao`,
   projectGithub: "https://github.com/lamhoang1256/netcomic"
 };
